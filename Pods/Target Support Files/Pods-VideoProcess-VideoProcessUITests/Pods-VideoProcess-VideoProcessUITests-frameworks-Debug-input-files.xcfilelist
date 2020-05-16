@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-VideoProcess-VideoProcessUITests/Pods-VideoProcess-VideoProcessUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework
+${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework
+${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
