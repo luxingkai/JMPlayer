@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "AudioViewController.h"
 #import "VideoPlayerViewController.h"
+#import "AssetHandleViewController.h"
 
 @interface AppDelegate ()
 
@@ -31,7 +32,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MainViewController *vc = [MainViewController new];
+    AssetHandleViewController *vc = [AssetHandleViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

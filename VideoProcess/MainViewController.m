@@ -50,119 +50,101 @@
 
 @end
 
-@implementation MainViewController
+@implementation MainViewController {
+    AVPlayer *_player;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    ////    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"spring" withExtension:@"mp4"];
-    ////    NSURL *workURL = [[NSBundle mainBundle] URLForResource:@"work" withExtension:@"mp4"];
-    ////
-    ////    AVAsset *firstAsset = [AVAsset assetWithURL:bundleURL];
-    ////    AVAsset *secondAsset = [AVAsset assetWithURL:workURL];
-    //
-    //    //Combining Multiple Assets and Saving the Result to the Camera Roll
-    //
-    //    //Create an AVMutableComposition object and add multiple AVMutableCompositionTrack objects
-    //    //Add time ranges of AVAssetTrack objects to compatible composition tracks
-    //    //Check the preferredTransform property of a video asset track to determine the video’s orientation
-    //    //Use AVMutableVideoCompositionLayerInstruction objects to apply transforms to the video tracks within a composition
-    //    //Set appropriate values for the renderSize and frameDuration properties of a video composition
-    //    //Use a composition in conjunction with a video composition when exporting to a video file
-    //    //Save a video file to the Camera Roll
-    //
-    //
-    //    /*
-    //     访问元数据
-    //     */
-    ////    NSURL *url = [[NSBundle mainBundle] URLForResource:@"spring" withExtension:@"mp4"];
-    ////    if (@available(iOS 10.0, *)) {
-    ////        AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url
-    ////                                                   options:@{AVURLAssetAllowsCellularAccessKey: @NO}];
-    ////        NSLog(@"lyrics %@",urlAsset.lyrics);
-    ////        for (AVMetadataItem *dateItem in urlAsset.metadata) {
-    ////            NSLog(@"identifier %@",dateItem.identifier);
-    ////            NSLog(@"extendedLanguageTag %@",dateItem.extendedLanguageTag);
-    ////            NSLog(@"locale %@",dateItem.locale);
-    ////            CMTimeShow(dateItem.time);
-    ////            CMTimeShow(dateItem.duration);
-    ////            NSLog(@"dataType %@",dateItem.dataType);
-    ////            NSLog(@"value %@",dateItem.value);
-    ////            NSLog(@"extraAttributes%@",dateItem.extraAttributes);
-    ////            NSLog(@"startDate %@",dateItem.startDate);
-    ////            NSLog(@"stringValue %@",dateItem.stringValue);
-    ////            NSLog(@"numberValue %@",dateItem.numberValue);
-    ////            NSLog(@"dateValue %@",dateItem.dateValue);
-    ////            NSLog(@"dataValue %@",dateItem.dataValue);
-    ////            NSLog(@"key %@",dateItem.key);
-    ////            NSLog(@"commonKey %@",dateItem.commonKey);
-    ////            NSLog(@"keySpace %@",dateItem.keySpace);
-    ////        }
-    ////        for (AVMetadataFormat format in urlAsset.availableMetadataFormats) {
-    ////            NSLog(@"%@",format);
-    ////        }
-    ////    } else {
-    ////        // Fallback on earlier versions
-    ////    }
-    //
-    //    /*
-    //     展现章节标签
-    //     */
-    ////    NSURL *url = [[NSBundle mainBundle] URLForResource:@"spring" withExtension:@"mp4"];
-    ////    AVAsset *asset = [AVAsset assetWithURL:url];
-    ////    NSString *chapterLocalesKey = @"availableChapterLocales";
-    ////
-    ////    [asset loadValuesAsynchronouslyForKeys:@[chapterLocalesKey] completionHandler:^{
-    ////
-    ////        NSError *error = nil;
-    ////        AVKeyValueStatus status = [asset statusOfValueForKey:chapterLocalesKey error:&error];
-    ////        if (status == AVKeyValueStatusLoaded) {
-    ////            NSArray *languages = [NSLocale preferredLanguages];
-    ////            NSArray *chapterMetadata = [asset chapterMetadataGroupsBestMatchingPreferredLanguages:languages];
-    ////            for (AVTimedMetadataGroup *metadataGroup in chapterMetadata) {
-    ////                if (@available(iOS 9.3, *)) {
-    ////                    NSLog(@"%@",metadataGroup.classifyingLabel);
-    ////                } else {
-    ////                    // Fallback on earlier versions
-    ////                }
-    ////                if (@available(iOS 9.3, *)) {
-    ////                    NSLog(@"%@",metadataGroup.uniqueID);
-    ////                } else {
-    ////                    // Fallback on earlier versions
-    ////                }
-    ////                CMTimeRangeShow(metadataGroup.timeRange);
-    ////            }
-    ////            //Process chapter metadata
-    ////        }else
-    ////        {
-    ////            //handle other status cases
-    ////        }
-    ////    }];
-    //
-    //    /*
-    //     检测资源（asset）
-    //     */
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"spring" withExtension:@"mp4"];
-    AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-    CMTimeShow(asset.duration);
-    NSLog(@"preferredVolume %f",asset.preferredVolume);
-    NSLog(@"preferredRate %f",asset.preferredRate);
-    NSLog(@"preferredTransform %@",NSStringFromCGAffineTransform(asset.preferredTransform));
-    if (@available(iOS 13.0, *)) {
-        CMTimeShow(asset.minimumTimeOffsetFromLive);
-    } else {
-        // Fallback on earlier versions
-    }
-    
-    NSLog(@"canContainFragments %d",[asset canContainFragments]);
 
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"beauty" withExtension:@"mp4"];
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    NSArray *assetKeys = @[@"playable",@"hasProtectedContent"];
+    
+    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset automaticallyLoadedAssetKeys:assetKeys];
+    [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+    
+    _player = [AVPlayer playerWithPlayerItem:playerItem];
+    
+    AVPlayerLayer *playerLayer = [[AVPlayerLayer alloc] init];
+    playerLayer.frame = [UIScreen mainScreen].bounds;
+    playerLayer.player = _player;
+    [self.view.layer addSublayer:playerLayer];
+    
+    // Observe Periodic Timing
+//    dispatch_queue_t queue = dispatch_queue_create("main", DISPATCH_QUEUE_SERIAL);
+//    CMTimeScale timeScale = NSEC_PER_SEC;
+//    CMTime time = CMTimeMakeWithSeconds(0.5, timeScale);
+//    [_player addPeriodicTimeObserverForInterval:time queue:queue usingBlock:^(CMTime time) {
+//        CMTimeShow(time);
+//    }];
+    
+    //Observe Boundary Timing
+    CMTime interval = CMTimeMultiplyByFloat64(asset.duration, 0.25);
+    CMTime currentTime = kCMTimeZero;
+    NSMutableArray *times = [NSMutableArray array];
+    //Calculate boundary times
+    while (CMTimeCompare(currentTime, asset.duration) == -1) {
+        currentTime = CMTimeAdd(currentTime, interval);
+        [times addObject:[NSValue valueWithCMTime:currentTime]];
+    }
+    dispatch_queue_t queue = dispatch_queue_create("label", DISPATCH_QUEUE_SERIAL);
+    [_player addBoundaryTimeObserverForTimes:times queue:queue usingBlock:^{
+       //Update UI
+    }];
+    
+    //Jump to a Specific Time Quickly
+//    CMTime time = CMTimeMake(5, 1);
+//    [_player seekToTime:time completionHandler:^(BOOL finished) {
+//    }];
+    //Jump to a Specific Time Accurately
+    CMTime seekTime = CMTimeMakeWithSeconds(10, NSEC_PER_SEC);
+    [_player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
+    }];
     
     
     
     // Do any additional setup after loading the view.
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItemStatus status = [change[@"new"] integerValue];
+        switch (status) {
+            case AVPlayerItemStatusReadyToPlay:
+            {
+                NSLog(@"准备播放");
+            }
+                break;
+            case AVPlayerItemStatusFailed:
+            {
+                NSLog(@"加载失败");
+            }
+                break;
+            case AVPlayerItemStatusUnknown:
+            {
+                NSLog(@"状态未知");
+            }
+                break;
+        }
+    }
+}/*//*/
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    if (_player.status == AVPlayerStatusReadyToPlay) {
+        [_player play];
+    }
+    else{
+        [_player pause];
+    }
+}
+
 
 /*
  #pragma mark - Navigation

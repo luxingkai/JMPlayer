@@ -9,8 +9,9 @@
 #import "AudioViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "AudioFileLoader.h"
+#import <AVKit/AVKit.h>
 
-@interface AudioViewController ()
+@interface AudioViewController ()<AVRoutePickerViewDelegate>
 
 @end
 
@@ -33,26 +34,31 @@
     self.navigationItem.rightBarButtonItem = rightItem;
     
     //开启音频任务
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    NSError *error = nil;
-    BOOL result = [audioSession setActive:true withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:&error];
-    if (result != true) {
-        NSLog(@"激活失败！");
-        return;
-    }
+//    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+//    NSError *error = nil;
+//    BOOL result = [audioSession setActive:true withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:&error];
+//    if (result != true) {
+//        NSLog(@"激活失败！");
+//        return;
+//    }
+//
+//    NSError *audioError = nil;
+//    NSURL *audioURL = [[NSBundle mainBundle] URLForResource:@"Mark Petrie - New Light No Synth" withExtension:@"mp3"];
+//    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:&audioError];
+//    BOOL prepare = [_audioPlayer prepareToPlay];
+//    if (prepare) {
+//        NSLog(@"prepareToPlay %d",prepare);
+//    }
+//
+////    NSString *path = [[NSBundle mainBundle] pathForResource:@"Mark Petrie - New Light No Synth" ofType:@"mp3"];
+//    [AudioFileLoader fileLoaderWithFilePath:@"Mark Petrie - New Light No Synth"];
     
-    NSError *audioError = nil;
-    NSURL *audioURL = [[NSBundle mainBundle] URLForResource:@"Mark Petrie - New Light No Synth" withExtension:@"mp3"];
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:&audioError];
-    BOOL prepare = [_audioPlayer prepareToPlay];
-    if (prepare) {
-        NSLog(@"prepareToPlay %d",prepare);
-    }
     
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"Mark Petrie - New Light No Synth" ofType:@"mp3"];
-    [AudioFileLoader fileLoaderWithFilePath:@"Mark Petrie - New Light No Synth"];
     
-
+    
+    
+    
+    
     	
     // Do any additional setup after loading the view.
 }
