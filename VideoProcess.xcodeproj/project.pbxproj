@@ -17,6 +17,7 @@
 		1127A3B1240D40260038ED48 /* VideoProcessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127A3B0240D40260038ED48 /* VideoProcessTests.m */; };
 		1127A3BC240D40260038ED48 /* VideoProcessUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127A3BB240D40260038ED48 /* VideoProcessUITests.m */; };
 		1127A3CA240D42750038ED48 /* spring.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1127A3C9240D42750038ED48 /* spring.mp4 */; };
+		112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112AA057247522B100FD19C3 /* MediaPlayViewController.m */; };
 		1130E160247264E100C973F6 /* beauty.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1130E15F247264E100C973F6 /* beauty.mp4 */; };
 		1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E16224727EAC00C973F6 /* AssetHandleViewController.m */; };
 		1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E1652472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m */; };
@@ -37,7 +38,6 @@
 		11C21DF1246E807E00F6E7BD /* offline-133581.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DEB246E807E00F6E7BD /* offline-133581.jpg */; };
 		11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C21DF3246E820C00F6E7BD /* MusicListViewController.m */; };
 		11C21DF7246E99D400F6E7BD /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C21DF6246E99D400F6E7BD /* VideoPlayerViewController.m */; };
-		11EB1552246FE9ED00E29E2B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EB1551246FE9ED00E29E2B /* MainViewController.m */; };
 		49EC485E5D13C07E980030F5 /* Pods_VideoProcess_VideoProcessUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC81B83E5440AC3DA66DB09 /* Pods_VideoProcess_VideoProcessUITests.framework */; };
 		8CD808BAB1E150C23E328242 /* Pods_VideoProcessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7D2DBF7109FC82EA8F8468 /* Pods_VideoProcessTests.framework */; };
 		FB4EA8F154BBA7D02BA39686 /* Pods_VideoProcess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D967F07E9C8056F71E0FB2B6 /* Pods_VideoProcess.framework */; };
@@ -81,6 +81,8 @@
 		1127A3BB240D40260038ED48 /* VideoProcessUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoProcessUITests.m; sourceTree = "<group>"; };
 		1127A3BD240D40260038ED48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1127A3C9240D42750038ED48 /* spring.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = spring.mp4; sourceTree = "<group>"; };
+		112AA056247522B100FD19C3 /* MediaPlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaPlayViewController.h; sourceTree = "<group>"; };
+		112AA057247522B100FD19C3 /* MediaPlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaPlayViewController.m; sourceTree = "<group>"; };
 		1130E15F247264E100C973F6 /* beauty.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = beauty.mp4; sourceTree = "<group>"; };
 		1130E16124727EAC00C973F6 /* AssetHandleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetHandleViewController.h; sourceTree = "<group>"; };
 		1130E16224727EAC00C973F6 /* AssetHandleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetHandleViewController.m; sourceTree = "<group>"; };
@@ -109,8 +111,6 @@
 		11C21DF3246E820C00F6E7BD /* MusicListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicListViewController.m; sourceTree = "<group>"; };
 		11C21DF5246E99D400F6E7BD /* VideoPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
 		11C21DF6246E99D400F6E7BD /* VideoPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
-		11EB1550246FE9ED00E29E2B /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		11EB1551246FE9ED00E29E2B /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		43CE52B366017EADB419BDF1 /* Pods-VideoProcess-VideoProcessUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcess-VideoProcessUITests.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcess-VideoProcessUITests/Pods-VideoProcess-VideoProcessUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F33BB9B148B24306D2C9621 /* Pods-VideoProcess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcess.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcess/Pods-VideoProcess.debug.xcconfig"; sourceTree = "<group>"; };
 		5FAB52853BD9C5AC24AD4FB9 /* Pods-VideoProcessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcessTests.release.xcconfig"; path = "Target Support Files/Pods-VideoProcessTests/Pods-VideoProcessTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -206,10 +206,10 @@
 				115C051B246E2D5A00EAF3A6 /* AudioPlayer */,
 				1127A394240D40230038ED48 /* AppDelegate.h */,
 				1127A395240D40230038ED48 /* AppDelegate.m */,
-				11EB1550246FE9ED00E29E2B /* MainViewController.h */,
-				11EB1551246FE9ED00E29E2B /* MainViewController.m */,
 				1130E16124727EAC00C973F6 /* AssetHandleViewController.h */,
 				1130E16224727EAC00C973F6 /* AssetHandleViewController.m */,
+				112AA056247522B100FD19C3 /* MediaPlayViewController.h */,
+				112AA057247522B100FD19C3 /* MediaPlayViewController.m */,
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
@@ -545,10 +545,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11EB1552246FE9ED00E29E2B /* MainViewController.m in Sources */,
 				11183D91241B2A1B007FBE59 /* JMPlayerView.m in Sources */,
 				1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */,
 				11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */,
+				112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */,
 				1127A396240D40230038ED48 /* AppDelegate.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,
 				114C9074241CA24F008CBC01 /* JMPlayerControlLayer.m in Sources */,

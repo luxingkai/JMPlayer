@@ -11,7 +11,7 @@
 #import <CoreMedia/CoreMedia.h>
 #import <VideoToolbox/VideoToolbox.h>
 
-@interface AssetHandleViewController ()
+@interface AssetHandleViewController ()<AVAssetResourceLoaderDelegate>
 
 @end
 
@@ -31,7 +31,7 @@
     NSLog(@"preferredRate %f",asset.preferredRate);
     NSLog(@"preferredTransform %@",NSStringFromCGAffineTransform(asset.preferredTransform));
     NSLog(@"preferredVolume %f",asset.preferredVolume);
-    
+     
     //Determine Usablility
     NSLog(@"playable %d",asset.playable);
     NSLog(@"exportable %d",asset.exportable);
@@ -49,11 +49,11 @@
     for (AVAssetTrackGroup *trackGroup in asset.trackGroups) {
         NSLog(@"trackIDs %@",trackGroup.trackIDs);
     }
-//    NSArray *assetTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-//    for (AVAssetTrack *assetTrack in assetTracks) {
-//        NSLog(@"assetTrack %@",assetTrack);
-//    }
-//    NSLog(@"unusedTrackID %d",asset.unusedTrackID);
+    //    NSArray *assetTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    //    for (AVAssetTrack *assetTrack in assetTracks) {
+    //        NSLog(@"assetTrack %@",assetTrack);
+    //    }
+    //    NSLog(@"unusedTrackID %d",asset.unusedTrackID);
     
     //Accessing Metadata
     NSLog(@"%@",asset.lyrics);
@@ -139,7 +139,7 @@
     CMTimeShow(asset.overallDurationHint);
     
     //Specified Media Characteristics
-
+    
 #pragma mark -- AssetTrack
     
     //Retrieving Track Information
@@ -148,7 +148,7 @@
         NSLog(@"assetTrack %@",assetTrack);
         NSLog(@"trackID %d",assetTrack.trackID);
         NSLog(@"mediaType %@",assetTrack.mediaType);
-        NSArray * trackUserDataItems = [assetTrack metadataForFormat:AVMetadataFormatQuickTimeUserData ];
+        NSArray * trackUserDataItems = [assetTrack metadataForFormat:AVMetadataFormatQuickTimeUserData];
         NSArray * trackTaggedMediaCharacteristics = [AVMetadataItem metadataItemsFromArray:trackUserDataItems withKey:AVMetadataQuickTimeUserDataKeyTaggedCharacteristic keySpace:AVMetadataKeySpaceQuickTimeUserData];
         for (AVMetadataItem *metadataItem in trackTaggedMediaCharacteristics) {
             NSString *thisTrackMediaCharacteristic = [metadataItem stringValue];
@@ -183,11 +183,16 @@
         NSLog(@"preferredVolume %f",assetTrack.preferredVolume);
         //Retrieving Frame-Based Characteristics
         NSLog(@"nominalFrameRate %f",assetTrack.nominalFrameRate);
-//        NSLog(@"%f",assetTrack.minFrameDuration);
+        //        NSLog(@"%f",assetTrack.minFrameDuration);
         CMTimeShow(assetTrack.minFrameDuration);
         NSLog(@"requiresFrameReordering %d",assetTrack.requiresFrameReordering);
         //Finding Track Segments
         NSLog(@"segments %@",assetTrack.segments);
+        for (AVAssetTrackSegment *trackSegment in assetTrack.segments) {
+            CMTimeMapping timeMapping = trackSegment.timeMapping;
+            CMTimeRangeShow(timeMapping.source);
+            CMTimeRangeShow(timeMapping.target);
+        }
         //Managing Metadata
         NSLog(@"metadata %@",assetTrack.metadata);
         NSLog(@"commonMetadata %@",assetTrack.commonMetadata);
@@ -195,20 +200,224 @@
         //Working with Associated Tracks
         NSLog(@"availableTrackAssociationTypes %@",assetTrack.availableTrackAssociationTypes);
     }
-//    AVMutableMetadataItem *myTaggedMediaCharacteristic = [[AVMutableMetadataItem alloc] init];
-//    [myTaggedMediaCharacteristic setKey:AVMetadataQuickTimeUserDataKeyTaggedCharacteristic];
-//    [myTaggedMediaCharacteristic setKeySpace:AVMetadataKeySpaceQuickTimeUserData];
-//    [myTaggedMediaCharacteristic setValue:aMeaningfulCharacteristicAsNSString];
-//    [myMutableArrayOfMetadata addObject:myTaggedMediaCharacteristic];
-//    [myAssetWriterInput setMetadata:myMutableArrayOfMetadata];
+    //    AVMutableMetadataItem *myTaggedMediaCharacteristic = [[AVMutableMetadataItem alloc] init];
+    //    [myTaggedMediaCharacteristic setKey:AVMetadataQuickTimeUserDataKeyTaggedCharacteristic];
+    //    [myTaggedMediaCharacteristic setKeySpace:AVMetadataKeySpaceQuickTimeUserData];
+    //    [myTaggedMediaCharacteristic setValue:aMeaningfulCharacteristicAsNSString];
+    //    [myMutableArrayOfMetadata addObject:myTaggedMediaCharacteristic];
+    //    [myAssetWriterInput setMetadata:myMutableArrayOfMetadata];
     
+#pragma make -- Asset Manipulation
     
+    //Asset Information
+    AVFragmentedAsset *fragmentedAsset = [[AVFragmentedAsset alloc] initWithURL:url options:nil];
+    NSArray *tracks = fragmentedAsset.tracks;
+    NSLog(@"canContainFragments %d",[fragmentedAsset canContainFragments]);
+    NSLog(@"containsFragments %d",[fragmentedAsset containsFragments]);
+    NSLog(@"overallDurationHint %d",[fragmentedAsset overallDurationHint]);
     
+//    AVFragmentedAssetMinder *assetMinder = [[AVFragmentedAssetMinder alloc] initWithAsset:asset mindingInterval:2.0];
     
+    //Track Information
+    AVAssetTrackGroup *trackGroup = [asset trackGroups];
+    AVAssetTrack *assetTrack = assetTracks.firstObject;
     
+    //Asset Retrieval
+    AVURLAsset *urlAsset = [AVURLAsset assetWithURL:url];
+    AVAssetDownloadURLSession *downloadURLSession = [[AVAssetDownloadURLSession alloc] assetDownloadTaskWithURLAsset:urlAsset destinationURL:nil options:nil];
+    
+    AVAssetResourceLoader *resourceLoadser = urlAsset.resourceLoader;
+    [resourceLoadser setDelegate:self queue:dispatch_get_main_queue()];
+    
+#pragma mark -- Asset File Import and Export
+    
+    //File Import
+    
+    //AVAssetReader
+    NSError *readerError = nil;
+    AVAssetReader *assetReader = [AVAssetReader assetReaderWithAsset:asset error:&readerError];
+    NSLog(@"readStatus %ld",(long)assetReader.status);
+    NSArray *outputs = assetReader.outputs;
+    NSLog(@"outputs %lu",(unsigned long)outputs.count);
+    NSLog(@"error %@",assetReader.error.description);
+    CMTimeRangeShow(assetReader.timeRange);
+    
+//    NSMutableArray *audioTracks = [NSMutableArray array];
+//    for (AVAssetTrack *assetTrack in asset.tracks) {
+//        NSLog(@"mediaType %@",assetTrack.mediaType);
+//        if (assetTrack.mediaType == AVMediaTypeVideo) {
+//            [audioTracks addObject:assetTrack];
+//        }
+//    }
+    
+    /*
+     Video Setting
+     AVVideoCodecKey
+     AVVideoWidthKey
+     AVVideoheightKey
+     AVVideoCompressionPropertiesKey
+     AVVideoAverageBitRateKey
+     AVVideoQualityKey
+     AVVideoMaxKeyFrameIntervalKey
+     AVVideoProfileLevelKey
+     AVVideoProfileLevelH264Baseline30
+     AVVideoProfileLevelH264Baseline31
+     AVVideoProfileLevelH264Baseline41
+     AVVideoProfileLevelH264Main30
+     AVVideoProfileLevelH264Main31
+     AVVideoProfileLevelH264Main32
+     AVVideoProfileLevelH264Main41
+     AVVideoProfileLevelH264High40
+     AVVideoPixelAspectRatioKey
+     AVVideoPixelAspectRatioHorizontalSpacingKey
+     AVVideoPixelAspectRatioVerticalSpacingKey
+     AVVideoCleanApertureKey
+     AVVideoCleanApertureWidthKey
+     AVVideoCleanApertureHeightKey
+     AVVideoCleanApertureHorizontalOffsetKey
+     AVVideoCleanApertureVerticalOffsetKey
+     */
+    
+    //AVAssetReaderAudioMixOutput
+//    NSArray *audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
+//    AVMutableAudioMix *audioMix = [AVMutableAudioMix audioMix];
+//    AVAssetReaderAudioMixOutput *audioMixOutput = [[AVAssetReaderAudioMixOutput alloc] initWithAudioTracks:audioTracks audioSettings:nil];
+//    audioMixOutput.audioMix = audioMix;
+//    audioMixOutput.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmSpectral;
+//    if ([assetReader canAddOutput:audioMixOutput]) {
+//        [assetReader addOutput:audioMixOutput];
+//    }
+//    [assetReader startReading];
+//
+//    CMSampleBufferRef *sampleBufferRef = [audioMixOutput copyNextSampleBuffer];
+//    NSLog(@"sampleBuffer %@",sampleBufferRef);
+    
+    //AVAssetReaderTrackOutput
+//    AVAssetReaderTrackOutput *trackOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:asset.tracks.firstObject outputSettings:nil];
+//    trackOutput.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmSpectral;
+//    if ([assetReader canAddOutput:trackOutput]) {
+//        [assetReader addOutput:trackOutput];
+//    }
+//    [assetReader startReading];
+//    [trackOutput copyNextSampleBuffer];
+    
+    //AVAssetReaderSampleReferenceOutput
+//    AVAssetReaderSampleReferenceOutput *referenceOutput = [[AVAssetReaderSampleReferenceOutput alloc] initWithTrack:asset.tracks.firstObject];
+//    if ([assetReader canAddOutput:referenceOutput]) {
+//        [assetReader addOutput:referenceOutput];
+//    }
+//    [assetReader startReading];
+    
+    //AVAssetReaderVideoCompositionOutput
+//    AVAssetReaderVideoCompositionOutput *compositionOutput = [[AVAssetReaderVideoCompositionOutput alloc] initWithVideoTracks:assetTracks videoSettings:nil];
+//    if ([assetReader canAddOutput:compositionOutput]) {
+//        [assetReader addOutput:compositionOutput];
+//    }
+//    [assetReader startReading];
+    
+    //AVAssetReaderOutputMetadataAdaptor
+//    NSArray *metadataTracks = [asset tracksWithMediaType:AVMediaTypeMetadata];
+//    AVAssetReaderTrackOutput *trackOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:metadataTracks.firstObject outputSettings:nil];
+//    trackOutput.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+//    if ([assetReader canAddOutput:trackOutput]) {
+//        [assetReader addOutput:trackOutput];
+//    }
+//    AVAssetReaderOutputMetadataAdaptor *metadataAdaptor = [[AVAssetReaderOutputMetadataAdaptor alloc] initWithAssetReaderTrackOutput:trackOutput];
+//    if (assetReader.outputs.count >= 1) {
+//        [assetReader startReading];
+//        AVTimedMetadataGroup *metadataGroup = [metadataAdaptor nextTimedMetadataGroup];
+//        NSLog(@"metadataGroup %@",metadataGroup);
+//    }
+     
+    //AVAssetImageGenerator
+//    AVVideoComposition *videoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:asset];
+//    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+//    imageGenerator.apertureMode = AVAssetImageGeneratorApertureModeCleanAperture;
+//    imageGenerator.appliesPreferredTrackTransform = YES;
+//    imageGenerator.videoComposition = videoComposition;
+//    Float64 durationSeconds = CMTimeGetSeconds(asset.duration);
+//    CMTime firstThird = CMTimeMakeWithSeconds(durationSeconds/3.0, 600);
+//    CMTime secondThird = CMTimeMakeWithSeconds(durationSeconds*2.0/3.0, 600);
+//    CMTime end = CMTimeMakeWithSeconds(durationSeconds, 600);
+//    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero],[NSValue valueWithCMTime:firstThird],[NSValue valueWithCMTime:secondThird],[NSValue valueWithCMTime:end]];
+//    [imageGenerator generateCGImagesAsynchronouslyForTimes:times completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error) {
+//        NSString *requestTimeString = (NSString *)CFBridgingRelease(CMTimeCopyDescription(NULL, requestedTime));
+//        NSString *actualTimeString = (NSString *)CFBridgingRelease(CMTimeCopyDescription(NULL, actualTime));
+//        NSLog(@"requested: %@; actual %@",requestTimeString, actualTimeString);
+//
+//        if (result == AVAssetImageGeneratorSucceeded) {
+//            // Do something interesting with the image.
+//            NSLog(@"image %@",image);
+//        }
+//        if (result == AVAssetImageGeneratorFailed) {
+//            NSLog(@"Failed with error: %@",[error localizedDescription]);
+//        }
+//        if (result == AVAssetImageGeneratorCancelled) {
+//            NSLog(@"Canceled");
+//        }
+//    }];
+//
+//    NSError *generatorError = nil;
+//    CMTime actualTime;
+//    CGImageRef halfWayImage = [imageGenerator copyCGImageAtTime:firstThird actualTime:&actualTime error:&generatorError];
+//    if (halfWayImage != NULL) {
+//        NSString *actualTimeString = (NSString *)CFBridgingRelease(CMTimeCopyDescription(NULL, actualTime));
+//        NSString *requestTimeString = (NSString *)CFBridgingRelease(CMTimeCopyDescription(NULL, firstThird));
+//        NSLog(@"Got halfWayImage: Asked for %@, got %@",requestTimeString,actualTimeString);
+//
+//        //Do something interesting with the image.
+//        CGImageRelease(halfWayImage);
+//    }
+    
+    //File Export
+    NSString *localpath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSLog(@"path %@",localpath);
+    NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:[localpath stringByAppendingFormat:@"/moive.mp4"]];
+    
+    //These setting will encode using H.264
+    NSString *preset = AVAssetExportPresetHighestQuality;
+    AVFileType outFileType = AVFileTypeQuickTimeMovie;
+    //检测是否可以转换为指定格式
+    [AVAssetExportSession determineCompatibilityOfExportPreset:preset withAsset:asset outputFileType:outFileType completionHandler:^(BOOL compatible) {
+        if (!compatible) {
+            return;
+        }
+    }];
+    AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:asset presetName:preset];
+    if (exportSession) {
+        exportSession.outputFileType = outFileType;
+        exportSession.outputURL = outputURL;
+        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+            //handle export results.
+            if (exportSession.progress == 1.0) {
+            }
+        }];
+        NSLog(@"progress %f",exportSession.progress);
+    }
+    
+    NSError *writerError = nil;
+    AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:nil];
+    AVAssetWriter *assetWriter = [AVAssetWriter assetWriterWithURL:outputURL fileType:outFileType error:&writerError];
+    NSLog(@"write status %ld",(long)assetWriter.status);
+    if ([assetWriter canAddInput:writerInput]) {
+        [assetWriter addInput:writerInput];
+    }
+    [assetWriter startWriting];
+    [assetWriter finishWritingWithCompletionHandler:^{
+        [assetWriter cancelWriting];
+    }];
     
     
     // Do any additional setup after loading the view.
+}
+
+- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest {
+    
+    return true;
+}
+
+- (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest {
+    
 }
 
 /*

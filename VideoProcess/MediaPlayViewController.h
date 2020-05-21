@@ -1,8 +1,8 @@
 //
-//  MainViewController.h
+//  MediaPlayViewController.h
 //  VideoProcess
 //
-//  Created by tigerfly on 2020/5/16.
+//  Created by tigerfly on 2020/5/20.
 //  Copyright © 2020 tiger fly. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainViewController : UIViewController
+@interface MediaPlayViewController : UIViewController
 
 @end
 

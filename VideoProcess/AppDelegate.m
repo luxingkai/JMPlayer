@@ -6,12 +6,12 @@
 //  Copyright © 2020 tiger fly. All rights reserved.
 //
 
-#import "MainViewController.h"
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 #import "AudioViewController.h"
 #import "VideoPlayerViewController.h"
 #import "AssetHandleViewController.h"
+#import "MediaPlayViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,7 +32,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    AssetHandleViewController *vc = [AssetHandleViewController new];
+    MediaPlayViewController *vc = [MediaPlayViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
