@@ -15,7 +15,6 @@
  
 @implementation MetadataManipulationController {
     
-    
 }
  
 - (void)viewDidLoad {
@@ -37,6 +36,26 @@
         }
     }];
     
+    NSArray *metadata = [asset commonMetadata];
+    NSArray *titleItems = [AVMetadataItem metadataItemsFromArray:metadata filteredByIdentifier:AVMetadataCommonIdentifierTitle];
+    for (AVMetadataItem *item in titleItems) {
+        //process title Item
+        NSLog(@"%@",item.identifier);
+        NSLog(@"%@",item.dataType);
+        NSLog(@"%@",item.extendedLanguageTag);
+        NSLog(@"%@",item.locale);
+        CMTimeShow(item.time);
+        CMTimeShow(item.duration);
+        NSLog(@"%@",item.value);
+        NSLog(@"%@",item.extraAttributes);
+    }
+    
+//    Find Specific Values
+    NSArray *metadatas = asset.commonMetadata;
+    NSArray *artworkItems = [AVMetadataItem metadataItemsFromArray:metadatas filteredByIdentifier:AVMetadataCommonIdentifierArtwork];
+    AVMetadataItem *artworkItem = [artworkItems firstObject];
+    NSData *imageData = artworkItem.dataValue;
+    UIImage *image = [UIImage imageWithData:imageData];
     
     
     // Do any additional setup after loading the view.

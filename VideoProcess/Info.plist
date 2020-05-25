@@ -52,7 +52,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>inter-app-audio</key>
-	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>相机</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>麦克风</string>
 </dict>
 </plist>
