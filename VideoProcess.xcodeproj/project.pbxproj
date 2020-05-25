@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		11183D91241B2A1B007FBE59 /* JMPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11183D90241B2A1B007FBE59 /* JMPlayerView.m */; };
 		11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 11183D93241B4E1A007FBE59 /* UIColor+Add.m */; };
+		1126040D2478C2C200B1C006 /* sofa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1126040C2478C2C200B1C006 /* sofa.mp4 */; };
+		1126040F2478C43B00B1C006 /* sofia.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1126040E2478C43B00B1C006 /* sofia.mp4 */; };
 		1127A396240D40230038ED48 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127A395240D40230038ED48 /* AppDelegate.m */; };
 		1127A39F240D40230038ED48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1127A39D240D40230038ED48 /* Main.storyboard */; };
 		1127A3A1240D40260038ED48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1127A3A0240D40260038ED48 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 		1130E160247264E100C973F6 /* beauty.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1130E15F247264E100C973F6 /* beauty.mp4 */; };
 		1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E16224727EAC00C973F6 /* AssetHandleViewController.m */; };
 		1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E1652472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m */; };
+		1131B65C247B62C5009D8FF7 /* MediaPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112AA057247522B100FD19C3 /* MediaPlayViewController.m */; };
+		1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */; };
 		114C9074241CA24F008CBC01 /* JMPlayerControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C9073241CA24F008CBC01 /* JMPlayerControlLayer.m */; };
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
@@ -63,9 +67,11 @@
 /* Begin PBXFileReference section */
 		0F868A362BB29ECCC8D0AB29 /* Pods-VideoProcessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcessTests.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcessTests/Pods-VideoProcessTests.debug.xcconfig"; sourceTree = "<group>"; };
 		11183D8F241B2A1B007FBE59 /* JMPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayerView.h; sourceTree = "<group>"; };
-		11183D90241B2A1B007FBE59 /* JMPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPlayerView.m; sourceTree = "<group>"; };
+		11183D90241B2A1B007FBE59 /* JMPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPlayerView.m; sourceTree = "<group>"; wrapsLines = 0; };
 		11183D92241B4E1A007FBE59 /* UIColor+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Add.h"; sourceTree = "<group>"; };
 		11183D93241B4E1A007FBE59 /* UIColor+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Add.m"; sourceTree = "<group>"; };
+		1126040C2478C2C200B1C006 /* sofa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofa.mp4; sourceTree = "<group>"; };
+		1126040E2478C43B00B1C006 /* sofia.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofia.mp4; sourceTree = "<group>"; };
 		1127A391240D40230038ED48 /* VideoProcess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoProcess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1127A394240D40230038ED48 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1127A395240D40230038ED48 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -88,6 +94,8 @@
 		1130E16224727EAC00C973F6 /* AssetHandleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetHandleViewController.m; sourceTree = "<group>"; };
 		1130E1642472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVAssetTrack+CoreMediaExtensions.h"; sourceTree = "<group>"; };
 		1130E1652472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVAssetTrack+CoreMediaExtensions.m"; sourceTree = "<group>"; };
+		1131B65D247BCD8D009D8FF7 /* MetadataManipulationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetadataManipulationController.h; sourceTree = "<group>"; };
+		1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetadataManipulationController.m; sourceTree = "<group>"; };
 		114C9072241CA24F008CBC01 /* JMPlayerControlLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayerControlLayer.h; sourceTree = "<group>"; };
 		114C9073241CA24F008CBC01 /* JMPlayerControlLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPlayerControlLayer.m; sourceTree = "<group>"; };
 		115C051D246E2D7B00EAF3A6 /* AudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
@@ -210,11 +218,15 @@
 				1130E16224727EAC00C973F6 /* AssetHandleViewController.m */,
 				112AA056247522B100FD19C3 /* MediaPlayViewController.h */,
 				112AA057247522B100FD19C3 /* MediaPlayViewController.m */,
+				1131B65D247BCD8D009D8FF7 /* MetadataManipulationController.h */,
+				1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */,
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
 				1130E15F247264E100C973F6 /* beauty.mp4 */,
 				1127A3C9240D42750038ED48 /* spring.mp4 */,
+				1126040C2478C2C200B1C006 /* sofa.mp4 */,
+				1126040E2478C43B00B1C006 /* sofia.mp4 */,
 				1127A3A5240D40260038ED48 /* Info.plist */,
 				1127A3A6240D40260038ED48 /* main.m */,
 			);
@@ -401,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1126040D2478C2C200B1C006 /* sofa.mp4 in Resources */,
 				1127A3A4240D40260038ED48 /* LaunchScreen.storyboard in Resources */,
 				11C21DEF246E807E00F6E7BD /* offline-29045499.jpg in Resources */,
 				1127A3A1240D40260038ED48 /* Assets.xcassets in Resources */,
@@ -414,6 +427,7 @@
 				11C21DE1246E803400F6E7BD /* Mark Petrie - New Light.mp3 in Resources */,
 				11C21DE4246E803400F6E7BD /* Liquid Cinema - Eternity.mp3 in Resources */,
 				11C21DEC246E807E00F6E7BD /* offline-35447682.jpg in Resources */,
+				1126040F2478C43B00B1C006 /* sofia.mp4 in Resources */,
 				11C21DE3246E803400F6E7BD /* Danny Gokey - Love Will Take You Places.mp3 in Resources */,
 				11C21DE2246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 in Resources */,
 				115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */,
@@ -556,6 +570,7 @@
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
 				115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */,
+				1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */,
 				1127A3A7240D40260038ED48 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1127A3BC240D40260038ED48 /* VideoProcessUITests.m in Sources */,
+				1131B65C247B62C5009D8FF7 /* MediaPlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "VideoPlayerViewController.h"
 #import "AssetHandleViewController.h"
 #import "MediaPlayViewController.h"
+#import "MetadataManipulationController.h"
 
 @interface AppDelegate ()
 
@@ -24,7 +25,11 @@
     AVAudioSession *audioSesion = [AVAudioSession sharedInstance];
     @try {
         NSError *error = nil;
-        [audioSesion setCategory:AVAudioSessionCategoryPlayback error:&error];
+        if (@available(iOS 10.0, *)) {
+            [audioSesion setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionModeMoviePlayback options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+        } else {
+            // Fallback on earlier versions
+        }
     } @catch (NSException *exception) {
         NSLog(@"Setting category to AVAudioSessionCategoryPlayback failed.");
     } @finally {
@@ -32,7 +37,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MediaPlayViewController *vc = [MediaPlayViewController new];
+    MetadataManipulationController *vc = [MetadataManipulationController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
