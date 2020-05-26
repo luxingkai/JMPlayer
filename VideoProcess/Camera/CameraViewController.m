@@ -8,8 +8,12 @@
 
 #import "CameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "PreviewView.h"
+#import "VPCameraManager.h"
 
 @interface CameraViewController ()
+
+@property (nonatomic, strong) AVCaptureSession *captureSession;
 
 @end
 
@@ -20,42 +24,22 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    switch (status) {
-        case AVAuthorizationStatusAuthorized: {
-            // The user has previously granted access to the camera.
-            [self setupCaptureSession];
-        }
-            break;
-        case AVAuthorizationStatusNotDetermined: {
-            // The user has not yet been asked for camera access.
-            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                if (granted) {
-                    [self setupCaptureSession];
-                }
-            }];
-        }
-            break;
-        case AVAuthorizationStatusDenied: {
-            // The user has previously denied access.
-        }
-            break;
-            
-        case AVAuthorizationStatusRestricted: {
-            // The user can't grant access due to restrictions.
-        }
-            break;
-    }
-    
-    
+    VPCameraManager *cameraManager = [VPCameraManager cameraManager];
+    PreviewView *previewView = [[PreviewView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    previewView.previewLayer.session = cameraManager.captureSession;
+    [self.view addSubview:previewView];
+    [cameraManager startRunning];
     
     // Do any additional setup after loading the view.
 }
 
-- (void)setupCaptureSession {
-    
-    
-}
+
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    [super touchesBegan:touches withEvent:event];
+//    if (![self.captureSession isRunning]) {
+//    }
+//}
 
 
 /*

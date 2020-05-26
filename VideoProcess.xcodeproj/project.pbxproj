@@ -30,6 +30,8 @@
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
+		11A53EE2247CAAB600268962 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE1247CAAB600268962 /* PreviewView.m */; };
+		11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE4247CC2CD00268962 /* VPCameraManager.m */; };
 		11C21DE0246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDB246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 */; };
 		11C21DE1246E803400F6E7BD /* Mark Petrie - New Light.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDC246E803400F6E7BD /* Mark Petrie - New Light.mp3 */; };
 		11C21DE2246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDD246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 */; };
@@ -107,6 +109,10 @@
 		115C0522246E682C00EAF3A6 /* AudioFileLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileLoader.h; sourceTree = "<group>"; };
 		115C0523246E682C00EAF3A6 /* AudioFileLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileLoader.m; sourceTree = "<group>"; };
 		11789CCF241F16BD00EC8862 /* JMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayer.h; sourceTree = "<group>"; };
+		11A53EE0247CAAB600268962 /* PreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
+		11A53EE1247CAAB600268962 /* PreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
+		11A53EE3247CC2CD00268962 /* VPCameraManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPCameraManager.h; sourceTree = "<group>"; };
+		11A53EE4247CC2CD00268962 /* VPCameraManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPCameraManager.m; sourceTree = "<group>"; };
 		11C21DDB246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "李戈 - 夕阳山顶.mp3"; sourceTree = "<group>"; };
 		11C21DDC246E803400F6E7BD /* Mark Petrie - New Light.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mark Petrie - New Light.mp3"; sourceTree = "<group>"; };
 		11C21DDD246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Christophe Lebled - Alpha.mp3"; sourceTree = "<group>"; };
@@ -260,6 +266,10 @@
 			children = (
 				1131B665247BF626009D8FF7 /* CameraViewController.h */,
 				1131B666247BF626009D8FF7 /* CameraViewController.m */,
+				11A53EE3247CC2CD00268962 /* VPCameraManager.h */,
+				11A53EE4247CC2CD00268962 /* VPCameraManager.m */,
+				11A53EE0247CAAB600268962 /* PreviewView.h */,
+				11A53EE1247CAAB600268962 /* PreviewView.m */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -573,10 +583,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				11183D91241B2A1B007FBE59 /* JMPlayerView.m in Sources */,
+				11A53EE2247CAAB600268962 /* PreviewView.m in Sources */,
 				1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */,
 				11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */,
 				112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */,
 				1127A396240D40230038ED48 /* AppDelegate.m in Sources */,
+				11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */,
 				1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,
 				114C9074241CA24F008CBC01 /* JMPlayerControlLayer.m in Sources */,
