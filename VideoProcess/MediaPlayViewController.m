@@ -14,6 +14,15 @@
 #import <CoreMIDI/CoreMIDI.h>
 #import <CoreVideo/CoreVideo.h>
 
+/*
+ 播放器需要处理的相关事宜
+ 1. 请求视频资源：是否可用于播放（资源加载状态）
+ 2. 视频进度处理：缓冲进度、播放进度
+ 3. 资源总时长、当前播放时间；滑动进度条
+ 4. 播放键和暂停键、播放速率、音量、静音
+ 5. 横竖屏切换
+ */
+
 //AVPlayer是一次播放一个媒体资产。可以使用player实例的replaceCurrentItemWithPlayerItem:方法重用player实例来播放其他媒体资产，但它一次只管理单个媒体资产的播放。该框架还提供了AVPlayer的一个子类，称为AVQueuePlayer，用于创建和管理按顺序播放的媒体资产的队列。使用AVPlayer播放媒体资产，AVFoundation使用AVAsset类对媒体资产进行建模。
 //AVAsset只对媒体的静态方面进行建模，例如它的持续时间或创建日期，并且它本身不适合用AVPlayer播放。要运行一个asset，您需要创建一个在AVPlayerItem中找到的动态副本的实例。这个对象对AVPlayer实例播放的资产的时间和表示状态进行建模。查看AVPlayerItem参考以了解更多细节。
 @interface MediaPlayViewController ()<AVPlayerItemMetadataCollectorPushDelegate,AVQueuedSampleBufferRendering>
@@ -246,6 +255,7 @@
      [_player cancelPendingPrerolls];
      _player.masterClock = CMClockGetHostTimeClock();
      */
+    
     /*
      管理音频输出
      _player.muted = false;
