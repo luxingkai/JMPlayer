@@ -321,7 +321,6 @@
     NSLog(@"geometricDistortionCorrectionSupported %d",captureDevice.geometricDistortionCorrectionSupported);
     NSLog(@"geometricDistortionCorrectionEnabled %d",captureDevice.geometricDistortionCorrectionEnabled);
     
-    
     return captureDevice;
 }
 
