@@ -30,6 +30,7 @@
     _playerView = [JMPlayerView playerViewWithFrame:CGRectMake(0, status_height + 44.0, [UIScreen mainScreen].bounds.size.width, 200.0) sourceURL:[NSURL URLWithString:url]];
     [self.view addSubview:_playerView];
     
+    
     // Do any additional setup after loading the view.
 }
 

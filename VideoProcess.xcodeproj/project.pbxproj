@@ -30,6 +30,7 @@
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
+		117DCE07247F99F700E1D8FC /* OperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117DCE06247F99F700E1D8FC /* OperationView.m */; };
 		11A53EE2247CAAB600268962 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE1247CAAB600268962 /* PreviewView.m */; };
 		11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE4247CC2CD00268962 /* VPCameraManager.m */; };
 		11C21DE0246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDB246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 */; };
@@ -109,6 +110,8 @@
 		115C0522246E682C00EAF3A6 /* AudioFileLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileLoader.h; sourceTree = "<group>"; };
 		115C0523246E682C00EAF3A6 /* AudioFileLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileLoader.m; sourceTree = "<group>"; };
 		11789CCF241F16BD00EC8862 /* JMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayer.h; sourceTree = "<group>"; };
+		117DCE05247F99F700E1D8FC /* OperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationView.h; sourceTree = "<group>"; };
+		117DCE06247F99F700E1D8FC /* OperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OperationView.m; sourceTree = "<group>"; };
 		11A53EE0247CAAB600268962 /* PreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
 		11A53EE1247CAAB600268962 /* PreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		11A53EE3247CC2CD00268962 /* VPCameraManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPCameraManager.h; sourceTree = "<group>"; };
@@ -270,6 +273,8 @@
 				11A53EE4247CC2CD00268962 /* VPCameraManager.m */,
 				11A53EE0247CAAB600268962 /* PreviewView.h */,
 				11A53EE1247CAAB600268962 /* PreviewView.m */,
+				117DCE05247F99F700E1D8FC /* OperationView.h */,
+				117DCE06247F99F700E1D8FC /* OperationView.m */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -596,6 +601,7 @@
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
 				115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */,
+				117DCE07247F99F700E1D8FC /* OperationView.m in Sources */,
 				1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */,
 				1127A3A7240D40260038ED48 /* main.m in Sources */,
 			);

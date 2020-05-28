@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull, strong) AVCaptureDeviceInput *captureInput;
 /// 捕获输出
 @property (nonatomic, nonnull, strong) AVCaptureOutput *captureOutput;
+/// 设备连接
+@property (nonatomic, nullable, strong) AVCaptureConnection *connection;
 
 - (void)startRunning;
 - (void)stopRunning;

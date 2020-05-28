@@ -74,15 +74,15 @@
 //    self.captureSession.unifiedAutoExposureDefaultsEnabled = true;
 //    self.captureSession.videoMinFrameDurationOverride = CMTimeMake(1, 60);
     
-    self.captureOutput = [[AVCaptureStillImageOutput alloc] init];
+    self.captureOutput = [self photoCaptureOutput];
     if ([self.captureSession canAddOutput:self.captureOutput]) {
         [self.captureSession addOutput:self.captureOutput];
     }
-    
+
     
     // Managing Session Presets
-    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
-        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
+    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset3840x2160]) {
+        self.captureSession.sessionPreset = AVCaptureSessionPreset3840x2160;
     }
     
     
@@ -91,7 +91,7 @@
     if ([self.captureSession canAddConnection:captureConnection]) {
         [self.captureSession addConnection:captureConnection];
     }
-    
+    NSLog(@"connection active state %d",self.connection.active);
     
     //Sharing the Application's Audio Session
     self.captureSession.usesApplicationAudioSession = true;
@@ -111,7 +111,7 @@
     
     
     [self.captureSession commitConfiguration];
-    
+
 }
 
 #pragma mrak -- Managing Running State
@@ -322,6 +322,35 @@
     NSLog(@"geometricDistortionCorrectionEnabled %d",captureDevice.geometricDistortionCorrectionEnabled);
     
     return captureDevice;
+}
+
+#pragma mark -- Photo Capture
+
+- (AVCaptureOutput *)photoCaptureOutput {
+    
+        if (@available(iOS 10.0, *)) {
+            AVCapturePhotoOutput *photoOutput = [AVCapturePhotoOutput new];
+            
+            //Choosing Data and File Formats
+            NSLog(@"availablePhotoFileTypes %@",photoOutput.availablePhotoFileTypes);
+            NSLog(@"availableRawPhotoFileTypes %@",photoOutput.availableRawPhotoFileTypes);
+            NSLog(@"availablePhotoPixelFormatTypes %@",photoOutput.availablePhotoPixelFormatTypes);
+            NSLog(@"availablePhotoCodecTypes %@",photoOutput.availablePhotoCodecTypes);
+            NSLog(@"availableRawPhotoFileTypes %@",photoOutput.availableRawPhotoPixelFormatTypes);
+            
+            //Determining Available Setting
+            NSLog(@"maxBracketedCapturePhotoCount %d",photoOutput.maxBracketedCapturePhotoCount);
+            NSLog(@"lensStabilizationDuringBracketedCaptureSupported %d",photoOutput.lensStabilizationDuringBracketedCaptureSupported);
+            NSLog(@"supportedFlashModes %d",photoOutput.supportedFlashModes);
+            NSLog(@"autoRedEyeReductionSupported %d",photoOutput.autoRedEyeReductionSupported);
+
+            return photoOutput;
+            
+        } else {
+            // Fallback on earlier versions
+            AVCaptureStillImageOutput *output = [[AVCaptureStillImageOutput alloc] init];
+            return output;
+        }
 }
 
 #pragma mark --
