@@ -166,7 +166,16 @@
  
 - (void)captureOutput:(AVCaptureFileOutput *)output didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections error:(nullable NSError *)error {
     
-    
+    NSLog(@"outputFileURL %@",outputFileURL);
+    //Saving Captured Photos
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        if (status != PHAuthorizationStatusAuthorized) return;
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            PHAssetCreationRequest *creationRequest = [PHAssetCreationRequest creationRequestForAsset];
+            [creationRequest addResourceWithType:PHAssetResourceTypeVideo fileURL:outputFileURL options:nil];
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        }];
+    }];
 }
 
 
