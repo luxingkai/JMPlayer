@@ -74,7 +74,8 @@
 //    self.captureSession.unifiedAutoExposureDefaultsEnabled = true;
 //    self.captureSession.videoMinFrameDurationOverride = CMTimeMake(1, 60);
     
-    self.captureOutput = [self photoCaptureOutput];
+//    self.captureOutput = [self photoCaptureOutput];
+    self.captureOutput = [self movieFileOutput];
     if ([self.captureSession canAddOutput:self.captureOutput]) {
         [self.captureSession addOutput:self.captureOutput];
     }
@@ -343,7 +344,49 @@
             NSLog(@"lensStabilizationDuringBracketedCaptureSupported %d",photoOutput.lensStabilizationDuringBracketedCaptureSupported);
             NSLog(@"supportedFlashModes %d",photoOutput.supportedFlashModes);
             NSLog(@"autoRedEyeReductionSupported %d",photoOutput.autoRedEyeReductionSupported);
+            
+            //Monitoring the Visible Scene
+            NSLog(@"isFlashScene %d",photoOutput.isFlashScene);
+            NSLog(@"uniqueID %lld",photoOutput.photoSettingsForSceneMonitoring.uniqueID);
+            NSLog(@"format %@",photoOutput.photoSettingsForSceneMonitoring.format);
+            NSLog(@"processedFileType %@",photoOutput.photoSettingsForSceneMonitoring.processedFileType);
+            NSLog(@"rawFileType %@",photoOutput.photoSettingsForSceneMonitoring.rawFileType);
+            NSLog(@"rawPhotoPixelFormatType %@",photoOutput.photoSettingsForSceneMonitoring.rawPhotoPixelFormatType);
+            
+            //Configuring High-Resolution Still Capture
+            NSLog(@"highResolutionCaptureEnabled %d",photoOutput.highResolutionCaptureEnabled);
+            
+            //Configuring Live Photo Capture
+            NSLog(@"livePhotoCaptureSupported %d",photoOutput.livePhotoCaptureSupported);
+            NSLog(@"livePhotoCaptureEnabled %d",photoOutput.livePhotoCaptureEnabled);
+            NSLog(@"livePhotoCaptureSuspended %d",photoOutput.livePhotoCaptureSuspended);
+            NSLog(@"livePhotoAutoTrimmingEnabled %d",photoOutput.livePhotoAutoTrimmingEnabled);
+            NSLog(@"availableLivePhotoVideoCodecTypes %@",photoOutput.availableLivePhotoVideoCodecTypes);
+            
+            //Configuring Depth Data Capture
+            NSLog(@"depthDataDeliverySupported %d",photoOutput.depthDataDeliverySupported);
+            NSLog(@"depthDataDeliveryEnabled %d",photoOutput.depthDataDeliveryEnabled);
 
+            //Configuring Portrait Effects Matte Capture
+            NSLog(@"portraitEffectsMatteDeliveryEnabled %d",photoOutput.portraitEffectsMatteDeliveryEnabled);
+            NSLog(@"portraitEffectsMatteDeliverySupported %d",photoOutput.portraitEffectsMatteDeliverySupported);
+
+            //Configuring Dual Camera Capture
+            NSLog(@"cameraCalibrationDataDeliverySupported %d",photoOutput.cameraCalibrationDataDeliverySupported);
+            NSLog(@"virtualDeviceConstituentPhotoDeliveryEnabled %d",       photoOutput.virtualDeviceConstituentPhotoDeliveryEnabled);
+            NSLog(@"virtualDeviceConstituentPhotoDeliveryEnabled %d",       photoOutput.virtualDeviceConstituentPhotoDeliverySupported);
+            NSLog(@"virtualDeviceFusionSupported %d",photoOutput.virtualDeviceFusionSupported);
+
+            //Preparing for Resource-Intensive Captures
+            NSLog(@"preparedPhotoSettingsArray %@",photoOutput.preparedPhotoSettingsArray);
+            
+            //Getting Segmentation Mattes
+            NSLog(@"availableSemanticSegmentationMatteTypes %@",photoOutput.availableSemanticSegmentationMatteTypes);
+            NSLog(@"enabledSemanticSegmentationMatteTypes %@",photoOutput.enabledSemanticSegmentationMatteTypes);
+
+            //Setting the Capture Prioritization
+            photoOutput.maxPhotoQualityPrioritization = AVCapturePhotoQualityPrioritizationBalanced;
+            
             return photoOutput;
             
         } else {
@@ -352,6 +395,54 @@
             return output;
         }
 }
+
+
+#pragma mark -- Capturing Video in Alternative Formats
+
+- (AVCaptureMovieFileOutput *)movieFileOutput {
+    
+    AVCaptureMovieFileOutput *movieFileOutput = [AVCaptureMovieFileOutput new];
+    AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+    if ([movieFileOutput.availableVideoCodecTypes containsObject:AVVideoCodecTypeH264]) {
+        // Use the H.264 codec to encode the video
+        [movieFileOutput setOutputSettings:@{AVVideoCodecKey:AVVideoCodecTypeH264} forConnection:connection];
+    }
+    
+    // Configuring Movies
+    NSLog(@"movieFragmentInterval %d",movieFileOutput.movieFragmentInterval);
+    NSLog(@"metadata %@",movieFileOutput.metadata);
+    
+    // Managing Output Settinga
+    NSArray *outputSetting = [movieFileOutput supportedOutputSettingsKeysForConnection:connection];
+    NSLog(@"outputSetting %@",outputSetting);
+//    NSDictionary *outputDic = [movieFileOutput outputSettingsForConnection:connection];
+//    NSLog(@"outputDic %@",outputDic);
+    NSArray *availableTypes = [movieFileOutput availableVideoCodecTypes];
+    NSLog(@"availableVideoCodecTypes %@",availableTypes);
+    
+    //Setting Oritentation
+    BOOL result = [movieFileOutput recordsVideoOrientationAndMirroringChangesAsMetadataTrackForConnection:connection];
+    NSLog(@"recordsVideoOrientationAndMirroringChange %d",result);
+    
+    
+    return movieFileOutput;
+}
+
+#pragma mark -- Metadata Capture
+
+- (AVCaptureMetadataOutput *)metadataOutput {
+    
+    AVCaptureMetadataOutput *metadataOutput = [AVCaptureMetadataOutput new];
+    
+    // Configuring Metadata Capture
+    NSLog(@"availableMetadataObjectTypes %@",metadataOutput.availableMetadataObjectTypes);
+    NSLog(@"metadataObjectTypes %@",metadataOutput.metadataObjectTypes);
+    NSLog(@"availableMetadataObjectTypes %@",NSStringFromCGRect(metadataOutput.rectOfInterest));
+
+    return metadataOutput;
+}
+ 
+
 
 #pragma mark --
 

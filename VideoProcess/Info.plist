@@ -25,10 +25,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>图片写入相册成功</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>图片写入相册成功</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -56,5 +52,9 @@
 	<string>相机</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>麦克风</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>图片写入相册成功</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>图片写入相册成功</string>
 </dict>
 </plist>

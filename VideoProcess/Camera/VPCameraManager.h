@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  媒体捕获的基本架构的主要部分是: captureSession\captureInput\captureOutput
  */
 
+/// Manager主要处理（设备授权访问、Session、设备相关设置（曝光、焦距、闪光灯、电筒等设置）以及设备输出相关设置）
 @interface VPCameraManager : NSObject
 
 + (instancetype)cameraManager;
