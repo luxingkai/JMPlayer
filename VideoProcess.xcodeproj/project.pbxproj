@@ -27,6 +27,7 @@
 		1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */; };
 		1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131B666247BF626009D8FF7 /* CameraViewController.m */; };
 		114C9074241CA24F008CBC01 /* JMPlayerControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C9073241CA24F008CBC01 /* JMPlayerControlLayer.m */; };
+		115826E32485320700156C0B /* MediaItemTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115826E22485320700156C0B /* MediaItemTransferController.m */; };
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
@@ -104,6 +105,8 @@
 		1131B666247BF626009D8FF7 /* CameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		114C9072241CA24F008CBC01 /* JMPlayerControlLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayerControlLayer.h; sourceTree = "<group>"; };
 		114C9073241CA24F008CBC01 /* JMPlayerControlLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPlayerControlLayer.m; sourceTree = "<group>"; };
+		115826E12485320700156C0B /* MediaItemTransferController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaItemTransferController.h; sourceTree = "<group>"; };
+		115826E22485320700156C0B /* MediaItemTransferController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaItemTransferController.m; sourceTree = "<group>"; };
 		115C051D246E2D7B00EAF3A6 /* AudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		115C051E246E2D7B00EAF3A6 /* AudioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mark Petrie - New Light No Synth.mp3"; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 				112AA057247522B100FD19C3 /* MediaPlayViewController.m */,
 				1131B65D247BCD8D009D8FF7 /* MetadataManipulationController.h */,
 				1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */,
+				115826E12485320700156C0B /* MediaItemTransferController.h */,
+				115826E22485320700156C0B /* MediaItemTransferController.m */,
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
@@ -593,6 +598,7 @@
 				11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */,
 				112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */,
 				1127A396240D40230038ED48 /* AppDelegate.m in Sources */,
+				115826E32485320700156C0B /* MediaItemTransferController.m in Sources */,
 				11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */,
 				1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,

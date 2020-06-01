@@ -38,7 +38,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    CameraViewController *vc = [CameraViewController new];
+    MetadataManipulationController *vc = [MetadataManipulationController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
