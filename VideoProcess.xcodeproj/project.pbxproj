@@ -21,6 +21,8 @@
 		1127A3CA240D42750038ED48 /* spring.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1127A3C9240D42750038ED48 /* spring.mp4 */; };
 		112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112AA057247522B100FD19C3 /* MediaPlayViewController.m */; };
 		112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */; };
+		112E8BBF248676B1007B0BA6 /* SampleBufferManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBE248676B1007B0BA6 /* SampleBufferManipulationController.m */; };
+		112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */; };
 		1130E160247264E100C973F6 /* beauty.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1130E15F247264E100C973F6 /* beauty.mp4 */; };
 		1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E16224727EAC00C973F6 /* AssetHandleViewController.m */; };
 		1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E1652472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m */; };
@@ -97,6 +99,10 @@
 		112AA057247522B100FD19C3 /* MediaPlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaPlayViewController.m; sourceTree = "<group>"; };
 		112E8BBA248670E0007B0BA6 /* HTTPLiveStreamingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPLiveStreamingViewController.h; sourceTree = "<group>"; };
 		112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPLiveStreamingViewController.m; sourceTree = "<group>"; };
+		112E8BBD248676B1007B0BA6 /* SampleBufferManipulationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleBufferManipulationController.h; sourceTree = "<group>"; };
+		112E8BBE248676B1007B0BA6 /* SampleBufferManipulationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleBufferManipulationController.m; sourceTree = "<group>"; };
+		112E8BC024867826007B0BA6 /* MediaCompositionEditingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaCompositionEditingViewController.h; sourceTree = "<group>"; };
+		112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaCompositionEditingViewController.m; sourceTree = "<group>"; };
 		1130E15F247264E100C973F6 /* beauty.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = beauty.mp4; sourceTree = "<group>"; };
 		1130E16124727EAC00C973F6 /* AssetHandleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetHandleViewController.h; sourceTree = "<group>"; };
 		1130E16224727EAC00C973F6 /* AssetHandleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetHandleViewController.m; sourceTree = "<group>"; };
@@ -243,6 +249,10 @@
 				115826E22485320700156C0B /* MediaItemTransferController.m */,
 				112E8BBA248670E0007B0BA6 /* HTTPLiveStreamingViewController.h */,
 				112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */,
+				112E8BBD248676B1007B0BA6 /* SampleBufferManipulationController.h */,
+				112E8BBE248676B1007B0BA6 /* SampleBufferManipulationController.m */,
+				112E8BC024867826007B0BA6 /* MediaCompositionEditingViewController.h */,
+				112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */,
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
@@ -601,6 +611,7 @@
 				11A53EE2247CAAB600268962 /* PreviewView.m in Sources */,
 				1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */,
 				11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */,
+				112E8BBF248676B1007B0BA6 /* SampleBufferManipulationController.m in Sources */,
 				112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */,
 				1127A396240D40230038ED48 /* AppDelegate.m in Sources */,
 				115826E32485320700156C0B /* MediaItemTransferController.m in Sources */,
@@ -608,6 +619,7 @@
 				1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,
 				114C9074241CA24F008CBC01 /* JMPlayerControlLayer.m in Sources */,
+				112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */,
 				11C21DF7246E99D400F6E7BD /* VideoPlayerViewController.m in Sources */,
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
