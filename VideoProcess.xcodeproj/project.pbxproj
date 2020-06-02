@@ -20,6 +20,7 @@
 		1127A3BC240D40260038ED48 /* VideoProcessUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127A3BB240D40260038ED48 /* VideoProcessUITests.m */; };
 		1127A3CA240D42750038ED48 /* spring.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1127A3C9240D42750038ED48 /* spring.mp4 */; };
 		112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112AA057247522B100FD19C3 /* MediaPlayViewController.m */; };
+		112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */; };
 		1130E160247264E100C973F6 /* beauty.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1130E15F247264E100C973F6 /* beauty.mp4 */; };
 		1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E16224727EAC00C973F6 /* AssetHandleViewController.m */; };
 		1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E1652472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m */; };
@@ -94,6 +95,8 @@
 		1127A3C9240D42750038ED48 /* spring.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = spring.mp4; sourceTree = "<group>"; };
 		112AA056247522B100FD19C3 /* MediaPlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaPlayViewController.h; sourceTree = "<group>"; };
 		112AA057247522B100FD19C3 /* MediaPlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaPlayViewController.m; sourceTree = "<group>"; };
+		112E8BBA248670E0007B0BA6 /* HTTPLiveStreamingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPLiveStreamingViewController.h; sourceTree = "<group>"; };
+		112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPLiveStreamingViewController.m; sourceTree = "<group>"; };
 		1130E15F247264E100C973F6 /* beauty.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = beauty.mp4; sourceTree = "<group>"; };
 		1130E16124727EAC00C973F6 /* AssetHandleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetHandleViewController.h; sourceTree = "<group>"; };
 		1130E16224727EAC00C973F6 /* AssetHandleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetHandleViewController.m; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */,
 				115826E12485320700156C0B /* MediaItemTransferController.h */,
 				115826E22485320700156C0B /* MediaItemTransferController.m */,
+				112E8BBA248670E0007B0BA6 /* HTTPLiveStreamingViewController.h */,
+				112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */,
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
@@ -606,6 +611,7 @@
 				11C21DF7246E99D400F6E7BD /* VideoPlayerViewController.m in Sources */,
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
+				112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */,
 				115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */,
 				117DCE07247F99F700E1D8FC /* OperationView.m in Sources */,
 				1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */,

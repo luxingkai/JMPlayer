@@ -14,6 +14,7 @@
 #import "MediaPlayViewController.h"
 #import "MetadataManipulationController.h"
 #import "CameraViewController.h"
+#import "MediaItemTransferController.h"
 
 @interface AppDelegate ()
 
@@ -38,7 +39,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MetadataManipulationController *vc = [MetadataManipulationController new];
+    MediaItemTransferController *vc = [MediaItemTransferController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
