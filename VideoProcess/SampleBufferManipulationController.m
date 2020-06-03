@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface SampleBufferManipulationController ()
+@interface SampleBufferManipulationController ()<AVQueuedSampleBufferRendering>
 
 @end
 
@@ -19,8 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    AVSampleBufferDisplayLayer
+
+    //AVSampleBufferRequest
+    //AVSampleCursor
+    //AVSampleBufferGenerator
+    //AVQueuedSampleBufferRendering
+        
     
     
     

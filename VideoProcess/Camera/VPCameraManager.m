@@ -396,8 +396,11 @@
         }
 }
 
+#pragma mark  -- Depth Data Capture /硬件设备是否支持
 
-#pragma mark -- Capturing Video in Alternative Formats
+
+
+#pragma mark -- Movie and Video Capture
 
 - (AVCaptureMovieFileOutput *)movieFileOutput {
     
@@ -424,9 +427,12 @@
     BOOL result = [movieFileOutput recordsVideoOrientationAndMirroringChangesAsMetadataTrackForConnection:connection];
     NSLog(@"recordsVideoOrientationAndMirroringChange %d",result);
     
-    
     return movieFileOutput;
 }
+
+#pragma mark -- Audio Capture
+
+
 
 #pragma mark -- Metadata Capture
 
@@ -442,6 +448,12 @@
     return metadataOutput;
 }
  
+#pragma mark -- Synchronized Capture
+
+
+#pragma mark -- Media Capture Preview
+
+
 
 
 #pragma mark --

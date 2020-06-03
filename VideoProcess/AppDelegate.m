@@ -15,6 +15,9 @@
 #import "MetadataManipulationController.h"
 #import "CameraViewController.h"
 #import "MediaItemTransferController.h"
+#import "HTTPLiveStreamingViewController.h"
+#import "SampleBufferManipulationController.h"
+#import "MediaCompositionEditingViewController.h"
 
 @interface AppDelegate ()
 
@@ -39,7 +42,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MediaItemTransferController *vc = [MediaItemTransferController new];
+    MediaCompositionEditingViewController *vc = [MediaCompositionEditingViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

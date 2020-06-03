@@ -20,6 +20,7 @@
 		1127A3BC240D40260038ED48 /* VideoProcessUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127A3BB240D40260038ED48 /* VideoProcessUITests.m */; };
 		1127A3CA240D42750038ED48 /* spring.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1127A3C9240D42750038ED48 /* spring.mp4 */; };
 		112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112AA057247522B100FD19C3 /* MediaPlayViewController.m */; };
+		112C4770248777020082BC37 /* MediaCompositionEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */; };
 		112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */; };
 		112E8BBF248676B1007B0BA6 /* SampleBufferManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBE248676B1007B0BA6 /* SampleBufferManipulationController.m */; };
 		112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */; };
@@ -643,6 +644,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112C4770248777020082BC37 /* MediaCompositionEditingViewController.m in Sources */,
 				1127A3BC240D40260038ED48 /* VideoProcessUITests.m in Sources */,
 				1131B65C247B62C5009D8FF7 /* MediaPlayViewController.m in Sources */,
 			);
