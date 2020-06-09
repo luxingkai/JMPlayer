@@ -174,6 +174,44 @@
     [compositionLayerInstruction setCropRectangle:CGRectZero atTime:time];
     [compositionLayerInstruction setCropRectangleRampFromStartCropRectangle:CGRectZero toEndCropRectangle:CGRectZero timeRange:kCMTimeRangeZero];
     
+#pragma mark -- AVVideoCompositionCoreAnimationTool
+    //Creating a Composition Tool
+    AVPlayer *player = [AVPlayer playerWithURL:url];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+    playerLayer.frame = self.view.frame;
+    AVVideoCompositionCoreAnimationTool *animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithAdditionalLayer:playerLayer asTrackID:compositionTrack.trackID];
+    [self.view.layer addSublayer:playerLayer];
+    
+#pragma mark -- AVVideoCompositionInstruction
+    AVVideoCompositionInstruction *videoCompositionInstruction = videoComposition.instructions.firstObject;
+    NSLog(@"backgroundColor %@",videoCompositionInstruction.backgroundColor);
+    NSLog(@"layerInstructions %@",videoCompositionInstruction.layerInstructions);
+    CMTimeRangeShow(videoCompositionInstruction.timeRange);
+    NSLog(@"enablePostProcessing %d",videoCompositionInstruction.enablePostProcessing);
+    NSLog(@"passthroughTrackID %d",videoCompositionInstruction.passthroughTrackID);
+    NSLog(@"requiredSourceTrackIDs %@",videoCompositionInstruction.requiredSourceTrackIDs);
+    
+#pragma mark -- AVVideoCompositionLayerInstruction
+    AVVideoCompositionLayerInstruction *videoCompositionLayerInstruction = [AVVideoCompositionLayerInstruction new];
+    NSLog(@"trackID %d",videoCompositionLayerInstruction.trackID);
+    CMTimeRange timeRange;
+    float startOpacity;
+    float endOpacity;
+    [videoCompositionLayerInstruction getOpacityRampForTime:kCMTimeZero startOpacity:&startOpacity endOpacity:&endOpacity timeRange:&timeRange];
+    
+#pragma mark -- AVVideoCompositionRenderContext
+    AVVideoCompositionRenderContext *renderContext = [AVVideoCompositionRenderContext new];
+    
+    
+#pragma mark -- AVMutableMoive
+    
+    AVMutableMovie *mutableMovie = [AVMutableMovie movieWithURL:url options:nil error:nil];
+    AVMutableMovieTrack *mutableMovieTrack = mutableMovie.tracks.firstObject;
+    
+#pragma mark -- AVAudioMix
+    
+    AVMutableAudioMix *mutableAudioMix = [AVMutableAudioMix audioMix];
+    
     
 }
 

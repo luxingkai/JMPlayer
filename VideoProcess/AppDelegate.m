@@ -18,6 +18,8 @@
 #import "HTTPLiveStreamingViewController.h"
 #import "SampleBufferManipulationController.h"
 #import "MediaCompositionEditingViewController.h"
+#import "MediaSelectionViewController.h"
+#import "ContentKeyDecryptionController.h"
 
 @interface AppDelegate ()
 
@@ -42,7 +44,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MediaCompositionEditingViewController *vc = [MediaCompositionEditingViewController new];
+    ContentKeyDecryptionController *vc = [ContentKeyDecryptionController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
