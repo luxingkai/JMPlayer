@@ -21,6 +21,7 @@
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"sofa" withExtension:@"mp4"];
     AVURLAsset *urlAsset = [AVURLAsset assetWithURL:url];
     
+    
 #pragma mark -- Creating New Content Key Sessions
     
     AVContentKeySession *keySession = [AVContentKeySession contentKeySessionWithKeySystem:AVContentKeySystemAuthorizationToken];
@@ -29,7 +30,9 @@
     
     [keySession setDelegate:self queue:dispatch_get_main_queue()];
 //    [keySession addContentKeyRecipient:self];
+//    NSLog(@"mayRequireContentKeysForMediaDataProcessing %d",self.mayRequireContentKeysForMediaDataProcessing);
     [keySession processContentKeyRequestWithIdentifier:[@"com.fxw.VideoProcess" dataUsingEncoding:NSUTF8StringEncoding] initializationData:[@"com.fxw.VideoProcess" dataUsingEncoding:NSUTF8StringEncoding] options:@{AVContentKeyRequestProtocolVersionsKey:@[@1]}];
+    
     
 #pragma mark -- Updating Content Key Requests
 //    keySession renewExpiringResponseDataForContentKeyRequest:<#(nonnull AVContentKeyRequest *)#>
@@ -61,6 +64,9 @@
     
     
 #pragma mark -- Getting Content Key Request Properties
+    
+    
+    
     
     
     // Do any additional setup after loading the view.

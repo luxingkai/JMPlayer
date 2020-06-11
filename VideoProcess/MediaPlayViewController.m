@@ -17,8 +17,8 @@
 /*
  播放器需要处理的相关事宜
  1. 请求视频资源：是否可用于播放（资源加载状态）
- 2. 视频进度处理：缓冲进度、播放进度
- 3. 资源总时长、当前播放时间；滑动进度条
+ 2. 资源总时长、当前播放时间；滑动进度条
+ 3. 视频进度处理：缓冲进度、播放进度调整
  4. 播放键和暂停键、播放速率、音量、静音
  5. 横竖屏切换
  */
@@ -37,6 +37,7 @@
     AVPlayerItem *_playerItem;
     id _timeObserverToken;
     UIProgressView *_progressView;
+    UIButton *_playButton;
 }
 
 - (void)dealloc {
@@ -73,7 +74,7 @@
      NSLog(@"error %@",_playerItem.error);
      */
     NSLog(@"loadedTimeRanges %@",_playerItem.loadedTimeRanges);
-
+    
     /*
      移动播放头
      [_playerItem stepByCount:5];
@@ -84,7 +85,7 @@
      [_playerItem cancelPendingSeeks];
      */
     NSLog(@"seekableTimeRanges %@",[_playerItem seekableTimeRanges]);
-
+    
     /*
      获取播放信息
      NSLog(@"playbackLikelyToKeepUp %d",_playerItem.playbackLikelyToKeepUp);
@@ -166,7 +167,7 @@
     AVPlayerItemMetadataCollector *dataCollector = [[AVPlayerItemMetadataCollector alloc] init];
     [dataCollector setDelegate:self queue:dispatch_get_main_queue()];
     [_playerItem addMediaDataCollector:dataCollector];
-
+    
     /*
      观察者通知
      */
@@ -177,13 +178,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemNewAccessLogEntryNotification:) name:AVPlayerItemNewAccessLogEntryNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemNewErrorLogEntryNotification:) name:AVPlayerItemNewErrorLogEntryNotification object:nil];
     /*
-      实例属性
+     实例属性
      _playerItem.automaticallyPreservesTimeOffsetFromLive = true;
      CMTimeShow(_playerItem.configuredTimeOffsetFromLive);
      NSLog(@"audioSpatializationAllowed %d",_playerItem.audioSpatializationAllowed);
      CMTimeShow(_playerItem.recommendedTimeOffsetFromLive);
      */
- 
+    
 #pragma mark -- playerItemTracks
     
     NSArray *playerItemTracks = _playerItem.tracks;
@@ -276,7 +277,7 @@
     /*
      设置GPU
      */
-
+    
 #pragma mark -- playerLayer
     
     AVPlayerLayer *playerLayer = [[AVPlayerLayer alloc] init];
@@ -292,25 +293,41 @@
      */
     
 #pragma mark -- AVSynchronizedLayer
-//    AVSynchronizedLayer *syncLayer = [AVSynchronizedLayer synchronizedLayerWithPlayerItem:_playerItem];
-//    [syncLayer addSublayer:playerLayer];
-//    [self.view.layer addSublayer:syncLayer];
+    //    AVSynchronizedLayer *syncLayer = [AVSynchronizedLayer synchronizedLayerWithPlayerItem:_playerItem];
+    //    [syncLayer addSublayer:playerLayer];
+    //    [self.view.layer addSublayer:syncLayer];
     
 #pragma mark -- AVSampleBufferAudioRenderer /用来解压音频和播放压缩或未压缩的音频。
-//    AVSampleBufferAudioRenderer
+    //    AVSampleBufferAudioRenderer
     
 #pragma mark -- AVSampleBufferDisplayLayer /显示压缩或未压缩视频帧的对象。
-//    AVSampleBufferDisplayLayer *displayLayer = [AVSampleBufferDisplayLayer layer];
-        
+    //    AVSampleBufferDisplayLayer *displayLayer = [AVSampleBufferDisplayLayer layer];
+    
 #pragma mark -- AVSampleBufferRenderSynchronizer /用于将多个排队的示例缓冲区同步到单个时间线的对象。
-
+    
 #pragma mark -- AVRouteDetector /检测媒体播放路径存在的对象。
-
+    
+#pragma mark -- QuickTime and ISO-Related Media
+    //    AVMovieTrack
+    //    AVFragmentedMovie
+    //    AVFragmentedMovieTrack
+    //    AVFragmentedMovieMinder
+    //    AVMediaDataStorage
+    AVMovie *movie = [[AVMovie alloc] initWithURL:_assetUrl options:nil];
+    
+    
     _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     _progressView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 83.0, [UIScreen mainScreen].bounds.size.width, 2.0);
     _progressView.progressTintColor = [UIColor redColor];
     _progressView.trackTintColor = [UIColor grayColor];
     [self.view addSubview:_progressView];
+    
+    _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _playButton.frame = CGRectMake(0, 0, 60, 60);
+    _playButton.center = CGPointMake(self.view.center.x, self.view.center.y);
+    [_playButton setImage:[UIImage imageNamed:@"bofang-3"] forState:UIControlStateNormal];
+    [_playButton addTarget:self action:@selector(playBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_playButton];
     
     
     // Do any additional setup after loading the view.
@@ -352,7 +369,7 @@
         //Update UI
     }];
 }
- 
+
 - (void)removeBoundaryTimeObserver {
     
     if (_timeObserverToken) {
@@ -364,8 +381,28 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     
-    if (_player.status == AVPlayerStatusReadyToPlay) {
-        [_player play];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+    if (_player.rate == 1.0) {
+        _player.rate = 0.0f;
+        [_playButton setImage:[UIImage imageNamed:@"bofang-3"] forState:UIControlStateNormal];
+    }else {
+        _player.rate = 1.0;
+        [_playButton setImage:nil forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark --
+
+- (void)playBtn:(id)sender {
+    if (_player.rate == 1.0) {
+        _player.rate = 0.0f;
+        [_playButton setImage:[UIImage imageNamed:@"bofang-3"] forState:UIControlStateNormal];
+    }else {
+        _player.rate = 1.0;
+        [_playButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     }
 }
 
@@ -440,7 +477,7 @@ didCollectDateRangeMetadataGroups:(NSArray<AVDateRangeMetadataGroup *> *)metadat
     // Process metadata
     NSLog(@"metadataGroups %@",metadataGroups);
 }
- 
+
 
 
 /*

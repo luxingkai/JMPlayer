@@ -20,6 +20,7 @@
 #import "MediaCompositionEditingViewController.h"
 #import "MediaSelectionViewController.h"
 #import "ContentKeyDecryptionController.h"
+#import "SupportingTypesController.h"
 
 @interface AppDelegate ()
 
@@ -44,7 +45,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    ContentKeyDecryptionController *vc = [ContentKeyDecryptionController new];
+    MediaPlayViewController *vc = [MediaPlayViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
