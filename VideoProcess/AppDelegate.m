@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 #import "AudioViewController.h"
-#import "VideoPlayerViewController.h"
 #import "AssetHandleViewController.h"
 #import "MediaPlayViewController.h"
 #import "MetadataManipulationController.h"
@@ -21,6 +20,10 @@
 #import "MediaSelectionViewController.h"
 #import "ContentKeyDecryptionController.h"
 #import "SupportingTypesController.h"
+#import "SpeechSynthesisControls.h"
+#import "SpeechSynthesisController.h"
+#import "SpeechViewController.h"
+#import "RSILAViewController.h"
 
 @interface AppDelegate ()
 
@@ -41,11 +44,10 @@
     } @catch (NSException *exception) {
         NSLog(@"Setting category to AVAudioSessionCategoryPlayback failed.");
     } @finally {
-        
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MediaPlayViewController *vc = [MediaPlayViewController new];
+    RSILAViewController *vc = [RSILAViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

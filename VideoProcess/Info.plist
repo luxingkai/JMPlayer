@@ -56,5 +56,9 @@
 	<string>图片写入相册成功</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>图片写入相册成功</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>使用语音识别功能</string>
 </dict>
 </plist>

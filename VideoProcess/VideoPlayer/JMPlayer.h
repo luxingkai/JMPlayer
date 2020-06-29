@@ -20,6 +20,4 @@
 
 
 
-
-
 #endif /* JMPlayer_h */

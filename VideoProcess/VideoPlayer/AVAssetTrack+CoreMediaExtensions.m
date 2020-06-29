@@ -31,4 +31,7 @@ static NSString *FourCCString(FourCharCode code) {
     NSCharacterSet *characterSet = [NSCharacterSet whitespaceCharacterSet];
     return [result stringByTrimmingCharactersInSet:characterSet];
 }
+
+
+
 @end

@@ -1,8 +1,8 @@
 //
-//  VideoPlayerViewController.h
+//  RSILAViewController.h
 //  VideoProcess
 //
-//  Created by tigerfly on 2020/5/15.
+//  Created by tigerfly on 2020/6/29.
 //  Copyright © 2020 tiger fly. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoPlayerViewController : UIViewController
-
+@interface RSILAViewController : UIViewController
 
 @end
 

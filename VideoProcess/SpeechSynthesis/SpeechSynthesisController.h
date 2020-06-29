@@ -1,8 +1,8 @@
 //
-//  JMPlayerControlLayer.h
+//  SpeechSynthesisController.h
 //  VideoProcess
 //
-//  Created by tiger fly on 2020/3/14.
+//  Created by tigerfly on 2020/6/29.
 //  Copyright © 2020 tiger fly. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMPlayerControlLayer : UIControl
-
+@interface SpeechSynthesisController : UIViewController
 
 @end
 
