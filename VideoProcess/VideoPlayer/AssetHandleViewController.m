@@ -207,7 +207,7 @@
     //    [myMutableArrayOfMetadata addObject:myTaggedMediaCharacteristic];
     //    [myAssetWriterInput setMetadata:myMutableArrayOfMetadata];
     
-#pragma make -- Asset Manipulation
+#pragma mark -- Asset Manipulation
     
     //Asset Information
     AVFragmentedAsset *fragmentedAsset = [[AVFragmentedAsset alloc] initWithURL:url options:nil];
@@ -228,6 +228,7 @@
     
     AVAssetResourceLoader *resourceLoadser = urlAsset.resourceLoader;
     [resourceLoadser setDelegate:self queue:dispatch_get_main_queue()];
+    
     
 #pragma mark -- Asset File Import and Export
     

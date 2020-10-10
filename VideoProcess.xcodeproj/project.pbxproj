@@ -55,6 +55,7 @@
 		11C21DF0246E807E00F6E7BD /* offline-29045492.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DEA246E807E00F6E7BD /* offline-29045492.jpg */; };
 		11C21DF1246E807E00F6E7BD /* offline-133581.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DEB246E807E00F6E7BD /* offline-133581.jpg */; };
 		11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C21DF3246E820C00F6E7BD /* MusicListViewController.m */; };
+		11EAE0FB25319BCF00806F15 /* VTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EAE0FA25319BCF00806F15 /* VTViewController.m */; };
 		49EC485E5D13C07E980030F5 /* Pods_VideoProcess_VideoProcessUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC81B83E5440AC3DA66DB09 /* Pods_VideoProcess_VideoProcessUITests.framework */; };
 		8CD808BAB1E150C23E328242 /* Pods_VideoProcessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7D2DBF7109FC82EA8F8468 /* Pods_VideoProcessTests.framework */; };
 		FB4EA8F154BBA7D02BA39686 /* Pods_VideoProcess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D967F07E9C8056F71E0FB2B6 /* Pods_VideoProcess.framework */; };
@@ -159,6 +160,8 @@
 		11C21DEB246E807E00F6E7BD /* offline-133581.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "offline-133581.jpg"; sourceTree = "<group>"; };
 		11C21DF2246E820C00F6E7BD /* MusicListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicListViewController.h; sourceTree = "<group>"; };
 		11C21DF3246E820C00F6E7BD /* MusicListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicListViewController.m; sourceTree = "<group>"; };
+		11EAE0F925319BCF00806F15 /* VTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTViewController.h; sourceTree = "<group>"; };
+		11EAE0FA25319BCF00806F15 /* VTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTViewController.m; sourceTree = "<group>"; };
 		43CE52B366017EADB419BDF1 /* Pods-VideoProcess-VideoProcessUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcess-VideoProcessUITests.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcess-VideoProcessUITests/Pods-VideoProcess-VideoProcessUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F33BB9B148B24306D2C9621 /* Pods-VideoProcess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcess.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcess/Pods-VideoProcess.debug.xcconfig"; sourceTree = "<group>"; };
 		5FAB52853BD9C5AC24AD4FB9 /* Pods-VideoProcessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcessTests.release.xcconfig"; path = "Target Support Files/Pods-VideoProcessTests/Pods-VideoProcessTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -266,6 +269,7 @@
 		1127A393240D40230038ED48 /* VideoProcess */ = {
 			isa = PBXGroup;
 			children = (
+				11EAE0F825319B7400806F15 /* VideoToolbox */,
 				1131B664247BF468009D8FF7 /* Camera */,
 				11183D8E241B29E4007FBE59 /* VideoPlayer */,
 				115C051B246E2D5A00EAF3A6 /* AudioPlayer */,
@@ -381,6 +385,15 @@
 				11C21DE7246E807E00F6E7BD /* offline-36668614.jpg */,
 			);
 			path = Icon;
+			sourceTree = "<group>";
+		};
+		11EAE0F825319B7400806F15 /* VideoToolbox */ = {
+			isa = PBXGroup;
+			children = (
+				11EAE0F925319BCF00806F15 /* VTViewController.h */,
+				11EAE0FA25319BCF00806F15 /* VTViewController.m */,
+			);
+			path = VideoToolbox;
 			sourceTree = "<group>";
 		};
 		4B4EB1A41158412051BB34AE /* Pods */ = {
@@ -666,6 +679,7 @@
 				11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */,
 				1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,
+				11EAE0FB25319BCF00806F15 /* VTViewController.m in Sources */,
 				112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */,
 				112A434224A97EFC00B37CEA /* SpeechSynthesisController.m in Sources */,
 				112A8CD7249202AC00F3F37E /* SupportingTypesController.m in Sources */,
