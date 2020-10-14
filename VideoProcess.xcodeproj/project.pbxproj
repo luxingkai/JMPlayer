@@ -36,6 +36,8 @@
 		1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */; };
 		1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131B666247BF626009D8FF7 /* CameraViewController.m */; };
 		11371A94248F8A3F007B1489 /* ContentKeyDecryptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11371A93248F8A3F007B1489 /* ContentKeyDecryptionController.m */; };
+		1148EE012533F997006B1833 /* CoreVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1148EE002533F997006B1833 /* CoreVideoController.m */; };
+		1148EE05253439F9006B1833 /* CoreMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1148EE04253439F9006B1833 /* CoreMediaViewController.m */; };
 		115826E32485320700156C0B /* MediaItemTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115826E22485320700156C0B /* MediaItemTransferController.m */; };
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
@@ -133,6 +135,10 @@
 		1131B666247BF626009D8FF7 /* CameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		11371A92248F8A3F007B1489 /* ContentKeyDecryptionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentKeyDecryptionController.h; sourceTree = "<group>"; };
 		11371A93248F8A3F007B1489 /* ContentKeyDecryptionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentKeyDecryptionController.m; sourceTree = "<group>"; };
+		1148EDFF2533F997006B1833 /* CoreVideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreVideoController.h; sourceTree = "<group>"; };
+		1148EE002533F997006B1833 /* CoreVideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreVideoController.m; sourceTree = "<group>"; };
+		1148EE03253439F9006B1833 /* CoreMediaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMediaViewController.h; sourceTree = "<group>"; };
+		1148EE04253439F9006B1833 /* CoreMediaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreMediaViewController.m; sourceTree = "<group>"; };
 		115826E12485320700156C0B /* MediaItemTransferController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaItemTransferController.h; sourceTree = "<group>"; };
 		115826E22485320700156C0B /* MediaItemTransferController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaItemTransferController.m; sourceTree = "<group>"; };
 		115C051D246E2D7B00EAF3A6 /* AudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
@@ -269,6 +275,8 @@
 		1127A393240D40230038ED48 /* VideoProcess */ = {
 			isa = PBXGroup;
 			children = (
+				1148EE02253439E8006B1833 /* CoreMedia */,
+				1148EDFE2533F971006B1833 /* CoreVideo */,
 				11EAE0F825319B7400806F15 /* VideoToolbox */,
 				1131B664247BF468009D8FF7 /* Camera */,
 				11183D8E241B29E4007FBE59 /* VideoPlayer */,
@@ -344,6 +352,24 @@
 				117DCE06247F99F700E1D8FC /* OperationView.m */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		1148EDFE2533F971006B1833 /* CoreVideo */ = {
+			isa = PBXGroup;
+			children = (
+				1148EDFF2533F997006B1833 /* CoreVideoController.h */,
+				1148EE002533F997006B1833 /* CoreVideoController.m */,
+			);
+			path = CoreVideo;
+			sourceTree = "<group>";
+		};
+		1148EE02253439E8006B1833 /* CoreMedia */ = {
+			isa = PBXGroup;
+			children = (
+				1148EE03253439F9006B1833 /* CoreMediaViewController.h */,
+				1148EE04253439F9006B1833 /* CoreMediaViewController.m */,
+			);
+			path = CoreMedia;
 			sourceTree = "<group>";
 		};
 		115C051B246E2D5A00EAF3A6 /* AudioPlayer */ = {
@@ -664,7 +690,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1148EE012533F997006B1833 /* CoreVideoController.m in Sources */,
 				11A53EE2247CAAB600268962 /* PreviewView.m in Sources */,
+				1148EE05253439F9006B1833 /* CoreMediaViewController.m in Sources */,
 				1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */,
 				112A434524A981FC00B37CEA /* SpeechSynthesisControls.m in Sources */,
 				11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */,
