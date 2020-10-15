@@ -1,8 +1,8 @@
 //
-//  VTViewController.h
+//  AssetsViewController.h
 //  VideoProcess
 //
-//  Created by tigerfly on 2020/10/10.
+//  Created by tigerfly on 2020/10/15.
 //  Copyright © 2020 tiger fly. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VTViewController : UIViewController
-
+@interface AssetsViewController : UIViewController
 
 @end
 

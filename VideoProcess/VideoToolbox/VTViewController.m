@@ -139,10 +139,12 @@
         to tear it down, and call CFRelease to free its memory.
     */
     
+    
     /*
      Creating Sessions
      */
 //    VTDecompressionSessionCreate(<#CFAllocatorRef  _Nullable allocator#>, <#CMVideoFormatDescriptionRef  _Nonnull videoFormatDescription#>, <#CFDictionaryRef  _Nullable videoDecoderSpecification#>, <#CFDictionaryRef  _Nullable destinationImageBufferAttributes#>, <#const VTDecompressionOutputCallbackRecord * _Nullable outputCallback#>, <#VTDecompressionSessionRef  _Nullable * _Nonnull decompressionSessionOut#>)
+    
     
     /*
      Configuring Sessions
@@ -156,6 +158,7 @@
      Quality of Service
      */
     
+    
     /*
      Decoding Sample Buffers
      */
@@ -164,6 +167,7 @@
 //    VTDecompressionSessionFinishDelayedFrames(<#VTDecompressionSessionRef  _Nonnull session#>)
 //    VTDecompressionSessionWaitForAsynchronousFrames(<#VTDecompressionSessionRef  _Nonnull session#>)
 //    VTDecompressionSessionCopyBlackPixelBuffer(<#VTDecompressionSessionRef  _Nonnull session#>, <#CVPixelBufferRef  _Nullable * _Nonnull pixelBufferOut#>)
+    
     
     /*
      Inspecting Sessions

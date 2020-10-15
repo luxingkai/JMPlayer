@@ -56,10 +56,8 @@
     
     self.captureSession = [[AVCaptureSession alloc] init];
     
-    
     // Configuration Change
     [self.captureSession beginConfiguration];
-    
     
     // Managing Inputs and Outputs
     NSError *error = nil;
@@ -110,9 +108,7 @@
         // Fallback on earlier versions
     }
     
-    
     [self.captureSession commitConfiguration];
-
 }
 
 #pragma mrak -- Managing Running State

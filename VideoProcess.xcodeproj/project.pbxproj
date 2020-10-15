@@ -42,7 +42,17 @@
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
+		117D163A2537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */; };
 		117DCE07247F99F700E1D8FC /* OperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117DCE06247F99F700E1D8FC /* OperationView.m */; };
+		11865DFE25381D960010C178 /* AVFoundationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865DFD25381D960010C178 /* AVFoundationController.m */; };
+		11865E0125381E640010C178 /* AssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E0025381E640010C178 /* AssetsViewController.m */; };
+		11865E05253836B80010C178 /* ATViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E04253836B80010C178 /* ATViewController.m */; };
+		11865E07253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 11865E06253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 */; };
+		11865E0A253851AD0010C178 /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E09253851AD0010C178 /* PlaybackViewController.m */; };
+		11865E0D253851B90010C178 /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E0C253851B90010C178 /* CaptureViewController.m */; };
+		11865E10253851DB0010C178 /* EditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E0F253851DB0010C178 /* EditingViewController.m */; };
+		11865E19253852740010C178 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E18253852740010C178 /* AudioController.m */; };
+		11865E1C253852810010C178 /* SpeechController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E1B253852810010C178 /* SpeechController.m */; };
 		11A53EE2247CAAB600268962 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE1247CAAB600268962 /* PreviewView.m */; };
 		11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE4247CC2CD00268962 /* VPCameraManager.m */; };
 		11C21DE0246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDB246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 */; };
@@ -147,8 +157,26 @@
 		115C0522246E682C00EAF3A6 /* AudioFileLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileLoader.h; sourceTree = "<group>"; };
 		115C0523246E682C00EAF3A6 /* AudioFileLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileLoader.m; sourceTree = "<group>"; };
 		11789CCF241F16BD00EC8862 /* JMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayer.h; sourceTree = "<group>"; };
+		117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 17.54.42.mp4"; sourceTree = "<group>"; };
 		117DCE05247F99F700E1D8FC /* OperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationView.h; sourceTree = "<group>"; };
 		117DCE06247F99F700E1D8FC /* OperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OperationView.m; sourceTree = "<group>"; };
+		11865DFC25381D960010C178 /* AVFoundationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVFoundationController.h; sourceTree = "<group>"; };
+		11865DFD25381D960010C178 /* AVFoundationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVFoundationController.m; sourceTree = "<group>"; };
+		11865DFF25381E640010C178 /* AssetsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsViewController.h; sourceTree = "<group>"; };
+		11865E0025381E640010C178 /* AssetsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetsViewController.m; sourceTree = "<group>"; };
+		11865E03253836B80010C178 /* ATViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATViewController.h; sourceTree = "<group>"; };
+		11865E04253836B80010C178 /* ATViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATViewController.m; sourceTree = "<group>"; };
+		11865E06253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 15.58.59.mp4"; sourceTree = "<group>"; };
+		11865E08253851AD0010C178 /* PlaybackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
+		11865E09253851AD0010C178 /* PlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		11865E0B253851B90010C178 /* CaptureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
+		11865E0C253851B90010C178 /* CaptureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
+		11865E0E253851DB0010C178 /* EditingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditingViewController.h; sourceTree = "<group>"; };
+		11865E0F253851DB0010C178 /* EditingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditingViewController.m; sourceTree = "<group>"; };
+		11865E17253852740010C178 /* AudioController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		11865E18253852740010C178 /* AudioController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
+		11865E1A253852810010C178 /* SpeechController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechController.h; sourceTree = "<group>"; };
+		11865E1B253852810010C178 /* SpeechController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechController.m; sourceTree = "<group>"; };
 		11A53EE0247CAAB600268962 /* PreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
 		11A53EE1247CAAB600268962 /* PreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		11A53EE3247CC2CD00268962 /* VPCameraManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPCameraManager.h; sourceTree = "<group>"; };
@@ -275,20 +303,20 @@
 		1127A393240D40230038ED48 /* VideoProcess */ = {
 			isa = PBXGroup;
 			children = (
+				11865DFA25381D2C0010C178 /* Practices */,
+				11865DFB25381D760010C178 /* AVFoundation */,
 				1148EE02253439E8006B1833 /* CoreMedia */,
 				1148EDFE2533F971006B1833 /* CoreVideo */,
 				11EAE0F825319B7400806F15 /* VideoToolbox */,
-				1131B664247BF468009D8FF7 /* Camera */,
-				11183D8E241B29E4007FBE59 /* VideoPlayer */,
-				115C051B246E2D5A00EAF3A6 /* AudioPlayer */,
-				112A433F24A97E5F00B37CEA /* SpeechSynthesis */,
-				112A434924A9935D00B37CEA /* Speech */,
+				11865E02253836920010C178 /* AudioToolbox */,
 				1127A394240D40230038ED48 /* AppDelegate.h */,
 				1127A395240D40230038ED48 /* AppDelegate.m */,
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
 				1130E15F247264E100C973F6 /* beauty.mp4 */,
+				117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */,
+				11865E06253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 */,
 				1127A3C9240D42750038ED48 /* spring.mp4 */,
 				1126040C2478C2C200B1C006 /* sofa.mp4 */,
 				1126040E2478C43B00B1C006 /* sofia.mp4 */,
@@ -385,6 +413,48 @@
 				115C0523246E682C00EAF3A6 /* AudioFileLoader.m */,
 			);
 			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		11865DFA25381D2C0010C178 /* Practices */ = {
+			isa = PBXGroup;
+			children = (
+				1131B664247BF468009D8FF7 /* Camera */,
+				11183D8E241B29E4007FBE59 /* VideoPlayer */,
+				115C051B246E2D5A00EAF3A6 /* AudioPlayer */,
+				112A433F24A97E5F00B37CEA /* SpeechSynthesis */,
+				112A434924A9935D00B37CEA /* Speech */,
+			);
+			path = Practices;
+			sourceTree = "<group>";
+		};
+		11865DFB25381D760010C178 /* AVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				11865DFC25381D960010C178 /* AVFoundationController.h */,
+				11865DFD25381D960010C178 /* AVFoundationController.m */,
+				11865DFF25381E640010C178 /* AssetsViewController.h */,
+				11865E0025381E640010C178 /* AssetsViewController.m */,
+				11865E08253851AD0010C178 /* PlaybackViewController.h */,
+				11865E09253851AD0010C178 /* PlaybackViewController.m */,
+				11865E0B253851B90010C178 /* CaptureViewController.h */,
+				11865E0C253851B90010C178 /* CaptureViewController.m */,
+				11865E0E253851DB0010C178 /* EditingViewController.h */,
+				11865E0F253851DB0010C178 /* EditingViewController.m */,
+				11865E17253852740010C178 /* AudioController.h */,
+				11865E18253852740010C178 /* AudioController.m */,
+				11865E1A253852810010C178 /* SpeechController.h */,
+				11865E1B253852810010C178 /* SpeechController.m */,
+			);
+			path = AVFoundation;
+			sourceTree = "<group>";
+		};
+		11865E02253836920010C178 /* AudioToolbox */ = {
+			isa = PBXGroup;
+			children = (
+				11865E03253836B80010C178 /* ATViewController.h */,
+				11865E04253836B80010C178 /* ATViewController.m */,
+			);
+			path = AudioToolbox;
 			sourceTree = "<group>";
 		};
 		11C21DDA246E7F9500F6E7BD /* Music */ = {
@@ -548,6 +618,7 @@
 				112A435124A9ECC900B37CEA /* README.md in Resources */,
 				11C21DEF246E807E00F6E7BD /* offline-29045499.jpg in Resources */,
 				1127A3A1240D40260038ED48 /* Assets.xcassets in Resources */,
+				117D163A2537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 in Resources */,
 				11C21DED246E807E00F6E7BD /* offline-36668614.jpg in Resources */,
 				1127A39F240D40230038ED48 /* Main.storyboard in Resources */,
 				11C21DEE246E807E00F6E7BD /* offline-28726729.jpg in Resources */,
@@ -557,6 +628,7 @@
 				11C21DF1246E807E00F6E7BD /* offline-133581.jpg in Resources */,
 				11C21DE1246E803400F6E7BD /* Mark Petrie - New Light.mp3 in Resources */,
 				11C21DE4246E803400F6E7BD /* Liquid Cinema - Eternity.mp3 in Resources */,
+				11865E07253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 in Resources */,
 				11C21DEC246E807E00F6E7BD /* offline-35447682.jpg in Resources */,
 				1126040F2478C43B00B1C006 /* sofia.mp4 in Resources */,
 				11C21DE3246E803400F6E7BD /* Danny Gokey - Love Will Take You Places.mp3 in Resources */,
@@ -691,9 +763,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1148EE012533F997006B1833 /* CoreVideoController.m in Sources */,
+				11865E05253836B80010C178 /* ATViewController.m in Sources */,
+				11865E0A253851AD0010C178 /* PlaybackViewController.m in Sources */,
 				11A53EE2247CAAB600268962 /* PreviewView.m in Sources */,
 				1148EE05253439F9006B1833 /* CoreMediaViewController.m in Sources */,
 				1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */,
+				11865E0125381E640010C178 /* AssetsViewController.m in Sources */,
 				112A434524A981FC00B37CEA /* SpeechSynthesisControls.m in Sources */,
 				11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */,
 				112A434F24A9C67900B37CEA /* RSILAViewController.m in Sources */,
@@ -707,6 +782,8 @@
 				11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */,
 				1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,
+				11865DFE25381D960010C178 /* AVFoundationController.m in Sources */,
+				11865E0D253851B90010C178 /* CaptureViewController.m in Sources */,
 				11EAE0FB25319BCF00806F15 /* VTViewController.m in Sources */,
 				112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */,
 				112A434224A97EFC00B37CEA /* SpeechSynthesisController.m in Sources */,
@@ -715,10 +792,13 @@
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
 				112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */,
+				11865E19253852740010C178 /* AudioController.m in Sources */,
+				11865E1C253852810010C178 /* SpeechController.m in Sources */,
 				115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */,
 				117DCE07247F99F700E1D8FC /* OperationView.m in Sources */,
 				1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */,
 				1127A3A7240D40260038ED48 /* main.m in Sources */,
+				11865E10253851DB0010C178 /* EditingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

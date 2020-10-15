@@ -46,8 +46,8 @@
      • A CMBlockBuffer of one or more media samples, or
      • A CVImageBuffer a reference to the format description for
         the stream of CMSampleBuffers, size and timing information for
-        each of the contained media samples, and both buffer-level and sample-level
-        attachments.
+        each of the contained media samples, and both buffer-level and
+        sample-level attachments.
      
      A sample buffer can contain both sample-level and buffer-level attachments.
      Sample-level attachments are associated with each individual sample(frame)
@@ -254,8 +254,8 @@
      CMSampleBufferCopyPCMDataIntoAudioBufferList
      Copies PCM audio data from the given sample buffer into a pre-populated
      AudioBufferList
-     
      */
+    
     
     /**
      Data Types
@@ -376,6 +376,7 @@
      Flags passed to various audio-related functions.
      kCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment
      */
+    
     
     /*
      CMBlockBuffer
@@ -598,8 +599,8 @@
      CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer
      Copies the contents of a CMAudioFormatDescription to a CMBlockBuffer in
      big-endian byte ordering.
-     
      */
+    
     
     /**
      Video-Specific Functions
@@ -656,12 +657,14 @@
      big-endian in place.
      */
     
+    
     /**
      Muxed-Specific Function
      
      CMMuxedFormatDescriptionCreate
      Creates a format description for a muxed media stream.
      */
+    
     
     /**
      Metadata-Specific Functions
@@ -702,8 +705,8 @@
      
      CMMetadataFormatDescriptionGetIdentifiers
      Gets an array of metadata identifiers from a metadata format description.
-     
      */
+    
     
     /**
      Text-Specific Functions
@@ -744,6 +747,7 @@
      big-endian in place.
      */
     
+    
     /**
      TimeCode-Specific Functions
      
@@ -782,6 +786,7 @@
      to big-endian in place.
      */
     
+    
     /**
      Closed Captioning-Functions
      
@@ -805,6 +810,7 @@
      Converts a ClosedCaptionDescription data structure from
      big-endian to host-endian in place.
      */
+    
     
     /**
      Format Description Types
@@ -969,6 +975,7 @@
      kCMTextFormatDescriptionStyle_FontSize
      */
     
+    
     /*
      CMAttachment
      
@@ -1034,6 +1041,21 @@
      CMTime
      A struct representing a time value such as a timestamp or duration.
      
+     This document describles the API for creating and manipulating CMTime
+     structs.
+     
+     CMTime strcuts are non-opaque mutable structs representing times
+     (either timestamps or durations).
+     
+     A CMTime is represented as a rational number, with a numerator(an
+     int64_t value), and a denominator(an int32_t timescale). Conceptually,
+     the timescale specifies the fraction of a second each unit in the numerator
+     occupies. Thus if the timescale is 4, each unit represents a quarter
+     of a second; if the timescale is 10, each unit represents a tenth of a
+     second, and so on. In addition to a simple time value, a CMTime can
+     represent non-numeric values: +infinity, -infinity, and indefinite.
+     Using a flag CMTime indicates whether the time been rounded at some
+     point.
      
      */
     
