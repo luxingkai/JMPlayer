@@ -25,6 +25,7 @@
 #import "SpeechViewController.h"
 #import "RSILAViewController.h"
 #import "AssetsViewController.h"
+#import "CaptureViewController.h"
 
 @interface AppDelegate ()
 
@@ -48,7 +49,7 @@
 //    }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    CameraViewController *vc = [CameraViewController new];
+    AssetsViewController *vc = [AssetsViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

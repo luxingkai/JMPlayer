@@ -8,6 +8,7 @@
 
 #import "CoreMediaViewController.h"
 #import <CoreMedia/CoreMedia.h>
+#import <CoreFoundation/CoreFoundation.h>
 
 @interface CoreMediaViewController ()
 
@@ -27,7 +28,7 @@
      The Core Media framework defines the media pipeline used by AVFoundation
      and other high-level media frameworks found on Apple platforms. Use
      Core Media's low-level data types and interfaces to efficiently process
-     media sampels and manage queues of media data.
+     media samples and manage queues of media data.
      */
     
     
@@ -1044,7 +1045,7 @@
      This document describles the API for creating and manipulating CMTime
      structs.
      
-     CMTime strcuts are non-opaque mutable structs representing times
+     CMTime structs are non-opaque mutable structs representing times
      (either timestamps or durations).
      
      A CMTime is represented as a rational number, with a numerator(an
@@ -1056,9 +1057,229 @@
      represent non-numeric values: +infinity, -infinity, and indefinite.
      Using a flag CMTime indicates whether the time been rounded at some
      point.
+
+     CMTimes contain an epoch number, which is usually set to 0, but
+     can be used to distinguish unrelated timelines: for example, it
+     could be incremented each time through a presentation loop, to
+     differentiate between time N in loop 0 from time N in loop 1.
      
+     You can convert CMTimes to and from immutable CFDictionaries
+     (see CFDictionaryRef) using CMTimeCopyAsDictionary and
+     CMTimeMakeFromDictionary, for use in annotations and various Core
+     Foundation containers.
+     
+     Additional functions for managing dates and times are described in
+     Time Utilities. Note that CMTime is designed for media timelines
+     whereas functions in Time Utilities Reference are designed for
+     working with wall-clock time in Core Foundation framework; see
+     also AVFoundation Constants.
      */
     
+    /**
+     Creating Times
+     */
+//    CMTimeMake(<#int64_t value#>, <#int32_t timescale#>)
+//    CMTimeMakeFromDictionary(<#CFDictionaryRef  _Nullable dictionaryRepresentation#>)
+//    CMTimeMakeWithEpoch(<#int64_t value#>, <#int32_t timescale#>, <#int64_t epoch#>)
+//    CMTimeMakeWithSeconds(<#Float64 seconds#>, <#int32_t preferredTimescale#>)
+    
+    /**
+     Performing Common Operations
+     */
+//    CMTimeAdd(<#CMTime lhs#>, <#CMTime rhs#>)
+//    CMTimeSubtract(<#CMTime lhs#>, <#CMTime rhs#>)
+//    CMTimeMultiply(<#CMTime time#>, <#int32_t multiplier#>)
+//    CMTimeMultiplyByFloat64(<#CMTime time#>, <#Float64 multiplier#>)
+//    CMTimeMultiplyByRatio(<#CMTime time#>, <#int32_t multiplier#>, <#int32_t divisor#>)
+//    CMTimeConvertScale(<#CMTime time#>, <#int32_t newTimescale#>, <#CMTimeRoundingMethod method#>)
+    
+    /**
+     Inspecting and Evaluating Times
+     */
+//    CMTimeCompare(<#CMTime time1#>, <#CMTime time2#>)
+//    CMTimeAbsoluteValue(<#CMTime time#>)
+//    CMTimeGetSeconds(<#CMTime time#>)
+//    CMTimeMaximum(<#CMTime time1#>, <#CMTime time2#>)
+//    CMTimeMinimum(<#CMTime time1#>, <#CMTime time2#>)
+//    CMTIME_IS_VALID
+//    CMTIME_IS_INVALID
+//    CMTIME_IS_POSITIVE_INFINITY
+//    CMTIME_IS_NEGATIVE_INFINITY
+//    CMTIME_IS_INDEFINITE
+//    CMTIME_IS_NUMERIC
+//    CMTIME_HAS_BEEN_ROUNDED
+//    CMTIME_COMPARE_INLINE
+
+    /**
+     Utility Functions
+     */
+//    CMTimeShow(<#CMTime time#>)
+//    CMTimeCopyDescription(<#CFAllocatorRef  _Nullable allocator#>, <#CMTime time#>)
+//    CMTimeCopyAsDictionary(<#CMTime time#>, <#CFAllocatorRef  _Nullable allocator#>)
+    
+    /**
+     Data Types
+     */
+//    CMTime
+//    CMTimeValue
+//    CMTimeScale
+//    CMTimeEpoch
+//    CMTimeFlags
+//    CMTimeRoundingMethod
+    
+    /**
+     Constants
+     
+     Time Constants
+     kCMTimeInvalid
+     kCMTimeIndefinite
+     kCMTimePositiveInfinity
+     kCMTimeNegativeInfinity
+     kCMTimeZero
+
+     Maximum Timescale
+     kCMTimeMaxTimescale
+
+     Rounding Methods
+     kCMTimeRoundingMethod_RoundHalfAwayFromZero
+     kCMTimeRoundingMethod_RoundTowardZero
+     kCMTimeRoundingMethod_RoundAwayFromZero
+     kCMTimeRoundingMethod_QuickTime
+     kCMTimeRoundingMethod_RoundTowardPositiveInfinity
+     kCMTimeRoundingMethod_RoundTowardNegativeInfinity
+     kCMTimeRoundingMethod_Default
+
+     Dictionary Keys
+     kCMTimeValueKey
+     kCMTimeScaleKey
+     kCMTimeEpochKey
+     kCMTimeFlagsKey
+     */
+    
+    
+    /*
+     CMTimeRange
+     
+     This document describes the API for creating and manipulating
+     CMTimeRange structures.
+     
+     CMTimeRange structs are non-opaque mutable structures that
+     represent time ranges. A CMTimeRange is represented as two
+     CMTime structs, one that specifies the start time of the range
+     and another that specifies the duration of the range. A time
+     range does not include the end time that would be calculated
+     by adding the duration to the start time. The following expression
+     will always evaluate to false:
+
+     You can convert CMTimeRanges to and from CFDictionaries
+     (see CFDictionaryRef) using CMTimeRangeCopyAsDictionary
+     and CMTimeRangeMakeFromDictionary, for use in annotations
+     and various Core Foundation containers.
+     
+     The epoch in a CMTime that represents a duration should
+     always be 0, and the value must be non-negative. The epoch
+     in a CMTime that represents a timestamp may be non-zero,
+     but range operations (such as CMTimeRangeGetUnion) can only
+     be performed on ranges whose start fields have the same epoch.
+     CMTimeRanges cannot span different epochs.
+     
+     Additional functions for managing dates and times are described
+     in Time Utilities; see also AVFoundation Constants.
+     */
+    
+    /**
+     Creating Time Ranges
+     */
+//    CMTimeRangeMake(<#CMTime start#>, <#CMTime duration#>)
+//    CMTimeRangeMakeFromDictionary(<#CFDictionaryRef  _Nonnull dictionaryRepresentation#>)
+//    CMTimeRangeFromTimeToTime(<#CMTime start#>, <#CMTime end#>)
+    
+    /**
+     Comparing Time Ranges
+     */
+//    CMTimeRangeEqual(<#CMTimeRange range1#>, <#CMTimeRange range2#>)
+//    CMTimeRangeContainsTime(<#CMTimeRange range#>, <#CMTime time#>)
+//    CMTimeRangeContainsTimeRange(<#CMTimeRange range#>, <#CMTimeRange otherRange#>)
+    
+    /**
+     Inspecting Time Ranges
+     
+     CMTIMERANGE_IS_EMPTY
+     CMTIMERANGE_IS_INDEFINITE
+     CMTIMERANGE_IS_INVALID
+     CMTIMERANGE_IS_VALID
+     */
+//    CMTimeRangeGetEnd(<#CMTimeRange range#>)
+//    CMTimeRangeGetIntersection(<#CMTimeRange range#>, <#CMTimeRange otherRange#>)
+//    CMTimeRangeGetUnion(<#CMTimeRange range#>, <#CMTimeRange otherRange#>)
+    
+    /**
+     Utility Functions
+     */
+//    CMTimeClampToRange(CMTime time, <#CMTimeRange range#>)
+//    CMTimeMapDurationFromRangeToRange(<#CMTime dur#>, <#CMTimeRange fromRange#>, <#CMTimeRange toRange#>)
+//    CMTimeMapTimeFromRangeToRange(<#CMTime t#>, <#CMTimeRange fromRange#>, <#CMTimeRange toRange#>)
+//    CMTimeRangeCopyDescription(<#CFAllocatorRef  _Nullable allocator#>, <#CMTimeRange range#>)
+//    CMTimeRangeCopyAsDictionary(<#CMTimeRange range#>, <#CFAllocatorRef  _Nullable allocator#>)
+//    CMTimeRangeShow(<#CMTimeRange range#>)
+    
+    /**
+     Data types
+     */
+//    CMTimeRange
+    
+    /**
+     Constants
+     
+     CFDictionary Keys
+     kCMTimeRangeStartKey
+     kCMTimeRangeDurationKey
+
+     Pre-Specified Time Ranges
+     kCMTimeRangeZero
+     kCMTimeRangeInvalid
+     */
+    
+    
+    /*
+     CMTimeMapping
+     
+     A struct used to specify the mapping of a segment of one
+     time line into another.
+     
+     A CMTimeMapping specifies the mapping of a segment of one
+     time line (called the source) into another time line
+     (called the target). When used for movie edit lists, the
+     source time line is the media and the target time line is
+     the track or movie.
+     */
+    
+    /**
+     Creating Time Mappings
+     */
+//    CMTimeMappingMake(<#CMTimeRange source#>, <#CMTimeRange target#>)
+//    CMTimeMappingMakeEmpty(<#CMTimeRange target#>)
+//    CMTimeMappingMakeFromDictionary(<#CFDictionaryRef  _Nonnull dictionaryRepresentation#>)
+    
+    /**
+     Performing Utility Operations
+     */
+//    CMTimeMappingCopyAsDictionary(<#CMTimeMapping mapping#>, <#CFAllocatorRef  _Nullable allocator#>)
+//    CMTimeMappingCopyDescription(<#CFAllocatorRef  _Nullable allocator#>, <#CMTimeMapping mapping#>)
+//    CMTimeMappingShow(<#CMTimeMapping mapping#>)
+    
+    /**
+     Data Types
+     */
+//    CMTimeMapping
+    
+    /**
+     Constants
+     
+     kCMTimeMappingInvalid
+     kCMTimeMappingSourceKey
+     kCMTimeMappingTargetKey
+     */
     
     
 #pragma mark -- Media Synchronization
@@ -1067,7 +1288,15 @@
      CMClock
      
      A reference clock used to synchronization applications and devices.
+     
+     The CMSync API provides a reference clock that you can use
+     to synchronize applications and devices. This API also
+     provides functions to monitor relative drift between CMClocks
+     and functions that are associated with timer services.
      */
+    
+    
+    
     
     
 #pragma mark -- Text Markup
