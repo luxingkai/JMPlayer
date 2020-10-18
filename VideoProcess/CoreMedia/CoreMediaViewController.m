@@ -1295,21 +1295,394 @@
      and functions that are associated with timer services.
      */
     
+    /**
+     Accessing the Host Clock
+     */
+    CMClockRef clockRef = CMClockGetHostTimeClock();
+    
+    /**
+     Accessing and Converting time
+     */
+//    CMTime time = CMClockGetTime(clockRef);
+//    CMClockGetAnchorTime(<#CMClockRef  _Nonnull clock#>, <#CMTime * _Nonnull clockTimeOut#>, <#CMTime * _Nonnull referenceClockTimeOut#>)
+//    CMClockConvertHostTimeToSystemUnits(<#CMTime hostTime#>)
+//    CMClockMakeHostTimeFromSystemUnits(<#uint64_t hostTime#>)
+    
+    /**
+     Utility Functions
+     */
+//    CMClockGetTypeID()
+//    CMClockMightDrift(<#CMClockRef  _Nonnull clock#>, <#CMClockRef  _Nonnull otherClock#>)
+//    CMClockInvalidate(<#CMClockRef  _Nonnull clock#>)
+//    CMSyncGetRelativeRate(<#CMClockOrTimebaseRef  _Nonnull ofClockOrTimebase#>, <#CMClockOrTimebaseRef  _Nonnull relativeToClockOrTimebase#>)
+//    CMSyncGetRelativeRateAndAnchorTime(<#CMClockOrTimebaseRef  _Nonnull ofClockOrTimebase#>, <#CMClockOrTimebaseRef  _Nonnull relativeToClockOrTimebase#>, <#Float64 * _Nullable outRelativeRate#>, <#CMTime * _Nullable outOfClockOrTimebaseAnchorTime#>, <#CMTime * _Nullable outRelativeToClockOrTimebaseAnchorTime#>)
+//    CMSyncConvertTime(<#CMTime time#>, <#CMClockOrTimebaseRef  _Nonnull fromClockOrTimebase#>, <#CMClockOrTimebaseRef  _Nonnull toClockOrTimebase#>)
+//    CMSyncMightDrift(<#CMClockOrTimebaseRef  _Nonnull clockOrTimebase1#>, <#CMClockOrTimebaseRef  _Nonnull clockOrTimebase2#>)
+//    CMSyncGetTime(<#CMClockOrTimebaseRef  _Nonnull clockOrTimebase#>)
+    
+    /**
+     Data Types
+     */
+//    CMClockRef
+//    CMClockOrTimebaseRef
+    
+    /**
+     Constants
+     
+     CMClock Error Codes
+     kCMClockError_MissingRequiredParameter
+     kCMClockError_InvalidParameter
+     kCMClockError_AllocationFailed
+     kCMClockError_UnsupportedOperation
+
+     CMTimebase error codes
+     kCMTimebaseError_MissingRequiredParameter
+     kCMTimebaseError_InvalidParameter
+     kCMTimebaseError_AllocationFailed
+     kCMTimebaseError_TimerIntervalTooShort
+     kCMTimebaseError_ReadOnly
+
+     CMSync error codes
+     kCMSyncError_MissingRequiredParameter
+     kCMSyncError_InvalidParameter
+     kCMSyncError_AllocationFailed
+     kCMSyncError_RateMustBeNonZero
+     
+     Timebase Notifications
+     kCMTimebaseNotification_EffectiveRateChanged
+     kCMTimebaseNotification_TimeJumped
+     */
     
     
+    /*
+     CMAudioClock
+     
+     A specialized reference clock used to synchronize with
+     audio sources.
+     
+     CMAudioClock provides a special variation on a CMClockRef
+     to use for synchronizing with audio sources. For details
+     on clocks and synchronization, see CMClock.
+     */
+    
+    /**
+     Creating Audio Clocks
+     */
+//    CMAudioClockCreate(<#CFAllocatorRef  _Nullable allocator#>, <#CMClockRef  _Nullable * _Nonnull clockOut#>)
+    
+    
+    /*
+     CMTimebase
+     
+     A model of a timeline under application control.
+     
+     A timebase represents a timeline that clients can control by setting
+     the rate and time. Each timebase has either a host clock or a
+     host timebase and its rate is expressed relative to its host:
+     •  when a timebase has rate 0.0, its time is fixed and does not change
+        as its host's time changes.
+     •  When a timebase has rate 1.0, its time increases one second as its
+        host's time increases by one second.
+     •  When a timebase has rate 2.0, its time increases two seconds as its
+        host's time increases by one second.
+     •  When a timebase has rate -1.0, its time decreases one second as its
+        host's time increases by one second.
+     
+     If a timebase has a host timebase, the host timebase's rate is a factor
+     in determining the timebase's effective rate. In fact, a timebase's
+     effective rate is defined as the product of its rate, its host timebase's
+     rate, its host timebase's rate, and so on up to the ultimate host clock.
+     This is the rate at which the timebase's time changes relative to the
+     the ultimate host clock.
+     */
+    
+    /**
+     Functions
+     */
+//    CMTimebaseNotificationBarrier(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseGetTypeID()
+//    CMTimebaseCreateWithMasterClock(<#CFAllocatorRef  _Nullable allocator#>, <#CMClockRef  _Nonnull masterClock#>, <#CMTimebaseRef  _Nullable * _Nonnull timebaseOut#>
+//    CMTimebaseCreateWithMasterTimebase(<#CFAllocatorRef  _Nullable allocator#>, <#CMTimebaseRef  _Nonnull masterTimebase#>, <#CMTimebaseRef  _Nullable * _Nonnull timebaseOut#>)
+//    CMTimebaseGetTime(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseGetTimeWithTimeScale(<#CMTimebaseRef  _Nonnull timebase#>, <#CMTimeScale timescale#>, <#CMTimeRoundingMethod method#>)
+//    CMTimebaseSetTime(<#CMTimebaseRef  _Nonnull timebase#>, <#CMTime time#>)
+//    CMTimebaseSetAnchorTime(<#CMTimebaseRef  _Nonnull timebase#>, <#CMTime timebaseTime#>, <#CMTime immediateMasterTime#>)
+//    CMTimebaseGetRate(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseGetTimeAndRate(<#CMTimebaseRef  _Nonnull timebase#>, <#CMTime * _Nullable timeOut#>, <#Float64 * _Nullable rateOut#>)
+//    CMTimebaseSetRate(<#CMTimebaseRef  _Nonnull timebase#>, <#Float64 rate#>)
+//    CMTimebaseSetRateAndAnchorTime(<#CMTimebaseRef  _Nonnull timebase#>, <#Float64 rate#>, <#CMTime timebaseTime#>, <#CMTime immediateMasterTime#>)
+//    CMTimebaseGetEffectiveRate(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseAddTimer(<#CMTimebaseRef  _Nonnull timebase#>, <#CFRunLoopTimerRef  _Nonnull timer#>, <#CFRunLoopRef  _Nonnull runloop#>)
+//    CMTimebaseRemoveTimer(<#CMTimebaseRef  _Nonnull timebase#>, <#CFRunLoopTimerRef  _Nonnull timer#>)
+//    CMTimebaseSetTimerNextFireTime(<#CMTimebaseRef  _Nonnull timebase#>, <#CFRunLoopTimerRef  _Nonnull timer#>, <#CMTime fireTime#>, <#uint32_t flags#>)
+//    CMTimebaseSetTimerToFireImmediately(<#CMTimebaseRef  _Nonnull timebase#>, <#CFRunLoopTimerRef  _Nonnull timer#>)
+//    CMTimebaseAddTimerDispatchSource(<#CMTimebaseRef  _Nonnull timebase#>, <#dispatch_source_t  _Nonnull timerSource#>)
+//    CMTimebaseRemoveTimerDispatchSource(<#CMTimebaseRef  _Nonnull timebase#>, <#dispatch_source_t  _Nonnull timerSource#>)
+//    CMTimebaseSetTimerDispatchSourceNextFireTime(<#CMTimebaseRef  _Nonnull timebase#>, <#dispatch_source_t  _Nonnull timerSource#>, <#CMTime fireTime#>, <#uint32_t flags#>)
+//    CMTimebaseSetTimerDispatchSourceToFireImmediately(<#CMTimebaseRef  _Nonnull timebase#>, <#dispatch_source_t  _Nonnull timerSource#>)
+//    CMTimebaseCopyMaster(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseCopyMasterClock(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseCopyMasterTimebase(<#CMTimebaseRef  _Nonnull timebase#>)
+//    CMTimebaseCopyUltimateMasterClock(<#CMTimebaseRef  _Nonnull timebase#>)
+    
+    /**
+     Data Types
+     */
+//    CMTimebaseRef
+    
+    /**
+     Constants
+     
+     kCMTimebaseVeryLongCFTimeInterval
+     kCMTimebaseFarFutureCFAbsoluteTime
+     kCMTimebaseError_MissingRequiredParameter
+     kCMTimebaseError_InvalidParameter
+     kCMTimebaseError_AllocationFailed
+     kCMTimebaseError_TimerIntervalTooShort
+     kCMTimebaseError_ReadOnly
+     */
+    
+    /**
+     Notifications
+     
+     kCMTimebaseNotificationKey_EventTime
+     */
     
     
 #pragma mark -- Text Markup
+    
+    /*
+     CMTextMarkup
+     
+     The collection of text markup-related attributes supported
+     by Core Media.
+     
+     Core Media includes support for legible media streams such
+     as subtitles, captions and text. In some cases, clients
+     may need to specify style information to control the rendering.
+     In other cases, information about the text and applied styling
+     may be communicated from Core Media to the client. To carry
+     this information, Core Media defines a set of attributes that
+     may be used in dictionaries that Core Media uses. These
+     attributes can also be used as CFAttributedString attributes.
+     */
+    
+    /**
+     Text Markup Attributes
+     
+     kCMTextMarkupAttribute_ForegroundColorARGB
+     kCMTextMarkupAttribute_BackgroundColorARGB
+     kCMTextMarkupAttribute_CharacterBackgroundColorARGB
+     kCMTextMarkupAttribute_BoldStyle
+     kCMTextMarkupAttribute_ItalicStyle
+     kCMTextMarkupAttribute_UnderlineStyle
+     kCMTextMarkupAttribute_FontFamilyName
+     kCMTextMarkupAttribute_GenericFontFamilyName
+     kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight
+     kCMTextMarkupAttribute_RelativeFontSize
+     kCMTextMarkupAttribute_VerticalLayout
+     kCMTextMarkupAttribute_Alignment
+     kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection
+     kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection
+     kCMTextMarkupAttribute_WritingDirectionSizePercentage
+     kCMTextMarkupAttribute_CharacterEdgeStyle
+
+     */
     
     
     
 #pragma mark -- Metadata
     
+    /*
+     The APIs for working with the framework's Metadata Identifier
+     Services and Metadata Data Type Registry.
+     
+     The Core Media framework provides two services: Metadata Identifier
+     Services, and the Metadata Data Type Registry.
+     
+     Medata Identifier Services provides a means of encoding the
+     metadata identifying tuple(four byte key namespace and n-byte key
+     value) into CFStringRef, and back again.
+     
+     The Metadata Data Type Registry allows a process to register
+     metadata data types that conform to a base data type and
+     (optionally) other registered data types. The registry
+     simplifies the process of creating format descriptions
+     for non-trivial metadata values, as well as allowing
+     clients to indicate how metadata can be interpreted.
+     */
+    
+    /**
+     Metadata Identifier Services
+     */
+//    CMMetadataCreateIdentifierForKeyAndKeySpace(<#CFAllocatorRef  _Nullable allocator#>, <#CFTypeRef  _Nonnull key#>, <#CFStringRef  _Nonnull keySpace#>, <#CFStringRef  _Nullable * _Nonnull identifierOut#>)
+//    CMMetadataCreateKeyFromIdentifier(<#CFAllocatorRef  _Nullable allocator#>, <#CFStringRef  _Nonnull identifier#>, <#CFTypeRef  _Nullable * _Nonnull keyOut#>)
+//    CMMetadataCreateKeyFromIdentifierAsCFData(<#CFAllocatorRef  _Nullable allocator#>, <#CFStringRef  _Nonnull identifier#>, <#CFDataRef  _Nullable * _Nonnull keyOut#>)
+//    CMMetadataCreateKeySpaceFromIdentifier(<#CFAllocatorRef  _Nullable allocator#>, <#CFStringRef  _Nonnull identifier#>, <#CFStringRef  _Nullable * _Nonnull keySpaceOut#>)
+    
+    /**
+     Metadata Data Type Registry
+     */
+//    CMMetadataDataTypeRegistryRegisterDataType(<#CFStringRef  _Nonnull dataType#>, <#CFStringRef  _Nonnull description#>, <#CFArrayRef  _Nonnull conformingDataTypes#>)
+//    CMMetadataDataTypeRegistryDataTypeIsRegistered(<#CFStringRef  _Nonnull dataType#>)
+//    CMMetadataDataTypeRegistryGetDataTypeDescription(<#CFStringRef  _Nonnull dataType#>)
+//    CMMetadataDataTypeRegistryGetConformingDataTypes(<#CFStringRef  _Nonnull dataType#>)
+//    CMMetadataDataTypeRegistryDataTypeConformsToDataType(<#CFStringRef  _Nonnull dataType#>, <#CFStringRef  _Nonnull conformsToDataType#>)
+//    CMMetadataDataTypeRegistryGetBaseDataTypes()
+//    CMMetadataDataTypeRegistryDataTypeIsBaseDataType(<#CFStringRef  _Nonnull dataType#>)
+//    CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(<#CFStringRef  _Nonnull dataType#>)
+    
+    /**
+     Constant
+     
+     Metadata Identifier Keyspaces
+     kCMMetadataKeySpace_QuickTimeUserData
+     kCMMetadataKeySpace_ISOUserData
+     kCMMetadataKeySpace_QuickTimeMetadata
+     kCMMetadataKeySpace_iTunes
+     kCMMetadataKeySpace_ID3
+     kCMMetadataKeySpace_Icy
+     kCMMetadataKeySpace_HLSDateRange
+
+     Metadata Identifiers
+     kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709
+     kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing
+     kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform
+     kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
+
+     Metadata Base Data Types
+     kCMMetadataBaseDataType_RawData
+     kCMMetadataBaseDataType_UTF8
+     kCMMetadataBaseDataType_UTF16
+     kCMMetadataBaseDataType_GIF
+     kCMMetadataBaseDataType_JPEG
+     kCMMetadataBaseDataType_PNG
+     kCMMetadataBaseDataType_BMP
+     kCMMetadataBaseDataType_Float32
+     kCMMetadataBaseDataType_Float64
+     kCMMetadataBaseDataType_SInt8
+     kCMMetadataBaseDataType_SInt16
+     kCMMetadataBaseDataType_SInt32
+     kCMMetadataBaseDataType_SInt64
+     kCMMetadataBaseDataType_UInt8
+     kCMMetadataBaseDataType_UInt16
+     kCMMetadataBaseDataType_UInt32
+     kCMMetadataBaseDataType_UInt64
+     kCMMetadataBaseDataType_PointF32
+     kCMMetadataBaseDataType_DimensionsF32
+     kCMMetadataBaseDataType_RectF32
+     kCMMetadataDataType_AffineTransformF64
+     kCMMetadataBaseDataType_PolygonF32
+     kCMMetadataBaseDataType_PolylineF32
+     kCMMetadataBaseDataType_JSON
+
+     Metadata Data Types
+     kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709
+     kCMMetadataDataType_QuickTimeMetadataDirection
+
+     */
+
+    /**
+     Result Codes
+
+     kCMMetadataIdentifierError_AllocationFailed
+     kCMMetadataIdentifierError_RequiredParameterMissing
+     kCMMetadataIdentifierError_BadKey
+     kCMMetadataIdentifierError_BadKeyLength
+     kCMMetadataIdentifierError_BadKeyType
+     kCMMetadataIdentifierError_BadNumberKey
+     kCMMetadataIdentifierError_BadKeySpace
+     kCMMetadataIdentifierError_BadIdentifier
+     kCMMetadataIdentifierError_NoKeyValueAvailable
+     kCMMetadataDataTypeRegistryError_AllocationFailed
+     kCMMetadataDataTypeRegistryError_RequiredParameterMissing
+     kCMMetadataDataTypeRegistryError_BadDataTypeIdentifier
+     kCMMetadataDataTypeRegistryError_DataTypeAlreadyRegistered
+     kCMMetadataDataTypeRegistryError_RequiresConformingBaseType
+     kCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes
+     */
+    
     
     
 #pragma mark -- Queues
     
+    /*
+     CMSimpleQueue
+
+     A simple, lockless FIFO queue of (void *) elements.
+     
+     CMSimpleQueues are Core Foundation-based objects that
+     implement a simple lockless FIFO queue of (void *) elements.
+     The elements are not assumed to be pointers; they could be
+     simple pointer-sized numeric values (although NULL or 0-valued
+     elements are not allowed). If the elements are in fact pointers
+     to allocated memory buffers, buffer lifetime management must be
+     handled externally.
+     
+     A CMSimpleQueue can safely handle one enqueueing thread and one
+     dequeueing thread. CMSimpleQueues are lockless. As such, enqueues
+     and/or dequeues can occur on the CoreAudio ioProc thread, where
+     locking/blocking is forbidden.
+     
+     The current status of a CMSimpleQueue can be interrogated. Clients
+     can get the current number of elements in the queue
+     (CMSimpleQueueGetCount) as well as the maximum capacity of
+     the queue (CMSimpleQueueGetCapacity). There is also a convenience
+     macro (CMSimpleQueueGetFullness) that uses those two APIs to
+     compute a Float32 between 0.0 and 1.0, representing the fullness
+     of the queue. CMSimpleQueues can be reset. This returns a newly
+     created state, with no elements in the queue (but with the maximum
+     capacity unchanged).
+     */
     
+    /**
+     Creating Queues
+     */
+//    CMSimpleQueueCreate(<#CFAllocatorRef  _Nullable allocator#>, <#int32_t capacity#>, <#CMSimpleQueueRef  _Nullable * _Nonnull queueOut#>)
+    
+    /**
+     Managing Queues
+     */
+//    CMSimpleQueueEnqueue(<#CMSimpleQueueRef  _Nonnull queue#>, <#const void * _Nonnull element#>)
+//    CMSimpleQueueDequeue(<#CMSimpleQueueRef  _Nonnull queue#>)
+//    CMSimpleQueueReset(<#CMSimpleQueueRef  _Nonnull queue#>)
+    
+    /**
+     Inspecting Queues
+     */
+//    CMSimpleQueueGetHead(<#CMSimpleQueueRef  _Nonnull queue#>)
+//    CMSimpleQueueGetCapacity(<#CMSimpleQueueRef  _Nonnull queue#>)
+//    CMSimpleQueueGetCount(<#CMSimpleQueueRef  _Nonnull queue#>)
+//    CMSimpleQueueGetFullness(<#queue#>)
+//    CMSimpleQueueGetTypeID()
+    
+    /**
+     Data Types
+     */
+//    CMSimpleQueueRef
+    
+    /**
+     Constants
+     
+     kCMSimpleQueueError_AllocationFailed
+     kCMSimpleQueueError_ParameterOutOfRange
+     kCMSimpleQueueError_QueueIsFull
+     kCMSimpleQueueError_RequiredParameterMissing
+     */
+    
+    /*
+     CMBufferQueue
+     
+     A queue of timed buffers.
+     */
+    
+    /*
+     CMMemoryPool
+     
+     A pool used for optimizing memory allocation when large
+     blocks of memory must be repeatedly allocated, deallocated,
+     and then reallocated.
+     */
     
 }
 
