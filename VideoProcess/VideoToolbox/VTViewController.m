@@ -64,7 +64,7 @@
      */
 //    VTCompressionSessionCreate(<#CFAllocatorRef  _Nullable allocator#>, <#int32_t width#>, <#int32_t height#>, <#CMVideoCodecType codecType#>, <#CFDictionaryRef  _Nullable encoderSpecification#>, <#CFDictionaryRef  _Nullable sourceImageBufferAttributes#>, <#CFAllocatorRef  _Nullable compressedDataAllocator#>, <#VTCompressionOutputCallback  _Nullable outputCallback#>, <#void * _Nullable outputCallbackRefCon#>, <#VTCompressionSessionRef  _Nullable * _Nonnull compressionSessionOut#>)
     
-    /*
+    /**
      Configuring Sessions
      
      Bitstream Configuration
@@ -81,7 +81,7 @@
      Runtime Restriction
      */
     
-    /*
+    /**
      Encoding Frames
      */
 //    VTCompressionSessionPrepareToEncodeFrames(<#VTCompressionSessionRef  _Nonnull session#>)
@@ -89,32 +89,32 @@
 //    VTCompressionSessionEncodeFrameWithOutputHandler(<#VTCompressionSessionRef  _Nonnull session#>, <#CVImageBufferRef  _Nonnull imageBuffer#>, <#CMTime presentationTimeStamp#>, <#CMTime duration#>, <#CFDictionaryRef  _Nullable frameProperties#>, <#VTEncodeInfoFlags * _Nullable infoFlagsOut#>, <#^(OSStatus status, VTEncodeInfoFlags infoFlags, CMSampleBufferRef  _Nullable sampleBuffer)outputHandler#>)
 //    VTCompressionSessionCompleteFrames(<#VTCompressionSessionRef  _Nonnull session#>, <#CMTime completeUntilPresentationTimeStamp#>)
     
-    /*
+    /**
      Inspecting Sessions
      */
 //    VTCompressionSessionGetPixelBufferPool(<#VTCompressionSessionRef  _Nonnull session#>)
 //    VTCompressionSessionGetTypeID()
     
-    /*
+    /**
      Performing Multipass Compression
      */
 //    VTCompressionSessionBeginPass(<#VTCompressionSessionRef  _Nonnull session#>, <#VTCompressionSessionOptionFlags beginPassFlags#>, <#uint32_t * _Nullable reserved#>)
 //    VTCompressionSessionEndPass(<#VTCompressionSessionRef  _Nonnull session#>, <#Boolean * _Nullable furtherPassesRequestedOut#>, <#uint32_t * _Nullable reserved#>)
 //    VTCompressionSessionGetTimeRangesForNextPass(<#VTCompressionSessionRef  _Nonnull session#>, <#CMItemCount * _Nonnull timeRangeCountOut#>, <#const CMTimeRange * _Nullable * _Nonnull timeRangeArrayOut#>)
     
-    /*
+    /**
      Ending Sessions
      */
 //    VTCompressionSessionInvalidate(<#VTCompressionSessionRef  _Nonnull session#>)
     
-    /*
+    /**
      Data Types
      */
 //    VTCompressionSessionRef
 //    VTCompressionOutputCallback
 //    VTCompressionOutputHandler
     
-    /*
+    /**
      Enumerations
      */
 //    VTCompressionSessionOptionFlags
@@ -218,6 +218,7 @@
     /*
      Creating Sessions
      */
+    
     
     
 #pragma mark -- Session Configuration

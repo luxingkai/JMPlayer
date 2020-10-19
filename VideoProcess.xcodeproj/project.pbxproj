@@ -30,7 +30,6 @@
 		112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBB248670E0007B0BA6 /* HTTPLiveStreamingViewController.m */; };
 		112E8BBF248676B1007B0BA6 /* SampleBufferManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BBE248676B1007B0BA6 /* SampleBufferManipulationController.m */; };
 		112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */; };
-		1130E160247264E100C973F6 /* beauty.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1130E15F247264E100C973F6 /* beauty.mp4 */; };
 		1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E16224727EAC00C973F6 /* AssetHandleViewController.m */; };
 		1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1130E1652472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m */; };
 		1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131B65E247BCD8D009D8FF7 /* MetadataManipulationController.m */; };
@@ -44,7 +43,7 @@
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
 		1171EFEA253ACEA800145C1A /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E0C253851B90010C178 /* CaptureViewController.m */; };
-		1171EFEC253AD2A200145C1A /* tiger fly 2020-10-10 15.19.42.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1171EFEB253AD2A200145C1A /* tiger fly 2020-10-10 15.19.42.mp4 */; };
+		1171EFEC253AD2A200145C1A /* chou.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1171EFEB253AD2A200145C1A /* chou.mp4 */; };
 		117D163A2537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */; };
 		117DCE07247F99F700E1D8FC /* OperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117DCE06247F99F700E1D8FC /* OperationView.m */; };
 		11865DFE25381D960010C178 /* AVFoundationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865DFD25381D960010C178 /* AVFoundationController.m */; };
@@ -137,7 +136,6 @@
 		112E8BBE248676B1007B0BA6 /* SampleBufferManipulationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleBufferManipulationController.m; sourceTree = "<group>"; };
 		112E8BC024867826007B0BA6 /* MediaCompositionEditingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaCompositionEditingViewController.h; sourceTree = "<group>"; };
 		112E8BC124867826007B0BA6 /* MediaCompositionEditingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaCompositionEditingViewController.m; sourceTree = "<group>"; };
-		1130E15F247264E100C973F6 /* beauty.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = beauty.mp4; sourceTree = "<group>"; };
 		1130E16124727EAC00C973F6 /* AssetHandleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetHandleViewController.h; sourceTree = "<group>"; };
 		1130E16224727EAC00C973F6 /* AssetHandleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetHandleViewController.m; sourceTree = "<group>"; };
 		1130E1642472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVAssetTrack+CoreMediaExtensions.h"; sourceTree = "<group>"; };
@@ -159,7 +157,7 @@
 		115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mark Petrie - New Light No Synth.mp3"; sourceTree = "<group>"; };
 		115C0522246E682C00EAF3A6 /* AudioFileLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileLoader.h; sourceTree = "<group>"; };
 		115C0523246E682C00EAF3A6 /* AudioFileLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileLoader.m; sourceTree = "<group>"; };
-		1171EFEB253AD2A200145C1A /* tiger fly 2020-10-10 15.19.42.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 15.19.42.mp4"; sourceTree = "<group>"; };
+		1171EFEB253AD2A200145C1A /* chou.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = chou.mp4; sourceTree = "<group>"; };
 		11789CCF241F16BD00EC8862 /* JMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayer.h; sourceTree = "<group>"; };
 		117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 17.54.42.mp4"; sourceTree = "<group>"; };
 		117DCE05247F99F700E1D8FC /* OperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationView.h; sourceTree = "<group>"; };
@@ -172,7 +170,7 @@
 		11865E04253836B80010C178 /* ATViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATViewController.m; sourceTree = "<group>"; };
 		11865E06253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 15.58.59.mp4"; sourceTree = "<group>"; };
 		11865E08253851AD0010C178 /* PlaybackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
-		11865E09253851AD0010C178 /* PlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		11865E09253851AD0010C178 /* PlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
 		11865E0B253851B90010C178 /* CaptureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
 		11865E0C253851B90010C178 /* CaptureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
 		11865E0E253851DB0010C178 /* EditingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditingViewController.h; sourceTree = "<group>"; };
@@ -318,12 +316,11 @@
 				1127A39D240D40230038ED48 /* Main.storyboard */,
 				1127A3A0240D40260038ED48 /* Assets.xcassets */,
 				1127A3A2240D40260038ED48 /* LaunchScreen.storyboard */,
-				1130E15F247264E100C973F6 /* beauty.mp4 */,
 				117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */,
 				11865E06253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 */,
 				1127A3C9240D42750038ED48 /* spring.mp4 */,
 				1126040C2478C2C200B1C006 /* sofa.mp4 */,
-				1171EFEB253AD2A200145C1A /* tiger fly 2020-10-10 15.19.42.mp4 */,
+				1171EFEB253AD2A200145C1A /* chou.mp4 */,
 				1126040E2478C43B00B1C006 /* sofia.mp4 */,
 				1127A3A5240D40260038ED48 /* Info.plist */,
 				112A435024A9ECC900B37CEA /* README.md */,
@@ -627,11 +624,10 @@
 				11C21DED246E807E00F6E7BD /* offline-36668614.jpg in Resources */,
 				1127A39F240D40230038ED48 /* Main.storyboard in Resources */,
 				11C21DEE246E807E00F6E7BD /* offline-28726729.jpg in Resources */,
-				1130E160247264E100C973F6 /* beauty.mp4 in Resources */,
 				11C21DF0246E807E00F6E7BD /* offline-29045492.jpg in Resources */,
 				11C21DE0246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 in Resources */,
 				11C21DF1246E807E00F6E7BD /* offline-133581.jpg in Resources */,
-				1171EFEC253AD2A200145C1A /* tiger fly 2020-10-10 15.19.42.mp4 in Resources */,
+				1171EFEC253AD2A200145C1A /* chou.mp4 in Resources */,
 				11C21DE1246E803400F6E7BD /* Mark Petrie - New Light.mp3 in Resources */,
 				11C21DE4246E803400F6E7BD /* Liquid Cinema - Eternity.mp3 in Resources */,
 				11865E07253838D80010C178 /* tiger fly 2020-10-10 15.58.59.mp4 in Resources */,
