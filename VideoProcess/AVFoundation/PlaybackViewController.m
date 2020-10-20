@@ -11,7 +11,7 @@
 #import <VideoToolbox/VideoToolbox.h>
 #import <CoreMedia/CoreMedia.h>
 
-@interface PlaybackViewController ()
+@interface PlaybackViewController ()<AVAssetResourceLoaderDelegate>
 
 @end
 
@@ -247,10 +247,10 @@
      */
     CMTime time = CMTimeMake(0.5, NSEC_PER_SEC);
     [player addPeriodicTimeObserverForInterval:time queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-       //Update player transport UI
+        //Update player transport UI
     }];
     
-//    [player removeTimeObserver:self];
+    //    [player removeTimeObserver:self];
     
     /**
      Observe Boundary Timing
@@ -272,7 +272,7 @@
      dispatch queue, and a callback block. The following
      example shows how to define boundary times for each
      quarter of playback:
-    
+     
      */
     CMTime interval = CMTimeMultiplyByFloat64(asset.duration, 0.25);
     CMTime currentTime = kCMTimeZero;
@@ -287,7 +287,7 @@
         // Update UI
     }];
     
-        
+    
     /*
      Seeking Through Media
      
@@ -331,7 +331,7 @@
      deviation from your target time(before and after).
      If you need to provide sample-accurate seeking
      behavior, you can indicate that zero tolerance is allowed:
-
+     
      ⚠️ Calling the seek(to:toleranceBefore:toleranceAfter:)
      method with small or zero-valued tolerances may incur
      additional decoding delay, which can impact your app's
@@ -378,47 +378,47 @@
      There are two approaches you can use to observe a player's
      state:
      •  General State Observations: You can use Key-Value observing
-        (KVO) to observe state changes to many of the player's
-        dynamic properties, such as its currentItem or its playback
-        rate. You should register and unregister for KVO change
-        notifications on the main thread. This avoid s the possibility
-        of receiving a partial notification when making a change
-        on another thread. AVFoundation invokes
-        observeValueForKeyPath:ofObject:change:context: on the main
-        thread, even when making the change operation on another
-        thread.
-        
-     •  Timed State Observation: KVO works well for general state
-        observations, but isn't intented for observing continuously
-        changing state like the player's time. AVPlayer provides
-        two methods to observe time changes:
-        addPeriodicTimeObserverForInterval:queue:usingBlock:
-        addBoundaryTimeObserverForTimes:queue:usingBlock:
+     (KVO) to observe state changes to many of the player's
+     dynamic properties, such as its currentItem or its playback
+     rate. You should register and unregister for KVO change
+     notifications on the main thread. This avoid s the possibility
+     of receiving a partial notification when making a change
+     on another thread. AVFoundation invokes
+     observeValueForKeyPath:ofObject:change:context: on the main
+     thread, even when making the change operation on another
+     thread.
      
-        these methods let you observe time changes either periodically
-        or by boundary, respectively. As changes occur, invoke the
-        callback block or closure you supply to these methods to
-        give you the opportunity to take some action such as updating
-        the state of your player's user interface.
-    
+     •  Timed State Observation: KVO works well for general state
+     observations, but isn't intented for observing continuously
+     changing state like the player's time. AVPlayer provides
+     two methods to observe time changes:
+     addPeriodicTimeObserverForInterval:queue:usingBlock:
+     addBoundaryTimeObserverForTimes:queue:usingBlock:
+     
+     these methods let you observe time changes either periodically
+     or by boundary, respectively. As changes occur, invoke the
+     callback block or closure you supply to these methods to
+     give you the opportunity to take some action such as updating
+     the state of your player's user interface.
+     
      AVPlayer and AVPlayerItem are nonvisual objects, meaning that
      on their own they are unable to present an asset's video
      onscreen. You have two primary approaches you can use to
      present your video content onscreen:
      
      •  AVKit: The best way to present your video content is with
-        the AVKit framework's AVPlayerViewController class in iOS,
-        or the AVPlayerView class in macOS. These classes present
-        the video content, along with playback controls and other
-        media features giving you a full-featured playback experience.
+     the AVKit framework's AVPlayerViewController class in iOS,
+     or the AVPlayerView class in macOS. These classes present
+     the video content, along with playback controls and other
+     media features giving you a full-featured playback experience.
      •  AVPlayerLayer: When building a custom interface for your
-        player, use AVPlayerLayer. The player layer can be set as
-        a view's backing layer or can be added directly to the layer
-        hierarchy. Unlike AVPlayerView and AVPlayerViewController,
-        a player layer doesn't present any playback controls - it
-        presents the visual content onscreen. It's up to you to
-        build the playback transport controls to play, pause, and
-        seek through the media.
+     player, use AVPlayerLayer. The player layer can be set as
+     a view's backing layer or can be added directly to the layer
+     hierarchy. Unlike AVPlayerView and AVPlayerViewController,
+     a player layer doesn't present any playback controls - it
+     presents the visual content onscreen. It's up to you to
+     build the playback transport controls to play, pause, and
+     seek through the media.
      
      Alongside the visual content presented with AVKit or AVPlayerLayer,
      you can also present animated content synchronized with the player's
@@ -427,94 +427,94 @@
      thirds or video transitions, and have them play in sync with
      the timing of the player's current AVPlayerItem.
      */
-        
+    
     /**
      Creating a Player
      */
-//    [AVPlayer alloc] initWithURL:<#(nonnull NSURL *)#>
-//    AVPlayer playerWithURL:<#(nonnull NSURL *)#>
-//    [AVPlayer alloc] initWithPlayerItem:<#(nullable AVPlayerItem *)#>
-//    AVPlayer playerWithPlayerItem:<#(nullable AVPlayerItem *)#>
+    //    [AVPlayer alloc] initWithURL:<#(nonnull NSURL *)#>
+    //    AVPlayer playerWithURL:<#(nonnull NSURL *)#>
+    //    [AVPlayer alloc] initWithPlayerItem:<#(nullable AVPlayerItem *)#>
+    //    AVPlayer playerWithPlayerItem:<#(nullable AVPlayerItem *)#>
     
     /**
      Managing Playback
      */
-//    [player play];
-//    [player pause];
-//    player.rate
-//    player actionAtItemEnd
-//    player replaceCurrentItemWithPlayerItem:<#(nullable AVPlayerItem *)#>
-//    player preventsDisplaySleepDuringVideoPlayback
+    //    [player play];
+    //    [player pause];
+    //    player.rate
+    //    player actionAtItemEnd
+    //    player replaceCurrentItemWithPlayerItem:<#(nullable AVPlayerItem *)#>
+    //    player preventsDisplaySleepDuringVideoPlayback
     
     /**
      Managing Automatic Waiting Behavior
      */
-//    player.automaticallyWaitsToMinimizeStalling
-//    player.reasonForWaitingToPlay
-//    player.timeControlStatus
-//    player playImmediatelyAtRate:<#(float)#>
+    //    player.automaticallyWaitsToMinimizeStalling
+    //    player.reasonForWaitingToPlay
+    //    player.timeControlStatus
+    //    player playImmediatelyAtRate:<#(float)#>
     
     /**
      Managing Time
      */
-//    player.currentTime
-//    player seekToTime:<#(CMTime)#>
-//    player seekToDate:<#(nonnull NSDate *)#>
-//    player seekToDate:<#(nonnull NSDate *)#> completionHandler:<#^(BOOL finished)completionHandler#>
-//    player seekToTime:<#(CMTime)#> completionHandler:<#^(BOOL finished)completionHandler#>
-//    player seekToTime:<#(CMTime)#> toleranceBefore:<#(CMTime)#> toleranceAfter:<#(CMTime)#>
-//    player seekToTime:<#(CMTime)#> toleranceBefore:<#(CMTime)#> toleranceAfter:<#(CMTime)#> completionHandler:<#^(BOOL finished)completionHandler#>
+    //    player.currentTime
+    //    player seekToTime:<#(CMTime)#>
+    //    player seekToDate:<#(nonnull NSDate *)#>
+    //    player seekToDate:<#(nonnull NSDate *)#> completionHandler:<#^(BOOL finished)completionHandler#>
+    //    player seekToTime:<#(CMTime)#> completionHandler:<#^(BOOL finished)completionHandler#>
+    //    player seekToTime:<#(CMTime)#> toleranceBefore:<#(CMTime)#> toleranceAfter:<#(CMTime)#>
+    //    player seekToTime:<#(CMTime)#> toleranceBefore:<#(CMTime)#> toleranceAfter:<#(CMTime)#> completionHandler:<#^(BOOL finished)completionHandler#>
     
     /**
      Observing Time
      */
-//    player addPeriodicTimeObserverForInterval:<#(CMTime)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(CMTime time)block#>
-//    player addBoundaryTimeObserverForTimes:<#(nonnull NSArray<NSValue *> *)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(void)block#>
-//    player removeTimeObserver:<#(nonnull id)#>
+    //    player addPeriodicTimeObserverForInterval:<#(CMTime)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(CMTime time)block#>
+    //    player addBoundaryTimeObserverForTimes:<#(nonnull NSArray<NSValue *> *)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    player removeTimeObserver:<#(nonnull id)#>
     
     /**
      Configuring Media Selection Criteria Settings
      */
-//    player appliesMediaSelectionCriteriaAutomatically
-//    player mediaSelectionCriteriaForMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
-//    player setMediaSelectionCriteria:<#(nullable AVPlayerMediaSelectionCriteria *)#> forMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
+    //    player appliesMediaSelectionCriteriaAutomatically
+    //    player mediaSelectionCriteriaForMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
+    //    player setMediaSelectionCriteria:<#(nullable AVPlayerMediaSelectionCriteria *)#> forMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
     
     /**
      Managing External Playback
      */
-//    player.allowsExternalPlayback
-//    player.externalPlaybackActive
-//    player.usesExternalPlaybackWhileExternalScreenIsActive
-//    player.externalPlaybackVideoGravity
+    //    player.allowsExternalPlayback
+    //    player.externalPlaybackActive
+    //    player.usesExternalPlaybackWhileExternalScreenIsActive
+    //    player.externalPlaybackVideoGravity
     
     /**
      Synchronizing Playback to an External Source
      */
-//    player setRate:<#(float)#> time:<#(CMTime)#> atHostTime:<#(CMTime)#>
-//    player prerollAtRate:<#(float)#> completionHandler:<#^(BOOL finished)completionHandler#>
-//    player cancelPendingPrerolls
-//    player masterClock
+    //    player setRate:<#(float)#> time:<#(CMTime)#> atHostTime:<#(CMTime)#>
+    //    player prerollAtRate:<#(float)#> completionHandler:<#^(BOOL finished)completionHandler#>
+    //    player cancelPendingPrerolls
+    //    player masterClock
     
     /**
      Managing Audio Output
      */
-//    player.muted
-//    player.volume
+    //    player.muted
+    //    player.volume
     
     /**
      Getting Player Properties
      */
-//    player.status
-//    player.error
-//    player.currentItem
-//    player.outputObscuredDueToInsufficientExternalProtection
+    //    player.status
+    //    player.error
+    //    player.currentItem
+    //    player.outputObscuredDueToInsufficientExternalProtection
     
     /**
      Determining HDR Playback
      */
-//    player.availableHDRModes
-//    AVPlayerEligibleForHDRPlaybackDidChangeNotification
-
+    //    player.availableHDRModes
+    //    AVPlayerEligibleForHDRPlaybackDidChangeNotification
+    
     
     /*
      AVQueuePlayer
@@ -531,22 +531,22 @@
      Creating a Queue Player
      */
     AVQueuePlayer *queuePlayer = [[AVQueuePlayer alloc] initWithItems:@[playerItem]];
-//    [AVQueuePlayer queuePlayerWithItems:@[playerItem]];
+    //    [AVQueuePlayer queuePlayerWithItems:@[playerItem]];
     
     /**
      Managing the Player Queue
      */
-//    queuePlayer.items
-//    queuePlayer advanceToNextItem
-//    queuePlayer canInsertItem:<#(nonnull AVPlayerItem *)#> afterItem:<#(nullable AVPlayerItem *)#>
-//    queuePlayer insertItem:<#(nonnull AVPlayerItem *)#> afterItem:<#(nullable AVPlayerItem *)#>
-//    queuePlayer removeItem:<#(nonnull AVPlayerItem *)#>
-//    queuePlayer removeAllItems
+    //    queuePlayer.items
+    //    queuePlayer advanceToNextItem
+    //    queuePlayer canInsertItem:<#(nonnull AVPlayerItem *)#> afterItem:<#(nullable AVPlayerItem *)#>
+    //    queuePlayer insertItem:<#(nonnull AVPlayerItem *)#> afterItem:<#(nullable AVPlayerItem *)#>
+    //    queuePlayer removeItem:<#(nonnull AVPlayerItem *)#>
+    //    queuePlayer removeAllItems
     
     /**
      Automatically Looping an Item
      */
-//    AVPlayerLooper
+    //    AVPlayerLooper
     
     
     /*
@@ -567,11 +567,11 @@
     /**
      Configuring Player Layer Values
      */
-//    playerLayer.player
-//    playerLayer isReadyForDisplay
-//    playerLayer.videoRect
-//    playerLayer.videoGravity
-//    playerLayer.pixelBufferAttributes
+    //    playerLayer.player
+    //    playerLayer isReadyForDisplay
+    //    playerLayer.videoRect
+    //    playerLayer.videoGravity
+    //    playerLayer.pixelBufferAttributes
     
     
     /*
@@ -585,119 +585,119 @@
     /**
      Creating a Player Item
      */
-//    [AVPlayerItem alloc] initWithURL:<#(nonnull NSURL *)#>
-//    AVPlayerItem playerItemWithURL:<#(nonnull NSURL *)#>
-//    [AVPlayerItem alloc] initWithAsset:<#(nonnull AVAsset *)#>
-//    AVPlayerItem  playerItemWithAsset:<#(nonnull AVAsset *)#>
-//    [AVPlayerItem alloc] initWithAsset:<#(nonnull AVAsset *)#> automaticallyLoadedAssetKeys:<#(nullable NSArray<NSString *> *)#>
-//    AVPlayerItem playerItemWithAsset:<#(nonnull AVAsset *)#> automaticallyLoadedAssetKeys:<#(nullable NSArray<NSString *> *)#>
+    //    [AVPlayerItem alloc] initWithURL:<#(nonnull NSURL *)#>
+    //    AVPlayerItem playerItemWithURL:<#(nonnull NSURL *)#>
+    //    [AVPlayerItem alloc] initWithAsset:<#(nonnull AVAsset *)#>
+    //    AVPlayerItem  playerItemWithAsset:<#(nonnull AVAsset *)#>
+    //    [AVPlayerItem alloc] initWithAsset:<#(nonnull AVAsset *)#> automaticallyLoadedAssetKeys:<#(nullable NSArray<NSString *> *)#>
+    //    AVPlayerItem playerItemWithAsset:<#(nonnull AVAsset *)#> automaticallyLoadedAssetKeys:<#(nullable NSArray<NSString *> *)#>
     
     /**
      Inspecting a Player Item
      */
-//    playerItem.asset
-//    playerItem.automaticallyLoadedAssetKeys
-//    playerItem.tracks
-//    playerItem.status
-//    playerItem.duration
-//    playerItem.timebase
-//    playerItem.loadedTimeRanges
-//    playerItem.presentationSize
-//    playerItem.error
+    //    playerItem.asset
+    //    playerItem.automaticallyLoadedAssetKeys
+    //    playerItem.tracks
+    //    playerItem.status
+    //    playerItem.duration
+    //    playerItem.timebase
+    //    playerItem.loadedTimeRanges
+    //    playerItem.presentationSize
+    //    playerItem.error
     
     /**
      Moving the Playhead
      */
-//    playerItem stepByCount:<#(NSInteger)#>
-//    playerItem seekableTimeRanges
-//    playerItem seekToDate:<#(nonnull NSDate *)#> completionHandler:<#^(BOOL finished)completionHandler#>
-//    playerItem seekToTime:<#(CMTime)#> completionHandler:<#^(BOOL finished)completionHandler#>
-//    playerItem seekToTime:<#(CMTime)#> toleranceBefore:<#(CMTime)#> toleranceAfter:<#(CMTime)#>
-//    playerItem cancelPendingSeeks
+    //    playerItem stepByCount:<#(NSInteger)#>
+    //    playerItem seekableTimeRanges
+    //    playerItem seekToDate:<#(nonnull NSDate *)#> completionHandler:<#^(BOOL finished)completionHandler#>
+    //    playerItem seekToTime:<#(CMTime)#> completionHandler:<#^(BOOL finished)completionHandler#>
+    //    playerItem seekToTime:<#(CMTime)#> toleranceBefore:<#(CMTime)#> toleranceAfter:<#(CMTime)#>
+    //    playerItem cancelPendingSeeks
     
     /**
      Getting Information About Playback
      */
-//    playerItem.playbackLikelyToKeepUp
-//    playerItem.playbackBufferEmpty
-//    playerItem.playbackBufferFull
-//    playerItem.canPlayReverse
-//    playerItem.canPlayFastForward
-//    playerItem.canPlayFastReverse
-//    playerItem.canPlaySlowForward
-//    playerItem.canPlaySlowReverse
-//    playerItem.canStepForward
-//    playerItem.canStepBackward
+    //    playerItem.playbackLikelyToKeepUp
+    //    playerItem.playbackBufferEmpty
+    //    playerItem.playbackBufferFull
+    //    playerItem.canPlayReverse
+    //    playerItem.canPlayFastForward
+    //    playerItem.canPlayFastReverse
+    //    playerItem.canPlaySlowForward
+    //    playerItem.canPlaySlowReverse
+    //    playerItem.canStepForward
+    //    playerItem.canStepBackward
     
     /**
      Getting Timing Information
      */
-//    playerItem.currentTime
-//    playerItem.currentDate
-//    playerItem.forwardPlaybackEndTime
-//    playerItem.reversePlaybackEndTime
+    //    playerItem.currentTime
+    //    playerItem.currentDate
+    //    playerItem.forwardPlaybackEndTime
+    //    playerItem.reversePlaybackEndTime
     
     /**
      Configuring Network Behavior
      */
-//    playerItem.preferredPeakBitRate
-//    playerItem.preferredMaximumResolution
-//    playerItem.preferredForwardBufferDuration
-//    playerItem canUseNetworkResourcesForLiveStreamingWhilePaused
+    //    playerItem.preferredPeakBitRate
+    //    playerItem.preferredMaximumResolution
+    //    playerItem.preferredForwardBufferDuration
+    //    playerItem canUseNetworkResourcesForLiveStreamingWhilePaused
     
     /**
      Configuring an Item's Settings
      */
-//    playerItem.audioMix
-//    playerItem.videoComposition
-//    playerItem.customVideoCompositor
-//    playerItem.seekingWaitsForVideoCompositionRendering
-//    playerItem.audioTimePitchAlgorithm
-//    playerItem.videoApertureMode
+    //    playerItem.audioMix
+    //    playerItem.videoComposition
+    //    playerItem.customVideoCompositor
+    //    playerItem.seekingWaitsForVideoCompositionRendering
+    //    playerItem.audioTimePitchAlgorithm
+    //    playerItem.videoApertureMode
     
     
     /**
      Accessing Logs
      */
-//    playerItem.accessLog
-//    playerItem.errorLog
+    //    playerItem.accessLog
+    //    playerItem.errorLog
     
     /**
      Selections Media Options
      */
-//    playerItem.currentMediaSelection
-//    playerItem selectMediaOption:<#(nullable AVMediaSelectionOption *)#> inMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
-//    playerItem selectedMediaOptionInMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+    //    playerItem.currentMediaSelection
+    //    playerItem selectMediaOption:<#(nullable AVMediaSelectionOption *)#> inMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+    //    playerItem selectedMediaOptionInMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
     
     /**
      Accessing the Text Style Rules
      */
-//    playerItem.textStyleRules
+    //    playerItem.textStyleRules
     
     /**
      Managing the Item's Outputs
      */
-//    playerItem.outputs
-//    playerItem addOutput:<#(nonnull AVPlayerItemOutput *)#>
-//    playerItem removeOutput:<#(nonnull AVPlayerItemOutput *)#>
+    //    playerItem.outputs
+    //    playerItem addOutput:<#(nonnull AVPlayerItemOutput *)#>
+    //    playerItem removeOutput:<#(nonnull AVPlayerItemOutput *)#>
     
     /**
      Managing the Item's Data Collectors
      */
-//    playerItem.mediaDataCollectors
-//    playerItem addMediaDataCollector:<#(nonnull AVPlayerItemMediaDataCollector *)#>
-//    playerItem removeMediaDataCollector:<#(nonnull AVPlayerItemMediaDataCollector *)#>
+    //    playerItem.mediaDataCollectors
+    //    playerItem addMediaDataCollector:<#(nonnull AVPlayerItemMediaDataCollector *)#>
+    //    playerItem removeMediaDataCollector:<#(nonnull AVPlayerItemMediaDataCollector *)#>
     
     /**
      Observing Notifications
      */
-//    AVPlayerItemDidPlayToEndTimeNotification
-//    AVPlayerItemFailedToPlayToEndTimeNotification
-//    AVPlayerItemTimeJumpedNotification
-//    AVPlayerItemPlaybackStalledNotification
-//    AVPlayerItemNewAccessLogEntryNotification
-//    AVPlayerItemNewErrorLogEntryNotification
-
+    //    AVPlayerItemDidPlayToEndTimeNotification
+    //    AVPlayerItemFailedToPlayToEndTimeNotification
+    //    AVPlayerItemTimeJumpedNotification
+    //    AVPlayerItemPlaybackStalledNotification
+    //    AVPlayerItemNewAccessLogEntryNotification
+    //    AVPlayerItemNewErrorLogEntryNotification
+    
     
     /*
      AVPlayerItemMetadataCollector
@@ -718,14 +718,14 @@
     /**
      Creating a Metadata Collector
      */
-//    [AVPlayerItemMetadataCollector alloc] initWithIdentifiers:<#(nullable NSArray<NSString *> *)#> classifyingLabels:<#(nullable NSArray<NSString *> *)#>
+    //    [AVPlayerItemMetadataCollector alloc] initWithIdentifiers:<#(nullable NSArray<NSString *> *)#> classifyingLabels:<#(nullable NSArray<NSString *> *)#>
     
     /**
      Accessing the Delegate and Callback Queue
      */
     AVPlayerItemMetadataCollector *metadataCollector = nil;
-//    metadataCollector.delegate
-//    metadataCollector.delegateQueue
+    //    metadataCollector.delegate
+    //    metadataCollector.delegateQueue
     
     
     /*
@@ -742,15 +742,15 @@
      Serialization is naturally achieved by invoking the AVPlayerItemTrack
      methods on the main thread or queue.
      */
-
+    
     /**
      Configuring Track Properties
      */
     AVPlayerItemTrack *itemTrack = nil;
-//    itemTrack.assetTrack
-//    itemTrack.enabled
-//    itemTrack.currentVideoFrameRate
-
+    //    itemTrack.assetTrack
+    //    itemTrack.enabled
+    //    itemTrack.currentVideoFrameRate
+    
     
     /*
      AVSynchronizedLayer
@@ -780,18 +780,18 @@
     /**
      Creating a Synchronized Layer
      */
-//    AVSynchronizedLayer synchronizedLayerWithPlayerItem:<#(nonnull AVPlayerItem *)#>
+    //    AVSynchronizedLayer synchronizedLayerWithPlayerItem:<#(nonnull AVPlayerItem *)#>
     
     /**
      Managing the Player Item
      */
     AVSynchronizedLayer *synchronizedLayer = nil;
-//    synchronizedLayer.playerItem
+    //    synchronizedLayer.playerItem
     
     /**
      Supporting Types
      */
-//    AVCoreAnimationBeginTimeAtZero
+    //    AVCoreAnimationBeginTimeAtZero
     
     
     /*
@@ -799,7 +799,7 @@
      
      An object that specifies the preferred languages
      and media characteristics for a player.
-
+     
      The languages and media characteristics of assets containing
      media selection options that an AVPlayer instance should
      attempt to select automatically when preparing and playing
@@ -810,14 +810,14 @@
     /**
      Creating Media Selection Criteria
      */
-//    [AVPlayerMediaSelectionCriteria alloc] initWithPreferredLanguages:<#(nullable NSArray<NSString *> *)#> preferredMediaCharacteristics:<#(nullable NSArray<AVMediaCharacteristic> *)#>
+    //    [AVPlayerMediaSelectionCriteria alloc] initWithPreferredLanguages:<#(nullable NSArray<NSString *> *)#> preferredMediaCharacteristics:<#(nullable NSArray<AVMediaCharacteristic> *)#>
     AVPlayerMediaSelectionCriteria *selectionCriteria = nil;
     
     /**
      Media Selection Criteria Settings
      */
-//    selectionCriteria.preferredLanguages
-//    selectionCriteria.preferredMediaCharacteristics
+    //    selectionCriteria.preferredLanguages
+    //    selectionCriteria.preferredMediaCharacteristics
     
     
     /*
@@ -834,20 +834,20 @@
      Inspecting Sample Buffers
      */
     AVSampleBufferAudioRenderer *audioRenderer = nil;
-//    audioRenderer.audioTimePitchAlgorithm
-//    audioRenderer.volume
-//    audioRenderer.muted
-//    audioRenderer.status
+    //    audioRenderer.audioTimePitchAlgorithm
+    //    audioRenderer.volume
+    //    audioRenderer.muted
+    //    audioRenderer.status
     
     /**
      Removing Queued Buffers
      */
-//    audioRenderer flushFromSourceTime:<#(CMTime)#> completionHandler:<#^(BOOL flushSucceeded)completionHandler#>
+    //    audioRenderer flushFromSourceTime:<#(CMTime)#> completionHandler:<#^(BOOL flushSucceeded)completionHandler#>
     
     /**
      Responding to Errors
      */
-//    audioRenderer.error
+    //    audioRenderer.error
     
     
     /*
@@ -860,43 +860,43 @@
      Initiating Media Data Requests
      */
     AVSampleBufferDisplayLayer * bufferDisplayLayer = nil;
-//    [AVSampleBufferDisplayLayer alloc] requestMediaDataWhenReadyOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
-//    bufferDisplayLayer.readyForMoreMediaData
-//    bufferDisplayLayer stopRequestingMediaData
+    //    [AVSampleBufferDisplayLayer alloc] requestMediaDataWhenReadyOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    bufferDisplayLayer.readyForMoreMediaData
+    //    bufferDisplayLayer stopRequestingMediaData
     
     /**
      Flushing Sample Buffers
      */
-//    bufferDisplayLayer flush
-//    bufferDisplayLayer flushAndRemoveImage
+    //    bufferDisplayLayer flush
+    //    bufferDisplayLayer flushAndRemoveImage
     
     /**
      Configuring the Timebase
      */
-//    bufferDisplayLayer.controlTimebase
+    //    bufferDisplayLayer.controlTimebase
     
     /**
      Enqueuing the sample buffer
      */
-//    bufferDisplayLayer enqueueSampleBuffer:<#(nonnull CMSampleBufferRef)#>
+    //    bufferDisplayLayer enqueueSampleBuffer:<#(nonnull CMSampleBufferRef)#>
     
     /**
      Setting the Video Gravity
      */
-//    bufferDisplayLayer.videoGravity
+    //    bufferDisplayLayer.videoGravity
     
     /**
      Getting Display Layer Settings
      */
-//    bufferDisplayLayer.status
+    //    bufferDisplayLayer.status
     
     /**
      Handling Errors
      */
-//    bufferDisplayLayer.error
-//    AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey
-//    AVSampleBufferDisplayLayerFailedToDecodeNotification
-
+    //    bufferDisplayLayer.error
+    //    AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey
+    //    AVSampleBufferDisplayLayerFailedToDecodeNotification
+    
     
     /*
      AVSampleBufferRenderSynchronizer
@@ -911,25 +911,25 @@
     /**
      Working with Time Observers
      */
-//    [AVSampleBufferRenderSynchronizer alloc] addPeriodicTimeObserverForInterval:<#(CMTime)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(CMTime time)block#>
-//    [AVSampleBufferRenderSynchronizer alloc] addBoundaryTimeObserverForTimes:<#(nonnull NSArray<NSValue *> *)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(void)block#>
-//    [AVSampleBufferRenderSynchronizer alloc] removeTimeObserver:<#(nonnull id)#>
+    //    [AVSampleBufferRenderSynchronizer alloc] addPeriodicTimeObserverForInterval:<#(CMTime)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(CMTime time)block#>
+    //    [AVSampleBufferRenderSynchronizer alloc] addBoundaryTimeObserverForTimes:<#(nonnull NSArray<NSValue *> *)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    [AVSampleBufferRenderSynchronizer alloc] removeTimeObserver:<#(nonnull id)#>
     
     /**
      Working with Renderers
      */
     AVSampleBufferRenderSynchronizer *renderSynchronizer = nil;
-//    renderSynchronizer.renderers
-//    renderSynchronizer addRenderer:<#(nonnull id<AVQueuedSampleBufferRendering>)#>
-//    renderSynchronizer removeRenderer:<#(nonnull id<AVQueuedSampleBufferRendering>)#> atTime:<#(CMTime)#> completionHandler:<#^(BOOL didRemoveRenderer)completionHandler#>
+    //    renderSynchronizer.renderers
+    //    renderSynchronizer addRenderer:<#(nonnull id<AVQueuedSampleBufferRendering>)#>
+    //    renderSynchronizer removeRenderer:<#(nonnull id<AVQueuedSampleBufferRendering>)#> atTime:<#(CMTime)#> completionHandler:<#^(BOOL didRemoveRenderer)completionHandler#>
     
     /**
      Accessing Time Information
      */
-//    renderSynchronizer.timebase
-//    renderSynchronizer.rate
-//    renderSynchronizer setRate:<#(float)#> time:<#(CMTime)#>
-//    renderSynchronizer.currentTime
+    //    renderSynchronizer.timebase
+    //    renderSynchronizer.rate
+    //    renderSynchronizer setRate:<#(float)#> time:<#(CMTime)#>
+    //    renderSynchronizer.currentTime
     
     
     /*
@@ -948,20 +948,600 @@
      Detecting Routes
      */
     AVRouteDetector *routeDetector = nil;
-//    routeDetector.routeDetectionEnabled
-//    routeDetector.multipleRoutesDetected
-//    AVRouteDetectorMultipleRoutesDetectedDidChangeNotification
-
+    //    routeDetector.routeDetectionEnabled
+    //    routeDetector.multipleRoutesDetected
+    //    AVRouteDetectorMultipleRoutesDetectedDidChangeNotification
+    
+    
+    /*
+     Sample Buffer Playback
+     
+     Play audio and video sample buffers using a custom player.
+     */
+    
+    /**
+     AVSampleBufferAudioRenderer
+     
+     An object used to decompress audio and play compressed
+     or uncompressed audio.
+     
+     You must add an instance of this class to an
+     AVSampleBufferRenderSynchronizer before queuing the
+     first sample buffer.
+     */
+    AVSampleBufferAudioRenderer *sampleBufferAudioRenderer = nil;
+    //    sampleBufferAudioRenderer.volume
+    //    sampleBufferAudioRenderer.muted
+    //    sampleBufferAudioRenderer.audioTimePitchAlgorithm
+    //    sampleBufferAudioRenderer.status
+    //    sampleBufferAudioRenderer.error
+    //    sampleBufferAudioRenderer flushFromSourceTime:<#(CMTime)#> completionHandler:<#^(BOOL flushSucceeded)completionHandler#>
+    
+    
+    /**
+     AVSampleBufferDisplayLayer
+     
+     An object that displays compressed or uncompressed video frames.
+     */
+    
+    AVSampleBufferDisplayLayer *displayLayer = nil;
+    //    displayLayer requestMediaDataWhenReadyOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    displayLayer isReadyForMoreMediaData
+    //    displayLayer stopRequestingMediaData
+    
+    //    displayLayer flush
+    //    displayLayer flushAndRemoveImage
+    
+    //    displayLayer controlTimebase
+    
+    //    displayLayer enqueueSampleBuffer:<#(nonnull CMSampleBufferRef)#>
+    
+    //    displayLayer videoGravity
+    //    displayLayer.status
+    //    displayLayer.error
+    //    AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey
+    //    AVSampleBufferDisplayLayerFailedToDecodeNotification
+    
+    
+    /**
+     AVSampleBufferRenderSynchronizer
+     
+     An object used to synchronizer multiple queued sample buffers
+     to a single timeline.
+     This class synchronizes multiple objects that conform to
+     AVQueuedSampleBufferRendering to a single timeline.
+     */
+    //    AVSampleBufferRenderSynchronizer *renderSynchronizer = nil;
+    //    renderSynchronizer addBoundaryTimeObserverForTimes:<#(nonnull NSArray<NSValue *> *)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    renderSynchronizer addPeriodicTimeObserverForInterval:<#(CMTime)#> queue:<#(nullable dispatch_queue_t)#> usingBlock:<#^(CMTime time)block#>
+    
     
     
 #pragma mark -- Metadata Manipulation
+    
+    /*
+     AVMetadataGroup
+     
+     A collection of metadata items associated with a timeline segment.
+     */
+    
+    /**
+     Inspecting the Metadata Group
+     */
+    AVMetadataGroup *metadataGroup = nil;
+    //    metadataGroup.items
+    //    metadataGroup.uniqueID
+    //    metadataGroup.classifyingLabel
+    
+    /*
+     AVDateRangeMetadataGroup
+     
+     A collection of metadata items that are valid for use within
+     a specific date range.
+     */
+    
+    /**
+     Creating a Date Range Group
+     */
+    AVDateRangeMetadataGroup *rangeMetadataGroup = nil;
+    //    AVDateRangeMetadataGroup *rangeMetadataGroup = [AVDateRangeMetadataGroup alloc] initWithItems:<#(nonnull NSArray<AVMetadataItem *> *)#> startDate:<#(nonnull NSDate *)#> endDate:<#(nullable NSDate *)#>;
+    
+    /**
+     Inspecting the Date Range Group
+     */
+    //    rangeMetadataGroup.items
+    //    rangeMetadataGroup.startDate
+    //    rangeMetadataGroup.endDate
+    
+    /*
+     AVMutableDateRangeMetadataGroup
+     
+     A mutable collection of metadata items that are valid for use
+     within a specific range of dates.
+     */
+    
+    /**
+     Inspecting and Configuring the Metadata Group
+     */
+    AVMutableDateRangeMetadataGroup *mutableRangeMetadataGroup = nil;
+    //    mutableRangeMetadataGroup.items
+    //    mutableRangeMetadataGroup.startDate
+    //    mutableRangeMetadataGroup.endDate
+    
+    
+    /*
+     AVTimedMetadataGroup
+     
+     A collection of metadata items that are valid for use during
+     a specific time range.
+     
+     For example, AVTimeMetadataGroups are used to represent chapters,
+     optionally containing metadata items for chapter titles and
+     chapter images.
+     */
+    
+    /**
+     Initializing Timed Metadata Group Objects
+     */
+    AVTimedMetadataGroup *timedMetadataGroup = nil;
+    //    [AVTimedMetadataGroup alloc] initWithSampleBuffer:<#(nonnull CMSampleBufferRef)#>
+    //    [[AVTimedMetadataGroup alloc] initWithItems:<#(nonnull NSArray<AVMetadataItem *> *)#> timeRange:<#(CMTimeRange)#>]
+    
+    /**
+     Configuring Timed Metadata Group Attributes
+     */
+    //    timedMetadataGroup copyFormatDescription
+    //    timedMetadataGroup.items
+    //    timedMetadataGroup.timeRange
+    
+    
+    /*
+     AVMutableTimedMetadataGroup
+     
+     A mutable collection of metadata items that are valid for
+     use during a specific time range.
+     */
+    
+    /**
+     Modifying the Group
+     */
+    AVMutableTimedMetadataGroup *mutableTimedMetadataGroup = nil;
+    //    mutableTimedMetadataGroup.timeRange
+    //    mutableTimedMetadataGroup.items
     
     
     
 #pragma mark -- Asset Downloading
     
+    /*
+     AVURLAsset
+     
+     A concrete subclass of AVAsset that's used to initilize an
+     asset from a local or remote URL.
+     */
+    
+    /**
+     Creating a URL Asset
+     */
+    AVURLAsset *urlAsset = [[AVURLAsset alloc] initWithURL:sourceURL options:nil];
+    //    AVURLAsset URLAssetWithURL:<#(nonnull NSURL *)#> options:<#(nullable NSDictionary<NSString *,id> *)#>
+
+    /**
+     Accessing the URL
+     */
+    //    urlAsset.URL
+    
+    /**
+     Assisting with Resource Loading
+     */
+    //    urlAsset.resourceLoader
+    
+    /**
+     Finding Compatible Tracks
+     */
+    //    urlAsset compatibleTrackForCompositionTrack:<#(nonnull AVCompositionTrack *)#>
+    
+    /**
+     Getting Supported Media Types
+     */
+    //    AVURLAsset audiovisualTypes
+    //    AVURLAsset audiovisualMIMETypes
+    //    AVURLAsset isPlayableExtendedMIMEType:<#(nonnull NSString *)#>
+    
+    /**
+     Working with Offline Assets
+     */
+    //    urlAsset.assetCache
+    
+    /**
+     Working with Encrypted Content
+     */
+    //    urlAsset.mayRequireContentKeysForMediaDataProcessing
+    
+    
+    /*
+     AVAssetDownloadURLSession
+     
+     A URL session used to support the creation and execution
+     of asset download tasks.
+     */
+    
+    /**
+     Creating an Instance
+     */
+    //    AVAssetDownloadURLSession sessionWithConfiguration:<#(nonnull NSURLSessionConfiguration *)#> assetDownloadDelegate:<#(nullable id<AVAssetDownloadDelegate>)#> delegateQueue:<#(nullable NSOperationQueue *)#>
+    
+    /**
+     Creating a Download Task
+     */
+    //    [AVAssetDownloadURLSession alloc] assetDownloadTaskWithURLAsset:<#(nonnull AVURLAsset *)#> assetTitle:<#(nonnull NSString *)#> assetArtworkData:<#(nullable NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    [AVAssetDownloadURLSession alloc] aggregateAssetDownloadTaskWithURLAsset:<#(nonnull AVURLAsset *)#> mediaSelections:<#(nonnull NSArray<AVMediaSelection *> *)#> assetTitle:<#(nonnull NSString *)#> assetArtworkData:<#(nullable NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#>
+    
+    
+    /*
+     AVAssetResourceLoader
+     
+     An object that mediates resource requests from a URL asset.
+     
+     You do not create resource loader objects yourself. Instead, you
+     retrieve a resource loader from the resourceLoader property of an
+     AVURLAsset object and use it to assign your custom delegate object.
+     
+     The delegate you associate with this object must adopt the
+     AVAssetResourceLoaderDelegate protocol. For more information,
+     see AVAssetResourceLoaderDelegate.
+     
+     The AVARLDelegateDemo demonstrates using this class in a streaming environment.
+     */
+    
+    /**
+     Accessing the Delegate
+     */
+    AVAssetResourceLoader *assetResourceLoader = nil;
+    [assetResourceLoader setDelegate:self queue:dispatch_get_main_queue()];
+    
+    /**
+     Getting the Dispatch Queue
+     */
+    //    assetResourceLoader.delegateQueue
+    
+    /**
+     Loading Content Keys
+     */
+    //    assetResourceLoader.preloadsEligibleContentKeys
+    
+    
+    /*
+     AVAssetResourceLoadingRequest
+     
+     An object that encapsulates information about a resource
+     request issued by a resource loader object.
+     
+     When an AVURLAsset object needs help loading a resource,
+     it asks its AVAssetResourceLoader object to assist. The resource
+     loader encapsulates the request information by creating an instance
+     of this object, which it then hands to its delegate object for
+     processing. The delegate uses the information in this object
+     to perform the request and report on the success or failure of
+     the operation.
+     */
+    
+    /**
+     Accessing the Request Data
+     */
+    AVAssetResourceLoadingRequest *resourceLoadingRequest = nil;
+    //    resourceLoadingRequest.request
+    //    resourceLoadingRequest.requestor
+    //    resourceLoadingRequest streamingContentKeyRequestDataForApp:<#(nonnull NSData *)#> contentIdentifier:<#(nonnull NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    //    resourceLoadingRequest persistentContentKeyFromKeyVendorResponse:<#(nonnull NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#> error:<#(NSError *__autoreleasing  _Nullable * _Nullable)#>
+    //    resourceLoadingRequest contentInformationRequest
+    //    resourceLoadingRequest dataRequest
+    //    resourceLoadingRequest redirect
+    
+    /**
+     Reporting the Result of the Request
+     */
+    //    resourceLoadingRequest.response
+    //    resourceLoadingRequest finishLoading
+    //    resourceLoadingRequest isCancelled
+    //    resourceLoadingRequest finishLoadingWithError:<#(nullable NSError *)#>
+    
+    
+    /*
+     AVAssetCache
+     
+     An object used to inspect the state of an asset’s locally
+     cached media data.
+     
+     You can download HTTP Live Streaming assets to an iOS device
+     using the AVAssetDownloadURLSession and AVAssetDownloadTask
+     classes. You can use the downloaded asset’s associated AVAssetCache
+     to inspect its locally cached media data.
+     */
+    
+    AVAssetCache *assetCache = nil;
+    //    assetCache.playableOffline
+    //    assetCache mediaSelectionOptionsInMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+    
+    
+    /*
+     AVAssetResourceRenewalRequest
+     
+     An object that encapsulates information about a resource
+     request issued by a resource loader to renew a previously
+     issued request.
+     
+     When an AVURLAsset needs to renew a resource, because the
+     renewalDate has been set on a previous loading request,
+     it asks its AVAssetResourceLoader object to assist. The resource
+     loader encapsulates the request information by creating an
+     instance of this object, which it then hands to its delegate
+     for processing. The delegate uses the information in this object
+     to perform the request and report on the success or failure of
+     the operation.
+     
+     The AVAssetResourceRenewalRequest class is a subclass of
+     AVAssetResourceLoadingRequest.
+     */
+    //    AVAssetResourceRenewalRequest
+    
+    
+    /*
+     AVAssetResourceLoadingContentInformationRequest
+     
+     A query used to get essential information about a resource
+     referenced by an asset resource loading request.
+     
+     When a resource loading delegate, which must implement
+     the AVAssetResourceLoaderDelegate protocol, receives an
+     instance of AVAssetResourceLoadingRequest when the
+     resourceLoader:shouldWaitForLoadingOfRequestedResource:
+     is invoked and accepts responsibility for loading the resource,
+     it must check whether the contentInformationRequest property
+     of the AVAssetResourceLoadingRequest is not nil. Whenever the
+     value is not nil, the request includes a query for the
+     information that AVAssetResourceLoadingContentInformationRequest
+     encapsulates. In response to such queries, the resource
+     loading delegate should set the values of the content
+     information request's properties appropriately before
+     invoking the AVAssetResourceLoadingRequest method finishLoading.
+     
+     When finishLoading is invoked, the values of the properties of
+     its contentInformationRequest property will, in part, determine
+     how the requested resource is processed. For example, if the
+     requested resource’s URL is the URL of an AVURLAsset and
+     contentType is set by the resource loading delegate to a
+     value that the underlying media system doesn’t recognize
+     as a supported media file type, operations on the AVURLAsset,
+     such as playback, are likely to fail.
+     */
+    AVAssetResourceLoadingContentInformationRequest *informationRequest = nil;
+    
+    /**
+     Configuring Content Information
+     */
+    //    informationRequest.allowedContentTypes
+    //    informationRequest.contentType
+    //    informationRequest.contentLength
+    //    informationRequest.byteRangeAccessSupported
+    //    informationRequest.renewalDate
+    
+    
+    /*
+     AVAssetResourceLoadingDateRequest
+     
+     An object used to request data from a resource referenced by
+     an asset resource loading request.
+     
+     The AVAssetResourceLoaderDelegate uses the AVAssetResourceLoadingDataRequest
+     class to do the actual data reading, and its methods will be invoked,
+     as necessary, to acquire data for the AVAssetResourceLoadingRequest
+     instance.
+     
+     When the resource loading delegate, which implements the
+     AVAssetResourceLoaderDelegate protocol, receives an instance
+     of AVAssetResourceLoadingRequest as the second parameter of
+     the delegate’s resourceLoader:shouldWaitForLoadingOfRequestedResource:
+     method, it has the option of accepting responsibility for
+     loading the referenced resource. If it accepts that responsibility,
+     by returning YES, it must check whether the dataRequest property
+     of the AVAssetResourceLoadingRequest instance is not nil. If it
+     is not nil, the resource loading delegate is informed of the
+     range of bytes within the resource that are required by the
+     underlying media system. In response, the data is provided by
+     one or more invocations of respondWithData: as required to
+     provide the requested data. The data can be provided in increments
+     determined by the resource loading delegate according to
+     convenience or efficiency.
+     
+     When the AVAssetResourceLoadingRequest method finishLoading
+     is invoked, the data request is considered fully satisfied.
+     If the entire range of bytes requested has not yet been
+     provided, the underlying media system assumes that the
+     resource's length is limited to the provided content.
+     */
+    
+    AVAssetResourceLoadingDataRequest *loadingDataRequest = nil;
+    //    loadingDataRequest respondWithData:<#(nonnull NSData *)#>
+    //    loadingDataRequest requestedLength
+    //    loadingDataRequest requestedOffset
+    //    loadingDataRequest currentOffset
+    //    loadingDataRequest requestsAllDataToEndOfResource
+    
+    
+    /*
+     AVAssetDownloadStorageManager
+     
+     A manager of policies used to automatically purge
+     downloaded assets.
+     
+     Fetch the shared singleton when setting a storage
+     management policy. Set new policy using
+     setStorageManagementPolicy:forURL: and the location
+     of the downloaded asset.
+     */
+    
+    /**
+     Setting the Storage Policy
+     */
+    AVAssetDownloadStorageManager *downloadStorageManager = nil;
+    //    downloadStorageManager setStorageManagementPolicy:<#(nonnull AVAssetDownloadStorageManagementPolicy *)#> forURL:<#(nonnull NSURL *)#>
+    //    downloadStorageManager storageManagementPolicyForURL:<#(nonnull NSURL *)#>
+    
+    /**
+     Retrieving the Singleton
+     */
+    //    AVAssetDownloadStorageManager sharedDownloadStorageManager
+    
+    
+    /*
+     AVAssetDownloadStorageManagementPolicy
+     
+     A set of properties that defines a policy to automatically
+     purge downloaded assets.
+     */
+    
+    /**
+     Managing Storage
+     */
+    AVAssetDownloadStorageManagementPolicy *storageManagementPolicy = nil;
+    //    storageManagementPolicy.expirationDate
+    //    storageManagementPolicy.priority
+    
+    
     
 #pragma mark -- Media Item Transfer
+    
+    /*
+     AVPlayerItemOutput
+     
+     The abstract class that defines the common interface for moving
+     samples from an asset to a player.
+     
+     This class provides basic methods for converting time values to
+     the timebase of the item. It also provides an option to suppress
+     rendering of the output associated with the specific instance of
+     this class.
+     
+     ⚠️ Do not create instances of this class directly but instead use
+     one of the concrete subclasses that manage specific types of assets.
+     */
+    
+    /**
+     Converting Time information
+     
+     itemTimeForHostTime:
+     itemTimeForMachAbsoluteTime:
+     itemTimeForCVTimeStamp:
+     */
+    
+    /**
+     Configuring the Playback Options
+     
+     suppressesPlayerRendering
+     */
+    
+    
+    /*
+     AVPlayerItemOutputPushDelegate
+     
+     Methods you can implement to respond to changes in the media
+     data sequence.
+     */
+    
+    /**
+     Flushing Sequence State
+     
+     outputSequenceWasFlushed:
+     */
+    
+    
+    /*
+     AVPlayerItemLegibleOutput
+     
+     An object that can vend media with a legible characteristic
+     as an attributed string.
+     */
+    AVPlayerItemLegibleOutput *legibleOutput = nil;
+    
+    /**
+     Creating a Legible-Output Instance
+     */
+    //    [AVPlayerItemLegibleOutput alloc] initWithMediaSubtypesForNativeRepresentation:<#(nonnull NSArray<NSNumber *> *)#>
+    //    [[AVPlayerItemLegibleOutput alloc] init];
+    
+    /**
+     Configuring Attribtued-String Text Styling Settings
+     */
+    //    legibleOutput.textStylingResolution
+    
+    /**
+     Configuring the Delegate
+     */
+    //    legibleOutput.delegate
+    //    legibleOutput setDelegate:<#(nullable id<AVPlayerItemLegibleOutputPushDelegate>)#> queue:<#(nullable dispatch_queue_t)#>
+    //    legibleOutput.delegateQueue
+    //    legibleOutput.advanceIntervalForDelegateInvocation
+    
+    
+    /*
+     AVPlayerItemMetadataOutput
+     
+     An object used to vend collections of metadata items carried
+     in metadata tracks.
+     
+     ⚠️Setting the value of suppressesPlayerRendering on an instance of
+     AVPlayerItemMetadataOutput has no effect.
+     */
+    
+    /**
+     Initializing a Metadata Output Object
+     */
+    //    AVPlayerItemMetadataOutput *metadataOutput = [AVPlayerItemMetadataOutput alloc] initWithIdentifiers:<#(nullable NSArray<NSString *> *)#>;
+    AVPlayerItemMetadataOutput *metadataOutput = nil;
+    
+    /**
+     Configuring the Delegate
+     */
+    //    metadataOutput advanceIntervalForDelegateInvocation
+    //    metadataOutput.delegate
+    //    metadataOutput.delegateQueue
+    //    metadataOutput setDelegate:<#(nullable id<AVPlayerItemMetadataOutputPushDelegate>)#> queue:<#(nullable dispatch_queue_t)#>
+    
+    
+    /*
+     AVPlayerItemVideoOutput
+     
+     An object that coordinates the output of content associated
+     with a Core Video pixel buffer.
+     */
+    
+    /**
+     Initializing the Player item Video Output
+     */
+    AVPlayerItemVideoOutput *videoOutput = nil;
+//    [AVPlayerItemVideoOutput alloc] initWithOutputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+//    [AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:<#(nullable NSDictionary<NSString *,id> *)#>
+    
+    /**
+     Accessing the Delegate
+     */
+//    videoOutput setDelegate:<#(nullable id<AVPlayerItemOutputPullDelegate>)#> queue:<#(nullable dispatch_queue_t)#>
+//    videoOutput.delegate
+//    videoOutput.delegateQueue
+    
+    /**
+     Notifying the Delegate of Changes
+     */
+//    videoOutput requestNotificationOfMediaDataChangeWithAdvanceInterval:<#(NSTimeInterval)#>
+    
+    /**
+     Getting Pixel Buffer Data
+     */
+//    videoOutput hasNewPixelBufferForItemTime:<#(CMTime)#>
+//    videoOutput copyPixelBufferForItemTime:<#(CMTime)#> itemTimeForDisplay:<#(nullable CMTime *)#>
+    
+    
     
     
 #pragma mark -- HTTP Live Streaming
@@ -972,7 +1552,7 @@
     
 #pragma mark -- Text Formatting
     
-
+    
 #pragma mark -- Media Selection
     
     

@@ -26,6 +26,7 @@
 #import "RSILAViewController.h"
 #import "AssetsViewController.h"
 #import "CaptureViewController.h"
+#import "AVFoundationController.h"
 
 @interface AppDelegate ()
 
@@ -50,7 +51,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    AssetsViewController *vc = [AssetsViewController new];
+    AVFoundationController *vc = [AVFoundationController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

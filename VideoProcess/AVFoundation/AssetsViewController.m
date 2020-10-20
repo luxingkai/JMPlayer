@@ -1071,6 +1071,332 @@
 //    outputMetadataAdaptor.nextTimedMetadataGroup
     
     
+    /*
+     AVAssetWriter
+     
+     An object used to write media data to a new file of a specified
+     audiovisual container type.
+     
+     You can get the media data for one or more assets from instances of
+     AVAssetReader or even from outside the AVFoundation API set. Send
+     Media data to AVAssetWriter for writing in the form of CMSampleBuffer.
+     Sequences of sample data appended to the asset writer inputs fall
+     within "sample-writing sessions." You must call startSessionAtSourceTime:
+     to begin one of these sessions.
+     
+     Using AVAssetWriter, you can optionally re-encode media samples
+     while writing. You can also optionally write metadata collections
+     to the output file. AVAssetWriter automatically supports interleaving
+     of media data for multiple concurrent tracks.
+     
+     You can only use a given instance of AVAssetWriter once to write to a
+     single file. You must use a new instance of AVAssetWriter every time
+     you write to a file.
+     */
+    
+    /**
+     Creating an Asset Writer
+     */
+//    AVAssetWriter assetWriterWithURL:<#(nonnull NSURL *)#> fileType:<#(nonnull AVFileType)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+//    [AVAssetWriter alloc] initWithURL:<#(nonnull NSURL *)#> fileType:<#(nonnull AVFileType)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    AVAssetWriter *assetWriter = nil;
+//    assetWriter.availableMediaTypes
+    
+    /**
+     Writing Data
+     */
+//    [assetWriter startWriting];
+//    assetWriter finishWritingWithCompletionHandler:<#^(void)handler#>
+//    assetWriter cancelWriting
+//    assetWriter.outputURL
+//    assetWriter.outputFileType
+//    assetWriter.error
+//    assetWriter.status
+    
+    /**
+     Managing Inputs
+     */
+//    assetWriter.inputs
+//    assetWriter canAddInput:<#(nonnull AVAssetWriterInput *)#>
+//    assetWriter addInput:<#(nonnull AVAssetWriterInput *)#>
+    
+    /**
+     Managing Session Time
+     */
+//    assetWriter startSessionAtSourceTime:<#(CMTime)#>
+//    assetWriter endSessionAtSourceTime:<#(CMTime)#>
+    
+    /**
+     Configuring Output
+     */
+//    assetWriter canApplyOutputSettings:<#(nullable NSDictionary<NSString *,id> *)#> forMediaType:<#(nonnull AVMediaType)#>
+//    assetWriter.metadata
+//    assetWriter.movieFragmentInterval
+//    assetWriter.overallDurationHint
+//    assetWriter.movieTimeScale
+//    assetWriter.shouldOptimizeForNetworkUse
+    
+    /**
+     Managing Asset Writer Input Groups
+     */
+//    assetWriter canAddInputGroup:<#(nonnull AVAssetWriterInputGroup *)#>
+//    assetWriter addInputGroup:<#(nonnull AVAssetWriterInputGroup *)#>
+//    assetWriter.inputGroups
+    
+    
+    /*
+     AVAssetWriterInput
+     
+     A writer used to append media samples tp a single track of
+     an asset writer's output file.
+     
+     An AVAssetWriterInput object can append media samples packaged
+     as CMSampleBufferRef objects, or collections of metadata,
+     to a single track of the output file of an AVAssetWriter object.
+     
+     When there are multiple inputs, AVAssetWriter tries to write
+     media data in an ideal interleaving pattern for efficiency in
+     storage and playback. Each of its inputs signals its readiness
+     to receive media data for writing according to that pattern
+     via the value of readyForMoreMedia. If readyForMoreMediaData
+     is YES, an input can accept additional media data while
+     maintaining appropriate interleaving. You can only append
+     media data to an input while its readyForMoreMediaData property
+     is YES.
+     •  If you're writing media data from a non-real-time source,
+        such as an instance of AVAssetReader, you should hold off
+        on generating or obtaining more media data to append to an
+        input when the value of readyForMoreMediaData is No. To
+        help with control of the supply of non-real-time media data,
+        you can use requestMediaDataWhenReadyOnQueue:usingBlock:
+        to specify a block that the input should invoke whenever
+        it's ready to append input.
+     •  If you're writing media data from a real-time source such
+        as an AVCaptureOutput object, you should set the input's
+        expectsMediaDataInRealTime property to YES to ensure to
+        calculate the value fo readyForMoreMediaData appropriately.
+        When expectsMediaDataInRealTime is YES, readyForMoreMediaData
+        will become NO only when the input cannot process media samples
+        as quickly as they are provided by the client. If
+        readyForMoreMediaData becomes NO for a real-time source,
+        the client may need to drop samples or consider reducing the
+        data rate of appended samples.
+     
+     The value of readyForMoreMediaData will often change from NO
+     to YES asynchronously while processing and writing
+     previously-supplied media data to the output. It is possible
+     for all fo an asset writer's inputs temporarily to return
+     NO for readForMoreMediaData.
+     */
+    
+    /**
+     Creating an Asset Writer Input Instance
+     */
+//    AVAssetWriterInput assetWriterInputWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+//    AVAssetWriterInput assetWriterInputWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#> sourceFormatHint:<#(nullable CMFormatDescriptionRef)#>
+//    [AVAssetWriterInput alloc] initWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+//    [AVAssetWriterInput alloc] initWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#> sourceFormatHint:<#(nullable CMFormatDescriptionRef)#>
+    
+    /**
+     Adding Media Samples
+     */
+    AVAssetWriterInput *writerInput = nil;
+//    writerInput appendSampleBuffer:<#(nonnull CMSampleBufferRef)#>
+//    writerInput.readyForMoreMediaData
+//    writerInput markAsFinished
+//    writerInput requestMediaDataWhenReadyOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    
+    /**
+     Configuring a Writer Input
+     */
+//    writerInput.metadata
+//    writerInput.transform
+//    writerInput.mediaTimeScale
+//    writerInput.expectsMediaDataInRealTime
+//    writerInput.marksOutputTrackAsEnabled
+//    writerInput.naturalSize
+//    writerInput.preferredVolume
+    
+    /**
+     Managing Track Associations
+     */
+//    writerInput addTrackAssociationWithTrackOfInput:<#(nonnull AVAssetWriterInput *)#> type:<#(nonnull NSString *)#>
+//    writerInput canAddTrackAssociationWithTrackOfInput:<#(nonnull AVAssetWriterInput *)#> type:<#(nonnull NSString *)#>
+    
+    /**
+     Inspecting a Writer input
+     */
+//    writerInput.mediaType
+//    writerInput.outputSettings
+//    writerInput.sourceFormatHint
+//    writerInput.sampleReferenceBaseURL
+    
+    /**
+     Managing Language Settings
+     */
+//    writerInput.extendedLanguageTag
+//    writerInput.languageCode
+    
+    /**
+     Performing Multiple-Pass Encoding
+     */
+//    writerInput canPerformMultiplePasses
+//    writerInput currentPassDescription
+//    writerInput markCurrentPassAsFinished
+//    writerInput.preferredMediaChunkDuration
+//    writerInput.preferredMediaChunkAlignment
+//    writerInput.performsMultiPassEncodingIfSupported
+//    writerInput respondToEachPassDescriptionOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    
+    /**
+     Specifying Media Data Layout
+     */
+//    writerInput.mediaDataLocation
+    
+    
+    /*
+     AVOutputSettingsAssistant
+     
+     An object that specifies a set of parameters for configuring
+     objects that use output settings dictionaries.
+     
+     Often you create Instances of AVOutputSettingAssistant using
+     a string constant representing a specific preset configuration,
+     such as AVOutputSettingsPreset1280*720. After configuring the
+     instance, its properties can be a guide for creating and configuring
+     an AVAssetWriter object and one or more AVAssetWriterInput objects
+     so that the resulting media file conforms to a specific criteria.
+     The preset configuration properties can be a "base" configuration,
+     which you can custimize to suit your individual needs.
+     
+     The suggested output settings improve as more information
+     is provided about the format of the source data. For example,
+     by setting the sourceVideoFormat property, the VideoSettings
+     property value ensures that video frames don't scale up
+     from a smaller size.
+     */
+    
+    /**
+     Creating an Output Settings Assistant
+     */
+//    AVOutputSettingsAssistant outputSettingsAssistantWithPreset:<#(nonnull AVOutputSettingsPreset)#>
+//    AVOutputSettingsAssistant availableOutputSettingsPresets
+    
+    /**
+     Configuring Output Settings
+     */
+    AVOutputSettingsAssistant *settingsAssistant = nil;
+//    settingsAssistant.outputFileType
+//    settingsAssistant.audioSettings
+//    settingsAssistant.sourceAudioFormat
+//    settingsAssistant.sourceVideoFormat
+//    settingsAssistant.sourceVideoAverageFrameDuration
+//    settingsAssistant.videoSettings
+//    settingsAssistant.sourceVideoMinFrameDuration
+    
+    
+    /*
+     AVAssetWriterInputGroup
+     
+     A group of tracks in a mutually exclusive relationship.
+     
+     Use this class to associate tracks corresponding to multiple
+     AVAssetWriterInput instances as mutually exclusive to each
+     other for playback or other processing.
+     
+     For example, if you are creating an asset with multiple audio
+     tracks using different spoken languages -- an only one track
+     should be played at a time -- group the inputs corresponding
+     to those tracks into a single instance of
+     AVAssetWriterInputGroup and add the group to the AVAssetWriter
+     instance using the AVAssetWriter method addInputGroup:. If the
+     output format supports mutually exclusive relationships among
+     tracks, the AVAssetWriter marks the tracks as mutually exclusive
+     to each other.
+     
+     Because AVAssetWriterInputGroup is a subclass of AVMediaSelectionGroup,
+     clients can examine the media selection options that are available
+     on the output asset before writing the asset. Obtain the best
+     results by examining the options of the AVAssetWriterInputGroup
+     after associating the AVAssetWriterInput instances of the
+     AVAssetTrack objects as appropriate using the AVAssetWriterInput
+     method addTrackAssociatedWithTrackOfInput:type: and by initializing
+     each AVAssetWriterInput with a source format hint, where appropriate.
+     */
+    
+    /**
+     Creating an Asset Writer input Group
+     */
+//    AVAssetWriterInputGroup assetWriterInputGroupWithInputs:<#(nonnull NSArray<AVAssetWriterInput *> *)#> defaultInput:<#(nullable AVAssetWriterInput *)#>
+//    [AVAssetWriterInputGroup alloc] initWithInputs:<#(nonnull NSArray<AVAssetWriterInput *> *)#> defaultInput:<#(nullable AVAssetWriterInput *)#>
+    
+    /**
+     Getting the Asset Writer Input Group Settings
+     */
+    AVAssetWriterInputGroup *writerInputGroup = nil;
+//    writerInputGroup.defaultInput
+//    writerInputGroup.inputs
+    
+    
+    /*
+     AVAssetWriterInputMetadataAdaptor
+     
+     An object that defines an interface for writing metadata
+     packaged as timed metadata groups into a single asset writer
+     input.
+     */
+    
+    /**
+     Creating Input Metadata Adaptors
+     */
+    AVAssetWriterInputMetadataAdaptor *inputMetadataAdaptor = nil;
+//    [AVAssetWriterInputMetadataAdaptor alloc] initWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+//    AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+    
+    /**
+     Appending Timed Metadata Groups
+     */
+//    inputMetadataAdaptor appendTimedMetadataGroup:<#(nonnull AVTimedMetadataGroup *)#>
+    
+    /**
+     Getting the Input
+     */
+//    inputMetadataAdaptor.assetWriterInput
+    
+    
+    /*
+     AVAssetWriterInputPixelBufferAdaptor
+     
+     A buffer used to append video samples packaged as pixel buffers
+     to a single asset writer input.
+     
+     Instances of AVAssetWriterInputPixelBufferAdaptor provide a
+     CVPixelBufferPoolRef that you can use to allocate pixel buffers
+     for writing to the output file. Using the provided pixel buffer
+     pool for buffer allocation is typically more efficient than
+     appending pixel buffers allocated using a separate pool.
+     */
+    
+    /**
+     Creating an Adaptor
+     */
+//    AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+//    [AVAssetWriterInputMetadataAdaptor alloc] initWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+    
+    /**
+     Adding a Pixel Buffer
+     */
+    AVAssetWriterInputPixelBufferAdaptor *inputPixelBufferAdaptor = nil;
+//    inputPixelBufferAdaptor appendPixelBuffer:<#(nonnull CVPixelBufferRef)#> withPresentationTime:<#(CMTime)#>
+    
+    /**
+     Inspecting a Pixel Buffer Adaptor
+     */
+//    inputPixelBufferAdaptor.assetWriterInput
+//    inputPixelBufferAdaptor.pixelBufferPool
+//    inputPixelBufferAdaptor.sourcePixelBufferAttributes
+    
+    
     
 #pragma mark -- Image Extraction
     
@@ -1406,4 +1732,5 @@
  */
 
 @end
+
 
