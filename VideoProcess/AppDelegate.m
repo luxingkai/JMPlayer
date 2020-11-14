@@ -28,6 +28,8 @@
 #import "CaptureViewController.h"
 #import "AVFoundationController.h"
 
+#import <objc/runtime.h>
+
 @interface AppDelegate ()
 
 @end

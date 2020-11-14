@@ -1125,7 +1125,7 @@
      */
     AVURLAsset *urlAsset = [[AVURLAsset alloc] initWithURL:sourceURL options:nil];
     //    AVURLAsset URLAssetWithURL:<#(nonnull NSURL *)#> options:<#(nullable NSDictionary<NSString *,id> *)#>
-
+    
     /**
      Accessing the URL
      */
@@ -1520,28 +1520,26 @@
      Initializing the Player item Video Output
      */
     AVPlayerItemVideoOutput *videoOutput = nil;
-//    [AVPlayerItemVideoOutput alloc] initWithOutputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
-//    [AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    [AVPlayerItemVideoOutput alloc] initWithOutputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    [AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:<#(nullable NSDictionary<NSString *,id> *)#>
     
     /**
      Accessing the Delegate
      */
-//    videoOutput setDelegate:<#(nullable id<AVPlayerItemOutputPullDelegate>)#> queue:<#(nullable dispatch_queue_t)#>
-//    videoOutput.delegate
-//    videoOutput.delegateQueue
+    //    videoOutput setDelegate:<#(nullable id<AVPlayerItemOutputPullDelegate>)#> queue:<#(nullable dispatch_queue_t)#>
+    //    videoOutput.delegate
+    //    videoOutput.delegateQueue
     
     /**
      Notifying the Delegate of Changes
      */
-//    videoOutput requestNotificationOfMediaDataChangeWithAdvanceInterval:<#(NSTimeInterval)#>
+    //    videoOutput requestNotificationOfMediaDataChangeWithAdvanceInterval:<#(NSTimeInterval)#>
     
     /**
      Getting Pixel Buffer Data
      */
-//    videoOutput hasNewPixelBufferForItemTime:<#(CMTime)#>
-//    videoOutput copyPixelBufferForItemTime:<#(CMTime)#> itemTimeForDisplay:<#(nullable CMTime *)#>
-    
-    
+    //    videoOutput hasNewPixelBufferForItemTime:<#(CMTime)#>
+    //    videoOutput copyPixelBufferForItemTime:<#(CMTime)#> itemTimeForDisplay:<#(nullable CMTime *)#>
     
     
 #pragma mark -- HTTP Live Streaming
@@ -1549,17 +1547,385 @@
     
 #pragma mark -- Sample Buffer Manipulation
     
+    /*
+     AVQueuedSampleBufferRendering
+     
+     Methods you can implement to enqueue sample buffers for presentation.
+     
+     AVSampleBufferDisplayLayer and AVSampleBufferAudioRenderer conform to
+     this protocol. When used in conjunction with an
+     AVSampleBufferRenderSynchronizer, an object conforming to
+     AVQueuedSampleBufferRendering can only be attached to a single synchronizer.
+     
+     */
+    
+    /**
+     Requesting Media
+     
+     readyForMoreMediaData
+     enqueueSampleBuffer:
+     requestMediaDataWhenReadyOnQueue:UsingBlock:
+     stopRequestingMediaData
+     */
+    
+    /**
+     Clearing Queued Sample buffers
+     
+     flush
+     */
+    
+    /**
+     indentifying the Timebase
+     
+     timebase
+     */
+    
     
 #pragma mark -- Text Formatting
+    
+    /*
+     AVTextStyleRule
+     
+     An object that represents text styling rules applied to text in a
+     media item.
+     
+     You use text style objects to format subtitles, closed captions,
+     and other text-related content of the item. The system applies
+     these rules to all or part of the text of the media item.
+     */
+    
+    /**
+     Creating and Initailizing Style Rules
+     */
+    //    AVTextStyleRule textStyleRulesFromPropertyList:<#(nonnull id)#>
+    //    AVTextStyleRule textStyleRuleWithTextMarkupAttributes:<#(nonnull NSDictionary<NSString *,id> *)#>
+    //    AVTextStyleRule textStyleRuleWithTextMarkupAttributes:<#(nonnull NSDictionary<NSString *,id> *)#> textSelector:<#(nullable NSString *)#>
+    //    [AVTextStyleRule alloc] initWithTextMarkupAttributes:<#(nonnull NSDictionary<NSString *,id> *)#>
+    //    [AVTextStyleRule alloc] initWithTextMarkupAttributes:<#(nonnull NSDictionary<NSString *,id> *)#> textSelector:<#(nullable NSString *)#>
+    
+    /**
+     Accessing the Style Attributes
+     */
+    AVTextStyleRule *styleRule = nil;
+    //    styleRule.textMarkupAttributes
+    //    styleRule.textSelector
+    
+    /**
+     Exporting the Style Rules
+     */
+    //    AVTextStyleRule propertyListForTextStyleRules:<#(nonnull NSArray<AVTextStyleRule *> *)#>
+    
     
     
 #pragma mark -- Media Selection
     
+    /*
+     Adding Subtitles and Alternative Audio Tracks
+     
+     Extend your app's appeal to users by adding subtitles and
+     alternative audio tracks in their native language.
+     
+     As a developer, you want to make your apps accessible to as
+     broad an audience as possible. One way for you to extend
+     your app's reach is to make it available to users in their
+     native language as well as to provide support for users who
+     have hearing impairments or other accessibility needs. AVKit
+     and AVFoundation simplify handling these concerns by providing
+     built-in support for presenting subtitles and closed captions,
+     and for selecting alternative audio and video tracks. If you're
+     building your own custom player or would like to present your
+     own media-selection interface, use the features provides by
+     AVFoundation's AVMediaSelectGroup and AVMediaSelectionOption
+     classes.
+     */
+    
+    /**
+     Retrieve the Available Media Options
+     
+     AVMediaSelectionOption models an alternative audio, video, or
+     text track contained within the source media. Media options
+     are uesd to select alternative camera angles, present audio
+     dubbed in a user's native language, or display subtitles and
+     closed captions. You determine which alternative media
+     presentations are available by asynchronously loading and
+     calling the asset's availbleMediaCharateristicsWithMediaSelectionOptions
+     property, which returns are AVMediaCharacteristicAudible (alternative
+     audio tracks), AVMediaCharacteristicVisual (alternative video tracks),
+     and AVMediaCharacteristicLegible(subtitles and closed captions).
+     
+     After you've retrieved the array of available options, you call
+     the asset's mediaSelectionGroupForMediaChracteristic:method, passing
+     it the desired characteristic. This method returns the associated
+     AVMediaSelectionGroup object, or nil if no groups exist for the
+     the specified characteristic.
+     
+     AVMediaSelectionGroup acts as a container for a collection of
+     mutually exclusive AVMediaSelectionOption objects. The following
+     example shows how you retrieve an asset's media-selection groups
+     and display their available options:
+     */
+    
+    for (AVMediaCharacteristic characteristic in asset.availableMediaCharacteristicsWithMediaSelectionOptions) {
+        
+        //retrieve the AVMediaSelectionGroup for the specified characteristic.
+        AVMediaSelectionGroup *group = [asset mediaSelectionGroupForMediaCharacteristic:characteristic];
+        for (AVMediaSelectionOption *option in group.options) {
+            printf("%s",[option.displayName cStringUsingEncoding:NSUTF8StringEncoding]);
+        }
+    }
+    
+    /**
+     Select the Desired Media Option
+     
+     After you're retrieved an AVMediaSelectionGroup object for a particular
+     media characteristic and identified the desired AVMediaSelectionOption
+     object, the next step is to select it. You select a media option by
+     calling selectMediaOption:inMediaSelectionGroup: on the active AVPlayerItem.
+     For instance, to present the asset's Spanish subtitle option, you could
+     select it as follows:
+     
+     Selecting a media option makes it immediately available for presentation.
+     Selecting a subtitle or closed-caption option displays the associated
+     text within the video display provided by AVPlayerViewController,
+     AVPlayerView, and AVPlayerLayer. Selecting an alternative audio
+     or video option replaces the currently presented media with the new
+     selection's media.
+     */
+    
+    AVMediaSelectionGroup *group = [asset mediaSelectionGroupForMediaCharacteristic:AVMediaCharacteristicLegible];
+    NSLocale *locale = [NSLocale localeWithLocaleIdentifier:@"en-ES"];
+    NSArray *options = [AVMediaSelectionGroup mediaSelectionOptionsFromArray:group.options withLocale:locale];
+    [playerItem selectMediaOption:options.firstObject inMediaSelectionGroup:group];
+    
+    
+    /*
+     AVMediaSelection
+     
+     An object that represents a complete rendition of media selection options
+     on an asset.
+     */
+    
+    /**
+     Inspecting the Media Selection
+     */
+    AVMediaSelection *mediaSelection = nil;
+//    mediaSelection.asset
+//    mediaSelection selectedMediaOptionInMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+//    mediaSelection mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+    
+    
+    /*
+     AVMediaSelectionGroup
+     
+     An object that represents a collection of mutually exclusive options
+     for the presentation of media within an asset.
+     */
+    
+    /**
+     Accessing Options
+     */
+    AVMediaSelectionGroup *selectionGroup = nil;
+//    selectionGroup.options
+//    selectionGroup mediaSelectionOptionWithPropertyList:<#(nonnull id)#>
+//    selectionGroup defaultOption
+    
+    /**
+     Configuring Empty Selection
+     */
+//    selectionGroup.allowsEmptySelection
+    
+    /**
+     Filtering Selection Options
+     */
+//    AVMediaSelectionGroup playableMediaSelectionOptionsFromArray:<#(nonnull NSArray<AVMediaSelectionOption *> *)#>
+    
+    
+    /*
+     AVMediaSelectionOption
+     
+     An object that represents a specific option for the presentation of
+     media within a group of options.
+     */
+    
+    /**
+     Managing Media Types
+     */
+    AVMediaSelectionOption *selectionOption = nil;
+//    selectionOption.mediaType
+//    selectionOption.mediaSubTypes
+//    selectionOption hasMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
+    
+    /**
+     Managing Metadata
+     */
+//    selectionOption.commonMetadata
+//    selectionOption.availableMetadataFormats
+//    selectionOption metadataForFormat:<#(nonnull NSString *)#>
+    
+    /**
+     Getting the Selection Playable Status
+     */
+//    selectionOption.playable
+    
+    /**
+     Getting the Language and Locale Settings
+     */
+//    selectionOption.displayName
+//    selectionOption displayNameWithLocale:<#(nonnull NSLocale *)#>
+//    selectionOption.locale
+//    selectionOption.extendedLanguageTag
+    
+    /**
+     Getting the Property List
+     */
+//    selectionOption.propertyList
+    
+    /**
+     Getting the Associated Media Selection Option
+     */
+//    selectionOption associatedMediaSelectionOptionInMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+    
+    
+    /*
+     AVMutableMediaSelection
+     
+     A mutable object that represents a complete rendition of media selection
+     options on an asset.
+     */
+    
+    /**
+     Selecting Media Options
+     */
+    AVMutableMediaSelection *mutableMediaSelection = nil;
+//    mediaSelection selectedMediaOptionInMediaSelectionGroup:<#(nonnull AVMediaSelectionGroup *)#>
+    
     
 #pragma mark -- Content Key Decryption
     
+    /*
+     AVContentKeyRequest
+     
+     An object that encapsulates information about a content decryption
+     key request issued from a content key session object.
+     */
+    
+    /**
+     Getting Content Key Request Data
+     */
+    AVContentKeyRequest *keyRequest = nil;
+//    keyRequest makeStreamingContentKeyRequestDataForApp:<#(nonnull NSData *)#> contentIdentifier:<#(nullable NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#> completionHandler:<#^(NSData * _Nullable contentKeyRequestData, NSError * _Nullable error)handler#>
+//    AVContentKeyRequestProtocolVersionsKey
+    
+    /**
+     Responding to the Content Key Request
+     */
+//    keyRequest respondByRequestingPersistableContentKeyRequestAndReturnError:<#(NSError *__autoreleasing  _Nullable * _Nullable)#>
+//    keyRequest processContentKeyResponse:<#(nonnull AVContentKeyResponse *)#>
+//    keyRequest processContentKeyResponseError:<#(nonnull NSError *)#>
+    
+    /**
+     Getting Content Key Request Properties
+     */
+//    keyRequest.identifier
+//    keyRequest canProvidePersistableContentKey
+//    keyRequest.error
+//    keyRequest.initializationData
+//    keyRequest.renewsExpiringResponseData
+//    keyRequest.status
+    
+    
+    /*
+     AVContentKeyResponse
+     
+     An object that encapsulates information about a response
+     to a content decryption key request.
+     */
+    
+    /**
+     Creating New Content Key Responses
+     */
+//    AVContentKeyResponse contentKeyResponseWithAuthorizationTokenData:<#(nonnull NSData *)#>
+//    AVContentKeyResponse contentKeyResponseWithFairPlayStreamingKeyResponseData:<#(nonnull NSData *)#>
+//    AVContentKeyResponse contentKeyResponseWithClearKeyData:<#(nonnull NSData *)#> initializationVector:<#(nullable NSData *)#>
+    
+    
+    /*
+     AVContentKeySession
+     
+     An object used to create and track decryption keys for media data.
+     */
+    
+    /**
+     Creating New Content Key Sessions
+     */
+//    AVContentKeySession contentKeySessionWithKeySystem:<#(nonnull AVContentKeySystem)#>
+//    AVContentKeySession contentKeySessionWithKeySystem:<#(nonnull AVContentKeySystem)#> storageDirectoryAtURL:<#(nonnull NSURL *)#>
+    
+    /**
+     Initializing the Content Key Request Process
+     */
+    AVContentKeySession *keySession = nil;
+//    keySession setDelegate:<#(nullable id<AVContentKeySessionDelegate>)#> queue:<#(nullable dispatch_queue_t)#>
+//    keySession.delegate
+//    keySession.delegateQueue
+//    keySession addContentKeyRecipient:<#(nonnull id<AVContentKeyRecipient>)#>
+//    keySession.contentKeyRecipients
+//    keySession processContentKeyRequestWithIdentifier:<#(nullable id)#> initializationData:<#(nullable NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#>
+    
+    /**
+     Updating Content Key Requests
+     */
+//    keySession renewExpiringResponseDataForContentKeyRequest:<#(nonnull AVContentKeyRequest *)#>
+//    keySession makeSecureTokenForExpirationDateOfPersistableContentKey:<#(nonnull NSData *)#> completionHandler:<#^(NSData * _Nullable secureTokenData, NSError * _Nullable error)handler#>
+//    keySession.contentProtectionSessionIdentifier
+    
+    /**
+     Ending a Content Key Request Process
+     */
+//    keySession.expire
+//    keySession removeContentKeyRecipient:<#(nonnull id<AVContentKeyRecipient>)#>
+     
+    /**
+     Handling Expired Session Reports
+     */
+//    AVContentKeySession pendingExpiredSessionReportsWithAppIdentifier:<#(nonnull NSData *)#> storageDirectoryAtURL:<#(nonnull NSURL *)#>
+//    AVContentKeySession removePendingExpiredSessionReports:<#(nonnull NSArray<NSData *> *)#> withAppIdentifier:<#(nonnull NSData *)#> storageDirectoryAtURL:<#(nonnull NSURL *)#>
+//    keySession.storageURL
+    
+    
+    /*
+     AVPersistableContentKeyRequest
+     
+     An object that encapsulate information about a persistable content
+     decryption key request issued from a content key session.
+     
+     This class allows clients to create and use persistable content keys.
+     */
+    
+    /**
+     Requesting Persistable Content Key Data
+     */
+    AVPersistableContentKeyRequest *persistableKeyRequset = nil;
+//    persistableKeyRequset persistableContentKeyFromKeyVendorResponse:<#(nonnull NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    
     
 #pragma mark -- Error
+    
+    /*
+     AVErrorDeviceKey
+     AVErrorDiscontinuityFlagsKey
+     AVErrorFileSizeKey
+     AVErrorFileTypeKey
+     AVErrorMediaSubTypeKey
+     AVErrorMediaTypeKey
+     AVErrorPIDKey
+     AVErrorPersistentTrackIDKey
+     AVErrorPresentationTimeStampKey
+     AVErrorRecordingSuccessfullyFinishedKey
+     AVErrorTimeKey
+     AVFoundationErrorDomain
+     AVError
+     */
     
     
 }
