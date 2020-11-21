@@ -7,7 +7,7 @@ target 'VideoProcess' do
   use_frameworks!
    pod 'FMDB', '~> 2.7.5'
    pod 'SVProgressHUD', '~> 2.2.5'
-
+   pod 'FFmpeg'
 
   # Pods for VideoProcess
 
