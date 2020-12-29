@@ -582,6 +582,7 @@
 //    deviceInput videoMinFrameDurationOverride
     
     
+    
 #pragma mark -- Photo Capture
     
     /*
@@ -768,20 +769,851 @@
      to a file, such as HEVC encoded image data containerized in the HEIC file
      format and including a preview image, depth data and other attachments.
      
+     An AVCapturePhoto instance wraps a single image result. For example,
+     if you request a bracketed capture of three images, your callback is
+     called three times, each time delivering a single AVCapturePhoto object.
+     */
+    
+    /**
+     Resolving Photo Capture Requests
      
+     ==resolvedSettings
+     The settings object that was used to request this photo capture.
+     
+     ==photoCount
+     The 1-based index of this photo capture relative to other results
+     from the same capture request.
+     
+     ==timestamp
+     The time at which the image was captured.
+     */
+    
+    /**
+     Accessing Photo Pixel Data
+     
+     ==rawPhoto
+     A Boolean value indicating whether this photo object contains RAW format data.
+     
+     ==pixelBuffer
+     The uncompressed or RAW image sample buffer for the photo, if requested.
+     */
+    
+    /**
+     Accessing Preview Photo Data
+     
+     ==embeddedThumbnailPhotoFormat
+     A dictionary describing the data format for a preview-sized image
+     accompanying the captured photo.
+     
+     ==previewPixelBuffer
+     The pixel data for a preview-sized version of the photo, if requested.
+     */
+        
+    /**
+     Accessing Photo Metadata
+     
+     ==depthData
+     Depth or disparity map data captured with the photo.
+     
+     ==AVDepthData
+     A container for per-pixel distance or disparity information
+     captured by compatible camera devices.
+     
+     ==cameraCalibrationData
+     Calibration information for the camera device that captured the photo.
+     
+     ==AVCameraCalibrationData
+     Information about the camera characteristics used to capture
+     images and depth data.
+     
+     ==sourceDeviceType
+     The type of device that captured the photo.
+     
+     ==metadata
+     A dictionary of metadata describing the captured image.
+     
+     ==portraitEffectsMatte
+     The portrait effects matte captured with the photo.
+     */
+    
+    /**
+     Packaging Data for File Output
+     
+     - fileDataRepresentationWithCustomizer:
+     
+     ==AVCapturePhotoFileDataRepresentationCustomizer
+     A set of delegate callbacks to be implemented by callers of
+     fileDataRepresentationWithCustomizer:.
+     
+     - fileDataRepresentation
+     Generates and returns a flat data representation of the photo
+     and its attachments.
+     
+     - CGImageRepresentation
+     Extracts and returns the captured photo's primary image as a
+     Core Graphics image object.
+     
+     - previewCGImageRepresentation
+     Extracts and returns the captured photo's preview image as a
+     CoreGraphics image object.
+     */
+    
+    /**
+     Examining Bracketed Capture Information
+     
+     ==bracketSettings
+     The variations available for bracketed capture settings
+     for this photo.
+     
+     ==sequenceCount
+     The 1-based index of this photo in a bracketed capture sequence.
+     
+     ==lensStabilizationStatus
+     Information about the use of lens stabilization during bracketed
+     photo capture.
+     
+     ==AVCaptureLensStabilizationStatus
+     Constants that indicate the status of optical image stabilization
+     hardware during a bracketed photo capture.
+     */
+    
+    /**
+     Accessing Segmentation Mattes
+     
+     - semanticSegmentationMatteForType:
+     Retrieves the semantic segmentation matte associated with this photo.
      */
     
     
-        
+    /*
+     AVCapturePhotoOutput
+     
+     A capture output for still image, Live Photo, and other
+     photography workflows.
+
+     AVCapturePhotoOutput provides a modern interface for capture
+     workflows related to still photography. In addition to basic
+     capture of still images, a photo output supports RAW-format
+     capture, bracketed capture of multiple images, Live Photos,
+     and wide-gamut color. You can output captured photos in a
+     variety of formats and codecs, including RAW format DNG files,
+     HEVC format HEIF files, and JPEG files.
+     
+     To capture photos with the AVCapturePhotoOutput class,
+     follow these steps:
+     1. Create an AVCapturePhotoOutput object. Use its properties
+        to determine supported capture settings and to enable certain
+        features (for example, whether to capture Live Photos).
+     2. Create and configure an AVCapturePhotoSettings object to
+        choose features and settings for a specific capture (for
+        example, whether to enable image stabilization or flash).
+     3. Capture an image by passing your photo settings object to
+        the capturePhotoWithSettings:delegate: method along with a
+        delegate object implementing the AVCapturePhotoCaptureDelegate
+        protocol. The photo capture output then calls your delegate to
+        notify you of significant events during the capture process.
+     
+     Some photo capture settings, such as the flashMode property,
+     include options for automatic behavior. For such settings,
+     the photo output determines whether to use that feature at
+     the moment of capture—you don’t know when requesting a capture
+     whether the feature will be enabled when the capture completes.
+     When the photo capture output calls your
+     AVCapturePhotoCaptureDelegate methods with information about
+     the completed or in-progress capture, it also provides an
+     AVCaptureResolvedPhotoSettings object that details which
+     automatic features have been set for that capture. The resolved
+     settings object’s uniqueID property matches the uniqueID
+     value of the AVCapturePhotoSettings object you used to
+     request capture.
+     
+     Enabling certain photo features (Live Photo capture and
+     high resolution capture) requires a reconfiguration of
+     the capture render pipeline. To opt into these features,
+     set the highResolutionCaptureEnabled, livePhotoCaptureEnabled,
+     and livePhotoAutoTrimmingEnabled properties before calling
+     your AVCaptureSession object’s startRunning method. Changing
+     any of these properties while the session is running disrupts
+     the capture render pipeline: Live Photo captures in progress
+     end immediately, unfulfilled photo requests abort, and video
+     preview temporarily freezes.
+     
+     Using a photo capture output adds other requirements to
+     your AVCaptureSession object:
+     •  A capture session cannot support both Live Photo capture
+        and movie file output. If your capture session includes an
+        AVCaptureMovieFileOutput object, the livePhotoCaptureSupported
+        property becomes NO. (As an alternative, you can use the
+        AVCaptureVideoDataOutput class to output video buffers at
+        the same resolution as a simultaneous Live Photo capture.)
+     •  A capture session cannot contain both an AVCapturePhotoOutput
+        object and an AVCaptureStillImageOutput object. The
+        AVCapturePhotoOutput class includes all functionality of
+        (and deprecates) the AVCaptureStillImageOutput class.
+     
+     The AVCapturePhotoOutput class implicitly supports wide-gamut
+     color photography. If the source AVCaptureDevice object’s
+     activeColorSpace value is AVCaptureColorSpace_P3_D65, the
+     capture output produces photos with wide color information
+     (unless your AVCapturePhotoSettings object specifies an output
+     format that does not support wide color).
+     */
+    
+    /**
+     Creating a Photo Output
+     
+     - init
+     Initializes a new photo capture output object.
+     
+     + new
+     Creates a new photo capture output object.
+     */
+    
+    /**
+     Capturing a Photo
+     
+     - capturePhotoWithSettings:delegate:
+     Initiates a photo capture using the specified settings.
+     
+     ==AVCapturePhotoSettings
+     A specification of the features and settings to use for a
+     single photo capture request.
+     
+     ==AVCapturePhotoBracketSettings
+     A specification of the features and settings to use for a
+     photo capture request that captures multiple images with
+     varied settings.
+     
+     ==AVCaptureResolvedPhotoSettings
+     A description of the features and settings in use for an
+     in-progress or complete photo capture request.
+     */
+    
+    /**
+     Determining Supported Pixel Formats
+
+     ==availablePhotoPixelFormatTypes
+     The pixel formats the capture output supports for photo capture.
+     
+     ==availableRawPhotoPixelFormatTypes
+     The pixel formats the capture output supports for RAW photo capture.
+     
+     - supportedPhotoPixelFormatTypesForFileType:
+     Returns the list of uncompressed pixel formats supported for
+     photo data in the specified file type.
+     
+     - supportedRawPhotoPixelFormatTypesForFileType:
+     Returns the list of Bayer RAW pixel formats supported for
+     photo data in the specified file type.
+     
+     + isAppleProRAWPixelFormat:
+     Returns a Boolean value that indicates whether the pixel
+     format is an Apple ProRAW format.
+     
+     + isBayerRAWPixelFormat:
+     Returns a Boolean value that indicates whether the pixel
+     format is a Bayer RAW format.
+     */
+    
+    /**
+     Determining Supported Codec Types
+     
+     ==availablePhotoCodecTypes
+     The compression codecs this capture output currently
+     supports for photo capture.
+     
+     - supportedPhotoCodecTypesForFileType:
+     Returns the list of photo codecs (such as JPEG or HEVC) supported
+     for photo data in the specified file type.
+     */
+    
+    /**
+     Determining Supported File Types
+     
+     ==availablePhotoFileTypes
+     The list of file types currently supported for photo capture and output.
+     
+     ==availableRawPhotoFileTypes
+     The list of file types currently supported for RAW format capture and output.
+     */
+    
+    /**
+     Determining Available Settings
+     
+     ==lensStabilizationDuringBracketedCaptureSupported
+     A Boolean value indicating whether the capture output
+     currently supports lens stabilization during bracketed image capture.
+     
+     ==maxBracketedCapturePhotoCount
+     The maximum number of images that the photo capture output
+     can support in a single bracketed capture.
+     
+     ==supportedFlashModes
+     The flash settings this capture output currently supports.
+     
+     ==autoRedEyeReductionSupported
+     A Boolean value indicating whether the capture output supports
+     automatic red-eye reduction.
+     */
+    
+    /**
+     Monitoring the Visible Scene
+     
+     ==isFlashScene
+     A Boolean value indicating whether the scene currently being
+     previewed by the camera warrants use of the flash.
+     
+     ==photoSettingsForSceneMonitoring
+     A photo settings object that controls how the photo output
+     detects and handles automatic flash and stabilization modes.
+     */
+    
+    /**
+     Configuring High-Resolution Still Capture
+     
+     ==highResolutionCaptureEnabled
+     A Boolean value that specifies whether to configure the
+     capture pipeline for high resolution still image capture.
+     */
+    
+    /**
+     Configuring Live Photo Capture
+     
+     ==livePhotoCaptureSupported
+     A Boolean value indicating whether the capture output
+     currently supports Live Photo capture.
+     
+     ==livePhotoCaptureEnabled
+     A Boolean value that specifies whether to configure the capture
+     pipeline for Live Photo capture.
+     
+     ==livePhotoCaptureSuspended
+     A Boolean value that specifies whether to suspend, but not
+     disable, Live Photo capture.
+     
+     ==livePhotoAutoTrimmingEnabled
+     A Boolean value that specifies whether to automatically trim Live
+     Photo movie captures to avoid excessive movement.
+     
+     ==availableLivePhotoVideoCodecTypes
+     The list of video codecs currently available for capturing Live
+     Photos with the photo output.
+     */
+    
+    /**
+     Configuring Depth Data Capture
+     
+     ==depthDataDeliverySupported
+     A Boolean value indicating whether the capture output currently
+     supports depth data capture.
+     
+     ==depthDataDeliveryEnabled
+     A Boolean value that specifies whether to configure the capture
+     pipeline for depth data capture.
+     */
+    
+    /**
+     Configuring Portrait Effects Matte Capture
+     
+     ==portraitEffectsMatteDeliveryEnabled
+     A Boolean value indicating whether the capture output will
+     generate a portrait effects matte.
+     
+     ==portraitEffectsMatteDeliverySupported
+     A Boolean value indicating whether the capture output currently
+     supports delivery of a portrait effects matte.
+     
+     ==portraitEffectsMatte
+     The portrait effects matte captured with the photo.
+     */
+    
+    /**
+     Configuring Dual Camera Capture
+     
+     ==cameraCalibrationDataDeliverySupported
+     A Boolean value indicating whether the capture output currently
+     supports delivery of camera calibration data.
+     
+     
+     virtualDeviceConstituentPhotoDeliveryEnabled
+     virtualDeviceConstituentPhotoDeliverySupported
+     virtualDeviceFusionSupported
+     */
+    
+    /**
+     Preparing for Resource-Intensive Captures
+     
+     ==preparedPhotoSettingsArray
+     An array of photo settings for which the photo output has
+     prepared capture resources.
+     
+     - setPreparedPhotoSettingsArray:completionHandler:
+     Tells the photo capture output to prepare resources for future
+     capture requests with the specified settings.
+     */
+    
+    /**
+     Getting Segmentation Mattes
+     
+     ==availableSemanticSegmentationMatteTypes
+     An array of semantic segmentation matte types that may be
+     captured and delivered along with the primary photo.
+     
+     ==enabledSemanticSegmentationMatteTypes
+     The semantic segmentation matte types that the photo
+     render pipeline delivers.
+     */
+
+    /**
+     Setting the Capture Prioritization
+     
+     ==maxPhotoQualityPrioritization
+     The highest quality the photo output should prepare to deliver
+     on a capture-by-capture basis.
+     
+     ==AVCapturePhotoQualityPrioritization
+     Constants that indicate how to prioritize photo quality relative
+     to capture speed.
+     */
     
     
+    /*
+     AVCapturePhotoCaptureDelegate
+     
+     Methods for monitoring progress and receiving results from
+     a photo capture output.
+
+     You implement methods in the AVCapturePhotoCaptureDelegate
+     protocol to be notified of progress and results when capturing
+     photos with the AVCapturePhotoOutput class.
+     
+     To capture a photo, you pass an object implementing this protocol
+     to the capturePhotoWithSettings:delegate: method, along with a
+     settings object that describes the capture to be performed. As
+     the capture proceeds, the photo output calls several of the methods
+     in this protocol on your delegate object, providing information
+     about the capture’s progress and delivering the resulting photos.
+     
+     Which delegate methods the photo output calls depends on the photo
+     settings you initiate capture with. All methods in this protocol
+     are optional at compile time, but at run time your delegate object
+     must respond to certain methods depending on your photo settings:
+     
+     •  If you request a still photo capture (by specifying image
+        formats or file types), your delegate either must implement
+        the captureOutput:didFinishProcessingPhoto:error: method, or
+        must implement methods listed in Receiving Capture Results
+        (Deprecated) corresponding to whether you request capture in
+        RAW format, processed format, or both.
+     •  If you request Live Photo capture (by setting the
+        livePhotoMovieFileURL property to a non-nil value),
+        your delegate must implement the
+        captureOutput:didFinishProcessingLivePhotoToMovieFileAtURL:
+        duration:photoDisplayTime:resolvedSettings:error: method.
+     
+     The capture output validates these requirements when you call the
+     capturePhotoWithSettings:delegate: method. If your delegate does
+     not meet these requirements, that method raises an exception.
+     
+     You must use a unique AVCapturePhotoSettings object for each capture
+     request. When the photo output calls your delegate methods, it
+     provides an AVCaptureResolvedPhotoSettings object whose uniqueID
+     property matches that of the photo settings you requested
+     capture with. When making multiple captures, use this unique
+     ID to determine which delegate method calls correspond to which requests.
+     
+     The photo output always calls each method listed in Monitoring
+     Capture Progress exactly once for each capture request. For
+     methods listed in Receiving Capture Results, you may receive
+     a call more than once, or not at all, depending on your photo
+     settings. See the description of each method for details.
+     */
+    
+    /**
+     Monitoring Capture Progress
+     
+     - captureOutput:willBeginCaptureForResolvedSettings:
+     Notifies the delegate that the capture output has resolved
+     settings and will soon begin its capture process.
+     
+     - captureOutput:willCapturePhotoForResolvedSettings:
+     Notifies the delegate that photo capture is about to occur.
+     
+     - captureOutput:didCapturePhotoForResolvedSettings:
+     Notifies the delegate that the photo has been taken.
+     
+     - captureOutput:didFinishCaptureForResolvedSettings:error:
+     Notifies the delegate that the capture process is complete.
+     */
+    
+    /**
+     Receiving Capture Results
+     
+     - captureOutput:didFinishProcessingPhoto:error:
+     Provides the delegate with the captured image and associated metadata
+     resulting from a photo capture.
+     
+     - captureOutput:didFinishRecordingLivePhotoMovieForEventualFileAtURL:resolvedSettings:
+     Notifies the delegate that the movie content of a Live Photo has finished recording.
+     
+     - captureOutput:didFinishProcessingLivePhotoToMovieFileAtURL:duration:
+     photoDisplayTime:resolvedSettings:error:
+     Provides the delegate the movie file URL resulting from a Live Photo capture.
+     */
     
     
 #pragma mark -- Depth Data Capture
     
+    /*
+     Capturing Photos with Depth
+     
+     Get a depth map with a photo to create effects like the system
+     camera’s Portrait mode (on compatible devices).
+
+     On iOS devices with a back-facing dual camera or a front-facing
+     TrueDepth camera, the capture system can record depth
+     information. A depth map is like an image; however, instead
+     of each pixel providing a color, it indicates distance from
+     the camera to that part of the image (either in absolute terms,
+     or relative to other pixels in the depth map).
+     
+     You can use a depth map together with a photo to create
+     image-processing effects that treat foreground and background
+     elements of a photo differently, like the Portrait mode in
+     the iOS Camera app. By saving color and depth data separately,
+     you can even apply and change these effects long after a
+     photo has been captured.
+     
+     You can add depth capture to many of the other photography
+     workflows covered in Capturing Still and Live Photos by
+     adding the following steps.
+     */
+    
+    /**
+     Prepare for Depth Photo Capture
+
+     To capture depth maps, you’ll need to first select a
+     AVCaptureDeviceTypeBuiltInDualCamera or
+     AVCaptureDeviceTypeBuiltInTrueDepthCamera capture device
+     as your session’s video input. Even if an iOS device has
+     a dual camera or TrueDepth camera, selecting the default
+     back- or front-facing camera does not enable depth capture.
+     
+     Capturing depth also requires an internal reconfiguration
+     of the capture pipeline, briefly delaying capture and
+     interrupting any in-progress captures. Before shooting
+     your first depth photo, make sure you configure the pipeline
+     appropriately by enabling depth capture on your
+     AVCapturePhotoOutput object.
+     
+     
+     // Select a depth-capable capture device.
+     guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+         for: .video, position: .unspecified)
+         else { fatalError("No dual camera.") }
+     guard let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
+         self.captureSession.canAddInput(videoDeviceInput)
+         else { fatalError("Can't add video input.") }
+     self.captureSession.beginConfiguration()
+     self.captureSession.addInput(videoDeviceInput)
+
+     // Set up photo output for depth data capture.
+     let photoOutput = AVCapturePhotoOutput()
+     photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
+     guard self.captureSession.canAddOutput(photoOutput)
+         else { fatalError("Can't add photo output.") }
+     self.captureSession.addOutput(photoOutput)
+     self.captureSession.sessionPreset = .photo
+     self.captureSession.commitConfiguration()
+     
+     ⚠️ Enabling depth capture on a dual camera locks the zoom
+        factor of both the wide and telephoto cameras.
+     */
+    
+    /**
+     Choose Settings
+
+     Once your photo output is ready for depth capture, you can
+     request that any individual photos capture a depth map along
+     with the color image. Create an AVCapturePhotoSettings object,
+     choosing the format for the color image. Then, enable depth
+     capture and depth output (and any other settings you’d like
+     for that photo) and call the capturePhotoWithSettings:delegate:
+     method.
+     
+     let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+     photoSettings.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
+
+     // Shoot the photo, using a custom class to handle capture delegate callbacks.
+     let captureProcessor = PhotoCaptureProcessor()
+     photoOutput.capturePhoto(with: photoSettings, delegate: captureProcessor)
+     */
+    
+    /**
+     Handle Results
+
+     After a capture, the photo output calls your delegate’s
+     captureOutput:didFinishProcessingPhoto:error: method,
+     providing the photo and captured depth data as an
+     AVCapturePhoto object.
+     
+     If you plan to use the captured depth data immediately—for
+     example, to display a preview of a depth-based image processing
+     effect—you can find it in the photo object’s depthData property.
+     
+     Otherwise, the capture output embeds depth data and depth-related
+     metadata when you use the fileDataRepresentation method to
+     produce file data for saving the photo. If you add the resulting
+     file to the Photos library, other apps (including the system
+     Photos app) automatically recognize the depth data within and
+     can apply depth-based image processing effects. (If you need
+     to disable this option, see the embedsDepthDataInPhoto setting).
+     */
+    
+    /**
+     About Disparity, Depth, and Accuracy
+
+     When you enable depth capture with the back-facing dual
+     camera on compatible devices (see iOS Device Compatibility
+     Reference), the system captures imagery using both cameras.
+     Because the two parallel cameras are a small distance apart
+     on the back of the device, similar features found in both
+     images show a parallax shift: objects that are closer to the
+     camera shift by a greater distance between the two images. The
+     capture system uses this difference, or disparity, to infer the
+     relative distances from the camera to objects in the image,
+     as shown below.
+     
+     Each point in a depth map captured by a dual camera device
+     measures disparity in units of 1/meters, and offers
+     AVDepthDataAccuracyRelative accuracy. That is, an individual
+     point isn’t a good estimate of real-world distance, but the
+     variation between points is consistent enough to use for
+     depth-based image processing effects.
+     
+     The TrueDepth camera projects an infrared light pattern in
+     front of the camera and images that pattern with an infrared
+     camera. By observing how the pattern is distorted by objects
+     in the scene, the capture system can calculate the distance
+     from the camera to each point in the image.
+     
+     The TrueDepth camera produces disparity maps by default so
+     that the resulting depth data is similar to that produced
+     by a dual camera device. However, unlike a dual camera device,
+     the TrueDepth camera can directly measure depth (in meters)
+     with AVDepthDataAccuracyAbsolute accuracy. To capture depth
+     instead of disparity, set the activeDepthDataFormat of the
+     capture device before starting your capture session:
+     
+     // Select a depth (not disparity) format that works with the active color format.
+     let availableFormats = captureDevice.activeFormat.supportedDepthDataFormats
+
+     let depthFormat = availableFormats.filter { format in
+         let pixelFormatType =
+             CMFormatDescriptionGetMediaSubType(format.formatDescription)
+         
+         return (pixelFormatType == kCVPixelFormatType_DepthFloat16 ||
+                 pixelFormatType == kCVPixelFormatType_DepthFloat32)
+     }.first
+
+     // Set the capture device to use that depth format.
+     captureSession.beginConfiguration()
+     captureDevice.activeDepthDataFormat = depthFormat
+     captureSession.commitConfiguration()
+     */
+    
+    
+    /*
+     AVCaptureDepthDataOutput
+     
+     A capture output that records scene depth information on compatible
+     camera devices.
+     
+     This out captures AVDepthData objects containing per-pixel depth or
+     disparity information, following a streaming delivery model similar
+     to that used by AVCaptureVideoDataOutput. Alternatively, you can
+     capture depth data alongside photos using AVCapturePhotoOutput
+     (see the AVCapturePhotoSettings depthDataDeliveryEnabled property).
+     
+     A depth data output always provides depth data in the format
+     expressed by the source AVCaptureDevice object’s activeDepthDataFormat
+     property. If you wish to receive depth data in another format,
+     choose a new value for that property from those listed in the
+     supportedDepthDataFormats array of the device's activeFormat object.
+     */
+    
+    /**
+     Creating a Depth Data Output
+     
+     - init
+     Initializes a depth data output object.
+     
+     + new
+     Creates a depth data output object.
+     */
+    
+    /**
+     Configuring Depth Data Capture
+     
+     ==alwaysDiscardsLateDepthData
+     A Boolean value that determines whether the capture output should
+     discard any depth data that is not processed before the next
+     depth data is captured.
+     
+     ==filteringEnabled
+     A Boolean value that determines whether the depth data output
+     should filter depth data to smooth out noise and fill invalid values.
+     */
+    
+    /**
+     Receiving Captured Depth Data
+     
+     - setDelegate:callbackQueue:
+     Designates a delegate object to receive depth data and a dispatch
+     queue for delivering that data.
+     
+     ==delegate
+     A delegate object that receives depth data.
+     
+     ==delegateCallbackQueue
+     A dispatch queue for delivering depth data.
+     
+     ==AVCaptureDepthDataOutputDelegate
+     Methods for receiving depth data produced by a depth capture output.
+     */
+    
+    
+    /*
+     AVDepthData
+     
+     A container for per-pixel distance or disparity information
+     captured by compatible camera devices.
+
+     Depth data is a generic term for a map of per-pixel data containing
+     depth-related information. A depth data object wraps a disparity or
+     depth map and provides conversion methods, focus information, and
+     camera calibration data to aid in using the map for rendering or
+     computer vision tasks.
+     
+     A depth map describes at each pixel the distance to an object,
+     in meters.
+     
+     A disparity map describes normalized shift values for use in
+     comparing two images. The value for each pixel in the map is
+     in units of 1/meters: (pixelShift / (pixelFocalLength * baselineInMeters)).
+     
+     The capture pipeline generates disparity or depth maps from camera
+     images containing nonrectilinear data. Camera lenses have small
+     imperfections that cause small distortions in their resultant
+     images compared to an ideal pinhole camera model, so AVDepthData
+     maps contain nonrectilinear (nondistortion-corrected) data as
+     well. The maps' values are warped to match the lens distortion
+     characteristics present in the YUV image pixel buffers captured
+     at the same time.
+     
+     Because a depth data map is nonrectilinear, you can use an
+     AVDepthData map as a proxy for depth when rendering effects to
+     its accompanying image, but not to correlate points in 3D space.
+     To use depth data for computer vision tasks, use the data in
+     the cameraCalibrationData property to rectify the depth data.
+     
+     There are two ways to capture depth data:
+     •  The AVCaptureDepthDataOutput class captures and delivers depth
+        data in a stream (similar to how the AVCaptureVideoDataOutput
+        delivers video data).
+     •  The AVCapturePhotoOutput class delivers depth data as a property
+        of an AVCapturePhoto object containing the captured image.
+     
+     You can also create AVDepthData objects using information obtained
+     from image files with the Image I/O framework.
+     
+     When editing images containing depth information, use the methods
+     listed in Transforming and Processing to generate derivative
+     AVDepthData objects reflecting the edits that have been performed.
+     */
+    
+    /**
+     Creating Depth Data
+     
+     + depthDataFromDictionaryRepresentation:error:
+     Creates a depth data object from depth information such as that
+     found in an image file.
+     
+     - dictionaryRepresentationForAuxiliaryDataType:
+     Returns a dictionary representation of the depth data suitable
+     for writing into an image file.
+     */
+    
+    /**
+     Reading Pixel Depth Information
+     
+     depthDataMap
+     A pixel buffer containing the depth data's per-pixel depth or
+     disparity data map.
+     
+     depthDataType
+     The pixel format of the depth data map.
+     */
+    
+    /**
+     Evaluating Depth Data
+     
+     ==depthDataFiltered
+     A Boolean value indicating whether the depth map contains temporally
+     smoothed data.
+     
+     ==depthDataAccuracy
+     The general accuracy of depth data map values.
+     
+     ==AVDepthDataAccuracy
+     Values indicating the general accuracy of a depth data map.
+     
+     ==depthDataQuality
+     The overall quality of the depth map.
+     
+     ==AVDepthDataQuality
+     Values indicating the overall quality of a depth data map.
+     */
+    
+    
+    /**
+     Transforming and Processing
+     
+     - depthDataByApplyingExifOrientation:
+     Returns a derivative depth data object by mirroring or rotating
+     it to the specified orientation.
+     
+     - depthDataByConvertingToDepthDataType:
+     Returns a derivative depth data object by converting the depth
+     data map to the specified data type.
+     
+     availableDepthDataTypes
+     The list of depth data formats to which this depth data can be converted.
+     
+     - depthDataByReplacingDepthDataMapWithPixelBuffer:error:
+     Returns a derivative depth data object by replacing the depth data map.
+     */
+    
+    /**
+     Using Calibration Data
+     
+     cameraCalibrationData
+     The imaging parameters with which this depth data was captured.
+     
+     AVCameraCalibrationData
+     Information about the camera characteristics used to capture
+     images and depth data.
+     */
+    
     
     
 #pragma mark -- Movie and Video Capture
+    
+    
+    /*
+     
+     
+     */
     
     
     
