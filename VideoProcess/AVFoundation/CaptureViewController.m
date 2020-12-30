@@ -1611,35 +1611,1287 @@
     
     
     /*
+     Capturing Video in Alternative Formats
      
+     Change the format used for capturing movie files.
      
+     Video captured on iPhone 8, iPhone 8 Plus, and iPhone X, and
+     running iOS 11 or later, uses the HEVC Format by default.
+     When you use AVFoundation to capture videos, you can
+     change the default format if you know in advance that
+     you need a different format.
+     
+     If your app shares the captured video using a system share
+     sheet, the video is automatically converted to a format
+     compatible with the destination device, and no more
+     work is needed.
+     
+     However, if your app saves or shares captured video internally,
+     for applications outside the system share sheet, you must
+     use a video-capture format compatible with all target devices.
+     This article shows you how to change the capture format dynamically,
+     so that videos captured in your app begin in the desired
+     format.
+     */
+    
+    /**
+     Change the default Format Used in Capture
+     
+     Change the default format at capture time by specifying it
+     in the output settings for capturing movie files. Each capture
+     device has a dictionary of settings that you tweak to control
+     properties of the output movie file. For example, to capture
+     video in H.264/MPEG-4 AVC, set the output settings key
+     AVVideoCodecKey to AVVideoCodecTypeH264:
+     =================================================================
+     #import <AVFoundation/AVFoundation.h>
+
+     AVCaptureMovieFileOutput* movieFileOutput = // Your AVCaptureMovieFileOutput //;
+     AVCaptureConnection* connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+         
+     if ([movieFileOutput.availableVideoCodecTypes containsObject:AVVideoCodecTypeH264]) {
+         // Use the H.264 codec to encode the video.
+         [movieFileOutput setOutputSettings:@{AVVideoCodecKey: AVVideoCodecTypeH264} forConnection:connection];
+     }
+     =================================================================
+
+     For a list of supported capture codecs, see AVVideoCodecType and
+     the Related Documentation section.
+     */
+    
+    /**
+     Convert Previously Captured Movie Files
+     
+     In addition to saving or sharing captured video using a different
+     default format, you can also convert existing movie file content.
+     For more information, see Exporting Video to Alternative Formats.
+     */
+    
+    
+    /*
+     AVCaptureMovieFileOutput
+     
+     A capture output that records video and audio to a QuickTime movie file.
+     
+     This class is the movie file equivalent of AVCapturePhotoOutput.
+     Use it to export or save movie files from capture session content.
+     
+     ⚠️ This class supports exporting or saving to QuickTime movie
+        (.mov)files only. It doesn't support formats such as MPEG-4
+        (.mp4) and others.
+     
+     The timeMapping.target.start of the first track segment must
+     be kCMTimeZero, and the timeMapping.target.start of each subsequent
+     track segment must equal CMTimeRangeGetEnd, when passing in the
+     previous AVCompositionTrackSegment's timeMapping.target. You can
+     use validateTrackSegments:error: to ensure that an array of track
+     segments conforms to this rule.
+     
+     Starting in iOS 12, photo formats no longer list the
+     AVCaptureMovieFileOutput.class as being unsupported.
+     If you construct a session with a photo format as input and a
+     movie file output, you can record movies. The resolution of the
+     video track in the movie follows the conventions established by
+     the AVCaptureVideoDataOutput; namely, when using the photo preset,
+     you receive video buffers with size approximating the screen size.
+     Video outputs are a proxy for photo preview in this configuration.
+     
+     If you set the AVCaptureDevice format to a high-resolution photo
+     format, you receive full-resolution (5,8, or 12 MP depending on
+     the device) video buffers into your movie. If the capture
+     session's automaticallyConfiguresCaptureDeviceForWideColor property
+     is YES, the session selects sRGB as the video colorspace in your
+     movie. you can override this behavior by adding an
+     AVCapturePhotoOutput to your session and configuring its photo
+     format or AVCaptureSessionPresetPhoto preset for a photo output.
+     */
+    
+    
+    /**
+     Initializing Movies
+     
+     - init
+     */
+    
+    /**
+     Configuring Movies
+     
+     movieFragmentInterval
+     The number of seconds of output that are written per fragment.
+     
+     metadata
+     The metadata for the output file.
+     */
+    
+    /**
+     Managing Output Settings
+     
+     - supportedOutputSettingsKeysForConnection:
+     The list of supported keys for the output settings dictionary.
+     
+     - outputSettingsForConnection:
+     Returns the options used to reencode media from a given connection
+     as it's being recorded.
+          
+     - setOutputSettings:forConnection:
+     Sets the options dictionary used to reencode media from the given
+     connection as it's being recorded.
+     
+     availableVideoCodecTypes
+     The video codec types currently supported for recording movie files.
+     
+     Video Settings
+     Define output image and video formats by using the key and
+     value constants.
+     
+     AVVideoCodecType
+     A set of constants used to describe codecs for video capture.
+     */
+    
+    /**
+     Setting Orientation
+     
+     - recordsVideoOrientationAndMirroringChangesAsMetadataTrackForConnection:
+     A Boolean indicating whether the capture device records video orientation.
+     
+     - setRecordsVideoOrientationAndMirroringChanges:asMetadataTrackForConnection:
+     A Boolean indicating whether the capture device sets video orientation.
+     */
+    
+    
+    /*
+     AVCaptureVideoDataOutput
+     
+     A capture output that records video and provides access to video
+     frames for processing.
+     
+     You use this output to process compressed or uncompressed frames
+     from the captured video. You can access the frames with the
+     captureOutput:didOutputSampleBuffer:fromConnection: delegate method.
+     
+     ⚠️ AVCaptureVideoDataOutput supports compressed video data output
+     for macOS only.
+     */
+    
+    /**
+     Configuring Video Capture
+     
+     videoSettings
+     The compression settings for the output.
+     
+     alwaysDiscardsLateVideoFrames
+     Indicates whether to drop video frames if they arrive late.
+     
+     automaticallyConfiguresOutputBufferDimensions
+     A Boolean value that indicates whether the output automatically
+     configures the size of output buffers.
+
+     deliversPreviewSizedOutputBuffers
+     A Boolean value that indicates whether the output is configured
+     to deliver preview-sized buffers.
+     
+     - recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:
+     Returns a video settings dictionary appropriate for capturing video
+     to be recorded to a file with the specified codec and type.
+
+     - recommendedVideoSettingsForAssetWriterWithOutputFileType:
+     Specifies the recommended settings for use with an AVAssetWriterInput.
+     */
+
+    
+    /**
+     Retrieving Supported Video Types
+     
+     availableVideoCVPixelFormatTypes
+     Indicates the supported video pixel formats that can be specified
+     in videoSettings.
+     
+     availableVideoCodecTypes
+     Indicates the supported video codec formats that can be specified
+     in videoSettings.
+     
+     - availableVideoCodecTypesForAssetWriterWithOutputFileType:
+
+     AVVideoCodecType
+     A set of constants used to describe codecs for video capture.
+     */
+    
+    /**
+     Receiving Captured Video Data
+     
+     - setSampleBufferDelegate:queue:
+     Sets the sample buffer delegate and the queue on which callbacks
+     should be invoked.
+     
+     sampleBufferDelegate
+     The capture object’s delegate.
+     
+     sampleBufferCallbackQueue
+     The queue on which delegate callbacks should be invoked
+     
+     AVCaptureVideoDataOutputSampleBufferDelegate
+     Methods for receiving sample buffers from and monitoring the
+     status of a video data output.
+     */
+    
+    /**
+     Creating Video Capture Output
+     
+     - init
+     Creates a new video file output.
+     
+     + new
+     Creates a new video file output.
      */
     
     
     
 #pragma mark -- Audio Capture
     
+    /*
+     AVCaptureAudioFileOutput
+     
+     A capture output that records audio and saves the recorded
+     audio to a file.
+     
+     AVCaptureAudioFileOutput implements the complete file recording
+     interface declared by AVCaptureFileOutput for writing media
+     data to audio files. In addition, you can configure options
+     specific to the audio file formats, including writing metadata
+     collections to each file and specifying audio encoding options,
+     AVCaptureAudioFileOutput does not, however, support
+     startRecordingToOutputFileURL:recordingDelegate:
+     -- use startRecordingToOutputFileURL:outputFileType:recordingDelegate:
+     instead.
+     */
+    
+    /**
+     Discovering Supported Types
+     
+     + availableOutputFileTypes
+     Returns an array containing UTIs identifying the file types
+     AVCaptureAudioFileOutput can write.
+     */
+    
+    /**
+     Starting a Recording
+     
+     - startRecordingToOutputFileURL:outputFileType:recordingDelegate:
+     Tells the receiver to start recording to a new file of the specified
+     format, and specifies a delegate that will be notified when
+     recording is finished.
+     */
+    
+    /**
+     Configuring Output
+     
+     audioSettings
+     The settings used to decode or re-encode audio before it is output by
+     the receiver.
+     
+     metadata
+     A collection of metadata to be written to the receiver's output files.
+     */
+    
+    /**
+     Creating Output
+     
+     - init
+     Creates a new audio file output.
+     
+     + new
+     Creates a new audio file output.
+     */
+    
+    
+    /*
+     AVCaptureAudioDataOutput
+     
+     A capture output that records audio and provides access to audio
+     sample buffers as they are recorded.
+     */
+    
+    /**
+     Creating an audio Capture Output
+     
+     - init
+     + new
+     */
+    
+    /**
+     Configuring Audio Capture
+     
+     audioSettings
+     The settings used to decode or re-encode audio before it is output.
+
+     - recommendedAudioSettingsForAssetWriterWithOutputFileType:
+     Specifies the recommended settings for use with an AVAssetWriterInput.
+     */
+    
+    /**
+     Receiving Captured Audio Data
+     
+     - setSampleBufferDelegate:queue:
+     Sets the delegate that will accept captured buffers and the dispatch
+     queue on which the delegate will be called.
+     
+     sampleBufferDelegate
+     The capture object’s delegate.
+     
+     sampleBufferCallbackQueue
+     The queue on which delegate callbacks are invoked
+     
+     AVCaptureAudioDataOutputSampleBufferDelegate
+     Methods for receiving audio sample data from an audio capture.
+     */
+    
     
     
 #pragma mark -- Metadata Capture
     
+    /*
+     AVMetadataBodyObject
+     
+     An abstract class that defines the interface for a metadata body
+     object.
+     
+     A metadata body object represents a single detected body in a
+     picture. It's the base object used to represent bodies, for
+     example AVMetadataHumanBodyObject, AVMetadataDogBodyObject,
+     and AVMetadataCatBodyObject.
+     */
+    
+    /**
+     Inspecting Metadata
+    
+     bodyID
+     An integer value that defines the unique identifier of an
+     object in a picture.
+     */
+    
+    
+    /*
+     AVMetadataCatBodyObject
+     
+     An object representing a single detected cat body in a picture.
+     
+     This object is an immutable type that describles the various features
+     found in the cat body in a picture.
+     */
+    
+    
+    /*
+     AVMetadataDogBodyObject
+     
+     An object representing a single detected dog body in a picture.
+     
+     This object is an immutable type that describes the various features
+     found in the dog body in a picture.
+     */
+    
+    
+    /*
+     AVMetadataHumanBodyObject
+     
+     An object representing a single detected human body in a picture.
+     
+     This object is an immutable type that describes the various features
+     found in the human body in a picture.
+    */
+    
+    
+    /*
+     AVMetadataSalientObject
+     
+     An object representing a single salient area in a picture.
+     
+     This object is an immutable type that describes the various
+     features of the salient object in a picture.
+     */
+    
+    /**
+     Inspecting Metadata
+     
+     objectID
+     An integer value that defines the unique identifier of an
+     object in a picture.
+     */
+    
+    
+    /*
+     AVCaptureMetadataInput
+     
+     A capture input for providing timed metadata to a capture
+     session.
+     
+     This class provides input to an AVCaptureSession.
+     An instance of AVCaptureMetadataInput can present one and
+     only one AVCaptureInputPort connected to an AVCaptureMovieFileOutput.
+     Provide metadata through the input port by conforming to
+     a CMFormatDescription and supplying AVMetadataItem objects
+     in an AVTimedMetadataGroup.
+     */
+    
+    /**
+     Creating Metadata Input
+     
+     - initWithFormatDescription:clock:
+     Creates capture metadata input to provide timed groups to a capture session.
+     
+     + metadataInputWithFormatDescription:clock:
+     Returns a metadata input instance that allows clients to provide
+     timed metadata groups to a capture session.
+     */
+    
+    /**
+     Providing Metadata
+     
+     - appendTimedMetadataGroup:error:
+     Provides metadata to the capture session.
+     */
+    
+    
+    /*
+     AVCaptureMetadataOutput
+     
+     A capture output for processing timed metadata produced by a
+     capture session.
+     
+     An AVCaptureMetadataOutput object intercepts metadata objects
+     emitted by its associated capture connection and forwards
+     them to a delegate object for processing. You can use instances
+     of this class to process specific types of metadata included
+     with the input data. You use this class the way you do other
+     output objects, typically by adding it as an output to an
+     AVCaptureSession object.
+     */
+    
+    /**
+     Configuring Metadata Capture
+     
+     availableMetadataObjectTypes
+     An array of strings identifying the types of metadata
+     objects that can be captured.
+
+     metadataObjectTypes
+     An array of strings identifying the types of metadata
+     objects to process.
+     
+     rectOfInterest
+     A rectangle of interest for limiting the search area
+     for visual metadata.
+     */
+    
+    /**
+     Receiving Captured Metadata Objects
+     
+     - setMetadataObjectsDelegate:queue:
+     Sets the delegate and dispatch queue to use handle callbacks.
+     
+     metadataObjectsDelegate
+     The delegate of the capture metadata output object.
+     
+     metadataObjectsCallbackQueue
+     The dispatch queue on which to execute the delegate’s methods.
+     
+     AVCaptureMetadataOutputObjectsDelegate
+     Methods for receiving metadata produced by a metadata capture output.
+     */
+    
+    /**
+     Creating Metadata Output
+     
+     - init
+     Creates a new capture metadata output.
+     + new
+     Creates a new capture metadata output.
+     */
+    
+    
+    /*
+     AVMetadataFaceObject
+     
+     Face information detected by a metadata capture output.
+
+     The AVMetadataFaceObject class is a concrete subclass of
+     AVMetadataObject that defines the features of a single
+     detected face. You can retrieve instances of this class
+     from the output of an AVCaptureMetadataOutput object on
+     devices that support face detection.
+     */
+    
+    /**
+     Getting the Face Identifier
+     
+     faceID
+     The unique ID for this face metadata object.
+     */
+    
+    /**
+     Accessing the Face Detection Data
+     
+     hasRollAngle
+     A Boolean value indicating whether there is a valid roll angle
+     associated with the face.
+     
+     rollAngle
+     The roll angle of the face specified in degrees.
+     
+     hasYawAngle
+     A Boolean value indicating whether there is a valid yaw angle
+     associated with the face.
+     
+     yawAngle
+     The yaw angle of the face specified in degrees.
+     */
+    
+    
+    /*
+     AVMetadataMachineReadableCodeObject
+
+     Barcode information detected by a metadata capture output.
+
+     The AVMetadataMachineReadableCodeObject class is a concrete
+     subclass of AVMetadataObject defining the features of a
+     detected one-dimensional or two-dimensional barcode.
+
+     An AVMetadataMachineReadableCodeObject instance represents
+     a single detected machine readable code in an image.  It’s
+     an immutable object describing the features and payload of
+     a barcode.
+
+     On supported platforms, the AVCaptureMetadataOutput class
+     outputs arrays of detected machine readable code objects.
+     */
+    
+    /**
+     Getting Machine Readable Code Values
+     
+     corners
+     The points defining the (x, y) locations of the corners.
+     
+     descriptor
+     A barcode description for use in Core Image.
+     
+     stringValue
+     Returns the error-corrected data decoded into a
+     human-readable string.
+     */
+    
+    /*
+     AVMetadataObject
+     
+     The abstract superclass for objects provided by a metadata
+     capture output.
+
+     The AVMetadataObject class is an abstract class that defines
+     the basic properties associated with a piece of metadata.
+     These attributes reflect information either about the metadata
+     itself or the media from which the metadata originated.
+     Subclasses are responsible for providing appropriate values
+     for each of the relevant properties.
+
+     You shouldn’t subclass AVMetadataObject directly. Instead,
+     you use one of the defined subclasses provided by the
+     AVFoundation framework. Similarly, you don’t create
+     instances of this class yourself but use an
+     AVCaptureMetadataOutput object to retrieve them from
+     the captured data.
+     */
+    
+    /**
+     Getting the Type of Metadata
+     
+     type
+     The type of the metadata.
+     
+     AVMetadataObjectType
+     Values identifying the type of metadata object.
+     */
+    
+    /**
+     Getting the Media-Related Attributes
+     
+     time
+     The media time value associated with the metadata object.
+     
+     duration
+     The duration of the media associated with this metadata object.
+     
+     bounds
+     The bounding rectangle associated with the metadata.
+     */
     
     
 #pragma mark -- Synchronized Capture
     
+    /*
+     AVCaptureDataOutputSynchronizer
+     
+     An object that coordinates time-matched delivery of data
+     from multiple capture outputs.
+     
+     Use this class when you need to capture media from multiple
+     capture outputs and want to receive all data samples from
+     the same timestamp in a single delegate callback.
+
+     For example, when you use an AVCaptureDataOutputSynchronizer
+     object to coordinate the output of AVCaptureVideoDataOutput
+     and AVCaptureDepthDataOutput objects, you can easily match
+     each captured video frame to depth information captured at
+     the same moment.
+     */
+    
+    /**
+     Configuring Synchronized Capture
+     
+     - initWithDataOutputs:
+     Creates a capture output synchronizer for the specified
+     capture outputs.
+     
+     dataOutputs
+     The list of data outputs governed by this data output synchronizer.
+     */
+    
+    /**
+     Receiving Synchronized Capture Data
+     
+     - setDelegate:queue:
+     Designates a delegate object to receive synchronized data and
+     a dispatch queue for delivering that data.
+     
+     delegate
+     A delegate object that receives synchronized capture data.
+     
+     delegateCallbackQueue
+     A dispatch queue for delivering synchronized capture data.
+     
+     AVCaptureDataOutputSynchronizerDelegate
+     Methods for receiving captured data from multiple capture
+     outputs synchronized to the same timestamp.
+     */
+    
+    /*
+     AVCaptureSynchronizedDataCollection
+     
+     A set of data samples collected simultaneously from multiple
+     capture outputs.
+     */
+    
+    /**
+     Accessing Synchronized Data
+     
+     count
+     The number of synchronized data objects in the collection.
+     
+     - synchronizedDataForCaptureOutput:
+     Returns synchronized data captured by the specified capture output.
+     
+     - objectForKeyedSubscript:
+     Returns data captured by the specified capture output, using
+     subscript syntax.
+     */
+    
+    
+    /*
+     AVCaptureSynchronizedDepthData
+
+     A container for scene depth information collected using
+     synchronized capture.
+     */
+    
+    /**
+     Accessing Synchronized Data
+     
+     depthData
+     The depth data captured at this synchronization point.
+     */
+    
+    /**
+     Handling Dropped Data
+     
+     depthDataWasDropped
+     A Boolean value indicating whether depth data was discarded
+     between capture and processing.
+
+     droppedReason
+     A value indicating why the capture output failed to deliver
+     depth data, if applicable.
+     */
+    
+    
+    /*
+     AVCaptureSynchronizedMetadataObjectData
+     
+     A container for metadata objects collected using synchronized
+     capture.
+     */
+    
+    /**
+     Accessing Synchronized Data
+     
+     metadataObjects
+     The list of metadata objects captured at this synchronization
+     timestamp.
+     */
+    
+    
+    /*
+     AVCaptureSynchronizedSampleBufferData
+     
+     A container for video or audio samples collected using synchronized
+     capture.
+     */
+    
+    /**
+     Accessing Synchronized Data
+     
+     sampleBuffer
+     The depth data captured at this synchronization point.
+     */
+    
+    /**
+     Handling Dropped Data
+     
+     sampleBufferWasDropped
+     A Boolean value indicating whether sample buffers were
+     discarded between capture and processing.
+     
+     droppedReason
+     A value indicating why the capture output failed to
+     deliver sample buffers, if applicable.
+     */
+    
+    
+    /*
+     AVCaptureSynchronizedData
+     
+     The abstract superclass for media samples collected
+     using synchronized capture.
+     */
+    
+    /**
+     Correlating Synchronized Data
+     
+     timestamp
+     The time at which this synchronized data was captured.
+     */
     
     
 #pragma mark -- Media Capture Preview
     
+    /*
+     AVCaptureVideoPreviewLayer
+     
+     A Core Animation layer that displays the video as it's captured.
+     
+     AVCaptureVideoPreviewLayer is a subclass of CALayer that you
+     use to display video as it's captured by an input device.
+     
+     You use this preview layer in conjunction with a capture
+     session, as shown in the following code fragment.
+     
+     ==========================================================
+     // Create a preview layer.
+     let previewLayer = AVCaptureVideoPreviewLayer()
+
+     // Connect the preview layer with the capturing session.
+     previewLayer.session = captureSession
+
+     // Add the preview layer into the view's layer hierarchy.
+     view.layer.addSublayer(previewLayer)
+     ==========================================================
+     */
+    
+    /**
+     Creating a Preview Layer
+     
+     + layerWithSession:
+     Returns a preview layer initialized with a given capture session.
+     
+     - initWithSession:
+     Initializes a preview layer with a given capture session.
+     
+     - initWithSessionWithNoConnection:
+     Initializes a preview layer using a given capture session but
+     without making any connections.
+     
+     + layerWithSessionWithNoConnection:
+     Returns a preview layer using a given capture session but without
+     making any connections.
+     */
+    
+    /**
+     Layer Configuration
+     
+     videoGravity
+     Indicates how the layer displays the video content within its bounds.
+     
+     previewing
+     A Boolean value that indicates whether the layer is rendering
+     video frames from its source.
+     */
+    
+    /**
+     Session Configuration
+     
+     session
+     The previewed capture session.
+     
+     connection
+     The capture connection describing the AVCaptureInputPort to which
+     the preview layer is connected.
+     
+     - setSessionWithNoConnection:
+     Attaches the layer to a given session without implicitly forming a connection.
+     */
+    
+    /**
+     Converting Between Coordinate Systems
+     
+     - captureDevicePointOfInterestForPoint:
+     Converts a point from layer coordinates to the coordinate space of
+     the capture device.
+     
+     - pointForCaptureDevicePointOfInterest:
+     Converts a point from the coordinate space of the capture device
+     to the coordinate space of the layer.
+     
+     - rectForMetadataOutputRectOfInterest:
+     Converts a rectangle in the coordinate system used for metadata outputs
+     to one in the preview layer’s coordinate system.
+     
+     - metadataOutputRectOfInterestForRect:
+     Converts a rectangle in the preview layer’s coordinate system to one
+     in the coordinate system used for metadata outputs.
+     
+     - transformedMetadataObjectForMetadataObject:
+     Converts a metadata object’s visual properties to layer coordinates.
+     */
+    
+    
+    /*
+     AVCaptureAudioPreviewOutput
+     
+     A capture output that provides preview playback for audio being
+     recorded in a capture session.
+
+     Instances of AVCaptureAudioPreviewOutput are associated with a
+     Core Audio output device that can be used to play audio being
+     captured by the capture session. You can obtain the unique ID
+     of a Core Audio device using its kAudioDevicePropertyDeviceUID
+     property.
+     */
+    
+    /**
+     Configuring Preview Output
+
+     outputDeviceUniqueID
+     Indicates the unique ID of the Core Audio output device being
+     used to play preview audio.
+     
+     volume
+     Indicates the preview volume of the output.
+     */
+    
+    /**
+     Creating Preview Output
+     
+     - init
+     Creates a new audio preview output.
+     + new
+     Creates a new audio preview output.
+     */
     
     
 #pragma mark -- Session Configuration
     
+    /*
+     AVCaptureInput
+     
+     The abstract superclass for objects that provide input
+     data to a capture session.
+
+     To associate an AVCaptureInput object with a session,
+     call addInput: on the session.
+
+     AVCaptureInput objects have one or more ports (instances
+     of AVCaptureInputPort), one for each data stream they can
+     produce. For example, an AVCaptureDevice object presenting
+     one video data stream has one port.
+     */
     
+    /**
+     Accessing Ports
+     
+     AVCaptureInputPort
+     A specific stream of data provided by a capture input.
+     
+     ports
+     The capture input’s ports.
+     */
+    
+    /*
+     AVCaptureOutput
+     
+     The abstract superclass for objects that output the media
+     recorded in a capture session.
+
+     AVCaptureOutput is an abstract base class describing an
+     output destination of an AVCaptureSession object.
+
+     AVCaptureOutput provides an abstract interface for connecting
+     capture output destinations, such as files and video previews,
+     to a capture session (an instance of AVCaptureSession). A
+     capture output can have multiple connections represented by
+     AVCaptureConnection objects, one for each stream of media
+     that it receives from an AVCaptureInput. A capture output
+     does not have any connections when it is first created. When
+     you add an output to a capture session, the capture session
+     creates connects that map media data from that session’s
+     inputs to its outputs.
+
+     You can add concrete AVCaptureOutput instances to a capture
+     session using addOutput:.
+     */
+    
+    /**
+     Accessing Connections
+     
+     connections
+     The capture output object’s connections.
+     
+     - connectionWithMediaType:
+     Returns the first connection in the connections array with
+     an input port of a specified media type.
+     
+     AVCaptureOutputDataDroppedReason
+     Information about why capture data was not delivered.
+     */
+    
+    /**
+     Converting Between Coordinate Systems
+     
+     - transformedMetadataObjectForMetadataObject:connection:
+     Converts the visual properties of an AVMetadataObject to
+     the output’s coordinates.
+     
+     - metadataOutputRectOfInterestForRect:
+     Converts a rectangle in the capture output object’s coordinate
+     system to one in the coordinate system used for metadata outputs.
+     
+     - rectForMetadataOutputRectOfInterest:
+     Converts a rectangle in the coordinate system used for metadata
+     outputs to one in the capture output object’s coordinate system.
+     */
+    
+    
+    /*
+     AVCaptureConnection
+     
+     A connection between a specific pair of capture input and
+     capture output objects in a capture session.
+
+     Capture inputs have one or more input ports (instances of
+     AVCaptureInputPort). Capture outputs can accept data from
+     one or more sources (for example, an AVCaptureMovieFileOutput
+     object accepts both video and audio data).
+
+     You can add an AVCaptureConnection instance to a session using
+     the addConnection: method only if the canAddConnection: method
+     returns YES. When using the addInput: or addOutput: method,
+     the session forms connections automatically between all
+     compatible inputs and outputs. You only need to add connections
+     manually when adding an input or output with no connections.
+     You can also use connections to enable or disable the flow of
+     data from a given input or to a given output.
+     */
+    
+    /**
+     Creating a Connection
+
+     + connectionWithInputPorts:output:
+     Returns a capture connection describing a connection between the
+     specified input ports and the specified output.
+     
+     - initWithInputPorts:output:
+     Initializes a capture connection to describe a connection between
+     the specified input ports and the specified output.
+     
+     + connectionWithInputPort:videoPreviewLayer:
+     Returns a capture connection describing a connection between the
+     specified input port and the specified video preview layer.
+     
+     - initWithInputPort:videoPreviewLayer:
+     Initializes a capture connection to describe a connection between
+     the specified input port and the specified video preview layer.
+     */
+    
+    /**
+     Configuration
+     
+     enabled
+     Indicates whether the connection is enabled.
+     
+     active
+     Indicates whether the connection is active.
+     
+     inputPorts
+     The connection’s input ports.
+     
+     output
+     The connection’s output port.
+     
+     videoPreviewLayer
+     The video preview layer associated with the connection.
+     
+     audioChannels
+     An array of AVCaptureAudioChannel objects.
+     */
+    
+    /**
+     Managing Video Configuration
+     
+     videoOrientation
+     Indicates whether to rotate the video flowing through the
+     connection to a given orientation.
+     
+     supportsVideoOrientation
+     A Boolean value that indicates whether the connection
+     supports changing the orientation of the video.
+     
+     AVCaptureVideoOrientation
+     Constants indicating video orientation.
+     
+     videoFieldMode
+     An indicator of how interlaced video flowing through the connection
+     should be treated
+     
+     supportsVideoFieldMode
+     A Boolean value that indicates whether the connection supports
+     setting the videoFieldMode property.
+     
+     videoMinFrameDuration
+     The minimum time interval between which the receiver should
+     output consecutive video frames.
+     
+     supportsVideoMinFrameDuration
+     A Boolean value that indicates whether the connection supports
+     setting the videoMinFrameDuration property.
+     
+     videoMaxFrameDuration
+     The maximum time interval between which the receiver should
+     output consecutive video frames.
+     
+     supportsVideoMaxFrameDuration
+     A Boolean value that indicates whether the connection
+     supports setting the videoMaxFrameDuration property.
+     
+     videoScaleAndCropFactor
+     The current video scale and crop factor in use by the receiver.
+     
+     videoMaxScaleAndCropFactor
+     The maximum video scale and crop factor by the connection.
+     */
+    
+    /**
+     Managing the Video Mirroring Settings
+
+     automaticallyAdjustsVideoMirroring
+     A Boolean value that indicates whether the value of videoMirrored
+     can change based on configuration of the session.
+     
+     supportsVideoMirroring
+     A Boolean value that indicates whether the connection supports
+     video mirroring.
+     
+     videoMirrored
+     A Boolean value that indicates whether the video flowing through
+     the connection should be mirrored about its vertical axis.
+     */
+    
+    /**
+     Managing the Video Stabilization Settings
+     
+     supportsVideoStabilization
+     A Boolean value that indicates whether this connection supports
+     video stabilization.
+     
+     activeVideoStabilizationMode
+     The stabilization mode currently active for the connection.
+     
+     preferredVideoStabilizationMode
+     The stabilization mode most appropriate for use with the connection.
+     */
+    
+    /**
+     Managing Camera Calibration Delivery Settings
+
+     cameraIntrinsicMatrixDeliverySupported
+     A Boolean value indicating whether the capture connection currently
+     supports delivery of camera intrinsics information.
+     
+     cameraIntrinsicMatrixDeliveryEnabled
+     A Boolean value that specifies whether to configure the capture
+     pipeline for delivery of camera intrinsics information.
+     */
+    
+    
+    /*
+     AVCaptureAudioChannel
+     
+     An object that monitors average and peak power levels for
+     an audio channel in a capture connection.
+
+     You do not create AVCaptureAudioChannel instance directly.
+     Instead, an AVCaptureConnection object that connects an input
+     producing audio to an output receiving audio exposes an array
+     of AVCaptureAudioChannel objects, one for each channel of audio
+     available. You can poll for audio levels by iterating through
+     these audio channel objects.
+     */
+    
+    /**
+     Accessing Power Levels
+     
+     averagePowerLevel
+     The instantaneous average power level, in dB.
+     
+     peakHoldLevel
+     The peak hold power level, in dB.
+     
+     volume
+     The current volume (gain) of the channel.
+     */
+
+    /**
+     Managing Enabled State
+
+     enabled
+     Indicates whether the channel is currently enabled for data capture.
+     */
     
 #pragma mark -- File Output
     
     
+    /*
+     AVCaptureFileOutput
+     
+     The abstract superclass for capture outputs that can record
+     captured data to a file.
+     */
+    
+    /**
+     Setting File Output Properties
+
+     delegate
+     The delegate object for the capture file output.
+     
+     maxRecordedDuration
+     The longest duration allowed for the recording.
+     
+     maxRecordedFileSize
+     The maximum size, in bytes, of the data that should be
+     recorded by the receiver.
+     
+     minFreeDiskSpaceLimit
+     The minimum amount of free space, in bytes, required
+     for recording to continue on a given volume.
+     
+     outputFileURL
+     The URL to which output is directed.
+     
+     recordedDuration
+     Indicates the duration of the media recorded to the current
+     output file.
+     
+     recordedFileSize
+     Indicates the size, in bytes, of the data recorded to the
+     current output file.
+     
+     recording
+     Indicates whether recording is in progress.
+     
+     recordingPaused
+     Indicates whether recording to the current output file is paused.
+     */
+    
+    /**
+     Starting, Stopping, Pausing, and Resuming Playback
+
+     - startRecordingToOutputFileURL:recordingDelegate:
+     Starts recording media to the specified output URL.
+     
+     - stopRecording
+     Tells the receiver to stop recording to the current file.
+     
+     - pauseRecording
+     Pauses recording to the current output file.
+     
+     - resumeRecording
+     Resumes recording to the current output file after it was
+     previously paused using pauseRecording.
+     */
+    
+    
+    /*
+     AVCaptureFileOutputDelegate
+     
+     Methods for monitoring or controlling the output of a media file capture.
+
+     The AVCaptureFileOutputDelegate protocol defines an interface for
+     delegates of an AVCaptureFileOutput object to monitor and control
+     recordings along exact sample boundaries.
+     */
+    
+    /**
+     Sample Processing
+     
+     - captureOutputShouldProvideSampleAccurateRecordingStart:
+     Allows a client to opt in to frame accurate recording in
+     captureOutput:didOutputSampleBuffer:fromConnection:.
+     
+     Required.
+     - captureOutput:didOutputSampleBuffer:fromConnection:
+     Gives the delegate the opportunity to inspect samples as they
+     are received by the output and start and stop recording at exact times.
+     */
+    
+    
+    /*
+     AVCaptureFileOutputRecordingDelegate
+     
+     Methods for responding to events that occur while
+     recording captured media to a file.
+
+     Defines an interface for delegates of AVCaptureFileOutput to
+     respond to events that occur in the process of recording a single file.
+
+     The delegate of an AVCaptureFileOutput object must adopt the
+     AVCaptureFileOutputRecordingDelegate protocol.
+     */
+    
+    /**
+     Delegate Methods
+
+     - captureOutput:didStartRecordingToOutputFileAtURL:fromConnections:
+     Informs the delegate when the output has started writing to a file.
+     
+     - captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:error:
+     Informs the delegate when the output will stop writing new samples to a file.
+     
+     - captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
+     Informs the delegate when all pending data has been written to an output file.
+     Required.
+     
+     - captureOutput:didPauseRecordingToOutputFileAtURL:fromConnections:
+     Called whenever the output is recording to a file and successfully pauses
+     the recording at the request of a client.
+     
+     - captureOutput:didResumeRecordingToOutputFileAtURL:fromConnections:
+     Called whenever the output, at the request of the client, successfully
+     resumes a file recording that was paused.
+     */
     
     
 }
