@@ -27,6 +27,8 @@
 #import "AssetsViewController.h"
 #import "CaptureViewController.h"
 #import "AVFoundationController.h"
+#import "AVAudioEngineController.h"
+#import "AudioController.h"
 
 #import <objc/runtime.h>
 
@@ -53,7 +55,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    AVFoundationController *vc = [AVFoundationController new];
+    AudioController *vc = [AudioController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

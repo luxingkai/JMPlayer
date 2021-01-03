@@ -37,13 +37,15 @@
         likely to be a broken graph.
      */
     
+    
     /**
      Creating an Audio Engine Instance
 
      - init
      Initializes a newly allocated audio engine.
      */
-    
+    AVAudioEngine *audioEngine = [AVAudioEngine new];
+
     /**
      Attaching and Detaching Audio Nodes
 
@@ -68,6 +70,9 @@
      mainMixerNode
      The audio engine’s optional singleton main mixer node.
      */
+    AVAudioNode *audioInputNode = audioEngine.inputNode;
+    NSLog(@"inputNode %@",audioInputNode);
+    
     
     /**
      Managing Audio Nodes

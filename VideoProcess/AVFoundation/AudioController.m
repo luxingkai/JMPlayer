@@ -103,6 +103,7 @@
      + sharedInstance
      Returns the shared audio session instance.
      */
+    AVAudioSession *session = [AVAudioSession sharedInstance];
     
     /**
      Configuring the Audio Session
@@ -153,6 +154,8 @@
      AVAudioSessionRouteSharingPolicy
      Cases that indicate the possible route-sharing policies for an audio session.
      */
+    NSError *error = nil;
+    [session setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionModeMoviePlayback routeSharingPolicy:AVAudioSessionRouteSharingPolicyDefault options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
     
     
     /**
@@ -171,6 +174,7 @@
      Constants that describe the options to pass when activating
      the audio session.
      */
+    [session setActive:YES error:NULL];
     
     /**
      Requesting Permission to Record
@@ -181,6 +185,9 @@
      - requestRecordPermission:
      Requests the user’s permission to record audio.
      */
+    [session requestRecordPermission:^(BOOL granted) {
+    }];
+    
     
     /**
      Mixing with Other Audio
@@ -208,6 +215,12 @@
      AVAudioSessionPromptStyle
      Constants that indicate the prompt style to use.
      */
+    NSLog(@"otherAudioPlaying %d",session.otherAudioPlaying);
+    NSLog(@"secondaryAudioShouldBeSilencedHint %d",session.secondaryAudioShouldBeSilencedHint);
+    NSLog(@"allowHapticsAndSystemSoundsDuringRecording %d",session.allowHapticsAndSystemSoundsDuringRecording);
+    NSLog(@"promptStyle %d",session.promptStyle);
+
+    
     
     /**
      Responding to Audio Session Interruptions
@@ -307,7 +320,7 @@
      
      An important responsibility of AVAudioSession is managing audio
      route changes. A route change occurs when the system adds
-     or remotes an audio input or output. Route changes occur for
+     or removes an audio input or output. Route changes occur for
      several reasons, including a user plugging in a pair of headphones,
      connecting a bluetooth LE headset, or unplugging a USB audio
      interface. When these changes occur, the audio session reroutes
