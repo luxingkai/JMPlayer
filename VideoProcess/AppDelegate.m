@@ -29,6 +29,7 @@
 #import "AVFoundationController.h"
 #import "AVAudioEngineController.h"
 #import "AudioController.h"
+#import "EditingViewController.h"
 
 #import <objc/runtime.h>
 
@@ -37,6 +38,8 @@
 @end
 
 @implementation AppDelegate
+
+//https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/AudioQueueProgrammingGuide/AboutAudioQueues/AboutAudioQueues.html#//apple_ref/doc/uid/TP40005343-CH5-SW1
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

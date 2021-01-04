@@ -33,12 +33,12 @@
      playback, editing, and exporting of audiovisual media assets.
      Use these classes if you want to:
      •  Retrieve media assets for playback, or gather information
-     about an asset.
+        about an asset.
      •  Play audio and video media assets.
      •  Combine, edit, and remix audio and video assets from multiple
-     sources.
+        sources.
      •  Obtain the media data of an asset, or write media data to
-     a new file of a specified type.
+        a new file of a specified type.
      •  Transcode the contents of an asset to create a new representation.
      
      Assets are the building blocks for media players, and they provide
@@ -1559,6 +1559,7 @@
      AVQueuedSampleBufferRendering can only be attached to a single synchronizer.
      
      */
+
     
     /**
      Requesting Media
@@ -1594,6 +1595,7 @@
      and other text-related content of the item. The system applies
      these rules to all or part of the text of the media item.
      */
+
     
     /**
      Creating and Initailizing Style Rules

@@ -8,20 +8,42 @@
 
 #import "AudioController.h"
 
-@interface AudioController ()
+@interface AudioController ()<AVAudioRecorderDelegate>
 
 @end
 
-@implementation AudioController
+@implementation AudioController {
+    
+    AVAudioSession *_audioSession;
+    AVAudioRecorder *_audioRecorder;
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionRouteChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionInterruptionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionMediaServicesWereLostNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionMediaServicesWereResetNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionSilenceSecondaryAudioHintNotification object:nil];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = UIColor.whiteColor;
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"开始录音" style:UIBarButtonItemStyleDone target:self action:@selector(start)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"结束录音" style:UIBarButtonItemStyleDone target:self action:@selector(end)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
     /*
      Play, record, and process audio; configure your app's
      system audio behavior.
      */
+    
     
     
 #pragma mark -- System Audio
@@ -31,7 +53,7 @@
      
      An object that communicates to the system how you
      intend to use audio in your app.
-
+     
      An audio session acts as an intermediary between your app
      and the operating system -- and, in turn, the underlying audio
      hardware. You use an audio session to communicate to the
@@ -44,9 +66,9 @@
      All iOS, tvOS, and watchOS apps have a default audio session
      that comes preconfigured with the following behavior:
      •  All iOS, tvOS, and watchOS apps have a default audio session
-        that comes preconfigured with the following behavior:
+     that comes preconfigured with the following behavior:
      •  In iOS, setting the Ring/Silent switch to silent mode
-        silences any audio the app is playing.
+     silences any audio the app is playing.
      •  In iOS, locking a device silences the app’s audio.
      •  When the app plays audio, it silences any other background audio.
      
@@ -62,7 +84,7 @@
      switch set to silent mode(iOS only). Using this category,
      you can also play background audio if you're using the audio,
      AirPlay, and Picture in Picture background mode.
-
+     
      You use an AVAudioSession object to configure your app’s audio
      session. This class is a singleton object used to set the audio
      session’s category, mode, and other configurations. You can
@@ -71,25 +93,25 @@
      at app launch, as shown in the following example.
      ====================================================================
      func application(_ application: UIApplication,
-                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-         
-         // Get the singleton instance.
-         let audioSession = AVAudioSession.sharedInstance()
-         do {
-             // Set the audio session category, mode, and options.
-             try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
-         } catch {
-             print("Failed to set audio session category.")
-         }
-         
-         // Other post-launch configuration.
-         return true
+     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+     
+     // Get the singleton instance.
+     let audioSession = AVAudioSession.sharedInstance()
+     do {
+     // Set the audio session category, mode, and options.
+     try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+     } catch {
+     print("Failed to set audio session category.")
+     }
+     
+     // Other post-launch configuration.
+     return true
      }
      ====================================================================
-
+     
      The audio session uses this configuration when you activate the
      session using the setActive:error: or setActive:withOptions:error: method.
-
+     
      ⚠️ You can activate the audio session at any time after setting
      its category, but it’s generally preferable to defer this call
      until your app begins audio playback. Deferring the call ensures
@@ -103,11 +125,11 @@
      + sharedInstance
      Returns the shared audio session instance.
      */
-    AVAudioSession *session = [AVAudioSession sharedInstance];
+    _audioSession = [AVAudioSession sharedInstance];
     
     /**
      Configuring the Audio Session
-
+     
      category
      The current audio session category.
      
@@ -155,12 +177,12 @@
      Cases that indicate the possible route-sharing policies for an audio session.
      */
     NSError *error = nil;
-    [session setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionModeMoviePlayback routeSharingPolicy:AVAudioSessionRouteSharingPolicyDefault options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+    [_audioSession setCategory:AVAudioSessionCategoryRecord error:&error];
     
     
     /**
      Activating the Audio Session
-
+     
      - setActive:error:
      Activates or deactivates your app’s audio session.
      
@@ -174,24 +196,24 @@
      Constants that describe the options to pass when activating
      the audio session.
      */
-    [session setActive:YES error:NULL];
+    [_audioSession setActive:YES error:NULL];
+    
     
     /**
      Requesting Permission to Record
-
+     
      recordPermission
      The current recording permission status.
      
      - requestRecordPermission:
      Requests the user’s permission to record audio.
      */
-    [session requestRecordPermission:^(BOOL granted) {
-    }];
+
     
     
     /**
      Mixing with Other Audio
-
+     
      otherAudioPlaying
      A Boolean value that indicates whether another app is playing audio.
      
@@ -215,19 +237,19 @@
      AVAudioSessionPromptStyle
      Constants that indicate the prompt style to use.
      */
-    NSLog(@"otherAudioPlaying %d",session.otherAudioPlaying);
-    NSLog(@"secondaryAudioShouldBeSilencedHint %d",session.secondaryAudioShouldBeSilencedHint);
-    NSLog(@"allowHapticsAndSystemSoundsDuringRecording %d",session.allowHapticsAndSystemSoundsDuringRecording);
-    NSLog(@"promptStyle %d",session.promptStyle);
-
+    NSLog(@"otherAudioPlaying %d",_audioSession.otherAudioPlaying);
+    NSLog(@"secondaryAudioShouldBeSilencedHint %d",_audioSession.secondaryAudioShouldBeSilencedHint);
+    NSLog(@"allowHapticsAndSystemSoundsDuringRecording %d",_audioSession.allowHapticsAndSystemSoundsDuringRecording);
+    NSLog(@"promptStyle %lu",(unsigned long)_audioSession.promptStyle);
+    
     
     
     /**
      Responding to Audio Session Interruptions
-
+     
      Observe audio session notifications to ensure that your
      app responds appropriately to interruptions.
-
+     
      Interruptions are a common part of the iOS and watchOS user
      experiences. For example, consider the case of receiving a
      phone call while you’re watching a movie in the TV app on
@@ -235,7 +257,7 @@
      playback pauses, and the sound of the call’s ringtone fades
      in. If you decline the call, control returns to the TV app,
      and playback begins again as the movie’s audio fades in.
-
+     
      At the center of this behavior is your app’s audio session.
      As interruptions begin and end, the audio session notifies
      any registered observers so they can take appropriate action.
@@ -245,7 +267,7 @@
      key-value observing the player’s rate property and updating
      your user interface as needed when the player pauses and
      resumes playback.
-
+     
      ===Observe Interruptions
      You can directly observe interruption notifications posted
      by AVAudioSession. This might be useful if you’d like to
@@ -255,19 +277,19 @@
      of type AVAudioSessionInterruptionNotification.
      ===========================================================
      func setupNotifications() {
-         // Get the default notification center instance.
-         let nc = NotificationCenter.default
-         nc.addObserver(self,
-                        selector: #selector(handleInterruption),
-                        name: AVAudioSession.interruptionNotification,
-                        object: nil)
+     // Get the default notification center instance.
+     let nc = NotificationCenter.default
+     nc.addObserver(self,
+     selector: #selector(handleInterruption),
+     name: AVAudioSession.interruptionNotification,
+     object: nil)
      }
-
+     
      @objc func handleInterruption(notification: Notification) {
-         // To be implemented.
+     // To be implemented.
      }
      ===========================================================
-
+     
      ===Respond to Interruptions
      The posted Notification object contains a populated
      user-information dictionary providing the details of
@@ -277,39 +299,40 @@
      whether the interruption has begun or ended.
      ===========================================================
      @objc func handleInterruption(notification: Notification) {
-         guard let userInfo = notification.userInfo,
-             let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-             let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
-                 return
-         }
-
-         // Switch over the interruption type.
-         switch type {
-
-         case .began:
-             // An interruption began. Update the UI as needed.
-
-         case .ended:
-            // An interruption ended. Resume playback, if appropriate.
-
-             guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
-             let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-             if options.contains(.shouldResume) {
-                 // Interruption ended. Playback should resume.
-             } else {
-                 // Interruption ended. Playback should not resume.
-             }
-
-         default: ()
-         }
+     guard let userInfo = notification.userInfo,
+     let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+     let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+     return
+     }
+     
+     // Switch over the interruption type.
+     switch type {
+     
+     case .began:
+     // An interruption began. Update the UI as needed.
+     
+     case .ended:
+     // An interruption ended. Resume playback, if appropriate.
+     
+     guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+     let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+     if options.contains(.shouldResume) {
+     // Interruption ended. Playback should resume.
+     } else {
+     // Interruption ended. Playback should not resume.
+     }
+     
+     default: ()
+     }
      }
      ===========================================================
-
+     
      If the interruption type is AVAudioSessionInterruptionTypeEnded,
      the userInfo dictionary contains an AVAudioSessionInterruptionOptions
      value, which you use to determine if playback should automatically
      resume.
      */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
     
     
     /**
@@ -346,32 +369,32 @@
      player behavior, key-value observe the player’s rate property
      so that you can update your user interface as the player pauses
      playback.
-
+     
      ===Observe Route Changes
      You can directly observe route change notifications posted by
      the audio session. This might be useful if you want the system
      to notify you when a user connects headphones so you can
      present an icon or message in the player interface.
-
+     
      To observe audio route changes, begin by registering to observe
      notifications of type AVAudioSessionRouteChangeNotification.
      ============================================================
      func setupNotifications() {
-         // Get the default notification center instance.
-         let nc = NotificationCenter.default
-         nc.addObserver(self,
-                        selector: #selector(handleRouteChange),
-                        name: AVAudioSession.routeChangeNotification,
-                        object: nil)
+     // Get the default notification center instance.
+     let nc = NotificationCenter.default
+     nc.addObserver(self,
+     selector: #selector(handleRouteChange),
+     name: AVAudioSession.routeChangeNotification,
+     object: nil)
      }
-
+     
      @objc func handleRouteChange(notification: Notification) {
-         // To be implemented.
+     // To be implemented.
      }
      ============================================================
-
+     
      ===Respond to Route Changes
-
+     
      The posted Notification object contains a populated user-information
      dictionary providing the details of the route change. Determine
      the reason for this change by retrieving the
@@ -380,7 +403,7 @@
      AVAudioSessionRouteChangeReasonNewDeviceAvailable, and when a
      user removes a device, the reason is
      AVAudioSessionRouteChangeReasonOldDeviceUnavailable.
-
+     
      When a new device becomes available, you ask the audio session
      for its currentRoute to determine where the audio output is
      currently routed. This query returns an
@@ -394,39 +417,42 @@
      
      ============================================================
      @objc func handleRouteChange(notification: Notification) {
-         guard let userInfo = notification.userInfo,
-             let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-             let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
-                 return
-         }
-         
-         // Switch over the route change reason.
-         switch reason {
-
-         case .newDeviceAvailable: // New device found.
-             let session = AVAudioSession.sharedInstance()
-             headphonesConnected = hasHeadphones(in: session.currentRoute)
-         
-         case .oldDeviceUnavailable: // Old device removed.
-             if let previousRoute =
-                 userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription {
-                 headphonesConnected = hasHeadphones(in: previousRoute)
-             }
-         
-         default: ()
-         }
+     guard let userInfo = notification.userInfo,
+     let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+     let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+     return
      }
-
+     
+     // Switch over the route change reason.
+     switch reason {
+     
+     case .newDeviceAvailable: // New device found.
+     let session = AVAudioSession.sharedInstance()
+     headphonesConnected = hasHeadphones(in: session.currentRoute)
+     
+     case .oldDeviceUnavailable: // Old device removed.
+     if let previousRoute =
+     userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription {
+     headphonesConnected = hasHeadphones(in: previousRoute)
+     }
+     
+     default: ()
+     }
+     }
+     
      func hasHeadphones(in routeDescription: AVAudioSessionRouteDescription) -> Bool {
-         // Filter the outputs to only those with a port type of headphones.
-         return !routeDescription.outputs.filter({$0.portType == .headphones}).isEmpty
+     // Filter the outputs to only those with a port type of headphones.
+     return !routeDescription.outputs.filter({$0.portType == .headphones}).isEmpty
      }
      ============================================================
      */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRouteChange:) name:AVAudioSessionRouteChangeNotification object:nil];
+    
+    
     
     /**
      Responding to Audio Session Notifications
-
+     
      A notification that’s posted when an audio interruption occurs.
      
      The notification’s user-information dictionary contains the
@@ -435,12 +461,12 @@
      interrupted your app’s audio session and it’s no longer
      active. If the interruption type is AVAudioSessionInterruptionTypeEnded,
      this dictionary also contains the AVAudioSessionInterruptionOptionKey key.
-
+     
      See Responding to Audio Session Interruptions for more information
      on using this notification.
-
+     
      The system posts this notification on the main thread.
-
+     
      ⚠️ Starting in iOS 10, the system deactivates an app’s audio
      session when it suspends the app process. When the app starts
      running again, it receives an interruption notification that
@@ -450,7 +476,7 @@
      your app’s audio session for this reason, the user-information
      dictionary contains the AVAudioSessionInterruptionWasSuspendedKey
      key with a value of YES.
-
+     
      If you configured your audio session to be nonmixable (the default
      behavior for the AVAudioSessionCategoryPlayback,
      AVAudioSessionCategoryPlayAndRecord, AVAudioSessionCategorySoloAmbient,
@@ -461,6 +487,7 @@
      confusing notification).
      */
     
+    
     /**
      AVAudioSessionRouteChangeNotification
      
@@ -469,24 +496,26 @@
      The userInfo dictionary of this notification contains the
      AVAudioSessionRouteChangeReasonKey and AVAudioSessionRouteChangePreviousRouteKey
      keys, which provide information about the route change.
-
-     See Responding to Audio Session Route Changes for more information on using this notification.
-
+     
+     See Responding to Audio Session Route Changes for more information
+     on using this notification.
+     
      The system posts this notification on a secondary thread.
      */
+    
     
     /**
      AVAudioSessionSilenceSecondaryAudioHintNotification
      
      A notification that’s posted when the primary audio from
      other applications starts and stops.
-
+     
      Subscribe to this notification to ensure that the system notifies
      your app when optional secondary audio muting should begin or
      end. The system sends this notification only to registered
      listeners who are currently in the foreground and have an
      active audio session.
-
+     
      This notification’s userInfo dictionary contains a
      AVAudioSessionSilenceSecondaryAudioHintType value for the
      AVAudioSessionSilenceSecondaryAudioHintTypeKey. Use the audio
@@ -494,27 +523,29 @@
      or end.
      =======================================================
      func handleSecondaryAudio(notification: Notification) {
-         // Determine hint type
-         guard let userInfo = notification.userInfo,
-             let typeValue = userInfo[AVAudioSessionSilenceSecondaryAudioHintTypeKey] as? UInt,
-             let type = AVAudioSession.SilenceSecondaryAudioHintType(rawValue: typeValue) else {
-                 return
-         }
-         
-         if type == .begin {
-             // Other app audio started playing - mute secondary audio.
-         } else {
-             // Other app audio stopped playing - restart secondary audio.
-         }
+     // Determine hint type
+     guard let userInfo = notification.userInfo,
+     let typeValue = userInfo[AVAudioSessionSilenceSecondaryAudioHintTypeKey] as? UInt,
+     let type = AVAudioSession.SilenceSecondaryAudioHintType(rawValue: typeValue) else {
+     return
+     }
+     
+     if type == .begin {
+     // Other app audio started playing - mute secondary audio.
+     } else {
+     // Other app audio stopped playing - restart secondary audio.
+     }
      }
      =======================================================
      
      The system posts this notification on the main thread.
      */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSecondaryAudio:) name:AVAudioSessionSilenceSecondaryAudioHintNotification object:nil];
+    
     
     /**
      AVAudioSessionMediaServicesWereLostNotification
-
+     
      A notification that’s posted when the system terminates the media server.
      
      The system posts this notification when the media server
@@ -524,17 +555,20 @@
      However, you can use this notification as a cue to take any
      appropriate steps to handle requests that come in before the
      server restarts.
-
+     
      This notification has no userInfo dictionary.
-
+     
      The system posts this notification on the main thread.
      */
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMediaServicesWereLost:) name:AVAudioSessionMediaServicesWereLostNotification object:nil];
+    
+    
     /**
      AVAudioSessionMediaServicesWereResetNotification
-
+     
      A notification that’s posted when the media server restarts.
-
+     
      Under rare circumstances, the system terminates and restarts
      its media services daemon. Respond to these events by
      reinitializing your app’s audio objects (such as players,
@@ -548,19 +582,21 @@
      menu in the iOS Settings app. Using this utility helps to
      ensure that your app responds appropriately if media
      services were reset.
-
+     
      This notification has no userInfo dictionary.
-
+     
      The system posts this notification on the main thread.
-
+     
      ⚠️ Apps don’t need to reregister for any audio session
      notifications and don’t need to reset key-value observers
      on audio session properties after a media services reset.
      */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaServiceWereReset:) name:AVAudioSessionMediaServicesWereResetNotification object:nil];
+    
     
     /**
      Working with Audio Routes
-
+     
      currentRoute
      A description of the current audio route’s input and output ports.
      
@@ -611,10 +647,19 @@
      - overrideOutputAudioPort:error:
      Temporarily changes the current audio route.
      */
+    NSLog(@"currentRoute %@",session.currentRoute);
+    NSLog(@"inputAvailable %d",session.inputAvailable);
+    NSLog(@"availableInputs %@",session.availableInputs);
+    NSLog(@"preferredInput %@",session.preferredInput);
+    NSLog(@"inputDataSource %@",session.inputDataSource);
+    NSLog(@"inputDataSources %@",session.inputDataSources);
+    NSLog(@"outputDataSources %@",session.outputDataSources);
+    NSLog(@"outputDataSource %@",session.outputDataSource);
+    
     
     /**
      Preparing the Playback Route
-
+     
      - prepareRouteSelectionForPlaybackWithCompletionHandler:
      Prepares the route selection for long-form video playback.
      
@@ -622,9 +667,10 @@
      Constants used to define the active route selection.
      */
     
+    
     /**
      Enabling Stereo Recording
-
+     
      inputOrientation
      An orientation value that dictates which directions represent left
      and right when capturing audio from a built-in microphone configured
@@ -640,9 +686,10 @@
      Constants that define the supported stereo orientations.
      */
     
+    
     /**
      Working with Audio Channels
-
+     
      inputNumberOfChannels
      The number of audio input channels for the current route.
      
@@ -667,10 +714,17 @@
      - setPreferredOutputNumberOfChannels:error:
      Sets the preferred number of output channels for the current route.
      */
+    NSLog(@"inputNumberOfChannels %ld",(long)session.inputNumberOfChannels);
+    NSLog(@"maximumInputNumberOfChannels %ld",(long)session.maximumInputNumberOfChannels);
+    NSLog(@"preferredInputNumberOfChannels %ld",(long)session.preferredInputNumberOfChannels);
+    NSLog(@"outputNumberOfChannels %ld",(long)session.outputNumberOfChannels);
+    NSLog(@"maximumOutputNumberOfChannels %ld",(long)session.maximumOutputNumberOfChannels);
+    NSLog(@"preferredOutputNumberOfChannels %ld",(long)session.preferredOutputNumberOfChannels);
+    
     
     /**
      Working with Audio Device Settings
-
+     
      inputGain
      The gain applied to inputs associated with the session.
      
@@ -707,16 +761,27 @@
      - setPreferredIOBufferDuration:error:
      Sets the preferred audio I/O buffer duration.
      */
+    NSLog(@"inputGain %f",session.inputGain);
+    NSLog(@"inputGainSettable %d",session.inputGainSettable);
+    NSLog(@"outputVolume %f",session.outputVolume);
+    NSLog(@"sampleRate %f",session.sampleRate);
+    NSLog(@"preferredSampleRate %f",session.preferredSampleRate);
+    NSLog(@"inputLatency %f",session.inputLatency);
+    NSLog(@"outputLatency %f",session.outputLatency);
+    NSLog(@"IOBufferDuration %f",session.IOBufferDuration);
+    NSLog(@"preferredIOBufferDuration %f",session.preferredIOBufferDuration);
+    
     
     /**
      Setting the Aggregated I/O Preference
-
+     
      - setAggregatedIOPreference:error:
      Sets the audio session’s aggregated I/O configuration preference.
      
      AVAudioSessionIOType
      Constant values used to specify the audio session’s aggregated I/O behavior.
      */
+    
     
     /**
      Errors
@@ -727,50 +792,52 @@
      */
     
     
+    
+    
 #pragma mark -- Basic Playback and Recording
-
+    
     /*
      AVAudioPlayer
      
      An audio player that provides playback of audio data
      from a file or memory.
-
+     
      Use this class for audio playback unless you’re playing audio
      captured from a network stream or require very low I/O latency.
-
+     
      Using an audio player you can:
      •  Play sounds of any duration
      •  Play sounds from files or memory buffers
      •  Loop sounds
      •  Play multiple sounds simultaneously, one sound per audio
-        player, with precise synchronization
+     player, with precise synchronization
      •  Control relative playback level, stereo positioning,
-        and playback rate for each sound you’re playing
+     and playback rate for each sound you’re playing
      •  Seek to a particular point in a sound file, which supports
-        such application features as fast forward and rewind
+     such application features as fast forward and rewind
      •  Obtain data you can use for playback-level metering
-
+     
      This class lets you play sound in any audio format available in
      iOS and macOS. You implement a delegate to handle interruptions
      (such as an incoming phone call on iOS) and to update the user
      interface when a sound has finished playing. The delegate
      methods are described in AVAudioPlayerDelegate.
-
+     
      To play, pause, or stop an audio player, call one of its
      playback control methods, described in Controlling Playback.
-
+     
      This class uses the Objective-C declared properties feature
      for managing information about a sound, such as the playback
      point within the sound’s timeline, and for accessing playback
      options, such as volume and looping.
-
+     
      To configure an appropriate audio session for playback on
      iOS, see AVAudioSession and AVAudioSessionDelegate.
      */
     
     /**
      Creating an Audio Player
-
+     
      - initWithContentsOfURL:error:
      Creates an audio player for playing a designated sound file.
      
@@ -786,7 +853,7 @@
     
     /**
      Controlling Playback
-
+     
      currentTime
      The playback point, in seconds, within the timeline of the sound
      associated with the audio player.
@@ -818,9 +885,10 @@
      the end, to repeat playback.
      */
     
+    
     /**
      Configuring Audio Settings
-
+     
      - setVolume:fadeDuration:
      Fades to a new volume over a specific duration.
      
@@ -839,9 +907,10 @@
      is enabled for an audio player.
      */
     
+    
     /**
      Using Audio Level Metering
-
+     
      meteringEnabled
      A Boolean value that specifies the audio-level metering on/off state
      for the audio player.
@@ -859,9 +928,10 @@
      sound being played.
      */
     
+    
     /**
      Responding to Player Events
-
+     
      delegate
      The delegate object for the audio player.
      
@@ -869,6 +939,7 @@
      A protocol that allows a delegate to respond to audio interruptions
      and audio decoding errors, and to the completion of a sound’s playback.
      */
+    
     
     /**
      Managing Audio Channels
@@ -881,9 +952,10 @@
      the audio player
      */
     
+    
     /**
      Accessing Device Information
-
+     
      currentDevice
      The UID of the current audio player.
      
@@ -891,9 +963,10 @@
      The time value, in seconds, of the audio output device.
      */
     
+    
     /**
      Inspecting the Audio Data
-
+     
      settings
      The audio player’s settings dictionary, containing information about
      the sound associated with the player.
@@ -923,32 +996,32 @@
      •  Record for a specified duration
      •  Pause and resume a recording
      •  Obtain input audio-level data that you can use to provide
-        level metering
+      level metering
      
      In iOS, the audio being recorded comes from the device connected
      by the user—built-in microphone or headset microphone, for example.
      In macOS, the audio comes from the system’s default audio input
      device as set by a user in System Preferences.
-
+     
      You can implement a delegate object for an audio recorder to
      respond to audio interruptions and audio decoding errors, and
      to the completion of a recording.
-
+     
      To configure a recording, including options such as bit depth,
      bit rate, and sample rate conversion quality, configure the
      audio recorder’s settings dictionary. Use the settings keys
      described in Settings.
-
+     
      To configure an appropriate audio session for recording,
      refer to AVAudioSession and AVAudioSessionDelegate.
-
+     
      The AVAudioRecorder class is intended to allow you to make
      audio recordings with very little programming overhead.
      Other classes that can be used for recording audio in iOS
      and macOS include AVCaptureAudioDataOutput and the Audio
      Queue services described in the Audio Queue Services
      Programming Guide.
-
+     
      In macOS, you can also use the AVCaptureAudioFileOutput
      class to record audio.
      */
@@ -962,10 +1035,16 @@
      - initWithURL:format:error:
      Initializes and returns an audio recorder.
      */
+    NSString *writePath = [NSTemporaryDirectory() stringByAppendingString:@"audioRecord"];
+    NSLog(@"%@",writePath);
+    NSURL *url = [NSURL URLWithString:writePath];
+    _audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:@{AVLinearPCMBitDepthKey:@(16)} error:&error];
+    NSLog(@"audioRecordError === %@",error);
+    
     
     /**
      Controlling Recording
-
+     
      currentTime
      The time, in seconds, since the beginning of the recording.
      
@@ -996,10 +1075,12 @@
      recording
      A Boolean value that indicates whether the audio recorder is recording.
      */
+    BOOL prepareResult = [_audioRecorder prepareToRecord];
+    NSLog(@"prepareToRecord %d",prepareResult);
     
     /**
      Using Audio Level Metering
-
+     
      meteringEnabled
      A Boolean value that indicates whether audio-level metering is enabled.
      
@@ -1015,20 +1096,25 @@
      Returns the average power for a given channel, in decibels, for
      the sound being recorded.
      */
+//    NSLog(@"meteringEnabled %d",_audioRecorder.meteringEnabled);
+    [_audioRecorder updateMeters];
+    
     
     /**
      Responding to Recorder Events
-
+     
      delegate
      The delegate object for the audio recorder.
      
      AVAudioRecorderDelegate
      The delegate of an audio recorder object.
      */
+    _audioRecorder.delegate = self;
+    
     
     /**
      Accessing Device Information
-
+     
      deviceCurrentTime
      The time, in seconds, of the host device where the audio recorder
      is located.
@@ -1037,6 +1123,9 @@
      An array of AVAudioSessionChannelDescription objects associated
      with the recorder.
      */
+    NSLog(@"deviceCurrentTime %f",_audioRecorder.deviceCurrentTime);
+    NSLog(@"channelAssignments %@",_audioRecorder.channelAssignments);
+    
     
     /**
      Inspecting the Audio Data
@@ -1051,12 +1140,15 @@
      The audio settings for the audio recorder.
      */
     
+    
+    
     /**
      Settings
      
+     ==General Audio Format Settings==
      AVFormatIDKey
      A format identifier.
-     
+    
      AVSampleRateKey
      A sample rate, in hertz, expressed as an NSNumber floating point value.
      
@@ -1064,6 +1156,7 @@
      The number of channels expressed as an NSNumber integer value.
      
      
+     ==Encoder Settings==
      AVEncoderAudioQualityKey
      A constant from AVAudioQuality.
      
@@ -1080,6 +1173,7 @@
      An integer ranging from 8 through 32.
      
      
+     ==AVEncoderBitRateStrategyKey Values ==
      AVAudioBitRateStrategy_Constant
      A constant rate strategy.
      
@@ -1092,10 +1186,8 @@
      AVAudioBitRateStrategy_Variable
      A variable rate strategy.
      
-     
-     <These constants are the supported values for the
-     AVEncoderBitRateStrategyKey encoder setting.>
 
+     ==AVSampleRateConverterAlgorithmKey Values==
      AVSampleRateConverterAlgorithm_Normal
      The normal encoder bit rate strategy.
      
@@ -1105,6 +1197,7 @@
      AVSampleRateConverterAlgorithm_MinimumPhase
      The minimum phase encoder bit rate strategy.
      */
+    
     
     
     /*
@@ -1125,9 +1218,10 @@
      the data object.
      */
     
+    
     /**
      Controlling Playback
-
+     
      - prepareToPlay
      Prepares to play the sequence by prerolling all events.
      
@@ -1155,26 +1249,169 @@
      */
     
     
+    
 #pragma mark -- Advanced Audio Processing
-
+    
     /*
      Perform advanced realtime and offline audio processing.
      */
     
     
     
+}
+
+- (void)handleInterruption:(NSNotification *)notif {
+    
+    NSDictionary *userInfo = notif.userInfo;
+    int value = [userInfo[@"AVAudioSessionInterruptionTypeKey"] intValue];
+    switch (value) {
+        case 0:
+        {
+            //the interruption has ended
+            
+        }
+            break;
+            
+        case 1:
+        {
+            //the system has interrupted your audio session
+        }
+            break;
+    }
+}
+
+- (void)handleRouteChange:(NSNotification *)notif {
+    
+    NSDictionary *userInfo = notif.userInfo;
+    int value = [userInfo[@"AVAudioSessionRouteChangeReasonKey"] intValue];
+    //    AVAudioSessionRouteChangeReasonUnknown = 0,
+    //    AVAudioSessionRouteChangeReasonNewDeviceAvailable = 1,
+    //    AVAudioSessionRouteChangeReasonOldDeviceUnavailable = 2,
+    //    AVAudioSessionRouteChangeReasonCategoryChange = 3,
+    //    AVAudioSessionRouteChangeReasonOverride = 4,
+    //    AVAudioSessionRouteChangeReasonWakeFromSleep = 6,
+    //    AVAudioSessionRouteChangeReasonNoSuitableRouteForCategory = 7,
+    //    AVAudioSessionRouteChangeReasonRouteConfigurationChange = 8
+    switch (value) {
+        case 0:
+        {
+            //            AVAudioSessionRouteChangeReasonUnknown
+        }
+            break;
+            
+        case 1:
+        {
+            //            AVAudioSessionRouteChangeReasonNewDeviceAvailable
+        }
+            break;
+            
+        case 2:
+        {
+            //            AVAudioSessionRouteChangeReasonOldDeviceUnavailable
+        }
+            break;
+        case 3:
+        {
+            //            AVAudioSessionRouteChangeReasonCategoryChange
+        }
+            break;
+        case 4:
+        {
+            //            AVAudioSessionRouteChangeReasonOverride
+        }
+            break;
+        case 6:
+        {
+            //            AVAudioSessionRouteChangeReasonWakeFromSleep
+        }
+            break;
+        case 7:
+        {
+            //            AVAudioSessionRouteChangeReasonNoSuitableRouteForCategory
+        }
+            break;
+        case 8:
+        {
+            //            AVAudioSessionRouteChangeReasonRouteConfigurationChange
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)handleSecondaryAudio:(NSNotification *)notif {
+    
+    NSDictionary *userInfo = notif.userInfo;
+    int value = [userInfo[@"AVAudioSessionSilenceSecondaryAudioHintTypeKey"] intValue];
+    switch (value) {
+        case 0:
+        {
+            //            AVAudioSessionSilenceSecondaryAudioHintTypeBegin
+            
+        }
+            break;
+        case 1:
+        {
+            //            AVAudioSessionSilenceSecondaryAudioHintTypeEnd
+            
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)handleMediaServicesWereLost:(NSNotification *)notif {
     
     
 }
+
+- (void)mediaServiceWereReset:(NSNotification *)notif {
+    
+    
+}
+
+
+#pragma mark --
+
+/* audioRecorderDidFinishRecording:successfully: is called when a recording has been finished or stopped. This method is NOT called if the recorder is stopped due to an interruption. */
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+    NSLog(@"url %@",recorder.url);
+    NSLog(@"format %@",recorder.format);
+    NSLog(@"settings %@",recorder.settings);
+    
+}
+
+/* if an error occurs while encoding it will be reported to the delegate. */
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError * __nullable)error {
+    
+}
+
+
+
+
+- (void)start {
+    if (_audioRecorder.recording) {return;}
+    BOOL recordResult = [_audioRecorder record];
+    NSLog(@"开始录音%@",recordResult ? @"成功" : @"失败");
+}
+
+- (void)end {
+    [_audioRecorder stop];
+}
+
+
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

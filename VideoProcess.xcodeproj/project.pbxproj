@@ -72,6 +72,8 @@
 		11C21DF1246E807E00F6E7BD /* offline-133581.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DEB246E807E00F6E7BD /* offline-133581.jpg */; };
 		11C21DF4246E820C00F6E7BD /* MusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C21DF3246E820C00F6E7BD /* MusicListViewController.m */; };
 		11EAE0FB25319BCF00806F15 /* VTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EAE0FA25319BCF00806F15 /* VTViewController.m */; };
+		11F6978A25A32F34004BC306 /* Introduction.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F6978925A32F34004BC306 /* Introduction.m */; };
+		11F6978D25A33AAC004BC306 /* AudioQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F6978C25A33AAC004BC306 /* AudioQueues.m */; };
 		49EC485E5D13C07E980030F5 /* Pods_VideoProcess_VideoProcessUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC81B83E5440AC3DA66DB09 /* Pods_VideoProcess_VideoProcessUITests.framework */; };
 		8CD808BAB1E150C23E328242 /* Pods_VideoProcessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7D2DBF7109FC82EA8F8468 /* Pods_VideoProcessTests.framework */; };
 		FB4EA8F154BBA7D02BA39686 /* Pods_VideoProcess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D967F07E9C8056F71E0FB2B6 /* Pods_VideoProcess.framework */; };
@@ -204,6 +206,10 @@
 		11C21DF3246E820C00F6E7BD /* MusicListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicListViewController.m; sourceTree = "<group>"; };
 		11EAE0F925319BCF00806F15 /* VTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTViewController.h; sourceTree = "<group>"; };
 		11EAE0FA25319BCF00806F15 /* VTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTViewController.m; sourceTree = "<group>"; };
+		11F6978825A32F34004BC306 /* Introduction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Introduction.h; sourceTree = "<group>"; };
+		11F6978925A32F34004BC306 /* Introduction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Introduction.m; sourceTree = "<group>"; };
+		11F6978B25A33AAC004BC306 /* AudioQueues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueues.h; sourceTree = "<group>"; };
+		11F6978C25A33AAC004BC306 /* AudioQueues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueues.m; sourceTree = "<group>"; };
 		43CE52B366017EADB419BDF1 /* Pods-VideoProcess-VideoProcessUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcess-VideoProcessUITests.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcess-VideoProcessUITests/Pods-VideoProcess-VideoProcessUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F33BB9B148B24306D2C9621 /* Pods-VideoProcess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcess.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcess/Pods-VideoProcess.debug.xcconfig"; sourceTree = "<group>"; };
 		5FAB52853BD9C5AC24AD4FB9 /* Pods-VideoProcessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcessTests.release.xcconfig"; path = "Target Support Files/Pods-VideoProcessTests/Pods-VideoProcessTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -311,6 +317,7 @@
 		1127A393240D40230038ED48 /* VideoProcess */ = {
 			isa = PBXGroup;
 			children = (
+				11F6978725A32ED9004BC306 /* AudioQueueServicesProgrammingGuide */,
 				11865DFA25381D2C0010C178 /* Practices */,
 				11865DFB25381D760010C178 /* AVFoundation */,
 				1148EDFE2533F971006B1833 /* CoreVideo */,
@@ -502,6 +509,17 @@
 				11EAE0FA25319BCF00806F15 /* VTViewController.m */,
 			);
 			path = VideoToolbox;
+			sourceTree = "<group>";
+		};
+		11F6978725A32ED9004BC306 /* AudioQueueServicesProgrammingGuide */ = {
+			isa = PBXGroup;
+			children = (
+				11F6978825A32F34004BC306 /* Introduction.h */,
+				11F6978925A32F34004BC306 /* Introduction.m */,
+				11F6978B25A33AAC004BC306 /* AudioQueues.h */,
+				11F6978C25A33AAC004BC306 /* AudioQueues.m */,
+			);
+			path = AudioQueueServicesProgrammingGuide;
 			sourceTree = "<group>";
 		};
 		4B4EB1A41158412051BB34AE /* Pods */ = {
@@ -801,8 +819,10 @@
 				112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */,
 				112A434224A97EFC00B37CEA /* SpeechSynthesisController.m in Sources */,
 				112A8CD7249202AC00F3F37E /* SupportingTypesController.m in Sources */,
+				11F6978D25A33AAC004BC306 /* AudioQueues.m in Sources */,
 				112DF51E248B346A00467F8D /* TextFormattingViewController.m in Sources */,
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
+				11F6978A25A32F34004BC306 /* Introduction.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
 				112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */,
 				11865E19253852740010C178 /* AudioController.m in Sources */,

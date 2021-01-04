@@ -8,7 +8,7 @@
 
 #import "EditingViewController.h"
 
-@interface EditingViewController ()
+@interface EditingViewController ()<AVVideoCompositionValidationHandling>
 
 @end
 
@@ -21,6 +21,8 @@
     
 #pragma mark -- Media Composition
     
+    
+//    AVComposition->AVCompositionTrack->AVCompositionTrackSegment
     /*
      AVComposition
      
@@ -70,6 +72,9 @@
      references to candidate sources that it would have created in
      order to inspect or preview them prior to inclusion in a composition.
      */
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"sofia.mp4" withExtension:nil];
+    AVAsset *composition = [AVAsset assetWithURL:url];
+    
     
     /**
      Accessing Initialization Options
@@ -78,6 +83,7 @@
      The initializationOptions for the creation of URL asset by the
      receiver.
      */
+
     
     /**
      Accessing Tracks
@@ -96,6 +102,7 @@
      Provides the composition tracks of the specified media type associated
      with an asset.
      */
+    
     
     /**
      Determining the Visual Dimensions
@@ -120,6 +127,7 @@
      AVMutableCompositionTrack.
      */
     
+    
     /**
      Accessing Track segments
      
@@ -130,6 +138,7 @@
      Returns the composition track segment from the segment array
      that either contains or is closest to the supplied track time.
      */
+    
     
     /**
      Managing Format Descriptions
@@ -185,6 +194,7 @@
      empty
      A Boolean value that indicates whether the segment is empty.
      */
+    
     
     /*
      AVMutableComposition
@@ -379,6 +389,7 @@
      to write a movie header into a new file, thereby creating
      a reference movie.
      */
+    
     
     /**
      Creating a Movie
@@ -909,6 +920,9 @@
      individual video frame in a video composition.
      */
     
+    AVVideoComposition *videoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:composition];
+    
+    
     /**
      Configuring Video Composition Properties
 
@@ -949,6 +963,33 @@
      colorYCbCrMatrix
      The YCbCr matrix used for video composition.
      */
+    NSLog(@"frameDuration %lld",videoComposition.frameDuration.value);
+    NSLog(@"renderSize %@",NSStringFromCGSize(videoComposition.renderSize));
+    NSLog(@"renderScale %f",videoComposition.renderScale);
+    NSLog(@"instructions %@",videoComposition.instructions);
+    NSLog(@"animationTool %@",videoComposition.animationTool);
+    NSLog(@"customVideoCompositorClass %@",videoComposition.customVideoCompositorClass);
+    if (@available(iOS 11.0, *)) {
+        NSLog(@"sourceTrackIDForFrameTiming %d",videoComposition.sourceTrackIDForFrameTiming);
+    } else {
+        // Fallback on earlier versions
+    }
+    if (@available(iOS 10.0, *)) {
+        NSLog(@"colorPrimaries %@",videoComposition.colorPrimaries);
+    } else {
+        // Fallback on earlier versions
+    }
+    if (@available(iOS 10.0, *)) {
+        NSLog(@"colorTransferFunction %@",videoComposition.colorTransferFunction);
+    } else {
+        // Fallback on earlier versions
+    }
+    if (@available(iOS 10.0, *)) {
+        NSLog(@"colorYCbCrMatrix %@",videoComposition.colorYCbCrMatrix);
+    } else {
+        // Fallback on earlier versions
+    }
+    
     
     /**
      Validating the Time Range
@@ -961,6 +1002,8 @@
      Methods you can implement to indicate whether validation of a video
      composition should continue after specific errors are found.
      */
+    BOOL validResult = [videoComposition isValidForAsset:composition timeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMake(180, 1)) validationDelegate:self];
+    NSLog(@"validAsset %d",validResult);
     
     
     /*
@@ -1001,6 +1044,9 @@
      
      + videoCompositionWithPropertiesOfAsset:prototypeInstruction:
      */
+    AVMutableVideoComposition *mutableVideoComposition = [AVMutableVideoComposition videoCompositionWithAsset:composition applyingCIFiltersWithHandler:^(AVAsynchronousCIImageFilteringRequest * _Nonnull request) {
+        
+    }];
     
     /**
      Configuring Video Composition Properties
@@ -1052,6 +1098,7 @@
      An AVVideoComposition object maintains an array of instructions
      to perform its composition.
      */
+    
     
     /**
      Getting Composition Instruction Properties
@@ -1229,6 +1276,7 @@
     
     
 #pragma mark -- Custom Video Compositing
+    
     
     /*
      AVVideoCompositing
