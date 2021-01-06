@@ -1481,6 +1481,7 @@
      A set of constants used to describle codecs for video capture.
      */
     
+    
     /**
      Compression
      
@@ -1505,6 +1506,7 @@
      A key to access permission to reorder frames.
      */
 
+    
     /**
      Size and Aspect Ratio
      
@@ -1523,6 +1525,7 @@
      AVVideoPixelAspectRatioHorizontalSpacingKey
      A key to access the pixel aspect ratio horizontal spacing.
      */
+    
     
     /**
      Scaling Mode
@@ -1675,6 +1678,7 @@
      A baseline auto level profile.
      */
     
+    
     /**
      Entropy Mode
      
@@ -1688,6 +1692,7 @@
      The encoder uses Context-based Adaptive Variable Length Coding.
      */
     
+    
     /**
      Frame Rate
      
@@ -1699,6 +1704,7 @@
      The expected source frame rate.
      */
     
+    
     /**
      Video Toolbox Options
      
@@ -1706,6 +1712,7 @@
      The video encoder specification includes options for choosing
      a specific video encoder.
      */
+    
     
     /*
      AVFileType

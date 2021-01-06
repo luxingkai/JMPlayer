@@ -647,14 +647,14 @@
      - overrideOutputAudioPort:error:
      Temporarily changes the current audio route.
      */
-    NSLog(@"currentRoute %@",session.currentRoute);
-    NSLog(@"inputAvailable %d",session.inputAvailable);
-    NSLog(@"availableInputs %@",session.availableInputs);
-    NSLog(@"preferredInput %@",session.preferredInput);
-    NSLog(@"inputDataSource %@",session.inputDataSource);
-    NSLog(@"inputDataSources %@",session.inputDataSources);
-    NSLog(@"outputDataSources %@",session.outputDataSources);
-    NSLog(@"outputDataSource %@",session.outputDataSource);
+    NSLog(@"currentRoute %@",_audioSession.currentRoute);
+    NSLog(@"inputAvailable %d",_audioSession.inputAvailable);
+    NSLog(@"availableInputs %@",_audioSession.availableInputs);
+    NSLog(@"preferredInput %@",_audioSession.preferredInput);
+    NSLog(@"inputDataSource %@",_audioSession.inputDataSource);
+    NSLog(@"inputDataSources %@",_audioSession.inputDataSources);
+    NSLog(@"outputDataSources %@",_audioSession.outputDataSources);
+    NSLog(@"outputDataSource %@",_audioSession.outputDataSource);
     
     
     /**
@@ -714,12 +714,12 @@
      - setPreferredOutputNumberOfChannels:error:
      Sets the preferred number of output channels for the current route.
      */
-    NSLog(@"inputNumberOfChannels %ld",(long)session.inputNumberOfChannels);
-    NSLog(@"maximumInputNumberOfChannels %ld",(long)session.maximumInputNumberOfChannels);
-    NSLog(@"preferredInputNumberOfChannels %ld",(long)session.preferredInputNumberOfChannels);
-    NSLog(@"outputNumberOfChannels %ld",(long)session.outputNumberOfChannels);
-    NSLog(@"maximumOutputNumberOfChannels %ld",(long)session.maximumOutputNumberOfChannels);
-    NSLog(@"preferredOutputNumberOfChannels %ld",(long)session.preferredOutputNumberOfChannels);
+    NSLog(@"inputNumberOfChannels %ld",(long)_audioSession.inputNumberOfChannels);
+    NSLog(@"maximumInputNumberOfChannels %ld",(long)_audioSession.maximumInputNumberOfChannels);
+    NSLog(@"preferredInputNumberOfChannels %ld",(long)_audioSession.preferredInputNumberOfChannels);
+    NSLog(@"outputNumberOfChannels %ld",(long)_audioSession.outputNumberOfChannels);
+    NSLog(@"maximumOutputNumberOfChannels %ld",(long)_audioSession.maximumOutputNumberOfChannels);
+    NSLog(@"preferredOutputNumberOfChannels %ld",(long)_audioSession.preferredOutputNumberOfChannels);
     
     
     /**
@@ -761,15 +761,15 @@
      - setPreferredIOBufferDuration:error:
      Sets the preferred audio I/O buffer duration.
      */
-    NSLog(@"inputGain %f",session.inputGain);
-    NSLog(@"inputGainSettable %d",session.inputGainSettable);
-    NSLog(@"outputVolume %f",session.outputVolume);
-    NSLog(@"sampleRate %f",session.sampleRate);
-    NSLog(@"preferredSampleRate %f",session.preferredSampleRate);
-    NSLog(@"inputLatency %f",session.inputLatency);
-    NSLog(@"outputLatency %f",session.outputLatency);
-    NSLog(@"IOBufferDuration %f",session.IOBufferDuration);
-    NSLog(@"preferredIOBufferDuration %f",session.preferredIOBufferDuration);
+    NSLog(@"inputGain %f",_audioSession.inputGain);
+    NSLog(@"inputGainSettable %d",_audioSession.inputGainSettable);
+    NSLog(@"outputVolume %f",_audioSession.outputVolume);
+    NSLog(@"sampleRate %f",_audioSession.sampleRate);
+    NSLog(@"preferredSampleRate %f",_audioSession.preferredSampleRate);
+    NSLog(@"inputLatency %f",_audioSession.inputLatency);
+    NSLog(@"outputLatency %f",_audioSession.outputLatency);
+    NSLog(@"IOBufferDuration %f",_audioSession.IOBufferDuration);
+    NSLog(@"preferredIOBufferDuration %f",_audioSession.preferredIOBufferDuration);
     
     
     /**
@@ -835,6 +835,7 @@
      iOS, see AVAudioSession and AVAudioSessionDelegate.
      */
     
+    
     /**
      Creating an Audio Player
      
@@ -850,6 +851,7 @@
      - initWithData:fileTypeHint:error:
      Creates an audio player using the specified data and file type hint.
      */
+    
     
     /**
      Controlling Playback

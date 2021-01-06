@@ -29,6 +29,7 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:imageView];
     
+    
     /*
      AVFoundation
      
