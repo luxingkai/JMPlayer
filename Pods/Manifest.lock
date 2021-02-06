@@ -1,26 +1,29 @@
 PODS:
+  - FFmpeg (2.8.3):
+    - FFmpeg/precompiled (= 2.8.3)
+  - FFmpeg/precompiled (2.8.3)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - GPUImage (0.1.7)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - FFmpeg
   - FMDB (~> 2.7.5)
-  - GPUImage
   - SVProgressHUD (~> 2.2.5)
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - FFmpeg
   trunk:
     - FMDB
-    - GPUImage
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  FFmpeg: f1428c3b60b5f9e349fcd5d7878705cd7f9a26f6
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: ce3be7fdd81e9744b63af343788eb2612ee98f17
+PODFILE CHECKSUM: 71b2c707d5309d4ba42509ffb3c072c82a2f8fd2
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0

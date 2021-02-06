@@ -16,6 +16,8 @@
     
     AVAudioSession *_audioSession;
     AVAudioRecorder *_audioRecorder;
+    AVAudioPlayer *_audioPlayer;
+    NSURL *_recordURL;
 }
 
 - (void)dealloc {
@@ -38,6 +40,12 @@
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"结束录音" style:UIBarButtonItemStyleDone target:self action:@selector(end)];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.frame = CGRectMake(20, 100, 40, 20);
+    [button setTitle:@"play" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(player) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
     
     /*
      Play, record, and process audio; configure your app's
@@ -127,6 +135,7 @@
      */
     _audioSession = [AVAudioSession sharedInstance];
     
+    
     /**
      Configuring the Audio Session
      
@@ -177,8 +186,8 @@
      Cases that indicate the possible route-sharing policies for an audio session.
      */
     NSError *error = nil;
-    [_audioSession setCategory:AVAudioSessionCategoryRecord error:&error];
-    
+    //    [_audioSession setCategory:AVAudioSessionCategoryRecord error:&error];
+    //
     
     /**
      Activating the Audio Session
@@ -208,7 +217,9 @@
      - requestRecordPermission:
      Requests the user’s permission to record audio.
      */
-
+    [_audioSession requestRecordPermission:^(BOOL granted) {
+        
+    }];
     
     
     /**
@@ -810,11 +821,11 @@
      •  Play sounds from files or memory buffers
      •  Loop sounds
      •  Play multiple sounds simultaneously, one sound per audio
-     player, with precise synchronization
+        player, with precise synchronization
      •  Control relative playback level, stereo positioning,
-     and playback rate for each sound you’re playing
+        and playback rate for each sound you’re playing
      •  Seek to a particular point in a sound file, which supports
-     such application features as fast forward and rewind
+        such application features as fast forward and rewind
      •  Obtain data you can use for playback-level metering
      
      This class lets you play sound in any audio format available in
@@ -988,6 +999,7 @@
      */
     
     
+    
     /*
      AVAudioRecorder
      
@@ -998,7 +1010,7 @@
      •  Record for a specified duration
      •  Pause and resume a recording
      •  Obtain input audio-level data that you can use to provide
-      level metering
+        level metering
      
      In iOS, the audio being recorded comes from the device connected
      by the user—built-in microphone or headset microphone, for example.
@@ -1037,8 +1049,7 @@
      - initWithURL:format:error:
      Initializes and returns an audio recorder.
      */
-    NSString *writePath = [NSTemporaryDirectory() stringByAppendingString:@"audioRecord"];
-    NSLog(@"%@",writePath);
+    NSString *writePath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES).firstObject;
     NSURL *url = [NSURL URLWithString:writePath];
     _audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:@{AVLinearPCMBitDepthKey:@(16)} error:&error];
     NSLog(@"audioRecordError === %@",error);
@@ -1080,6 +1091,7 @@
     BOOL prepareResult = [_audioRecorder prepareToRecord];
     NSLog(@"prepareToRecord %d",prepareResult);
     
+    
     /**
      Using Audio Level Metering
      
@@ -1098,7 +1110,7 @@
      Returns the average power for a given channel, in decibels, for
      the sound being recorded.
      */
-//    NSLog(@"meteringEnabled %d",_audioRecorder.meteringEnabled);
+    //    NSLog(@"meteringEnabled %d",_audioRecorder.meteringEnabled);
     [_audioRecorder updateMeters];
     
     
@@ -1150,7 +1162,7 @@
      ==General Audio Format Settings==
      AVFormatIDKey
      A format identifier.
-    
+     
      AVSampleRateKey
      A sample rate, in hertz, expressed as an NSNumber floating point value.
      
@@ -1188,7 +1200,7 @@
      AVAudioBitRateStrategy_Variable
      A variable rate strategy.
      
-
+     
      ==AVSampleRateConverterAlgorithmKey Values==
      AVSampleRateConverterAlgorithm_Normal
      The normal encoder bit rate strategy.
@@ -1383,15 +1395,13 @@
     NSLog(@"url %@",recorder.url);
     NSLog(@"format %@",recorder.format);
     NSLog(@"settings %@",recorder.settings);
-    
+    _recordURL = recorder.url;
 }
 
 /* if an error occurs while encoding it will be reported to the delegate. */
 - (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError * __nullable)error {
     
 }
-
-
 
 
 - (void)start {
@@ -1404,6 +1414,18 @@
     [_audioRecorder stop];
 }
 
+
+- (void) player {
+    
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_recordURL error:nil];
+    _audioPlayer.volume = 1.0;
+    _audioPlayer.rate = 1;
+    _audioPlayer.enableRate = YES;
+    BOOL prepareToPlay = [_audioPlayer prepareToPlay];
+    NSLog(@"准备播放录音 %d",prepareToPlay);
+    NSLog(@"录音时长 %f",_audioPlayer.duration);
+    [_audioPlayer play];
+}
 
 
 /*
