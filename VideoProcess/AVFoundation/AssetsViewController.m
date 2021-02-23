@@ -10,6 +10,24 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 #import <MobileCoreServices/UTType.h>
+#import <CoreServices/CoreServices.h>
+#import <CoreFoundation/CoreFoundation.h>
+#import <CoreMedia/CoreMedia.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct {
+    int first;
+    float second;
+} CompleteType;
+
+struct curel {
+    CompleteType hint;
+};
+
+struct juice {
+    int sdeee;
+};
 
 @interface AssetsViewController ()
 
@@ -25,6 +43,8 @@
      Load, inspect, and export media assets and metadata, and
      perform low-level reading and writing of media sample data.
      */
+    
+    
     
     
 #pragma mark -- Assets
@@ -98,7 +118,7 @@
      Loading Data
      Cancels the loading of all values for all observers.
      */
-    [asset cancelLoading];
+    //    [asset cancelLoading];
     
     /**
      Inspecting an Asset
@@ -110,19 +130,19 @@
      preferredTransform
      preferredVolume
      */
-    CMTime time = asset.duration;
-    CMTimeShow(time);
-    BOOL provides = asset.providesPreciseDurationAndTiming;
-    NSLog(@"%d",provides);
-    AVMetadataItem *creationDate = asset.creationDate;
-    NSLog(@"%@",creationDate.dataValue);
-    float preferredRate = asset.preferredRate;
-    NSLog(@"%f",preferredRate);
-    CGAffineTransform affineTransform = asset.preferredTransform;
-    NSLog(@"%@",NSStringFromCGAffineTransform(affineTransform));
-    float preferredVolume = asset.preferredVolume;
-    NSLog(@"%f",preferredVolume);
-    
+    //    CMTime time = asset.duration;
+    //    CMTimeShow(time);
+    //    BOOL provides = asset.providesPreciseDurationAndTiming;
+    //    NSLog(@"%d",provides);
+    //    AVMetadataItem *creationDate = asset.creationDate;
+    //    NSLog(@"%@",creationDate.dataValue);
+    //    float preferredRate = asset.preferredRate;
+    //    NSLog(@"%f",preferredRate);
+    //    CGAffineTransform affineTransform = asset.preferredTransform;
+    //    NSLog(@"%@",NSStringFromCGAffineTransform(affineTransform));
+    //    float preferredVolume = asset.preferredVolume;
+    //    NSLog(@"%f",preferredVolume);
+    //
     
     /**
      Determining Usability
@@ -132,13 +152,13 @@
      set of conditions. These properties only return NO when there is
      no condition under which the associated operation can be performed.
      */
-    NSLog(@"playable %d",asset.playable);
-    NSLog(@"exportable %d",asset.exportable);
-    NSLog(@"readable %d",asset.readable);
-    NSLog(@"composable %d",asset.composable);
-    NSLog(@"hasProtectedContent %d",asset.hasProtectedContent);
-    NSLog(@"compatibleWithAirPlayVideo %d",asset.compatibleWithAirPlayVideo);
-    NSLog(@"compatibleWithSavedPhotosAlbum %d",asset.compatibleWithSavedPhotosAlbum);
+    //    NSLog(@"playable %d",asset.playable);
+    //    NSLog(@"exportable %d",asset.exportable);
+    //    NSLog(@"readable %d",asset.readable);
+    //    NSLog(@"composable %d",asset.composable);
+    //    NSLog(@"hasProtectedContent %d",asset.hasProtectedContent);
+    //    NSLog(@"compatibleWithAirPlayVideo %d",asset.compatibleWithAirPlayVideo);
+    //    NSLog(@"compatibleWithSavedPhotosAlbum %d",asset.compatibleWithSavedPhotosAlbum);
     
     
     /**
@@ -149,17 +169,17 @@
     //    asset trackWithTrackID:<#(CMPersistentTrackID)#>
     //    asset tracksWithMediaType:<#(nonnull AVMediaType)#>
     //    asset tracksWithMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
-    CMPersistentTrackID trackID = [asset unusedTrackID];
-    NSLog(@"unusedTrackID %d",trackID);
+    //    CMPersistentTrackID trackID = [asset unusedTrackID];
+    //    NSLog(@"unusedTrackID %d",trackID);
     
     
     /**
      Accessing Metadata
      */
-    NSLog(@"lyrics %@",asset.lyrics);
-    NSLog(@"metadata %@",asset.metadata);
-    NSLog(@"commonMetadata %@",asset.commonMetadata);
-    NSLog(@"availableMetadataFormats %@",asset.availableMetadataFormats);
+    //    NSLog(@"lyrics %@",asset.lyrics);
+    //    NSLog(@"metadata %@",asset.metadata);
+    //    NSLog(@"commonMetadata %@",asset.commonMetadata);
+    //    NSLog(@"availableMetadataFormats %@",asset.availableMetadataFormats);
     //    asset metadataForFormat:<#(nonnull AVMetadataFormat)#>
     
     
@@ -169,34 +189,34 @@
      Add chapter markers to enable users to quilkly navigate
      your content.
      */
-    NSLog(@"availableChapterLocales %@",asset.availableChapterLocales);
-    NSArray *metadataGroups = [asset chapterMetadataGroupsWithTitleLocale:[NSLocale systemLocale] containingItemsWithCommonKeys:@[AVMetadataCommonKeyTitle]];
-    NSLog(@"%@",metadataGroups);
-    NSArray *timeMetadataGroup = [asset chapterMetadataGroupsBestMatchingPreferredLanguages:[NSLocale availableLocaleIdentifiers]];
-    NSLog(@"%@",timeMetadataGroup);
+    //    NSLog(@"availableChapterLocales %@",asset.availableChapterLocales);
+    //    NSArray *metadataGroups = [asset chapterMetadataGroupsWithTitleLocale:[NSLocale systemLocale] containingItemsWithCommonKeys:@[AVMetadataCommonKeyTitle]];
+    //    NSLog(@"%@",metadataGroups);
+    //    NSArray *timeMetadataGroup = [asset chapterMetadataGroupsBestMatchingPreferredLanguages:[NSLocale availableLocaleIdentifiers]];
+    //    NSLog(@"%@",timeMetadataGroup);
     
     
     /**
      Finding Media Selections
      */
-    NSLog(@"preferredMediaSelection %@",asset.preferredMediaSelection);
-    NSLog(@"asset.availableMediaCharacteristicsWithMediaSelectionOptions %@",asset.availableMediaCharacteristicsWithMediaSelectionOptions);
-    NSLog(@"allMediaSelections %@",asset.allMediaSelections);
+    //    NSLog(@"preferredMediaSelection %@",asset.preferredMediaSelection);
+    //    NSLog(@"asset.availableMediaCharacteristicsWithMediaSelectionOptions %@",asset.availableMediaCharacteristicsWithMediaSelectionOptions);
+    //    NSLog(@"allMediaSelections %@",asset.allMediaSelections);
     //    asset mediaSelectionGroupForMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
     
     
     /**
      Managing Reference Restrictions
      */
-    NSLog(@"referenceRestrictions %d", asset.referenceRestrictions);
+    //    NSLog(@"referenceRestrictions %lu", (unsigned long)asset.referenceRestrictions);
     
     
     /**
      Working with Fragmented Moives
      */
-    NSLog(@"canContainFragments %d", asset.canContainFragments);
-    NSLog(@"containsFragments %d", asset.containsFragments);
-    NSLog(@"overallDurationHint %d", asset.overallDurationHint);
+    //    NSLog(@"canContainFragments %d", asset.canContainFragments);
+    //    NSLog(@"containsFragments %d", asset.containsFragments);
+    //    NSLog(@"overallDurationHint %d", asset.overallDurationHint);
     
     /**
      Specifying Media Characteristics
@@ -218,7 +238,6 @@
      has completed.
      */
     [asset loadValuesAsynchronouslyForKeys:@[@"playable"] completionHandler:^{
-        
         NSError *error = nil;
         AVKeyValueStatus status = [asset statusOfValueForKey:@"playable" error:&error];
         switch (status) {
@@ -238,7 +257,6 @@
                 // Handle all other cases
                 break;
         }
-        
     }];
     
     
@@ -260,69 +278,69 @@
     /**
      Retrieving Track Information
      */
-    AVAssetTrack *assetTrack = nil;
-//    assetTrack.asset
-//    assetTrack.trackID
-//    assetTrack.mediaType
-//    assetTrack hasMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
-//    assetTrack.formatDescriptions
-//    assetTrack.enabled
-//    assetTrack.playable
-//    assetTrack.selfContained
-//    assetTrack.estimatedDataRate
-//    assetTrack.totalSampleDataLength
-//    assetTrack.decodable
+    AVAssetTrack *assetTrack = asset.tracks.firstObject;
+    //    assetTrack.asset
+    //    assetTrack.trackID
+    //    assetTrack.mediaType
+    //    assetTrack hasMediaCharacteristic:<#(nonnull AVMediaCharacteristic)#>
+    //    assetTrack.formatDescriptions
+    //    assetTrack.enabled
+    //    assetTrack.playable
+    //    assetTrack.selfContained
+    //    assetTrack.estimatedDataRate
+    //    assetTrack.totalSampleDataLength
+    //    assetTrack.decodable
     
     /**
      Retrieving Temporal Properties
      */
-//    assetTrack.timeRange
-//    assetTrack.naturalTimeScale
+    //    assetTrack.timeRange
+    //    assetTrack.naturalTimeScale
     
     /**
      Retrieving Language Properties
      */
-//    assetTrack.languageCode
-//    assetTrack.extendedLanguageTag
+    //    assetTrack.languageCode
+    //    assetTrack.extendedLanguageTag
     
     /**
      Retrieving Visual Characteristics
      */
-//    assetTrack.naturalSize
-//    assetTrack.preferredTransform
+    //    assetTrack.naturalSize
+    //    assetTrack.preferredTransform
     
     /**
      Retrieving Audible Characteristics
      */
-//    assetTrack.preferredVolume
+    //    assetTrack.preferredVolume
     
     /**
      Retrieving Frame-Based Characteristics
      */
-//    assetTrack.nominalFrameRate
-//    assetTrack.minFrameDuration
-//    assetTrack.requiresFrameReordering
+    //    assetTrack.nominalFrameRate
+    //    assetTrack.minFrameDuration
+    //    assetTrack.requiresFrameReordering
     
     /**
      Finding Track Segments
      */
-//    assetTrack.segments
-//    assetTrack segmentForTrackTime:<#(CMTime)#>
-//    assetTrack samplePresentationTimeForTrackTime:<#(CMTime)#>
+    //    assetTrack.segments
+    //    assetTrack segmentForTrackTime:<#(CMTime)#>
+    //    assetTrack samplePresentationTimeForTrackTime:<#(CMTime)#>
     
     /**
      Managing Metadata
      */
-//    assetTrack.metadata
-//    assetTrack.commonMetadata
-//    assetTrack.availableMetadataFormats
-//    assetTrack metadataForFormat:<#(nonnull AVMetadataFormat)#>
+    //    assetTrack.metadata
+    //    assetTrack.commonMetadata
+    //    assetTrack.availableMetadataFormats
+    //    assetTrack metadataForFormat:<#(nonnull AVMetadataFormat)#>
     
     /**
      Working With Associated Tracks
      */
-//    assetTrack.availableTrackAssociationTypes
-//    assetTrack associatedTracksOfType:<#(nonnull AVTrackAssociationType)#>
+    //    assetTrack.availableTrackAssociationTypes
+    //    assetTrack associatedTracksOfType:<#(nonnull AVTrackAssociationType)#>
     
     
     /*
@@ -402,7 +420,7 @@
      */
     
     NSArray *commonMetadata = asset.commonMetadata;
-    NSArray *titleItems = [AVMetadataItem metadataItemsFromArray:commonMetadata filteredByIdentifier:AVMetadataCommonIdentifierTitle];
+    NSArray *titleItems = [AVMetadataItem metadataItemsFromArray:commonMetadata filteredByIdentifier:AVMetadataCommonIdentifierLanguage];
     AVMetadataItem *item = titleItems.firstObject;
     //process title item
     
@@ -418,7 +436,6 @@
      dataValue, and dataValue properties to easily coerce the value to the
      appropriate type. For instance, the following example shows how you
      retrieve the artwork associated with an iTunes music track:
-     
      */
     NSArray *artworkItems = [AVMetadataItem metadataItemsFromArray:commonMetadata filteredByIdentifier:AVMetadataCommonIdentifierArtwork];
     AVMetadataItem *artworkItem = artworkItems.firstObject;
@@ -497,6 +514,11 @@
     //    item.extendedLanguageTag
     //    item.startDate
     //    item.identifier
+    AVMetadataItem *videoMetadataItem = asset.metadata.firstObject;
+    id value = videoMetadataItem.value;
+    NSData *dataValue = videoMetadataItem.dataValue;
+    NSString *dataType = videoMetadataItem.dataType;
+    NSString *identifier = videoMetadataItem.identifier;
     
     /**
      Retrieving Formatted Metadata
@@ -639,19 +661,19 @@
      Creating Fragment Assets
      */
     AVFragmentedAssetMinder *assetMinder = [[AVFragmentedAssetMinder alloc] initWithAsset:fragmentedAsset mindingInterval:1.0];
-//    AVFragmentedAssetMinder fragmentedAssetMinderWithAsset:<#(nonnull AVAsset<AVFragmentMinding> *)#> mindingInterval:<#(NSTimeInterval)#>
-//    assetMinder.mindingInterval
+    //    AVFragmentedAssetMinder fragmentedAssetMinderWithAsset:<#(nonnull AVAsset<AVFragmentMinding> *)#> mindingInterval:<#(NSTimeInterval)#>
+    //    assetMinder.mindingInterval
     
     /**
      Inspecting a Fragment asset
      */
-//    assetMinder.assets
+    //    assetMinder.assets
     
     /**
      Adding and Removing Asset Fragments
      */
-//    assetMinder addFragmentedAsset:<#(nonnull AVAsset<AVFragmentMinding> *)#>
-//    assetMinder removeFragmentedAsset:<#(nonnull AVAsset<AVFragmentMinding> *)#>
+    //    assetMinder addFragmentedAsset:<#(nonnull AVAsset<AVFragmentMinding> *)#>
+    //    assetMinder removeFragmentedAsset:<#(nonnull AVAsset<AVFragmentMinding> *)#>
     
     /**
      Determining Fragment Support
@@ -707,14 +729,15 @@
      AVAssetExportPresetHighestQuality, and set the output file
      type to AVFileTypeQuickTimeMoive.
      */
-     
-    [AVAssetExportSession determineCompatibilityOfExportPreset:AVAssetExportPresetHighestQuality withAsset:asset outputFileType:AVFileTypeQuickTimeMovie completionHandler:^(BOOL compatible) {
+    
+    [AVAssetExportSession determineCompatibilityOfExportPreset:AVAssetExportPresetHighestQuality withAsset:asset outputFileType:AVFileTypeAppleM4V completionHandler:^(BOOL compatible) {
         if (!compatible) {
             return;
         }
         //Compatibility check successed, continue with export.
         
     }];
+    
     
     /*
      AVAssetExportSession
@@ -751,63 +774,98 @@
      Initializing a Session
      */
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPreset1920x1080];
-//    [AVAssetExportSession exportPresetsCompatibleWithAsset:asset];
+    //    [AVAssetExportSession exportSessionWithAsset:asset presetName:AVAssetExportPreset1920x1080];
     
     /**
      Configuring Output
+     
+     Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.
      */
-//    exportSession.outputURL
-//    exportSession.supportedFileTypes
-//    exportSession.outputFileType
-//    exportSession.fileLengthLimit
-//    exportSession.timeRange
-//    exportSession.metadata
-//    exportSession.metadataItemFilter
-//    exportSession.audioMix
-//    exportSession.audioTimePitchAlgorithm
-//    exportSession.shouldOptimizeForNetworkUse
-//    exportSession.videoComposition
-//    exportSession.customVideoCompositor
-//    exportSession.canPerformMultiplePassesOverSourceMediaData
-//    exportSession.directoryForTemporaryFiles
+    id extension = CFBridgingRelease(UTTypeCopyPreferredTagWithClass((CFStringRef)AVFileTypeAppleM4V, kUTTagClassFilenameExtension));
+    NSString *outputPath = [NSHomeDirectory() stringByAppendingFormat:@"/test.%@",extension];
+    exportSession.outputURL = [NSURL fileURLWithPath:outputPath];
+    exportSession.outputFileType = AVFileTypeAppleM4V;
+    //    exportSession.supportedFileTypes
+    //    exportSession.fileLengthLimit
+    //    exportSession.timeRange
+    //    exportSession.metadata
+    //    exportSession.metadataItemFilter
+    exportSession.audioMix = [AVMutableAudioMix audioMix];
+    exportSession.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmTimeDomain;
+    exportSession.shouldOptimizeForNetworkUse = YES;
+    //    exportSession.videoComposition
+    //    exportSession.customVideoCompositor
+    //    exportSession.canPerformMultiplePassesOverSourceMediaData
+    //    exportSession.directoryForTemporaryFiles
     
     /**
      Configuring Export Presets
      */
-//    exportSession.presetName
-//    [AVAssetExportSession allExportPresets];
-//    [AVAssetExportSession exportPresetsCompatibleWithAsset:asset];
-//    AVAssetExportSession determineCompatibilityOfExportPreset:<#(nonnull NSString *)#> withAsset:<#(nonnull AVAsset *)#> outputFileType:<#(nullable AVFileType)#> completionHandler:<#^(BOOL compatible)handler#>
-//    exportSession determineCompatibleFileTypesWithCompletionHandler:<#^(NSArray<AVFileType> * _Nonnull compatibleFileTypes)handler#>
+    //    exportSession.presetName
+    //    [AVAssetExportSession allExportPresets];
+    //    [AVAssetExportSession exportPresetsCompatibleWithAsset:asset];
+    //    AVAssetExportSession determineCompatibilityOfExportPreset:<#(nonnull NSString *)#> withAsset:<#(nonnull AVAsset *)#> outputFileType:<#(nullable AVFileType)#> completionHandler:<#^(BOOL compatible)handler#>
+    //    exportSession determineCompatibleFileTypesWithCompletionHandler:<#^(NSArray<AVFileType> * _Nonnull compatibleFileTypes)handler#>
+    
     
     /**
      Exporting Media
      */
-//    exportSession exportAsynchronouslyWithCompletionHandler:<#^(void)handler#>
-//    [exportSession cancelExport];
-//    exportSession.error
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        switch (exportSession.status) {
+            case AVAssetExportSessionStatusUnknown:
+            {
+            }
+                break;
+            case AVAssetExportSessionStatusWaiting:
+            {
+            }
+                break;
+            case AVAssetExportSessionStatusExporting:
+            {
+                NSLog(@"%f",exportSession.progress);
+            }
+                break;
+            case AVAssetExportSessionStatusCompleted:
+            {
+                NSLog(@"export completed");
+            }
+                break;
+            case AVAssetExportSessionStatusFailed:
+            {
+                NSLog(@"export error %@",exportSession.error);
+            }
+                break;
+            case AVAssetExportSessionStatusCancelled:
+            {
+            }
+                break;
+        }
+    }];
+    //    [exportSession cancelExport];
+    //    exportSession.error
     
     /**
      Getting Export Status
      */
-//    exportSession.progress
-//    exportSession.status
+    //    exportSession.progress
+    //    exportSession.status
     
     /**
      Accessing the Asset
      */
-//    exportSession.asset
+    //    exportSession.asset
     
     /**
      Instance methods
      */
-//    exportSession estimateMaximumDurationWithCompletionHandler:<#^(CMTime estimatedMaximumDuration, NSError * _Nullable error)handler#>
-//    exportSession estimateOutputFileLengthWithCompletionHandler:<#^(int64_t estimatedOutputFileLength, NSError * _Nullable error)handler#>
+    //    exportSession estimateMaximumDurationWithCompletionHandler:<#^(CMTime estimatedMaximumDuration, NSError * _Nullable error)handler#>
+    //    exportSession estimateOutputFileLengthWithCompletionHandler:<#^(int64_t estimatedOutputFileLength, NSError * _Nullable error)handler#>
     
     
     
 #pragma mark -- Reading and Writing
-        
+    
     /*
      AVAssetReader
      
@@ -832,33 +890,34 @@
      for real-time operations.
      */
     
+    
     /**
      Creating a Reader
      */
     NSError *assetReaderError = nil;
     AVAssetReader *assetReader = [[AVAssetReader alloc] initWithAsset:asset error:&assetReaderError];
-//    [AVAssetReader assetReaderWithAsset:asset error:&assetReaderError];
+    //    [AVAssetReader assetReaderWithAsset:asset error:&assetReaderError];
     
     /**
      Managing Outputs
      */
-//    assetReader.outputs
-//    assetReader addOutput:<#(nonnull AVAssetReaderOutput *)#>
-//    assetReader canAddOutput:<#(nonnull AVAssetReaderOutput *)#>
+    //    assetReader.outputs
+    //    assetReader addOutput:<#(nonnull AVAssetReaderOutput *)#>
+    //    assetReader canAddOutput:(nonnull AVAssetReaderOutput *)
     
     /**
      Controlling Reading
      */
-//    assetReader.status
-//    assetReader startReading
-//    assetReader cancelReading
-//    assetReader.error
-//    assetReader.timeRange
+    //    assetReader.status
+    //    assetReader startReading
+    //    assetReader cancelReading
+    //    assetReader.error
+    //    assetReader.timeRange
     
     /**
      Getting the Asset
      */
-//    assetReader.asset
+    //    assetReader.asset
     
     
     /*
@@ -878,18 +937,79 @@
     /**
      Creating an Audio Mix Output
      */
-//    [AVAssetReaderAudioMixOutput alloc] initWithAudioTracks:<#(nonnull NSArray<AVAssetTrack *> *)#> audioSettings:<#(nullable NSDictionary<NSString *,id> *)#>
-//    AVAssetReaderAudioMixOutput assetReaderAudioMixOutputWithAudioTracks:<#(nonnull NSArray<AVAssetTrack *> *)#> audioSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+    AVAssetTrack *audioTrack = asset.tracks.lastObject;
+    AVAssetReaderAudioMixOutput *audioMixOutput =
+    [[AVAssetReaderAudioMixOutput alloc] initWithAudioTracks:@[audioTrack] audioSettings:nil];
+    //    AVAssetReaderAudioMixOutput assetReaderAudioMixOutputWithAudioTracks:<#(nonnull NSArray<AVAssetTrack *> *)#> audioSettings:
+    
     
     /**
      Configuring Audio Properties
      */
-    AVAssetReaderAudioMixOutput *audioMixOutput;
-//    audioMixOutput.audioMix
-//    audioMixOutput.audioSettings
-//    audioMixOutput.audioTracks
-//    audioMixOutput.audioTimePitchAlgorithm
+//    audioMixOutput.audioMix = [AVMutableAudioMix audioMix];
+    //    audioMixOutput.audioSettings
+    //    audioMixOutput.audioTracks
+    audioMixOutput.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmTimeDomain;
+    //    audioMixOutput.mediaType
+    audioMixOutput.alwaysCopiesSampleData = NO;
+    audioMixOutput.supportsRandomAccess = NO;
+    //    [audioMixOutput markConfigurationAsFinal];
+    //    audioMixOutput resetForReadingTimeRanges:<#(nonnull NSArray<NSValue *> *)#>
+
+    if ([assetReader canAddOutput:audioMixOutput]) {
+        [assetReader addOutput:audioMixOutput];
+    }
+    assetReader.timeRange = assetTrack.timeRange;
+    //    assetReader.status
+    //    assetReader.error
+    //    assetReader.outputs
+    //    [assetReader addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     
+    [assetReader startReading];
+    if (assetReader.status == AVAssetReaderStatusFailed) {
+        NSLog(@"readerStatusFailed %@",assetReader.error.description);
+    }
+
+    CMSampleBufferRef audioMixOutputBuffer = [audioMixOutput copyNextSampleBuffer];
+    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(audioMixOutputBuffer);
+//    CMTimeShow(CMSampleBufferGetDecodeTimeStamp(audioMixOutputBuffer));
+//    CMTimeShow(CMSampleBufferGetDuration(audioMixOutputBuffer));
+//    CMFormatDescriptionRef descriptionRef = CMSampleBufferGetFormatDescription(audioMixOutputBuffer);
+//    CVImageBufferRef imagebufferRef = CMSampleBufferGetImageBuffer(audioMixOutputBuffer);
+//    CMItemCount itemCount = CMSampleBufferGetNumSamples(audioMixOutputBuffer);
+//    CMTimeShow(CMSampleBufferGetOutputDecodeTimeStamp(audioMixOutputBuffer));
+//    CMTimeShow(CMSampleBufferGetOutputDuration(audioMixOutputBuffer));
+//    CMTimeShow(CMSampleBufferGetOutputPresentationTimeStamp(audioMixOutputBuffer));
+//    //    //    CMSampleBufferGetOutputSampleTimingInfoArray
+//    CMTimeShow(CMSampleBufferGetPresentationTimeStamp(audioMixOutputBuffer));
+//    CFArrayRef arrayRef = CMSampleBufferGetSampleAttachmentsArray(audioMixOutputBuffer, YES);
+//    size_t sampleSize = CMSampleBufferGetSampleSize(audioMixOutputBuffer, 0);
+//    size_t *sizeArrayOut = nil;
+//    CMItemCount *sizeArrayEntriesNeededOut = nil;
+//    OSStatus status = CMSampleBufferGetSampleSizeArray(audioMixOutputBuffer, 1, sizeArrayOut, sizeArrayEntriesNeededOut);
+//    CMSampleTimingInfo timingInfoOut;
+//    CMSampleBufferGetSampleTimingInfo(audioMixOutputBuffer, 1, &timingInfoOut);
+//    CMSampleBufferGetSampleTimingInfoArray(audioMixOutputBuffer, 1, &timingInfoOut, sizeArrayEntriesNeededOut);
+//    size_t totalSampleSize = CMSampleBufferGetTotalSampleSize(audioMixOutputBuffer);
+//    OSStatus statusOut;
+//    CMSampleBufferHasDataFailed(audioMixOutputBuffer, &statusOut);
+//    Boolean isReady = CMSampleBufferDataIsReady(audioMixOutputBuffer);
+//    CMSampleBufferIsValid(audioMixOutputBuffer);
+    //
+    //    size_t bufferListSizeNeededOut;
+    //    AudioBufferList bufferListOut;
+    //    CMBlockBufferRef blockBufferOut;
+    //    OSStatus getAudioBufferList = CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(audioMixOutputBuffer, &bufferListSizeNeededOut, &bufferListOut, 4, kCFAllocatorDefault, kCFAllocatorDefault, 10, &blockBufferOut);
+    //
+//        BOOL isEmpty = CMBlockBufferIsEmpty(blockBufferRef);
+//        size_t dataLength = CMBlockBufferGetDataLength(blockBufferRef);
+//        size_t lengthAtOffsetOut;
+//        size_t totalLengthOut;
+//        char *dataPointerOut;
+//        CMBlockBufferGetDataPointer(blockBufferRef, 0, &lengthAtOffsetOut, &totalLengthOut, &dataPointerOut);
+//        BOOL contiguous = CMBlockBufferIsRangeContiguous(blockBufferRef, 0, dataLength);
+    
+  
     
     /*
      AVAssetReaderTrackOutput
@@ -916,16 +1036,26 @@
     /**
      Creating a Track Output
      */
-//    AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:<#(nonnull AVAssetTrack *)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
-//    [AVAssetReaderTrackOutput alloc] initWithTrack:<#(nonnull AVAssetTrack *)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    AVAssetTrack *videoTrack = asset.tracks.firstObject;
+    //    AVAssetReaderTrackOutput *trackOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:videoTrack outputSettings:nil];
+    //    [AVAssetReaderTrackOutput alloc] initWithTrack:<#(nonnull AVAssetTrack *)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
     
     /**
      Retrieving Output Properties
      */
-    AVAssetReaderTrackOutput *trackOutput;
-//    trackOutput.outputSettings
-//    trackOutput.track
-//    trackOutput.audioTimePitchAlgorithm
+    //        trackOutput.outputSettings
+    //        trackOutput.track
+    //    trackOutput.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmTimeDomain;
+    //
+    //    if ([assetReader canAddOutput:trackOutput]) {
+    //        [assetReader addOutput:trackOutput];
+    //    }
+    //    assetReader.timeRange = videoTrack.timeRange;
+    //    [assetReader startReading];
+    //
+    //    CMSampleBufferRef trackOutputBuffer = [trackOutput copyNextSampleBuffer];
+    //    CMBlockBufferRef trackOutputBlockBuffer = CMSampleBufferGetDataBuffer(trackOutputBuffer);
+    
     
     
     /*
@@ -940,7 +1070,9 @@
      
      Clients can extract information about the location of samples in
      a track—the file URL and offset—by adding an instance of this
-     class to an AVAssetReader object using the addOutput:. The kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset
+     class to an AVAssetReader object using the addOutput:. The
+     kCMSampleBufferAttachmentKey_SampleReferenceURL and
+     kCMSampleBufferAttachmentKey_SampleReferenceByteOffset
      attachments on the extracted sample buffers describe the
      location of the sample data. Find more information about sample
      buffers describing sample references in the CMSampleBuffer.
@@ -959,8 +1091,8 @@
     /**
      Creating Sample Reference Output instances
      */
-//    AVAssetReaderSampleReferenceOutput assetReaderSampleReferenceOutputWithTrack:<#(nonnull AVAssetTrack *)#>
-//    [AVAssetReaderSampleReferenceOutput alloc] initWithTrack:<#(nonnull AVAssetTrack *)#>
+    //    AVAssetReaderSampleReferenceOutput *sampleReferenceOutput = [AVAssetReaderSampleReferenceOutput assetReaderSampleReferenceOutputWithTrack:assetTrack];
+    //        [AVAssetReaderSampleReferenceOutput alloc] initWithTrack:<#(nonnull AVAssetTrack *)#>
     
     /**
      Getting the Track
@@ -968,6 +1100,22 @@
      track
      The track from which the sample references are extracted.
      */
+    
+    //    if ([assetReader canAddOutput:sampleReferenceOutput]) {
+    //        [assetReader addOutput:sampleReferenceOutput];
+    //    }
+    
+    //    assetReader.asset
+    //    assetReader.error
+    //    assetReader.status
+    //    assetReader.outputs
+    //    assetReader.timeRange = assetTrack.timeRange;
+    
+    //    [assetReader startReading];
+    //    CMSampleBufferRef nextSampleBuffer = [sampleReferenceOutput copyNextSampleBuffer];
+    //    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(nextSampleBuffer);
+    
+    
     
     
     /*
@@ -991,21 +1139,38 @@
      AVVideoPixelAspectRatioKey, AVVideoScalingModeKey, and
      AVVideoColorPropertiesKey.
      */
-        
+    
     /**
      Creating a Video Composition Output
      */
-//    AVAssetReaderVideoCompositionOutput assetReaderVideoCompositionOutputWithVideoTracks:<#(nonnull NSArray<AVAssetTrack *> *)#> videoSettings:<#(nullable NSDictionary<NSString *,id> *)#>
-//    [AVAssetReaderVideoCompositionOutput alloc] initWithVideoTracks:<#(nonnull NSArray<AVAssetTrack *> *)#> videoSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    AVAssetTrack *videoTrack = asset.tracks.firstObject;
+    //    AVAssetReaderVideoCompositionOutput *videoCompositionOutput = [AVAssetReaderVideoCompositionOutput assetReaderVideoCompositionOutputWithVideoTracks:@[videoTrack] videoSettings:nil];
+    //    //    [AVAssetReaderVideoCompositionOutput alloc] initWithVideoTracks:<#(nonnull NSArray<AVAssetTrack *> *)#> videoSettings:<#(nullable NSDictionary<NSString *,id> *)#>
     
     /**
      Setting Video Properties
      */
-    AVAssetReaderVideoCompositionOutput *videoCompositionOutput = nil;
-//    videoCompositionOutput.videoComposition
-//    videoCompositionOutput.customVideoCompositor
-//    videoCompositionOutput.videoSettings
-//    videoCompositionOutput.videoTracks
+    //    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    //    videoComposition.renderSize = CGSizeMake(100, 100);
+    //    videoComposition.frameDuration = CMTimeMake(100, 1);
+    //    videoCompositionOutput.videoComposition = videoComposition;
+    ////    videoCompositionOutput.customVideoCompositor
+    ////    videoCompositionOutput.videoSettings
+    ////    videoCompositionOutput.videoTracks
+    //    videoCompositionOutput.alwaysCopiesSampleData = YES;
+    //
+    //    if ([assetReader canAddOutput:videoCompositionOutput]) {
+    //        [assetReader addOutput:videoCompositionOutput];
+    //    }
+    //    assetReader.timeRange = videoTrack.timeRange;
+    ////    assetReader.asset
+    ////    assetReader.error
+    ////    assetReader.status
+    ////    assetReader.outputs
+    //    [assetReader startReading];
+    //    CMSampleBufferRef sampleBufferRef = [videoCompositionOutput copyNextSampleBuffer];
+    //    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(sampleBufferRef);
+    
     
     
     /*
@@ -1027,21 +1192,21 @@
     /**
      Copying a Buffer
      */
-    AVAssetReaderOutput *output = nil;
-//    output copyNextSampleBuffer
-//    output alwaysCopiesSampleData
+    //        AVAssetReaderOutput *output = nil;
+    //    output copyNextSampleBuffer
+    //    output alwaysCopiesSampleData
     
     /**
      Inspecting the Media type
      */
-//    output.mediaType
+    //    output.mediaType
     
     /**
      Configuring Reading Settings
      */
-//    [output markConfigurationAsFinal];
-//    output resetForReadingTimeRanges:<#(nonnull NSArray<NSValue *> *)#>
-//    output supportsRandomAccess
+    //        [output markConfigurationAsFinal];
+    //        output resetForReadingTimeRanges:<#(nonnull NSArray<NSValue *> *)#>
+    //        output supportsRandomAccess
     
     
     /*
@@ -1056,19 +1221,21 @@
     /**
      Creating an Output Metadata Adaptor
      */
-//    AVAssetReaderOutputMetadataAdaptor assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput:<#(nonnull AVAssetReaderTrackOutput *)#>
-//    [AVAssetReaderOutputMetadataAdaptor alloc] initWithAssetReaderTrackOutput:<#(nonnull AVAssetReaderTrackOutput *)#>
+    //    AVAssetReaderOutputMetadataAdaptor assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput:<#(nonnull AVAssetReaderTrackOutput *)#>
+    //    [AVAssetReaderOutputMetadataAdaptor alloc] initWithAssetReaderTrackOutput:<#(nonnull AVAssetReaderTrackOutput *)#>
     
     /**
      Getting the Track Output Object
      */
-    AVAssetReaderOutputMetadataAdaptor *outputMetadataAdaptor = nil;
-//    outputMetadataAdaptor.assetReaderTrackOutput
+    //    AVAssetReaderOutputMetadataAdaptor *outputMetadataAdaptor = nil;
+    //    outputMetadataAdaptor.assetReaderTrackOutput
     
     /**
      Getting the Next Timed Metadata Group
      */
-//    outputMetadataAdaptor.nextTimedMetadataGroup
+    //    outputMetadataAdaptor.nextTimedMetadataGroup
+    
+    
     
     
     /*
@@ -1097,51 +1264,52 @@
     /**
      Creating an Asset Writer
      */
-//    AVAssetWriter assetWriterWithURL:<#(nonnull NSURL *)#> fileType:<#(nonnull AVFileType)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
-//    [AVAssetWriter alloc] initWithURL:<#(nonnull NSURL *)#> fileType:<#(nonnull AVFileType)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
-    AVAssetWriter *assetWriter = nil;
-//    assetWriter.availableMediaTypes
+    //    AVAssetWriter assetWriterWithURL:<#(nonnull NSURL *)#> fileType:<#(nonnull AVFileType)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    //    [AVAssetWriter alloc] initWithURL:<#(nonnull NSURL *)#> fileType:<#(nonnull AVFileType)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    //    AVAssetWriter *assetWriter = nil;
+    //    assetWriter.availableMediaTypes
     
     /**
      Writing Data
      */
-//    [assetWriter startWriting];
-//    assetWriter finishWritingWithCompletionHandler:<#^(void)handler#>
-//    assetWriter cancelWriting
-//    assetWriter.outputURL
-//    assetWriter.outputFileType
-//    assetWriter.error
-//    assetWriter.status
+    //    [assetWriter startWriting];
+    //    assetWriter finishWritingWithCompletionHandler:<#^(void)handler#>
+    //    assetWriter cancelWriting
+    //    assetWriter.outputURL
+    //    assetWriter.outputFileType
+    //    assetWriter.error
+    //    assetWriter.status
     
     /**
      Managing Inputs
      */
-//    assetWriter.inputs
-//    assetWriter canAddInput:<#(nonnull AVAssetWriterInput *)#>
-//    assetWriter addInput:<#(nonnull AVAssetWriterInput *)#>
+    //    assetWriter.inputs
+    //    assetWriter canAddInput:<#(nonnull AVAssetWriterInput *)#>
+    //    assetWriter addInput:<#(nonnull AVAssetWriterInput *)#>
     
     /**
      Managing Session Time
      */
-//    assetWriter startSessionAtSourceTime:<#(CMTime)#>
-//    assetWriter endSessionAtSourceTime:<#(CMTime)#>
+    //    assetWriter startSessionAtSourceTime:<#(CMTime)#>
+    //    assetWriter endSessionAtSourceTime:<#(CMTime)#>
     
     /**
      Configuring Output
      */
-//    assetWriter canApplyOutputSettings:<#(nullable NSDictionary<NSString *,id> *)#> forMediaType:<#(nonnull AVMediaType)#>
-//    assetWriter.metadata
-//    assetWriter.movieFragmentInterval
-//    assetWriter.overallDurationHint
-//    assetWriter.movieTimeScale
-//    assetWriter.shouldOptimizeForNetworkUse
+    //    assetWriter canApplyOutputSettings:<#(nullable NSDictionary<NSString *,id> *)#> forMediaType:<#(nonnull AVMediaType)#>
+    //    assetWriter.metadata
+    //    assetWriter.movieFragmentInterval
+    //    assetWriter.overallDurationHint
+    //    assetWriter.movieTimeScale
+    //    assetWriter.shouldOptimizeForNetworkUse
     
     /**
      Managing Asset Writer Input Groups
      */
-//    assetWriter canAddInputGroup:<#(nonnull AVAssetWriterInputGroup *)#>
-//    assetWriter addInputGroup:<#(nonnull AVAssetWriterInputGroup *)#>
-//    assetWriter.inputGroups
+    //    assetWriter canAddInputGroup:<#(nonnull AVAssetWriterInputGroup *)#>
+    //    assetWriter addInputGroup:<#(nonnull AVAssetWriterInputGroup *)#>
+    //    assetWriter.inputGroups
+    
     
     
     /*
@@ -1164,23 +1332,23 @@
      media data to an input while its readyForMoreMediaData property
      is YES.
      •  If you're writing media data from a non-real-time source,
-        such as an instance of AVAssetReader, you should hold off
-        on generating or obtaining more media data to append to an
-        input when the value of readyForMoreMediaData is No. To
-        help with control of the supply of non-real-time media data,
-        you can use requestMediaDataWhenReadyOnQueue:usingBlock:
-        to specify a block that the input should invoke whenever
-        it's ready to append input.
+     such as an instance of AVAssetReader, you should hold off
+     on generating or obtaining more media data to append to an
+     input when the value of readyForMoreMediaData is No. To
+     help with control of the supply of non-real-time media data,
+     you can use requestMediaDataWhenReadyOnQueue:usingBlock:
+     to specify a block that the input should invoke whenever
+     it's ready to append input.
      •  If you're writing media data from a real-time source such
-        as an AVCaptureOutput object, you should set the input's
-        expectsMediaDataInRealTime property to YES to ensure to
-        calculate the value fo readyForMoreMediaData appropriately.
-        When expectsMediaDataInRealTime is YES, readyForMoreMediaData
-        will become NO only when the input cannot process media samples
-        as quickly as they are provided by the client. If
-        readyForMoreMediaData becomes NO for a real-time source,
-        the client may need to drop samples or consider reducing the
-        data rate of appended samples.
+     as an AVCaptureOutput object, you should set the input's
+     expectsMediaDataInRealTime property to YES to ensure to
+     calculate the value fo readyForMoreMediaData appropriately.
+     When expectsMediaDataInRealTime is YES, readyForMoreMediaData
+     will become NO only when the input cannot process media samples
+     as quickly as they are provided by the client. If
+     readyForMoreMediaData becomes NO for a real-time source,
+     the client may need to drop samples or consider reducing the
+     data rate of appended samples.
      
      The value of readyForMoreMediaData will often change from NO
      to YES asynchronously while processing and writing
@@ -1189,69 +1357,71 @@
      NO for readForMoreMediaData.
      */
     
+    
     /**
      Creating an Asset Writer Input Instance
      */
-//    AVAssetWriterInput assetWriterInputWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
-//    AVAssetWriterInput assetWriterInputWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#> sourceFormatHint:<#(nullable CMFormatDescriptionRef)#>
-//    [AVAssetWriterInput alloc] initWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
-//    [AVAssetWriterInput alloc] initWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#> sourceFormatHint:<#(nullable CMFormatDescriptionRef)#>
+    //    AVAssetWriterInput assetWriterInputWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    AVAssetWriterInput assetWriterInputWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#> sourceFormatHint:<#(nullable CMFormatDescriptionRef)#>
+    //    [AVAssetWriterInput alloc] initWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#>
+    //    [AVAssetWriterInput alloc] initWithMediaType:<#(nonnull AVMediaType)#> outputSettings:<#(nullable NSDictionary<NSString *,id> *)#> sourceFormatHint:<#(nullable CMFormatDescriptionRef)#>
     
     /**
      Adding Media Samples
      */
-    AVAssetWriterInput *writerInput = nil;
-//    writerInput appendSampleBuffer:<#(nonnull CMSampleBufferRef)#>
-//    writerInput.readyForMoreMediaData
-//    writerInput markAsFinished
-//    writerInput requestMediaDataWhenReadyOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    AVAssetWriterInput *writerInput = nil;
+    //    writerInput appendSampleBuffer:<#(nonnull CMSampleBufferRef)#>
+    //    writerInput.readyForMoreMediaData
+    //    writerInput markAsFinished
+    //    writerInput requestMediaDataWhenReadyOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
     
     /**
      Configuring a Writer Input
      */
-//    writerInput.metadata
-//    writerInput.transform
-//    writerInput.mediaTimeScale
-//    writerInput.expectsMediaDataInRealTime
-//    writerInput.marksOutputTrackAsEnabled
-//    writerInput.naturalSize
-//    writerInput.preferredVolume
+    //    writerInput.metadata
+    //    writerInput.transform
+    //    writerInput.mediaTimeScale
+    //    writerInput.expectsMediaDataInRealTime
+    //    writerInput.marksOutputTrackAsEnabled
+    //    writerInput.naturalSize
+    //    writerInput.preferredVolume
     
     /**
      Managing Track Associations
      */
-//    writerInput addTrackAssociationWithTrackOfInput:<#(nonnull AVAssetWriterInput *)#> type:<#(nonnull NSString *)#>
-//    writerInput canAddTrackAssociationWithTrackOfInput:<#(nonnull AVAssetWriterInput *)#> type:<#(nonnull NSString *)#>
+    //    writerInput addTrackAssociationWithTrackOfInput:<#(nonnull AVAssetWriterInput *)#> type:<#(nonnull NSString *)#>
+    //    writerInput canAddTrackAssociationWithTrackOfInput:<#(nonnull AVAssetWriterInput *)#> type:<#(nonnull NSString *)#>
     
     /**
      Inspecting a Writer input
      */
-//    writerInput.mediaType
-//    writerInput.outputSettings
-//    writerInput.sourceFormatHint
-//    writerInput.sampleReferenceBaseURL
+    //    writerInput.mediaType
+    //    writerInput.outputSettings
+    //    writerInput.sourceFormatHint
+    //    writerInput.sampleReferenceBaseURL
     
     /**
      Managing Language Settings
      */
-//    writerInput.extendedLanguageTag
-//    writerInput.languageCode
+    //    writerInput.extendedLanguageTag
+    //    writerInput.languageCode
     
     /**
      Performing Multiple-Pass Encoding
      */
-//    writerInput canPerformMultiplePasses
-//    writerInput currentPassDescription
-//    writerInput markCurrentPassAsFinished
-//    writerInput.preferredMediaChunkDuration
-//    writerInput.preferredMediaChunkAlignment
-//    writerInput.performsMultiPassEncodingIfSupported
-//    writerInput respondToEachPassDescriptionOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
+    //    writerInput canPerformMultiplePasses
+    //    writerInput currentPassDescription
+    //    writerInput markCurrentPassAsFinished
+    //    writerInput.preferredMediaChunkDuration
+    //    writerInput.preferredMediaChunkAlignment
+    //    writerInput.performsMultiPassEncodingIfSupported
+    //    writerInput respondToEachPassDescriptionOnQueue:<#(nonnull dispatch_queue_t)#> usingBlock:<#^(void)block#>
     
     /**
      Specifying Media Data Layout
      */
-//    writerInput.mediaDataLocation
+    //    writerInput.mediaDataLocation
+    
     
     
     /*
@@ -1279,20 +1449,20 @@
     /**
      Creating an Output Settings Assistant
      */
-//    AVOutputSettingsAssistant outputSettingsAssistantWithPreset:<#(nonnull AVOutputSettingsPreset)#>
-//    AVOutputSettingsAssistant availableOutputSettingsPresets
+    //    AVOutputSettingsAssistant outputSettingsAssistantWithPreset:<#(nonnull AVOutputSettingsPreset)#>
+    //    AVOutputSettingsAssistant availableOutputSettingsPresets
     
     /**
      Configuring Output Settings
      */
-    AVOutputSettingsAssistant *settingsAssistant = nil;
-//    settingsAssistant.outputFileType
-//    settingsAssistant.audioSettings
-//    settingsAssistant.sourceAudioFormat
-//    settingsAssistant.sourceVideoFormat
-//    settingsAssistant.sourceVideoAverageFrameDuration
-//    settingsAssistant.videoSettings
-//    settingsAssistant.sourceVideoMinFrameDuration
+    //    AVOutputSettingsAssistant *settingsAssistant = nil;
+    //    settingsAssistant.outputFileType
+    //    settingsAssistant.audioSettings
+    //    settingsAssistant.sourceAudioFormat
+    //    settingsAssistant.sourceVideoFormat
+    //    settingsAssistant.sourceVideoAverageFrameDuration
+    //    settingsAssistant.videoSettings
+    //    settingsAssistant.sourceVideoMinFrameDuration
     
     
     /*
@@ -1327,15 +1497,15 @@
     /**
      Creating an Asset Writer input Group
      */
-//    AVAssetWriterInputGroup assetWriterInputGroupWithInputs:<#(nonnull NSArray<AVAssetWriterInput *> *)#> defaultInput:<#(nullable AVAssetWriterInput *)#>
-//    [AVAssetWriterInputGroup alloc] initWithInputs:<#(nonnull NSArray<AVAssetWriterInput *> *)#> defaultInput:<#(nullable AVAssetWriterInput *)#>
+    //    AVAssetWriterInputGroup assetWriterInputGroupWithInputs:<#(nonnull NSArray<AVAssetWriterInput *> *)#> defaultInput:<#(nullable AVAssetWriterInput *)#>
+    //    [AVAssetWriterInputGroup alloc] initWithInputs:<#(nonnull NSArray<AVAssetWriterInput *> *)#> defaultInput:<#(nullable AVAssetWriterInput *)#>
     
     /**
      Getting the Asset Writer Input Group Settings
      */
     AVAssetWriterInputGroup *writerInputGroup = nil;
-//    writerInputGroup.defaultInput
-//    writerInputGroup.inputs
+    //    writerInputGroup.defaultInput
+    //    writerInputGroup.inputs
     
     
     /*
@@ -1350,18 +1520,18 @@
      Creating Input Metadata Adaptors
      */
     AVAssetWriterInputMetadataAdaptor *inputMetadataAdaptor = nil;
-//    [AVAssetWriterInputMetadataAdaptor alloc] initWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
-//    AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+    //    [AVAssetWriterInputMetadataAdaptor alloc] initWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+    //    AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
     
     /**
      Appending Timed Metadata Groups
      */
-//    inputMetadataAdaptor appendTimedMetadataGroup:<#(nonnull AVTimedMetadataGroup *)#>
+    //    inputMetadataAdaptor appendTimedMetadataGroup:<#(nonnull AVTimedMetadataGroup *)#>
     
     /**
      Getting the Input
      */
-//    inputMetadataAdaptor.assetWriterInput
+    //    inputMetadataAdaptor.assetWriterInput
     
     
     /*
@@ -1380,21 +1550,21 @@
     /**
      Creating an Adaptor
      */
-//    AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
-//    [AVAssetWriterInputMetadataAdaptor alloc] initWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+    //    AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
+    //    [AVAssetWriterInputMetadataAdaptor alloc] initWithAssetWriterInput:<#(nonnull AVAssetWriterInput *)#>
     
     /**
      Adding a Pixel Buffer
      */
     AVAssetWriterInputPixelBufferAdaptor *inputPixelBufferAdaptor = nil;
-//    inputPixelBufferAdaptor appendPixelBuffer:<#(nonnull CVPixelBufferRef)#> withPresentationTime:<#(CMTime)#>
+    //    inputPixelBufferAdaptor appendPixelBuffer:<#(nonnull CVPixelBufferRef)#> withPresentationTime:<#(CMTime)#>
     
     /**
      Inspecting a Pixel Buffer Adaptor
      */
-//    inputPixelBufferAdaptor.assetWriterInput
-//    inputPixelBufferAdaptor.pixelBufferPool
-//    inputPixelBufferAdaptor.sourcePixelBufferAttributes
+    //    inputPixelBufferAdaptor.assetWriterInput
+    //    inputPixelBufferAdaptor.pixelBufferPool
+    //    inputPixelBufferAdaptor.sourcePixelBufferAttributes
     
     
     
@@ -1405,7 +1575,7 @@
      
      An object that provides thumbnail or preview images of assets
      independently of playback.
-
+     
      AVAssetImageGenerator uses the default enabled video track(s) to
      generate images. Generating a single image in isolation can require
      the decoding of a large number of video frames with complex interdependencies.
@@ -1435,30 +1605,31 @@
      Creating an Image Generator
      */
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-//    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+    //    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
     
     /**
      Generating Images
      */
-//    imageGenerator copyCGImageAtTime:<#(CMTime)#> actualTime:<#(nullable CMTime *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
-//    imageGenerator generateCGImagesAsynchronouslyForTimes:<#(nonnull NSArray<NSValue *> *)#> completionHandler:<#^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error)handler#>
-//    [imageGenerator cancelAllCGImageGeneration];
+    //    imageGenerator copyCGImageAtTime:<#(CMTime)#> actualTime:<#(nullable CMTime *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    //        imageGenerator generateCGImagesAsynchronouslyForTimes:<#(nonnull NSArray<NSValue *> *)#> completionHandler:<#^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error)handler#>
+    //    [imageGenerator cancelAllCGImageGeneration];
     
     /**
      Managing Image-Generation Time Tolerances
      */
-//    imageGenerator requestedTimeToleranceBefore
-//    imageGenerator requestedTimeToleranceAfter
+    //    imageGenerator requestedTimeToleranceBefore
+    //    imageGenerator requestedTimeToleranceAfter
     
     /**
      Configuring Image-Generation Behavior
      */
-//    imageGenerator.apertureMode
-//    imageGenerator.appliesPreferredTrackTransform
-//    imageGenerator.asset
-//    imageGenerator.maximumSize
-//    imageGenerator.videoComposition
-//    imageGenerator.customVideoCompositor
+    //    imageGenerator.apertureMode
+    //    imageGenerator.appliesPreferredTrackTransform
+    //    imageGenerator.asset
+    //    imageGenerator.maximumSize
+    //    imageGenerator.videoComposition
+    //    imageGenerator.customVideoCompositor
+    
     
     
     
@@ -1505,7 +1676,7 @@
      AVVideoAllowFrameReorderingKey
      A key to access permission to reorder frames.
      */
-
+    
     
     /**
      Size and Aspect Ratio
@@ -1549,6 +1720,7 @@
      The string identifier for resizing a video to fit the surrounding
      view's longer dimension while preserving aspect ratio.
      */
+    
     
     /**
      Clean Aperture
@@ -1634,7 +1806,8 @@
      AVVideoYCbCrMatrix_ITU_R_2020
      The Y'CbCr color matrix for ITU-R BT.2020 conversion.
      */
-
+    
+    
     /**
      Profile Level
      
@@ -1726,7 +1899,47 @@
      AVMediaCharacteristic
      */
     
+    
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    int value = [change[@"new"] intValue];
+    switch (value) {
+        case 0:
+        {
+            NSLog(@"状态未知");
+        }
+            break;
+            
+        case 1:
+        {
+            NSLog(@"状态读取");
+        }
+            break;
+        case 2:
+        {
+            NSLog(@"状态完成");
+        }
+            break;
+        case 3:
+        {
+            NSLog(@"状态失败");
+        }
+            break;
+        case 4:
+        {
+            NSLog(@"状态取消");
+        }
+            break;
+    }
+}
+
+
+
+
+
+
+
 
 /*
  #pragma mark - Navigation

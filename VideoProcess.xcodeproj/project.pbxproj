@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1111F13925DF593200028930 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1111F13825DF593200028930 /* MobileCoreServices.framework */; };
 		11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 11183D93241B4E1A007FBE59 /* UIColor+Add.m */; };
 		11192D8E25412AA8000E628D /* tiger fly 2020-10-10 10.48.51.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 11192D8D25412AA8000E628D /* tiger fly 2020-10-10 10.48.51.mp4 */; };
 		1126040D2478C2C200B1C006 /* sofa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1126040C2478C2C200B1C006 /* sofa.mp4 */; };
@@ -98,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		0F868A362BB29ECCC8D0AB29 /* Pods-VideoProcessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcessTests.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcessTests/Pods-VideoProcessTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1111F13825DF593200028930 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		11183D92241B4E1A007FBE59 /* UIColor+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Add.h"; sourceTree = "<group>"; };
 		11183D93241B4E1A007FBE59 /* UIColor+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Add.m"; sourceTree = "<group>"; };
 		11192D8D25412AA8000E628D /* tiger fly 2020-10-10 10.48.51.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 10.48.51.mp4"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1111F13925DF593200028930 /* MobileCoreServices.framework in Frameworks */,
 				FB4EA8F154BBA7D02BA39686 /* Pods_VideoProcess.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +254,7 @@
 		00951966C91C7F33AB95949C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1111F13825DF593200028930 /* MobileCoreServices.framework */,
 				D967F07E9C8056F71E0FB2B6 /* Pods_VideoProcess.framework */,
 				DDC81B83E5440AC3DA66DB09 /* Pods_VideoProcess_VideoProcessUITests.framework */,
 				DD7D2DBF7109FC82EA8F8468 /* Pods_VideoProcessTests.framework */,

@@ -43,19 +43,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    AVAudioSession *audioSesion = [AVAudioSession sharedInstance];
-//    @try {
-//        NSError *error = nil;
-//        if (@available(iOS 10.0, *)) {
-//            [audioSesion setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeVoiceChat options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
-//        } else {
-//            // Fallback on earlier versions
-//        }
-//    } @catch (NSException *exception) {
-//        NSLog(@"Setting category to AVAudioSessionCategoryPlayback failed.");
-//    } @finally {
-//
-//    }
+    AVAudioSession *audioSesion = [AVAudioSession sharedInstance];
+    @try {
+        NSError *error = nil;
+        if (@available(iOS 10.0, *)) {
+            [audioSesion setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeVoiceChat options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+        } else {
+            // Fallback on earlier versions
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Setting category to AVAudioSessionCategoryPlayback failed.");
+    } @finally {
+
+    }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     AudioController *vc = [AudioController new];

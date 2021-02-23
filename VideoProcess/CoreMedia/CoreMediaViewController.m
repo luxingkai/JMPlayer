@@ -9,6 +9,8 @@
 #import "CoreMediaViewController.h"
 #import <CoreMedia/CoreMedia.h>
 #import <CoreFoundation/CoreFoundation.h>
+#import <CoreAudio/CoreAudioTypes.h>
+#import <CoreAudioTypes/CoreAudioTypes.h>
 
 @interface CoreMediaViewController ()
 
@@ -19,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     /*
      Core Media
@@ -33,7 +36,6 @@
         
     
 #pragma mark -- Sample Processing
-    
     
     /*
      CMSampleBuffer
@@ -64,7 +66,7 @@
      For example, some media services may have access to sample size, timing and format
      information and insert them into queues early, and attach( or fill) the
      CMBlockBuffers of media data later, when the data becomes ready. To this end,
-     CMSampleBuffers have the comcept of data-readiness, which can be tested, set,
+     CMSampleBuffers have the concept of data-readiness, which can be tested, set,
      forced to become ready "now" and so on. It is also possible for a CMSampleBuffer
      to contain nothing but a special buffer-level attachment that describles a media
      stream event(for example, "discontinuity:drain and reset decoder before processing
@@ -202,7 +204,7 @@
      sample attachment dictionaries(one dictionary per sample in the
      CMSampleBuffer.)
      
-     CMSampleBufferGetSampeleSize
+     CMSampleBufferGetSampleSize
      Returns the size in bytes of a specified sampel in a CMSampleBuffer.
      
      CMSampleBufferGetSampleSizeArray
@@ -231,6 +233,7 @@
      CMSampleBufferGetTypeID
      Returns the CFTypeID of CMSampleBuffer objects.
      */
+        
     
     /**
      Working with Audio Samples
@@ -438,6 +441,8 @@
      CMBlockBufferCopyDataBytes
      Copies bytes from a CMBlockBuffer into a provided memory area.
      */
+
+    
     
     /**
      Inspecting Block Buffers
@@ -476,16 +481,16 @@
     /**
      Constants
      
-     CMBlockBuffer Flags
+     = CMBlockBuffer Flags
      kCMBlockBufferAssureMemoryNowFlag
      kCMBlockBufferAlwaysCopyDataFlag
      kCMBlockBufferDontOptimizeDepthFlag
      kCMBlockBufferPermitEmptyReferenceFlag
 
-     Custom Block Source Version
+     = Custom Block Source Version
      kCMBlockBufferCustomBlockSourceVersion
 
-     Block Buffer Error Codes
+     = Block Buffer Error Codes
      kCMBlockBufferBadCustomBlockSourceErr
      kCMBlockBufferBadLengthParameterErr
      kCMBlockBufferBadOffsetParameterErr
@@ -545,6 +550,7 @@
      Returns the CFTypeID of CMFormatDescription objects.
      */
     
+
     /**
      Audio-Specific Functions
      
@@ -1015,6 +1021,10 @@
      CMCopyDictionaryOfAttachments
      Returns all attachments of a CMAttachmentBearer.
      */
+    CMAttachmentBearerRef bearerRef;
+    CMAttachmentMode *attachmentMode;
+    CMGetAttachment(bearerRef, nil, attachmentMode);
+    
     
     /**
      Data Types
@@ -1036,6 +1046,7 @@
      kCMAttachmentMode_ShouldPropagate
      Copy this attachment when using the CMPropagateAttachments function.
      */
+    
     
         
 #pragma mark -- Time Representation
@@ -1468,6 +1479,7 @@
      may be used in dictionaries that Core Media uses. These
      attributes can also be used as CFAttributedString attributes.
      */
+
     
     /**
      Text Markup Attributes
@@ -1580,9 +1592,9 @@
      Metadata Data Types
      kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709
      kCMMetadataDataType_QuickTimeMetadataDirection
-
      */
 
+    
     /**
      Result Codes
 
@@ -1684,6 +1696,13 @@
      blocks of memory must be repeatedly allocated, deallocated,
      and then reallocated.
      */
+    
+    
+    
+    
+    
+    
+    
     
 }
 

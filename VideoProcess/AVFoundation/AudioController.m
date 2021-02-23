@@ -73,8 +73,6 @@
      
      All iOS, tvOS, and watchOS apps have a default audio session
      that comes preconfigured with the following behavior:
-     •  All iOS, tvOS, and watchOS apps have a default audio session
-     that comes preconfigured with the following behavior:
      •  In iOS, setting the Ring/Silent switch to silent mode
      silences any audio the app is playing.
      •  In iOS, locking a device silences the app’s audio.
@@ -217,9 +215,13 @@
      - requestRecordPermission:
      Requests the user’s permission to record audio.
      */
-    [_audioSession requestRecordPermission:^(BOOL granted) {
-        
-    }];
+    if (_audioSession.recordPermission != AVAudioSessionRecordPermissionGranted) {
+        [_audioSession requestRecordPermission:^(BOOL granted) {
+            if (granted == true) {
+                NSLog(@"授权成功");
+            }
+        }];
+    }
     
     
     /**
@@ -250,8 +252,16 @@
      */
     NSLog(@"otherAudioPlaying %d",_audioSession.otherAudioPlaying);
     NSLog(@"secondaryAudioShouldBeSilencedHint %d",_audioSession.secondaryAudioShouldBeSilencedHint);
-    NSLog(@"allowHapticsAndSystemSoundsDuringRecording %d",_audioSession.allowHapticsAndSystemSoundsDuringRecording);
-    NSLog(@"promptStyle %lu",(unsigned long)_audioSession.promptStyle);
+    if (@available(iOS 13.0, *)) {
+        NSLog(@"allowHapticsAndSystemSoundsDuringRecording %d",_audioSession.allowHapticsAndSystemSoundsDuringRecording);
+    } else {
+        // Fallback on earlier versions
+    }
+    if (@available(iOS 13.0, *)) {
+        NSLog(@"promptStyle %lu",(unsigned long)_audioSession.promptStyle);
+    } else {
+        // Fallback on earlier versions
+    }
     
     
     
@@ -666,7 +676,12 @@
     NSLog(@"inputDataSources %@",_audioSession.inputDataSources);
     NSLog(@"outputDataSources %@",_audioSession.outputDataSources);
     NSLog(@"outputDataSource %@",_audioSession.outputDataSource);
-    
+    NSError *volumError = nil;
+      [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&volumError];
+      if (volumError) {
+          NSLog(@"音量控制失败 --- ");
+          NSLog(@"%@", volumError);
+      }
     
     /**
      Preparing the Playback Route
@@ -1049,9 +1064,18 @@
      - initWithURL:format:error:
      Initializes and returns an audio recorder.
      */
-    NSString *writePath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES).firstObject;
-    NSURL *url = [NSURL URLWithString:writePath];
-    _audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:@{AVLinearPCMBitDepthKey:@(16)} error:&error];
+    NSString *writePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSURL *url = [NSURL fileURLWithPath:[writePath stringByAppendingFormat:@"/a"]];
+    if (@available(iOS 11.0, *)) {
+        _audioRecorder = [[AVAudioRecorder alloc] initWithURL:url settings:@{
+        AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+        AVNumberOfChannelsKey: @2,
+        AVLinearPCMBitDepthKey: @16,
+        AVEncoderAudioQualityKey: @(AVAudioQualityHigh)
+        } error:&error];
+    } else {
+        // Fallback on earlier versions
+    }
     NSLog(@"audioRecordError === %@",error);
     
     
@@ -1424,6 +1448,8 @@
     BOOL prepareToPlay = [_audioPlayer prepareToPlay];
     NSLog(@"准备播放录音 %d",prepareToPlay);
     NSLog(@"录音时长 %f",_audioPlayer.duration);
+    NSLog(@"格式 %@",_audioPlayer.format);
+
     [_audioPlayer play];
 }
 
