@@ -7,6 +7,7 @@
 //
 
 #import "CoreVideoController.h"
+#import <CoreVideo/CoreVideo.h>
 
 @interface CoreVideoController ()
 
@@ -31,6 +32,7 @@
      display synchronization issues. Apps that don't need to manipulate
      individual video frames should never need to use Core Video directly.
      */
+    
     
     
 #pragma mark -- Data Processing
@@ -117,6 +119,7 @@
      video OpenGL buffers derive from the Core Video image buffer.
      */
     
+    
     /**
      Inspecting Image Buffers
      
@@ -139,6 +142,7 @@
      vertically.
      */
     
+    
     /**
      Creating Color Spaces
      
@@ -147,12 +151,14 @@
      attachments.
      */
     
+    
     /**
      Data Types
      
      CVImageBufferRef
      A reference to a Core Video image buffer.
      */
+    
     
     /**
      Converting Between Strings and Integer Code Points
@@ -164,6 +170,7 @@
      CVYCbCrMatrixGetIntegerCodePointForString
      CVYCbCrMatrixGetStringForIntegerCodePoint
      */
+    
     
     /**
      Constants
@@ -276,6 +283,8 @@
      CVPixelBufferCreateWithIOSurface
      Call to create a single pixel buffer for a passed-in IOSurface.
      */
+//    CVPixelBufferCreate(kCFAllocatorDefault, <#size_t width#>, <#size_t height#>, <#OSType pixelFormatType#>, <#CFDictionaryRef  _Nullable pixelBufferAttributes#>, <#CVPixelBufferRef  _Nullable * _Nonnull pixelBufferOut#>)
+     
     
     /**
      Inspecting Pixel Buffers
@@ -345,6 +354,8 @@
      CVPixelBufferUnlockBaseAddress
      Unlocks the base address of the pixel buffer.
     */
+    
+    
     
     /**
      Retaining and Releasing Pixel Buffers
@@ -620,6 +631,7 @@
      Returns the smallest possible increment in the system time.
      */
     
+    
     /**
      Data Types
      
@@ -630,6 +642,7 @@
      A structure for holding an SMPTE time.
      */
     
+    
     /**
      Constants
      
@@ -637,6 +650,7 @@
      kCVZeroTime
      kCVIndefiniteTime
      */
+    
     
     /*
      CVDisplayLink (available for macOS)
@@ -662,6 +676,7 @@
      
      CVDisplayLinkCreateWithActiveCGDisplays
      */
+    
     
     
 #pragma mark -- Metal
