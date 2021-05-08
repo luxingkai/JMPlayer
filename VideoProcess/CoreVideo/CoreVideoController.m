@@ -19,6 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
     /*
      CoreVideo
      
@@ -75,6 +77,7 @@
      buffer to another.
      */
     
+    
     /**
      Retaining and Releasing Buffers
      
@@ -85,6 +88,7 @@
      Releases a Core Video buffer.
      */
     
+    
     /**
      Data Types
      
@@ -94,6 +98,7 @@
      CVAttachmentMode
      The propagation modes of a Core video buffer attachment.
      */
+    
     
     /**
      Constants
@@ -107,6 +112,7 @@
      kCVBufferTimeValueKey
      kCVBufferTimeScaleKey
      */
+    
     
     
     /*
@@ -255,6 +261,7 @@
      kCVImageBufferChromaSubsampling_411
      */
 
+    
     /*
      CVPixelBuffer
      
@@ -342,6 +349,7 @@
      Returns the Core Foundation type identifier of the pixel buffer type.
      */
 
+    
     /**
      Modifying Pixel Buffers
      
@@ -356,7 +364,6 @@
     */
     
     
-    
     /**
      Retaining and Releasing Pixel Buffers
      
@@ -368,7 +375,7 @@
      */
     
     /**
-     Data  Types
+     Data Types
      
      CVPixelBufferRef
      A reference to a Core Video pixel buffer object.
@@ -430,6 +437,7 @@
      kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey
      kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey
      */
+    
     
     /*
      CVPixelBufferPool
@@ -526,6 +534,7 @@
      */
     
     
+    
     /*
      CVPixelFormatDesciption
      
@@ -605,6 +614,8 @@
      kCVPixelFormatFillExtendedPixelsCallback
      */
     
+    
+    
 
 #pragma mark -- Time Management
     
@@ -665,6 +676,7 @@
      internally to provide reference counting behavior and other useful properties.
      */
     
+    
     /**
      Creating Display Links
      
@@ -694,6 +706,7 @@
      in a 3D scene rendered with Metal.
      */
     
+    
     /**
      Functions
      
@@ -710,12 +723,14 @@
      Returns the Core Foundation type identifier for a Core Video Metal texture cache.
      */
     
+    
     /**
      Data Types
      
      CVMetalTextureCacheRef
      A reference to a Core Video Metal texture cache.
      */
+    
     
     /**
      Constants
@@ -724,6 +739,7 @@
      kCVMetalTextureCacheMaximumTextureAgeKey
      kCVMetalTextureUsage
      */
+    
     
     /*
      CVMetalTexture
@@ -734,6 +750,7 @@
      A Core Video Metal Texture is a texture-based image buffer that
      supplies source image data for use with the Metal framework.
      */
+    
     
     /**
      Inspecting Textures
@@ -764,6 +781,7 @@
 #pragma mark -- OpenGL
     
 
+    
 #pragma mark -- OpenGL ES
     
     /*
@@ -851,6 +869,7 @@
     
 #pragma mark -- Core Video Error Constants
     
+    
     /**
      Common
      
@@ -870,6 +889,7 @@
      kCVReturnLast
      kCVReturnFirst
      */
+    
     
     /**
      Pixel Buffer
@@ -892,6 +912,7 @@
      buffer size, pixel format, or attribute.
      */
     
+    
     /**
      Buffer Pool
      
@@ -909,8 +930,9 @@
      Allocation for a pixel buffer failed because the threshold value set for the
      kCVPixelBufferPoolAllocationThresholdKey key in the
      CVPixelBufferPoolCreatePixelBufferWithAuxAttributes function would be surpassed.
-     
      */
+    
+    
     
 }
 

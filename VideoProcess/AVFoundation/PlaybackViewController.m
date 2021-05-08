@@ -182,7 +182,6 @@
      With KVO, an object can register to observe another object's
      state. When the observed object's state changes, the observer
      is notified with details of the state change.
-     
      */
     
     /**
@@ -284,8 +283,8 @@
         [times addObject:[NSValue valueWithCMTime:currentTime]];
     }
     [player addBoundaryTimeObserverForTimes:times queue:dispatch_get_main_queue() usingBlock:^{
-        
         // Update UI
+        
     }];
     
     
@@ -305,7 +304,6 @@
      a supplemental user interface, such as a table view or a
      collection view, that lets users quickly skip to various
      locations in the media.
-     
      */
     
     /**
@@ -580,7 +578,6 @@
      
      An object used to model the timing and presentation state of an
      asset played by the player.
-     
      */
     
     /**
@@ -698,6 +695,7 @@
     //    AVPlayerItemPlaybackStalledNotification
     //    AVPlayerItemNewAccessLogEntryNotification
     //    AVPlayerItemNewErrorLogEntryNotification
+    
     
     
     /*

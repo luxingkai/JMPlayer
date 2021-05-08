@@ -46,28 +46,28 @@
     AVAsset *asset = [AVAsset assetWithURL:sourceURL];
     NSError *error = nil;
     
-//    assetReader = [AVAssetReader assetReaderWithAsset:asset error:&error];
-//    assetReader.timeRange = CMTimeRangeMake(kCMTimeZero, asset.duration);
+    assetReader = [AVAssetReader assetReaderWithAsset:asset error:&error];
+    assetReader.timeRange = CMTimeRangeMake(kCMTimeZero, asset.duration);
+
+    AVAssetReaderVideoCompositionOutput *videoCompositionOutput = [AVAssetReaderVideoCompositionOutput assetReaderVideoCompositionOutputWithVideoTracks:@[asset.tracks.firstObject] videoSettings:nil];
+    videoCompositionOutput.videoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:asset];
+    if ([assetReader canAddOutput:videoCompositionOutput]) {
+        [assetReader addOutput:videoCompositionOutput];
+    }
 //
-//    AVAssetReaderVideoCompositionOutput *videoCompositionOutput = [AVAssetReaderVideoCompositionOutput assetReaderVideoCompositionOutputWithVideoTracks:@[asset.tracks.firstObject] videoSettings:nil];
-//    videoCompositionOutput.videoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:asset];
-//    if ([assetReader canAddOutput:videoCompositionOutput]) {
-//        [assetReader addOutput:videoCompositionOutput];
-//    }
+//    [assetReader addObserver:self forKeyPath:@"status" options:NSKpixelBuffer    CVPixelBufferRef    0x60000304ca00    0x000060000304ca00eyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    [assetReader startReading];
 //
-//    [assetReader addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-//    [assetReader startReading];
-//
-//    CMSampleBufferRef sampleBuffer = [videoCompositionOutput copyNextSampleBuffer];
+    CMSampleBufferRef sampleBuffer = [videoCompositionOutput copyNextSampleBuffer];
+    CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer(sampleBuffer);
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    imageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
-    imageGenerator.appliesPreferredTrackTransform = YES;
+    CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)imageBuffer;
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
     
-    CMTime actualTime;
-    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:CMTimeMake(4, 1) actualTime:&actualTime error:nil];
-    imageView.image = [UIImage imageWithCGImage:imageRef];
-    CFRelease(imageRef);
+    
+    
+    
 }
 
 #pragma mark --

@@ -104,7 +104,7 @@ struct juice {
      as videos and sounds.
      */
     
-    NSURL *sourceURL = [[NSBundle mainBundle] URLForResource:@"tiger fly 2020-10-10 15.58.59" withExtension:@"mp4"];
+    NSURL *sourceURL = [[NSBundle mainBundle] URLForResource:@"sofa" withExtension:@"mp4"];
     //    AVAsset *asset = [AVAsset assetWithURL:sourceURL];
     //    AVAsset *asset = [AVURLAsset URLAssetWithURL:<#(nonnull NSURL *)#> options:<#(nullable NSDictionary<NSString *,id> *)#>];
     
@@ -269,7 +269,8 @@ struct juice {
      You can use the protocol’s statusOfValueForKey:error: method to
      determine if a track property can be accessed without blocking the
      calling thread. If a property’s status is a value other than
-     AVKeyValueStatusLoaded, you should use the protocol’s loadValuesAsynchronouslyForKeys:completionHandler: method to
+     AVKeyValueStatusLoaded, you should use the protocol’s
+     loadValuesAsynchronouslyForKeys:completionHandler: method to
      asynchronously load the key prior to use. To cancel pending load
      requests for all keys of AVAssetTrack you must message its owning
      AVAsset object (for example, [track.asset cancelLoading]).
@@ -286,10 +287,11 @@ struct juice {
     //    assetTrack.formatDescriptions
     //    assetTrack.enabled
     //    assetTrack.playable
-    //    assetTrack.selfContained
+    //        assetTrack.selfContained
     //    assetTrack.estimatedDataRate
-    //    assetTrack.totalSampleDataLength
+    //        assetTrack.totalSampleDataLength
     //    assetTrack.decodable
+    
     
     /**
      Retrieving Temporal Properties
@@ -324,9 +326,9 @@ struct juice {
     /**
      Finding Track Segments
      */
-    //    assetTrack.segments
-    //    assetTrack segmentForTrackTime:<#(CMTime)#>
-    //    assetTrack samplePresentationTimeForTrackTime:<#(CMTime)#>
+    //        assetTrack.segments
+    //        assetTrack segmentForTrackTime:<#(CMTime)#>
+    //        assetTrack samplePresentationTimeForTrackTime:<#(CMTime)#>
     
     /**
      Managing Metadata
@@ -864,6 +866,7 @@ struct juice {
     
     
     
+    
 #pragma mark -- Reading and Writing
     
     /*
@@ -875,10 +878,10 @@ struct juice {
      
      AVAssetReader lets you:
      •  Read raw un-decoded media samples directly from storage,
-        obtain samples decoded into renderable forms.
+     obtain samples decoded into renderable forms.
      •  Mix multiple audio tracks of the asset and compose multiple
-        video tracks by using AVAssetReaderAudioMixOutput and
-        AVAssetReaderVideoCompositionOutput.
+     video tracks by using AVAssetReaderAudioMixOutput and
+     AVAssetReaderVideoCompositionOutput.
      
      The AVAssetReader pipelines are multithreaded internally.
      After you initiate reading with initWithAsset:error:,
@@ -894,8 +897,8 @@ struct juice {
     /**
      Creating a Reader
      */
-    NSError *assetReaderError = nil;
-    AVAssetReader *assetReader = [[AVAssetReader alloc] initWithAsset:asset error:&assetReaderError];
+    //    NSError *assetReaderError = nil;
+    //    AVAssetReader *assetReader = [[AVAssetReader alloc] initWithAsset:asset error:&assetReaderError];
     //    [AVAssetReader assetReaderWithAsset:asset error:&assetReaderError];
     
     /**
@@ -918,6 +921,7 @@ struct juice {
      Getting the Asset
      */
     //    assetReader.asset
+    
     
     
     /*
@@ -946,7 +950,7 @@ struct juice {
     /**
      Configuring Audio Properties
      */
-//    audioMixOutput.audioMix = [AVMutableAudioMix audioMix];
+    //    audioMixOutput.audioMix = [AVMutableAudioMix audioMix];
     //    audioMixOutput.audioSettings
     //    audioMixOutput.audioTracks
     audioMixOutput.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmTimeDomain;
@@ -955,61 +959,61 @@ struct juice {
     audioMixOutput.supportsRandomAccess = NO;
     //    [audioMixOutput markConfigurationAsFinal];
     //    audioMixOutput resetForReadingTimeRanges:<#(nonnull NSArray<NSValue *> *)#>
-
-    if ([assetReader canAddOutput:audioMixOutput]) {
-        [assetReader addOutput:audioMixOutput];
-    }
-    assetReader.timeRange = assetTrack.timeRange;
+    
+//    if ([assetReader canAddOutput:audioMixOutput]) {
+//        [assetReader addOutput:audioMixOutput];
+//    }
+    //    assetReader.timeRange = assetTrack.timeRange;
     //    assetReader.status
     //    assetReader.error
     //    assetReader.outputs
     //    [assetReader addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     
-    [assetReader startReading];
-    if (assetReader.status == AVAssetReaderStatusFailed) {
-        NSLog(@"readerStatusFailed %@",assetReader.error.description);
-    }
-
-    CMSampleBufferRef audioMixOutputBuffer = [audioMixOutput copyNextSampleBuffer];
-    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(audioMixOutputBuffer);
-//    CMTimeShow(CMSampleBufferGetDecodeTimeStamp(audioMixOutputBuffer));
-//    CMTimeShow(CMSampleBufferGetDuration(audioMixOutputBuffer));
-//    CMFormatDescriptionRef descriptionRef = CMSampleBufferGetFormatDescription(audioMixOutputBuffer);
-//    CVImageBufferRef imagebufferRef = CMSampleBufferGetImageBuffer(audioMixOutputBuffer);
-//    CMItemCount itemCount = CMSampleBufferGetNumSamples(audioMixOutputBuffer);
-//    CMTimeShow(CMSampleBufferGetOutputDecodeTimeStamp(audioMixOutputBuffer));
-//    CMTimeShow(CMSampleBufferGetOutputDuration(audioMixOutputBuffer));
-//    CMTimeShow(CMSampleBufferGetOutputPresentationTimeStamp(audioMixOutputBuffer));
-//    //    //    CMSampleBufferGetOutputSampleTimingInfoArray
-//    CMTimeShow(CMSampleBufferGetPresentationTimeStamp(audioMixOutputBuffer));
-//    CFArrayRef arrayRef = CMSampleBufferGetSampleAttachmentsArray(audioMixOutputBuffer, YES);
-//    size_t sampleSize = CMSampleBufferGetSampleSize(audioMixOutputBuffer, 0);
-//    size_t *sizeArrayOut = nil;
-//    CMItemCount *sizeArrayEntriesNeededOut = nil;
-//    OSStatus status = CMSampleBufferGetSampleSizeArray(audioMixOutputBuffer, 1, sizeArrayOut, sizeArrayEntriesNeededOut);
-//    CMSampleTimingInfo timingInfoOut;
-//    CMSampleBufferGetSampleTimingInfo(audioMixOutputBuffer, 1, &timingInfoOut);
-//    CMSampleBufferGetSampleTimingInfoArray(audioMixOutputBuffer, 1, &timingInfoOut, sizeArrayEntriesNeededOut);
-//    size_t totalSampleSize = CMSampleBufferGetTotalSampleSize(audioMixOutputBuffer);
-//    OSStatus statusOut;
-//    CMSampleBufferHasDataFailed(audioMixOutputBuffer, &statusOut);
-//    Boolean isReady = CMSampleBufferDataIsReady(audioMixOutputBuffer);
-//    CMSampleBufferIsValid(audioMixOutputBuffer);
+    //    [assetReader startReading];
+    //    if (assetReader.status == AVAssetReaderStatusFailed) {
+    //        NSLog(@"readerStatusFailed %@",assetReader.error.description);
+    //    }
+    
+    //    CMSampleBufferRef audioMixOutputBuffer = [audioMixOutput copyNextSampleBuffer];
+    //    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(audioMixOutputBuffer);
+    //    CMTimeShow(CMSampleBufferGetDecodeTimeStamp(audioMixOutputBuffer));
+    //    CMTimeShow(CMSampleBufferGetDuration(audioMixOutputBuffer));
+    //    CMFormatDescriptionRef descriptionRef = CMSampleBufferGetFormatDescription(audioMixOutputBuffer);
+    //    CVImageBufferRef imagebufferRef = CMSampleBufferGetImageBuffer(audioMixOutputBuffer);
+    //    CMItemCount itemCount = CMSampleBufferGetNumSamples(audioMixOutputBuffer);
+    //    CMTimeShow(CMSampleBufferGetOutputDecodeTimeStamp(audioMixOutputBuffer));
+    //    CMTimeShow(CMSampleBufferGetOutputDuration(audioMixOutputBuffer));
+    //    CMTimeShow(CMSampleBufferGetOutputPresentationTimeStamp(audioMixOutputBuffer));
+    //    //    //    CMSampleBufferGetOutputSampleTimingInfoArray
+    //    CMTimeShow(CMSampleBufferGetPresentationTimeStamp(audioMixOutputBuffer));
+    //    CFArrayRef arrayRef = CMSampleBufferGetSampleAttachmentsArray(audioMixOutputBuffer, YES);
+    //    size_t sampleSize = CMSampleBufferGetSampleSize(audioMixOutputBuffer, 0);
+    //    size_t *sizeArrayOut = nil;
+    //    CMItemCount *sizeArrayEntriesNeededOut = nil;
+    //    OSStatus status = CMSampleBufferGetSampleSizeArray(audioMixOutputBuffer, 1, sizeArrayOut, sizeArrayEntriesNeededOut);
+    //    CMSampleTimingInfo timingInfoOut;
+    //    CMSampleBufferGetSampleTimingInfo(audioMixOutputBuffer, 1, &timingInfoOut);
+    //    CMSampleBufferGetSampleTimingInfoArray(audioMixOutputBuffer, 1, &timingInfoOut, sizeArrayEntriesNeededOut);
+    //    size_t totalSampleSize = CMSampleBufferGetTotalSampleSize(audioMixOutputBuffer);
+    //    OSStatus statusOut;
+    //    CMSampleBufferHasDataFailed(audioMixOutputBuffer, &statusOut);
+    //    Boolean isReady = CMSampleBufferDataIsReady(audioMixOutputBuffer);
+    //    CMSampleBufferIsValid(audioMixOutputBuffer);
     //
     //    size_t bufferListSizeNeededOut;
     //    AudioBufferList bufferListOut;
     //    CMBlockBufferRef blockBufferOut;
     //    OSStatus getAudioBufferList = CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(audioMixOutputBuffer, &bufferListSizeNeededOut, &bufferListOut, 4, kCFAllocatorDefault, kCFAllocatorDefault, 10, &blockBufferOut);
     //
-//        BOOL isEmpty = CMBlockBufferIsEmpty(blockBufferRef);
-//        size_t dataLength = CMBlockBufferGetDataLength(blockBufferRef);
-//        size_t lengthAtOffsetOut;
-//        size_t totalLengthOut;
-//        char *dataPointerOut;
-//        CMBlockBufferGetDataPointer(blockBufferRef, 0, &lengthAtOffsetOut, &totalLengthOut, &dataPointerOut);
-//        BOOL contiguous = CMBlockBufferIsRangeContiguous(blockBufferRef, 0, dataLength);
+    //        BOOL isEmpty = CMBlockBufferIsEmpty(blockBufferRef);
+    //        size_t dataLength = CMBlockBufferGetDataLength(blockBufferRef);
+    //        size_t lengthAtOffsetOut;
+    //        size_t totalLengthOut;
+    //        char *dataPointerOut;
+    //        CMBlockBufferGetDataPointer(blockBufferRef, 0, &lengthAtOffsetOut, &totalLengthOut, &dataPointerOut);
+    //        BOOL contiguous = CMBlockBufferIsRangeContiguous(blockBufferRef, 0, dataLength);
     
-  
+    
     
     /*
      AVAssetReaderTrackOutput
@@ -1234,6 +1238,8 @@ struct juice {
      Getting the Next Timed Metadata Group
      */
     //    outputMetadataAdaptor.nextTimedMetadataGroup
+    
+    
     
     
     
@@ -1534,6 +1540,7 @@ struct juice {
     //    inputMetadataAdaptor.assetWriterInput
     
     
+    
     /*
      AVAssetWriterInputPixelBufferAdaptor
      
@@ -1546,6 +1553,7 @@ struct juice {
      pool for buffer allocation is typically more efficient than
      appending pixel buffers allocated using a separate pool.
      */
+    
     
     /**
      Creating an Adaptor
@@ -1629,7 +1637,6 @@ struct juice {
     //    imageGenerator.maximumSize
     //    imageGenerator.videoComposition
     //    imageGenerator.customVideoCompositor
-    
     
     
     

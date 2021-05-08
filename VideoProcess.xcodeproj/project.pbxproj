@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110F7B1C26018F6E00A5F164 /* LibavdeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110F7B1B26018F6E00A5F164 /* LibavdeviceViewController.m */; };
 		1111F13925DF593200028930 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1111F13825DF593200028930 /* MobileCoreServices.framework */; };
 		11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 11183D93241B4E1A007FBE59 /* UIColor+Add.m */; };
 		11192D8E25412AA8000E628D /* tiger fly 2020-10-10 10.48.51.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 11192D8D25412AA8000E628D /* tiger fly 2020-10-10 10.48.51.mp4 */; };
@@ -41,7 +42,9 @@
 		1144EB592539AAC600307215 /* AssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E0025381E640010C178 /* AssetsViewController.m */; };
 		1148EE012533F997006B1833 /* CoreVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1148EE002533F997006B1833 /* CoreVideoController.m */; };
 		1148EE05253439F9006B1833 /* CoreMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1148EE04253439F9006B1833 /* CoreMediaViewController.m */; };
+		1149865226098C510095E579 /* LibavcodecViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1149865126098C510095E579 /* LibavcodecViewController.m */; };
 		115826E32485320700156C0B /* MediaItemTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115826E22485320700156C0B /* MediaItemTransferController.m */; };
+		115861D525F347B300E6FD2E /* LibavutilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115861D425F347B300E6FD2E /* LibavutilViewController.m */; };
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
@@ -60,6 +63,7 @@
 		11865E1C253852810010C178 /* SpeechController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E1B253852810010C178 /* SpeechController.m */; };
 		11A53EE2247CAAB600268962 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE1247CAAB600268962 /* PreviewView.m */; };
 		11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A53EE4247CC2CD00268962 /* VPCameraManager.m */; };
+		11B0380425F0CF6500B9EDB3 /* FFmpegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B0380325F0CF6500B9EDB3 /* FFmpegViewController.m */; };
 		11C21DE0246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDB246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 */; };
 		11C21DE1246E803400F6E7BD /* Mark Petrie - New Light.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDC246E803400F6E7BD /* Mark Petrie - New Light.mp3 */; };
 		11C21DE2246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C21DDD246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 */; };
@@ -99,6 +103,8 @@
 
 /* Begin PBXFileReference section */
 		0F868A362BB29ECCC8D0AB29 /* Pods-VideoProcessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoProcessTests.debug.xcconfig"; path = "Target Support Files/Pods-VideoProcessTests/Pods-VideoProcessTests.debug.xcconfig"; sourceTree = "<group>"; };
+		110F7B1A26018F6E00A5F164 /* LibavdeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibavdeviceViewController.h; sourceTree = "<group>"; };
+		110F7B1B26018F6E00A5F164 /* LibavdeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibavdeviceViewController.m; sourceTree = "<group>"; };
 		1111F13825DF593200028930 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		11183D92241B4E1A007FBE59 /* UIColor+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Add.h"; sourceTree = "<group>"; };
 		11183D93241B4E1A007FBE59 /* UIColor+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Add.m"; sourceTree = "<group>"; };
@@ -160,8 +166,12 @@
 		1148EE002533F997006B1833 /* CoreVideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreVideoController.m; sourceTree = "<group>"; };
 		1148EE03253439F9006B1833 /* CoreMediaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMediaViewController.h; sourceTree = "<group>"; };
 		1148EE04253439F9006B1833 /* CoreMediaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreMediaViewController.m; sourceTree = "<group>"; };
+		1149865026098C510095E579 /* LibavcodecViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibavcodecViewController.h; sourceTree = "<group>"; };
+		1149865126098C510095E579 /* LibavcodecViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibavcodecViewController.m; sourceTree = "<group>"; };
 		115826E12485320700156C0B /* MediaItemTransferController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaItemTransferController.h; sourceTree = "<group>"; };
 		115826E22485320700156C0B /* MediaItemTransferController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaItemTransferController.m; sourceTree = "<group>"; };
+		115861D325F347B300E6FD2E /* LibavutilViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibavutilViewController.h; sourceTree = "<group>"; };
+		115861D425F347B300E6FD2E /* LibavutilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibavutilViewController.m; sourceTree = "<group>"; };
 		115C051D246E2D7B00EAF3A6 /* AudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		115C051E246E2D7B00EAF3A6 /* AudioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mark Petrie - New Light No Synth.mp3"; sourceTree = "<group>"; };
@@ -193,6 +203,8 @@
 		11A53EE1247CAAB600268962 /* PreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		11A53EE3247CC2CD00268962 /* VPCameraManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPCameraManager.h; sourceTree = "<group>"; };
 		11A53EE4247CC2CD00268962 /* VPCameraManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPCameraManager.m; sourceTree = "<group>"; };
+		11B0380225F0CF6500B9EDB3 /* FFmpegViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFmpegViewController.h; sourceTree = "<group>"; };
+		11B0380325F0CF6500B9EDB3 /* FFmpegViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegViewController.m; sourceTree = "<group>"; };
 		11C21DDB246E803400F6E7BD /* 李戈 - 夕阳山顶.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "李戈 - 夕阳山顶.mp3"; sourceTree = "<group>"; };
 		11C21DDC246E803400F6E7BD /* Mark Petrie - New Light.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mark Petrie - New Light.mp3"; sourceTree = "<group>"; };
 		11C21DDD246E803400F6E7BD /* Christophe Lebled - Alpha.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Christophe Lebled - Alpha.mp3"; sourceTree = "<group>"; };
@@ -321,6 +333,7 @@
 		1127A393240D40230038ED48 /* VideoProcess */ = {
 			isa = PBXGroup;
 			children = (
+				11B0380125F0CF3E00B9EDB3 /* FFmpeg */,
 				11F6978725A32ED9004BC306 /* AudioQueueServicesProgrammingGuide */,
 				11865DFA25381D2C0010C178 /* Practices */,
 				11865DFB25381D760010C178 /* AVFoundation */,
@@ -478,6 +491,21 @@
 				11865E04253836B80010C178 /* ATViewController.m */,
 			);
 			path = AudioToolbox;
+			sourceTree = "<group>";
+		};
+		11B0380125F0CF3E00B9EDB3 /* FFmpeg */ = {
+			isa = PBXGroup;
+			children = (
+				11B0380225F0CF6500B9EDB3 /* FFmpegViewController.h */,
+				11B0380325F0CF6500B9EDB3 /* FFmpegViewController.m */,
+				115861D325F347B300E6FD2E /* LibavutilViewController.h */,
+				115861D425F347B300E6FD2E /* LibavutilViewController.m */,
+				110F7B1A26018F6E00A5F164 /* LibavdeviceViewController.h */,
+				110F7B1B26018F6E00A5F164 /* LibavdeviceViewController.m */,
+				1149865026098C510095E579 /* LibavcodecViewController.h */,
+				1149865126098C510095E579 /* LibavcodecViewController.m */,
+			);
+			path = FFmpeg;
 			sourceTree = "<group>";
 		};
 		11C21DDA246E7F9500F6E7BD /* Music */ = {
@@ -801,6 +829,7 @@
 				11865E05253836B80010C178 /* ATViewController.m in Sources */,
 				11865E0A253851AD0010C178 /* PlaybackViewController.m in Sources */,
 				11A53EE2247CAAB600268962 /* PreviewView.m in Sources */,
+				1149865226098C510095E579 /* LibavcodecViewController.m in Sources */,
 				1148EE05253439F9006B1833 /* CoreMediaViewController.m in Sources */,
 				1130E16324727EAC00C973F6 /* AssetHandleViewController.m in Sources */,
 				11865E0125381E640010C178 /* AssetsViewController.m in Sources */,
@@ -810,6 +839,7 @@
 				112E8BBF248676B1007B0BA6 /* SampleBufferManipulationController.m in Sources */,
 				112A434C24A9937300B37CEA /* SpeechViewController.m in Sources */,
 				112AA058247522B100FD19C3 /* MediaPlayViewController.m in Sources */,
+				115861D525F347B300E6FD2E /* LibavutilViewController.m in Sources */,
 				112DF521248B473A00467F8D /* MediaSelectionViewController.m in Sources */,
 				1127A396240D40230038ED48 /* AppDelegate.m in Sources */,
 				11371A94248F8A3F007B1489 /* ContentKeyDecryptionController.m in Sources */,
@@ -820,6 +850,7 @@
 				11865DFE25381D960010C178 /* AVFoundationController.m in Sources */,
 				11865E0D253851B90010C178 /* CaptureViewController.m in Sources */,
 				11EAE0FB25319BCF00806F15 /* VTViewController.m in Sources */,
+				110F7B1C26018F6E00A5F164 /* LibavdeviceViewController.m in Sources */,
 				112E8BC224867826007B0BA6 /* MediaCompositionEditingViewController.m in Sources */,
 				112A434224A97EFC00B37CEA /* SpeechSynthesisController.m in Sources */,
 				112A8CD7249202AC00F3F37E /* SupportingTypesController.m in Sources */,
@@ -827,6 +858,7 @@
 				112DF51E248B346A00467F8D /* TextFormattingViewController.m in Sources */,
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
 				11F6978A25A32F34004BC306 /* Introduction.m in Sources */,
+				11B0380425F0CF6500B9EDB3 /* FFmpegViewController.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
 				112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */,
 				11865E19253852740010C178 /* AudioController.m in Sources */,

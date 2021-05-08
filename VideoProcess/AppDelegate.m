@@ -30,7 +30,8 @@
 #import "AVAudioEngineController.h"
 #import "AudioController.h"
 #import "EditingViewController.h"
-
+#import "LibavutilViewController.h"
+#import "LibavdeviceViewController.h"
 #import <objc/runtime.h>
 
 @interface AppDelegate ()
@@ -58,7 +59,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    AudioController *vc = [AudioController new];
+    AVFoundationController *vc = [AVFoundationController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

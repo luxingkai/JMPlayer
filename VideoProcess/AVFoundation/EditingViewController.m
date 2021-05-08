@@ -8,8 +8,10 @@
 
 #import "EditingViewController.h"
 
-@interface EditingViewController ()<AVVideoCompositionValidationHandling>
-
+@interface EditingViewController ()<AVVideoCompositionValidationHandling,AVVideoCompositing>
+@property (nonatomic, strong) AVPlayerItem *playerItemForSnapshottedComposition;
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @end
 
 @implementation EditingViewController
@@ -17,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     
 #pragma mark -- Media Composition
@@ -28,7 +31,7 @@
      
      An object that combines media data from multiple file-based
      sources to present or process media data from multiple sources.
-
+     
      At its top-level, AVComposition is a collection of tracks,
      each presenting media of a specific media type, e.g. audio or
      video, according to a timeline. Each track is represented by an
@@ -73,8 +76,9 @@
      order to inspect or preview them prior to inclusion in a composition.
      */
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"sofia.mp4" withExtension:nil];
-    AVAsset *composition = [AVAsset assetWithURL:url];
-    
+    NSURL *url_2 = [[NSBundle mainBundle] URLForResource:@"tiger fly 2020-10-10 15.58.59.mp4" withExtension:nil];
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    AVAsset *asset_2 = [AVAsset assetWithURL:url_2];
     
     /**
      Accessing Initialization Options
@@ -83,7 +87,6 @@
      The initializationOptions for the creation of URL asset by the
      receiver.
      */
-
     
     /**
      Accessing Tracks
@@ -152,6 +155,7 @@
      */
 
     
+    
     /*
      AVCompositionTrackSegment
      
@@ -196,6 +200,7 @@
      */
     
     
+    
     /*
      AVMutableComposition
 
@@ -227,6 +232,7 @@
      + composition
      Returns a new, empty, mutable composition.
      */
+    AVMutableComposition *mutableComposition = [AVMutableComposition composition];
     
     /**
      Managing Time Ranges
@@ -245,6 +251,7 @@
      - scaleTimeRange:toDuration:
      Changes the duration of all tracks in a given time range.
      */
+    [mutableComposition insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMake(10, 1)) ofAsset:asset atTime:kCMTimeZero error:nil];
     
     /**
      Managing Tracks
@@ -274,6 +281,7 @@
      Provides the composition tracks of the specified media type associated
      with an asset.
      */
+
     
     /**
      Configuring Video Size
@@ -281,6 +289,15 @@
      naturalSize
      The encoded or authored size of the visual portion of the asset.
      */
+//    mutableComposition.naturalSize = CGSizeMake(100, 100);
+    
+    self.playerItemForSnapshottedComposition =
+    [[AVPlayerItem alloc] initWithAsset:mutableComposition];
+    self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItemForSnapshottedComposition];
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    self.playerLayer.frame = [UIScreen mainScreen].bounds;
+    [self.view.layer addSublayer:self.playerLayer];
+    [self.player play];
     
     
     /*
@@ -322,12 +339,14 @@
      The preferred volume of the audible media data.
      */
     
+    
     /**
      Managing Format Descriptions
 
      - replaceFormatDescription:withFormatDescription:
      */
 
+    
     /**
      Associating Tracks
      
@@ -340,6 +359,7 @@
      AVTrackAssociationType
      Constants that define the possible track association types.
      */
+    
     
     /**
      Managing Time Ranges
@@ -364,6 +384,7 @@
      The track segments from a composition track.
      */
     
+    
     /**
      Validating Segments
      
@@ -372,6 +393,7 @@
      array of track segments conform to the timing rules for a
      composition track.
      */
+    
     
     
 #pragma mark -- Moive Editing
@@ -408,6 +430,7 @@
      + movieWithData:options:
      Returns a movie object from a movie stored in an NSData object.
      */
+
     
     /**
      Accessing Movie Information
@@ -436,6 +459,7 @@
      Returns the file types the AVMovie class can process.
      */
     
+    
     /**
      Crreating Movie Tracks
      
@@ -450,6 +474,7 @@
      Provides the movie tracks of the specified media type associated
      with an asset.
      */
+    
     
     /**
      Creating and Writing Headers
@@ -468,6 +493,7 @@
      Returns a Boolean value that indicates whether a movie header
      of the specified type can be created.
      */
+    
     
     
     /*
@@ -492,6 +518,7 @@
      mediaPresentationTimeRange
      A range of presentation times for the track's media.
      */
+    
     
     
     /*
@@ -632,6 +659,7 @@
      timescale
      The time scale for movies that contain the moov atom.
      */
+    
     
     
     /*
@@ -920,8 +948,11 @@
      individual video frame in a video composition.
      */
     
-    AVVideoComposition *videoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:composition];
+//    AVVideoComposition *videoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:composition];
     
+    AVVideoComposition *videoComposition = [AVVideoComposition videoCompositionWithAsset:asset applyingCIFiltersWithHandler:^(AVAsynchronousCIImageFilteringRequest * _Nonnull request) {
+        
+    }];
     
     /**
      Configuring Video Composition Properties
@@ -963,32 +994,32 @@
      colorYCbCrMatrix
      The YCbCr matrix used for video composition.
      */
-    NSLog(@"frameDuration %lld",videoComposition.frameDuration.value);
-    NSLog(@"renderSize %@",NSStringFromCGSize(videoComposition.renderSize));
-    NSLog(@"renderScale %f",videoComposition.renderScale);
-    NSLog(@"instructions %@",videoComposition.instructions);
-    NSLog(@"animationTool %@",videoComposition.animationTool);
-    NSLog(@"customVideoCompositorClass %@",videoComposition.customVideoCompositorClass);
-    if (@available(iOS 11.0, *)) {
-        NSLog(@"sourceTrackIDForFrameTiming %d",videoComposition.sourceTrackIDForFrameTiming);
-    } else {
-        // Fallback on earlier versions
-    }
-    if (@available(iOS 10.0, *)) {
-        NSLog(@"colorPrimaries %@",videoComposition.colorPrimaries);
-    } else {
-        // Fallback on earlier versions
-    }
-    if (@available(iOS 10.0, *)) {
-        NSLog(@"colorTransferFunction %@",videoComposition.colorTransferFunction);
-    } else {
-        // Fallback on earlier versions
-    }
-    if (@available(iOS 10.0, *)) {
-        NSLog(@"colorYCbCrMatrix %@",videoComposition.colorYCbCrMatrix);
-    } else {
-        // Fallback on earlier versions
-    }
+//    NSLog(@"frameDuration %lld",videoComposition.frameDuration.value);
+//    NSLog(@"renderSize %@",NSStringFromCGSize(videoComposition.renderSize));
+//    NSLog(@"renderScale %f",videoComposition.renderScale);
+//    NSLog(@"instructions %@",videoComposition.instructions);
+//    NSLog(@"animationTool %@",videoComposition.animationTool);
+//    NSLog(@"customVideoCompositorClass %@",videoComposition.customVideoCompositorClass);
+//    if (@available(iOS 11.0, *)) {
+//        NSLog(@"sourceTrackIDForFrameTiming %d",videoComposition.sourceTrackIDForFrameTiming);
+//    } else {
+//        // Fallback on earlier versions
+//    }
+//    if (@available(iOS 10.0, *)) {
+//        NSLog(@"colorPrimaries %@",videoComposition.colorPrimaries);
+//    } else {
+//        // Fallback on earlier versions
+//    }
+//    if (@available(iOS 10.0, *)) {
+//        NSLog(@"colorTransferFunction %@",videoComposition.colorTransferFunction);
+//    } else {
+//        // Fallback on earlier versions
+//    }
+//    if (@available(iOS 10.0, *)) {
+//        NSLog(@"colorYCbCrMatrix %@",videoComposition.colorYCbCrMatrix);
+//    } else {
+//        // Fallback on earlier versions
+//    }
     
     
     /**
@@ -1002,8 +1033,8 @@
      Methods you can implement to indicate whether validation of a video
      composition should continue after specific errors are found.
      */
-    BOOL validResult = [videoComposition isValidForAsset:composition timeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMake(180, 1)) validationDelegate:self];
-    NSLog(@"validAsset %d",validResult);
+//    BOOL validResult = [videoComposition isValidForAsset:asset timeRange:CMTimeRangeMake(kCMTimeZero, asset.duration) validationDelegate:self];
+//    NSLog(@"validAsset %d",validResult);
     
     
     /*
@@ -1044,9 +1075,10 @@
      
      + videoCompositionWithPropertiesOfAsset:prototypeInstruction:
      */
-    AVMutableVideoComposition *mutableVideoComposition = [AVMutableVideoComposition videoCompositionWithAsset:composition applyingCIFiltersWithHandler:^(AVAsynchronousCIImageFilteringRequest * _Nonnull request) {
-        
-    }];
+//    AVMutableVideoComposition *mutableVideoComposition = [AVMutableVideoComposition videoCompositionWithAsset:composition applyingCIFiltersWithHandler:^(AVAsynchronousCIImageFilteringRequest * _Nonnull request) {
+//
+//    }];
+    
     
     /**
      Configuring Video Composition Properties
@@ -1277,7 +1309,6 @@
     
 #pragma mark -- Custom Video Compositing
     
-    
     /*
      AVVideoCompositing
      
@@ -1376,6 +1407,7 @@
      */
     
     
+    
 #pragma mark -- Audio Mixing
     
     /*
@@ -1467,6 +1499,7 @@
      + audioMix
      Returns a new mutable audio mix.
      */
+    AVMutableAudioMix *audioMix = [AVMutableAudioMix audioMix];
     
     /**
      Input Parameters
@@ -1474,6 +1507,8 @@
      inputParameters
      An array of input parameters for the mix.
      */
+//    audioMix.inputParameters = @[];
+    
     
     
     /*
@@ -1491,6 +1526,8 @@
      + audioMixInputParametersWithTrack:
      Creates a mutable input parameters object for a given track.
      */
+    AVMutableAudioMixInputParameters *mixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:asset.tracks.lastObject];
+    AVMutableAudioMixInputParameters *mixInputParameters_2 = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:asset_2.tracks.lastObject];
     
     /**
      Managing the Track ID
@@ -1516,6 +1553,7 @@
      The audio processing tap associated with the track.
      */
     
+    
     /**
      Time Pitch Settings
 
@@ -1525,6 +1563,12 @@
      AVAudioTimePitchAlgorithm
      An algorithm used to set the audio pitch as the rate changes.
      */
+    mixInputParameters.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+    mixInputParameters_2.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+
+    audioMix.inputParameters = @[mixInputParameters,mixInputParameters_2];
+    
+    
     
     
     
