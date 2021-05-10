@@ -48,6 +48,11 @@
 		115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C051E246E2D7B00EAF3A6 /* AudioViewController.m */; };
 		115C0521246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */; };
 		115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 115C0523246E682C00EAF3A6 /* AudioFileLoader.m */; };
+		116768F52649080400F3D9DE /* LibavfilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116768F42649080400F3D9DE /* LibavfilterViewController.m */; };
+		116768F82649081900F3D9DE /* LibavformatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116768F72649081900F3D9DE /* LibavformatViewController.m */; };
+		116768FB2649085400F3D9DE /* LibswresampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116768FA2649085400F3D9DE /* LibswresampleViewController.m */; };
+		116768FE2649086B00F3D9DE /* LibpostprocViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116768FD2649086B00F3D9DE /* LibpostprocViewController.m */; };
+		116769012649089300F3D9DE /* LibswscaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116769002649089300F3D9DE /* LibswscaleViewController.m */; };
 		1171EFEA253ACEA800145C1A /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11865E0C253851B90010C178 /* CaptureViewController.m */; };
 		1171EFEC253AD2A200145C1A /* chou.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1171EFEB253AD2A200145C1A /* chou.mp4 */; };
 		117D163A2537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */; };
@@ -177,6 +182,16 @@
 		115C0520246E4A6D00EAF3A6 /* Mark Petrie - New Light No Synth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mark Petrie - New Light No Synth.mp3"; sourceTree = "<group>"; };
 		115C0522246E682C00EAF3A6 /* AudioFileLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileLoader.h; sourceTree = "<group>"; };
 		115C0523246E682C00EAF3A6 /* AudioFileLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileLoader.m; sourceTree = "<group>"; };
+		116768F32649080400F3D9DE /* LibavfilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibavfilterViewController.h; sourceTree = "<group>"; };
+		116768F42649080400F3D9DE /* LibavfilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibavfilterViewController.m; sourceTree = "<group>"; };
+		116768F62649081900F3D9DE /* LibavformatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibavformatViewController.h; sourceTree = "<group>"; };
+		116768F72649081900F3D9DE /* LibavformatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibavformatViewController.m; sourceTree = "<group>"; };
+		116768F92649085400F3D9DE /* LibswresampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibswresampleViewController.h; sourceTree = "<group>"; };
+		116768FA2649085400F3D9DE /* LibswresampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibswresampleViewController.m; sourceTree = "<group>"; };
+		116768FC2649086B00F3D9DE /* LibpostprocViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibpostprocViewController.h; sourceTree = "<group>"; };
+		116768FD2649086B00F3D9DE /* LibpostprocViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibpostprocViewController.m; sourceTree = "<group>"; };
+		116768FF2649089300F3D9DE /* LibswscaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibswscaleViewController.h; sourceTree = "<group>"; };
+		116769002649089300F3D9DE /* LibswscaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibswscaleViewController.m; sourceTree = "<group>"; };
 		1171EFEB253AD2A200145C1A /* chou.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = chou.mp4; sourceTree = "<group>"; };
 		11789CCF241F16BD00EC8862 /* JMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayer.h; sourceTree = "<group>"; };
 		117D16392537027C00025960 /* tiger fly 2020-10-10 17.54.42.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiger fly 2020-10-10 17.54.42.mp4"; sourceTree = "<group>"; };
@@ -504,6 +519,16 @@
 				110F7B1B26018F6E00A5F164 /* LibavdeviceViewController.m */,
 				1149865026098C510095E579 /* LibavcodecViewController.h */,
 				1149865126098C510095E579 /* LibavcodecViewController.m */,
+				116768F32649080400F3D9DE /* LibavfilterViewController.h */,
+				116768F42649080400F3D9DE /* LibavfilterViewController.m */,
+				116768F62649081900F3D9DE /* LibavformatViewController.h */,
+				116768F72649081900F3D9DE /* LibavformatViewController.m */,
+				116768F92649085400F3D9DE /* LibswresampleViewController.h */,
+				116768FA2649085400F3D9DE /* LibswresampleViewController.m */,
+				116768FC2649086B00F3D9DE /* LibpostprocViewController.h */,
+				116768FD2649086B00F3D9DE /* LibpostprocViewController.m */,
+				116768FF2649089300F3D9DE /* LibswscaleViewController.h */,
+				116769002649089300F3D9DE /* LibswscaleViewController.m */,
 			);
 			path = FFmpeg;
 			sourceTree = "<group>";
@@ -847,6 +872,7 @@
 				11A53EE5247CC2CD00268962 /* VPCameraManager.m in Sources */,
 				1131B667247BF626009D8FF7 /* CameraViewController.m in Sources */,
 				1130E1662472B46800C973F6 /* AVAssetTrack+CoreMediaExtensions.m in Sources */,
+				116769012649089300F3D9DE /* LibswscaleViewController.m in Sources */,
 				11865DFE25381D960010C178 /* AVFoundationController.m in Sources */,
 				11865E0D253851B90010C178 /* CaptureViewController.m in Sources */,
 				11EAE0FB25319BCF00806F15 /* VTViewController.m in Sources */,
@@ -857,15 +883,19 @@
 				11F6978D25A33AAC004BC306 /* AudioQueues.m in Sources */,
 				112DF51E248B346A00467F8D /* TextFormattingViewController.m in Sources */,
 				11183D94241B4E1A007FBE59 /* UIColor+Add.m in Sources */,
+				116768F82649081900F3D9DE /* LibavformatViewController.m in Sources */,
 				11F6978A25A32F34004BC306 /* Introduction.m in Sources */,
 				11B0380425F0CF6500B9EDB3 /* FFmpegViewController.m in Sources */,
 				115C0524246E682C00EAF3A6 /* AudioFileLoader.m in Sources */,
 				112E8BBC248670E0007B0BA6 /* HTTPLiveStreamingViewController.m in Sources */,
 				11865E19253852740010C178 /* AudioController.m in Sources */,
+				116768FE2649086B00F3D9DE /* LibpostprocViewController.m in Sources */,
 				11865E1C253852810010C178 /* SpeechController.m in Sources */,
 				115C051F246E2D7B00EAF3A6 /* AudioViewController.m in Sources */,
 				117DCE07247F99F700E1D8FC /* OperationView.m in Sources */,
 				1131B65F247BCD8D009D8FF7 /* MetadataManipulationController.m in Sources */,
+				116768FB2649085400F3D9DE /* LibswresampleViewController.m in Sources */,
+				116768F52649080400F3D9DE /* LibavfilterViewController.m in Sources */,
 				1127A3A7240D40260038ED48 /* main.m in Sources */,
 				11865E10253851DB0010C178 /* EditingViewController.m in Sources */,
 				113528A1259DAFB1000FCD1F /* AVAudioEngineController.m in Sources */,
