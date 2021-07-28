@@ -33,6 +33,7 @@
 #import "LibavutilViewController.h"
 #import "LibavdeviceViewController.h"
 #import "LibswscaleViewController.h"
+#import "LibavformatViewController.h"
 #import <objc/runtime.h>
 
 @interface AppDelegate ()
@@ -60,7 +61,7 @@
     }
         
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    LibswscaleViewController *vc = [LibswscaleViewController new];
+    AssetsViewController *vc = [AssetsViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

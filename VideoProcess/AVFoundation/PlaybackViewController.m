@@ -1112,6 +1112,7 @@
     
     
     
+    
 #pragma mark -- Asset Downloading
     
     /*
@@ -1474,7 +1475,7 @@
     /**
      Configuring Attribtued-String Text Styling Settings
      */
-    //    legibleOutput.textStylingResolution
+//        legibleOutput.textStylingResolution
     
     /**
      Configuring the Delegate
@@ -1910,6 +1911,7 @@
      */
     AVPersistableContentKeyRequest *persistableKeyRequset = nil;
 //    persistableKeyRequset persistableContentKeyFromKeyVendorResponse:<#(nonnull NSData *)#> options:<#(nullable NSDictionary<NSString *,id> *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+    
     
     
 #pragma mark -- Error

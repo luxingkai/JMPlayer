@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <libswscale/swscale.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

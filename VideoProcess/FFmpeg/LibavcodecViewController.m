@@ -24,6 +24,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    /*
+     The libavcodec library provides a generic encoding/decoding framework and
+     contains multiple decoders and encoders for audio, video and subtitle streams,
+     and several bitstream filters.
+
+     The shared architecture provides various services ranging from bit stream I/O
+     to DSP optimizations, and makes it suitable for implementing robust and fast
+     codecs as well as for experimentation.
+     */
+    
     
 #pragma mark --
 //    avcodec_find_decoder(<#enum AVCodecID id#>)

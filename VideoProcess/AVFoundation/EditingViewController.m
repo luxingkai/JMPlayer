@@ -87,6 +87,10 @@
      The initializationOptions for the creation of URL asset by the
      receiver.
      */
+    AVComposition *composition = [AVComposition assetWithURL:url];
+    NSLog(@"%@",composition.URLAssetInitializationOptions);
+    
+    
     
     /**
      Accessing Tracks
@@ -105,7 +109,9 @@
      Provides the composition tracks of the specified media type associated
      with an asset.
      */
-    
+    NSLog(@"tracks %@",composition.tracks);
+    NSLog(@"mediaType %@",[composition tracksWithMediaType:AVMediaTypeVideo]);
+
     
     /**
      Determining the Visual Dimensions
@@ -113,6 +119,8 @@
      naturalSize
      The authored size of the visual portion of the composition.
      */
+    NSLog(@"naturalSize %@",NSStringFromCGSize(composition.naturalSize));
+    
     
     
     /*
@@ -129,6 +137,7 @@
      The AVFoundation framework also provides a mutable subclass,
      AVMutableCompositionTrack.
      */
+     
     
     
     /**
@@ -184,6 +193,7 @@
      Initializes a track segment that presents a portion of a file
      referenced by a given URL.
      */
+
     
     /**
      Getting Segment Properties
@@ -251,7 +261,11 @@
      - scaleTimeRange:toDuration:
      Changes the duration of all tracks in a given time range.
      */
-    [mutableComposition insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMake(10, 1)) ofAsset:asset atTime:kCMTimeZero error:nil];
+    
+    NSError *error = nil;
+    [mutableComposition insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMake(10, 1)) ofAsset:asset_2 atTime:kCMTimeZero error:nil];
+    [mutableComposition insertTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMake(10, 1)) ofAsset:asset atTime:CMTimeMake(10, 1) error:&error];
+    NSLog(@"error %@",error);
     
     /**
      Managing Tracks
@@ -555,6 +569,7 @@
      the shouldOptimizeForNetworkUse property to YES.
      */
     
+    
     /**
      Creating a Mutable Movie
      
@@ -580,6 +595,7 @@
      + movieWithSettingsFromMovie:options:error:
      Creates a mutable movie object without tracks.
      */
+    
     
     /**
      Modifying Tracks
@@ -613,6 +629,7 @@
      which any time range can be inserted.
      */
     
+    
     /**
      Modifying Time Ranges
 
@@ -629,6 +646,7 @@
      - scaleTimeRange:toDuration:
      Changes the duration of a time range in a movie.
      */
+    
     
     /**
      Configuring Movie Properties
@@ -808,6 +826,7 @@
      - replaceFormatDescription:withFormatDescription:
      Replaces a receiver's format description with a new format description.
      */
+    
     
     
     /*

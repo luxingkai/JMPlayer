@@ -491,6 +491,7 @@
      Releases a pixel buffer pool.
      */
     
+    
     /**
      Data Types
      
@@ -500,6 +501,7 @@
      CVPixelBufferPoolFlushFlags
      Flags to pass to when flushing the pool.
      */
+    
     
     /**
      Constants
